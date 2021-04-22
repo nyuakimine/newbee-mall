@@ -8,21 +8,27 @@
  */
 package ltd.newbee.mall.service.impl;
 
-import ltd.newbee.mall.common.ServiceResultEnum;
-import ltd.newbee.mall.controller.vo.NewBeeMallSearchGoodsVO;
-import ltd.newbee.mall.dao.NewBeeMallGoodsMapper;
-import ltd.newbee.mall.entity.NewBeeMallGoods;
-import ltd.newbee.mall.service.NewBeeMallGoodsService;
-import ltd.newbee.mall.util.BeanUtil;
-import ltd.newbee.mall.util.PageQueryUtil;
-import ltd.newbee.mall.util.PageResult;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import ltd.newbee.mall.common.ServiceResultEnum;
+import ltd.newbee.mall.controller.vo.NewBeeMallSearchGoodsVO;
+import ltd.newbee.mall.dao.NewBeeMallGoodsMapper;
+import ltd.newbee.mall.entity.GoodsDesc;
+import ltd.newbee.mall.entity.GoodsImage;
+import ltd.newbee.mall.entity.GoodsQa;
+import ltd.newbee.mall.entity.GoodsReview;
+import ltd.newbee.mall.entity.NewBeeMallGoods;
+import ltd.newbee.mall.entity.ReviewUserInfo;
+import ltd.newbee.mall.service.NewBeeMallGoodsService;
+import ltd.newbee.mall.util.BeanUtil;
+import ltd.newbee.mall.util.PageQueryUtil;
+import ltd.newbee.mall.util.PageResult;
 
 @Service
 public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
@@ -98,6 +104,56 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
             }
         }
         PageResult pageResult = new PageResult(newBeeMallSearchGoodsVOS, total, pageUtil.getLimit(), pageUtil.getPage());
-        return pageResult;
+        return pageResult;     
+        
     }
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+	@Override
+	public List<GoodsImage> getGoodsImageEntityByGoodsId(Long goodsId) {
+		
+		List<GoodsImage> list = goodsMapper.getImageList(goodsId);
+		return list;
+	}
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+	@Override
+	public List<GoodsDesc> getGoodsDescEntityByGoodsId(Long goodsId) {
+		
+		List<GoodsDesc> list = goodsMapper.getGoodsDesc(goodsId);
+		return list;
+	}
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	
+	
+	  @Override 
+	  public List<GoodsQa> getGoodsQaEntityByGoodsId(Long goodsId) {
+	  
+	  List<GoodsQa> list = goodsMapper.getGoodsQa(goodsId); 
+	  return list; }
+	 
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+	@Override
+	public List<GoodsReview> getGoodsReviewEntityByGoodsId(Long goodsId) {
+		
+		List<GoodsReview> list = goodsMapper.getGoodsReview(goodsId);
+		return list;
+	}
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	public List<ReviewUserInfo> getReviewUserInfoEntityByGoodsId(Long goodsId) {
+		
+		List<ReviewUserInfo> list = goodsMapper.getReviewUserInfoList(goodsId);
+		return list;
+	}
+
+	
+	
+	
+	
+	
+	
+	
 }

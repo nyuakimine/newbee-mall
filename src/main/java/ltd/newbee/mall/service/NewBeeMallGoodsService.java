@@ -8,11 +8,16 @@
  */
 package ltd.newbee.mall.service;
 
+import java.util.List;
+
+import ltd.newbee.mall.entity.GoodsDesc;
+import ltd.newbee.mall.entity.GoodsImage;
+import ltd.newbee.mall.entity.GoodsQa;
+import ltd.newbee.mall.entity.GoodsReview;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
+import ltd.newbee.mall.entity.ReviewUserInfo;
 import ltd.newbee.mall.util.PageQueryUtil;
 import ltd.newbee.mall.util.PageResult;
-
-import java.util.List;
 
 public interface NewBeeMallGoodsService {
     /**
@@ -70,4 +75,23 @@ public interface NewBeeMallGoodsService {
      * @return
      */
     PageResult searchNewBeeMallGoods(PageQueryUtil pageUtil);
+    
+    
+	/*
+	 * //ctrl+shift+o
+	 */    
+    List<GoodsImage> getGoodsImageEntityByGoodsId(Long goodsId);
+    List<GoodsDesc> getGoodsDescEntityByGoodsId(Long goodsId);
+    List<GoodsQa> getGoodsQaEntityByGoodsId(Long goodsId);
+    List<GoodsReview> getGoodsReviewEntityByGoodsId(Long goodsId);
+    List<ReviewUserInfo> getReviewUserInfoEntityByGoodsId(Long goodsId);
+    
+    
+    
+    
+    
+
+
+    
 }
+

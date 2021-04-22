@@ -141,4 +141,11 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where cart_item_id = #{cartItemId,jdbcType=BIGINT}
   </update>
+  
+  
+  
+  
+  
+  
+  
 </mapper>
