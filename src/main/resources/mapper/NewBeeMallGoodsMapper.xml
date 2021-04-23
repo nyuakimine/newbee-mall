@@ -375,59 +375,41 @@
     where goods_id = #{goodsId,jdbcType=BIGINT}
   </update>
 
-  
-  <select id="getImageList" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.GoodsImage">
-      select goods_id, path from goods_image
-      where goods_id = #{goodsId,jdbcType=BIGINT}
-  </select>
-  
-  <select id="getGoodsDesc" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.GoodsDesc">
-    select goods_id,color,size,material,weight,warranty_year,set_date,warp_size from goods_desc
-      where goods_id = #{goodsId,jdbcType=BIGINT}
-  </select>
-  
-   
-   <select id="getGoodsQa" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.GoodsQa">
-	      select id,question,submit_date,answer,answer_date,helped_num,goods_id from goods_qa
+	  
+	  <select id="getImageList" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.GoodsImage">
+	      select goods_id, path from goods_image
 	      where goods_id = #{goodsId,jdbcType=BIGINT}
-   </select>
-        
-        
-        <select id="getGoodsReview" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.GoodsReview">
-      select id,star,custermer_id,comment_date,goods_id,title,content,picture from goods_review
-      where goods_id = #{goodsId,jdbcType=BIGINT}
-    </select>
-  
-<!--  错误代码  <select id="getReviewUserInfo" parameterType="java.lang.Integer" resultType="ltd.newbee.mall.entity.ReviewUserInfo">
-      select 
-             n.id, n.star, n.custermer_id, n.comment_date, n.goods_id, n.title, n.content, n.picture , 
-             u.user_id, u.nick_name,u.login_name,u.password_md5,u.introduce_sign,
-             u.address,u.is_deleted,u.locked_flag,u.create_time,
-             f.goods_id,f.goods_name, f.goods_intro, f.goods_category_id, f.goods_cover_img,
-             f.goods_carousel,f.goods_detail_content,f.original_price,f.selling_price, f.stock_num, 
-             f.tag, f. goods_sell_status,f.create_user,f.create_time, f.update_user,f.update_time 
-
-             from goods_review as n 
-              join tb_newbee_mall_user as u on n.custermer_id = u.user_id 
-              join tb_newbee_mall_goods_info as f on n.goods_id=f.goods_id
-              
-              where goods_id = #{goodsId,jdbcType=BIGINT}
-    </select>
-   -->
-<!--   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-  
-          
-        <select id="getReviewUserInfoList" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.ReviewUserInfo">
-      select n.star,n.comment_date,n.title,n.content,n.picture,u.nick_name,f.goods_name         
-      from goods_review as n join tb_newbee_mall_user as u on n.custermer_id = u.user_id 
-      join tb_newbee_mall_goods_info as f on n.goods_id=f.goods_id 
-      where n.goods_id = #{goodsId,jdbcType=BIGINT}
-    </select>
+	  </select>
+	  
+	  <select id="getGoodsDesc" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.GoodsDesc">
+	    select goods_id,color,size,material,weight,warranty_year,set_date,warp_size from goods_desc
+	      where goods_id = #{goodsId,jdbcType=BIGINT}
+	  </select> 
+	   <select id="getGoodsQa" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.GoodsQa">
+	       select id,question,submit_date,answer,answer_date,helped_num,goods_id from goods_qa
+		   where goods_id = #{goodsId,jdbcType=BIGINT}
+	   </select>      
+       <select id="getGoodsReview" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.GoodsReview">
+	       select id,star,custermer_id,comment_date,goods_id,title,content,picture from goods_review
+	       where goods_id = #{goodsId,jdbcType=BIGINT}
+       </select>
+<!-- //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->         
+       <select id="getReviewUserInfoList" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.ReviewUserInfo">
+		    select n.star,n.comment_date,n.title,n.content,n.picture,u.nick_name,f.goods_name         
+		    from goods_review as n join tb_newbee_mall_user as u on n.custermer_id = u.user_id 
+		    join tb_newbee_mall_goods_info as f on n.goods_id=f.goods_id 
+		    where n.goods_id = #{goodsId,jdbcType=BIGINT}
+      </select>
+ <!--  ++++++++++++++++++++++++++++++++++++++++++Pagination++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+	 <select id="getPaginationList" parameterType="Map" resultType= "ltd.newbee.mall.entity.GoodsQa">			   
+			select goods_id,id,question,submit_date,answer,answer_date,helped_num
+		    from goods_qa order by submit_date
+		    limit #{start},#{limit}
+				  
+	 </select> 
   
   
-  
-  
-  
+ 
   
   
 </mapper>

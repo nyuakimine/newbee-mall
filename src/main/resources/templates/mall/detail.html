@@ -177,7 +177,7 @@
           <div class="zv-cqa-a-info">
             <span class="zv-space"></span>
             <span class="zv-cqa-a-reviewer"th:text="${goodsQaDetail.get(0).id}">回答者&nbsp; Nitori-QA-001</span>
-            <span class="zv-cqa-step" th:text="${qa.answerDate}">回答日&nbsp;2021年04月05日</span>
+            <span class="zv-cqa-step" th:text="'回答日:'+${qa.answerDate}">回答日&nbsp;2021年04月05日</span>
           </div>
           <div class="zv-helpful-form" data-answer-id="58746">
             <span class="zv-space"></span>
@@ -185,8 +185,8 @@
             <span class="zv-helpful-col">
               <span class="zv-helpful zv-helpful-wrapper zv-helpful-wrapper-yes-58746" data-count="58746" data-clickable="" data-answer-id="58746">
                 <i class="zv-helpful zv-helpful-yes-i"></i>
-                <span class="zv-cqa-step" th:text="${qa.helpedNum}">参考になった</span>
-                <span class="zv-helpful zv-helpful-num zv-helpful-yes-num zv-helpful-yes-num-58746" data-count="58746" id="ZVHelpfulYesNum-58746">(0人)</span>
+                <span class="zv-helpful zv-helpful-yes zv-helpful-yes-58746" data-count="58746" id="ZVHelpfulYes-58746">参考になった</span>
+                <span class="zv-cqa-step" th:text="${qa.helpedNum}+'人'">(0人)</span>
               </span>
             </span>
             <span class="zv-helpful-col">
@@ -400,31 +400,28 @@
 	<span>レビュー</span>
 </h2>
 
-	<th:block th:each="userInfo: ${goodsUserInfoDetail}" th:if="${userInfo !=null}">
-
+		 
 <div class="p-reviewScore">
 		<p class="p-average">
 			平均評価<span class="g-digit">4.7</span>
 		</p>
 		<p class="g-score">
-			<span data-score="4.7"></span>
-		
-			
+			<span data-score="4.7"></span>		
+			  <th:block th:each="userInfo: ${goodsUserInfoDetail}" th:if="${userInfo !=null}">	
 			<span>(<span id="js-reviews" th:text="${userInfo.star}">4</span>)</span>
 		</p>
-	</div>
+	</div>		    
 <ul class="g-reviewList">
 <li class="g-reviewList_item">
 	    <p class="g-label-brand g-reviewList_label">ピックアップレビュー</p>
+	     <th:block th:each="userInfo: ${goodsUserInfoDetail}" th:if="${userInfo !=null}">
 	    <div class="g-lg-flow-sm">
 			<p class="g-score">
 				<span data-score="5.0">
 					<span class="g-clip">text.product.review.Rating</span>
 	      		</span>
 			</p>
-	    </div>
-	    
-	    
+	    </div>    
 	    <p class="g-reviewList_info">購入商品:カジュアルソファ(パトレック GR/MBR）</p>
       	<p class="g-reviewList_user"><b th:text="${userInfo.nickName}"> </b>さん<span class="g-clip" th:text="${userInfo.CommentDate}">2020/07/20</p>
 	    <p class="g-reviewList_h" th:text="${userInfo.title}">安くて、座り心地良いです。</p>
@@ -458,7 +455,7 @@
 	      		
 			</p>
 			
-			</th:block>
+		</th:block>
 	      <!--	<p class="g-reviewList_user" th:text="${goodsUserInfoDetail.get(0).commentDate}"><b>ルル</b>さん 2021/03/09</p>
 	    </div>
 	    <p class="g-reviewList_info">購入商品:カジュアルソファ(パトレック GR/LBR)</p>

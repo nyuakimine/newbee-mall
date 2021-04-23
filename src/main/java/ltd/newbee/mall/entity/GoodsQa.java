@@ -8,10 +8,6 @@
  */
 package ltd.newbee.mall.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import java.util.Date;
-
 public class GoodsQa {
     private String id;
     private String question;

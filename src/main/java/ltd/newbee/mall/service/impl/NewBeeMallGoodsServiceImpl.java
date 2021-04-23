@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -24,6 +25,7 @@ import ltd.newbee.mall.entity.GoodsImage;
 import ltd.newbee.mall.entity.GoodsQa;
 import ltd.newbee.mall.entity.GoodsReview;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
+
 import ltd.newbee.mall.entity.ReviewUserInfo;
 import ltd.newbee.mall.service.NewBeeMallGoodsService;
 import ltd.newbee.mall.util.BeanUtil;
@@ -107,53 +109,58 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
         return pageResult;     
         
     }
-    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-	@Override
-	public List<GoodsImage> getGoodsImageEntityByGoodsId(Long goodsId) {
-		
-		List<GoodsImage> list = goodsMapper.getImageList(goodsId);
-		return list;
-	}
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-	@Override
-	public List<GoodsDesc> getGoodsDescEntityByGoodsId(Long goodsId) {
-		
-		List<GoodsDesc> list = goodsMapper.getGoodsDesc(goodsId);
-		return list;
+       @Override
+       public List<GoodsImage> getGoodsImageEntityByGoodsId(Long goodsId) {		
+            List<GoodsImage> list = goodsMapper.getImageList(goodsId);
+	    return list;
 	}
 
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	@Override
+	public List<GoodsDesc> getGoodsDescEntityByGoodsId(Long goodsId) {	
+            List<GoodsDesc> list = goodsMapper.getGoodsDesc(goodsId);
+            return list;
+	}
 	
-	
-	  @Override 
-	  public List<GoodsQa> getGoodsQaEntityByGoodsId(Long goodsId) {
-	  
-	  List<GoodsQa> list = goodsMapper.getGoodsQa(goodsId); 
-	  return list; }
-	 
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	@Override 
+        public List<GoodsQa> getGoodsQaEntityByGoodsId(Long goodsId) {	  
+           List<GoodsQa> list = goodsMapper.getGoodsQa(goodsId); 
+           return list; 
+        }
 
 	@Override
 	public List<GoodsReview> getGoodsReviewEntityByGoodsId(Long goodsId) {
-		
-		List<GoodsReview> list = goodsMapper.getGoodsReview(goodsId);
-		return list;
+            List<GoodsReview> list = goodsMapper.getGoodsReview(goodsId);
+            return list;
 	}
 
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	public List<ReviewUserInfo> getReviewUserInfoEntityByGoodsId(Long goodsId) {
-		
-		List<ReviewUserInfo> list = goodsMapper.getReviewUserInfoList(goodsId);
-		return list;
-	}
+	@Override
+	public List<ReviewUserInfo> getReviewUserInfoEntityByGoodsId(Long goodsId) {		
+            List<ReviewUserInfo> list = goodsMapper.getReviewUserInfoList(goodsId);
+            return list;
+	}	
 
 	
-	
-	
-	
-	
-	
-	
+	@Override 
+        public PageResult getPaginationEntityByGoodsId(PageQueryUtil pageUtil) {
+	  List<GoodsQa> goodsList = goodsMapper.getPaginationList(pageUtil); 
+             int total = goodsMapper.getTotalNewBeeMallGoods(pageUtil); 
+             PageResult pageResult = new PageResult(goodsList, total, pageUtil.getLimit(), pageUtil.getPage());
+             return pageResult; 
+             
+	}
+
+	 
 }
+
+
+
+
+
+
+
+
+
+
+
+

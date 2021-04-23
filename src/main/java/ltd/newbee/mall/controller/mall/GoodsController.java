@@ -160,7 +160,6 @@ public class GoodsController {
 		String warpSize = a.getWarpSize();
 		descVo.setWarpSize(warpSize);
 
-
 		String warrantyYear = a.getWarrantyYear();
 		descVo.setWarrantyYear(warrantyYear);
 

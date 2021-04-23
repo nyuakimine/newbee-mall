@@ -4,9 +4,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
+
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,8 +19,11 @@ import ltd.newbee.mall.entity.GoodsDesc;
 import ltd.newbee.mall.entity.GoodsImage;
 import ltd.newbee.mall.entity.GoodsQa;
 import ltd.newbee.mall.entity.GoodsReview;
+
 import ltd.newbee.mall.entity.ReviewUserInfo;
 import ltd.newbee.mall.service.NewBeeMallGoodsService;
+import ltd.newbee.mall.util.PageQueryUtil;
+import ltd.newbee.mall.util.PageResult;
 
 @SpringBootTest
 class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
@@ -24,7 +31,6 @@ class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
     @Resource
     private NewBeeMallGoodsService newBeeMallGoodsService;
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
     @Test
     public void testGoodsImageService() {
 	long o = 10700L;
@@ -97,27 +103,27 @@ class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
 
 	GoodsQa p = list.get(0);
 	String question = p.getQuestion();
-	assertEquals("この商品の耐久性がありますか", question);
+	assertEquals("半額でしてくれる？", question);
 
 	GoodsQa f = list.get(0);
 	String submitDate = f.getSubmitDate();
-	assertEquals("2021-04-15 00:00:00", submitDate);
+	assertEquals("2050-04-29 00:00:00", submitDate);
 
 	GoodsQa g = list.get(0);
 	String answer = g.getAnswer();
-	assertEquals("はい、そうですね、スカイツリーから落ちても問題ないです", answer);
+	assertEquals("だめ！", answer);
 
 	GoodsQa h = list.get(0);
 	String answerDate = h.getAnswerDate();
-	assertEquals("2021-04-15 00:00:00", answerDate);
+	assertEquals("1998-05-06 00:00:00", answerDate);
 
 	GoodsQa i = list.get(0);
 	String helpedNum = i.getHelpedNum();
-	assertEquals("10", helpedNum);
+	assertEquals("999", helpedNum);
 
 	GoodsQa j = list.get(0);
 	String id = j.getId();
-	assertEquals("1", id);
+	assertEquals("001", id);
 
     }
 
@@ -126,9 +132,7 @@ class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
     @Test
     public void test3() {
 	long o = 10700L;
-	List<GoodsReview> list =
-
-		newBeeMallGoodsService.getGoodsReviewEntityByGoodsId(o);
+	List<GoodsReview> list = newBeeMallGoodsService.getGoodsReviewEntityByGoodsId(o);
 	
 	GoodsReview z = list.get(0);
 	Long goodsId = z.getGoodsId();
@@ -136,11 +140,11 @@ class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
 
 	GoodsReview p = list.get(0);
 	String id = p.getId();
-	assertEquals("1", id);
+	assertEquals("10691", id);
 
 	GoodsReview k = list.get(0);
 	Integer star = k.getStar();
-	assertEquals(5, star);
+	assertEquals(4, star);
 
 	GoodsReview l = list.get(0);
 	String commentDate = l.getCommentDate();
@@ -148,19 +152,19 @@ class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
 
 	GoodsReview m = list.get(0);
 	String title = m.getTitle();
-	assertEquals("安い", title);
+	assertEquals("安すぎる", title);
 
 	GoodsReview n = list.get(0);
 	String content = n.getContent();
-	assertEquals("コンパクト", content);
+	assertEquals("壊れてる", content);
 
 	GoodsReview s = list.get(0);
 	String picture = s.getPicture();
-	assertEquals("215", picture);
+	assertEquals("56", picture);
 
-	GoodsReview q = list.get(2);
+	GoodsReview q = list.get(0);
 	String custermerId = q.getCustermerId();
-	assertEquals("6", custermerId);
+	assertEquals("1", custermerId);
 
     }
 
@@ -168,25 +172,25 @@ class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
 
     @Test
     public void test4() {
-	long o = 10700L;
+	long p = 10700L;
 
-	List<ReviewUserInfo> list = (List<ReviewUserInfo>) newBeeMallGoodsService.getReviewUserInfoEntityByGoodsId(o);
+	List<ReviewUserInfo> list = (List<ReviewUserInfo>) newBeeMallGoodsService.getReviewUserInfoEntityByGoodsId(p);
 
 	ReviewUserInfo e = list.get(0);
 	String title = e.getTitle();
-	assertEquals("安い", title);
+	assertEquals("安すぎる", title);
 
 	ReviewUserInfo k = list.get(0);
 	Integer star = k.getStar();
-	assertEquals(5, star);
+	assertEquals(4, star);
 
 	ReviewUserInfo n = list.get(0);
 	String content = n.getContent();
-	assertEquals("コンパクト", content);
+	assertEquals("壊れてる", content);
 
 	ReviewUserInfo s = list.get(0);
 	String picture = s.getPicture();
-	assertEquals("215", picture);
+	assertEquals("56", picture);
 
 	ReviewUserInfo l = list.get(0);
 	String commentDate = l.getCommentDate();
@@ -194,12 +198,58 @@ class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
 
 	ReviewUserInfo y = list.get(0);
 	String nickName = y.getNickName();
-	assertEquals("测试用户1", nickName);
+	assertEquals("十三", nickName);
 
 	ReviewUserInfo z = list.get(0);
 	String goodsName = z.getGoodsName();
 	assertEquals("荣耀8X 千元屏霸 91%屏占比 2000万AI双摄", goodsName);
-
     }
-
+ 
+     @Test
+      public void testPagination() { 
+             Map<String,Object> params = new HashMap<String,Object>();
+             params.put("page","1"); 
+             params.put("limit","3");
+             PageQueryUtil pageUtil = new PageQueryUtil(params); 
+             PageResult a =newBeeMallGoodsService.getPaginationEntityByGoodsId(pageUtil);
+	      
+	        List<GoodsQa>qaList = (List<GoodsQa>) a.getList();
+	        int size = 0;
+	        if(qaList != null || !qaList.isEmpty()) {
+	          size = qaList.size(); 
+	          }
+	        assertEquals(3,size); 
+	        GoodsQa expect1 = new GoodsQa();
+	        expect1.setId("001");
+	        expect1.setQuestion("半額でしてくれる？");
+	        expect1.setSubmitDate("2050-04-29 00:00:00");
+	        expect1.setAnswer("だめ！");
+	        expect1.setAnswerDate("1998-05-06 00:00:00");
+	        expect1.setHelpedNum("999");
+	      
+	        GoodsQa expect2 = new GoodsQa();
+	        expect2.setId("002");
+	        expect2.setQuestion("どこに住んでますか");
+	        expect2.setSubmitDate("2040-05-06 00:00:00");
+	        expect2.setAnswer("日本");
+	        expect2.setAnswerDate("1990-05-07 00:00:00");
+	        expect2.setHelpedNum("989");
+	        GoodsQa expect3 = new GoodsQa();
+	        expect3.setId("003");
+	        expect3.setQuestion("この商品の耐久性がありますか");
+	        expect3.setSubmitDate("2021-04-15 00:00:00");
+	        expect3.setAnswer("壊れやすい");
+	        expect3.setAnswerDate("2021-04-15 00:00:00");
+	        expect3.setHelpedNum("2563");
+	        List<GoodsQa> expectList = new ArrayList<GoodsQa>();
+	        expectList.add(expect1);
+	        expectList.add(expect2);
+	        expectList.add(expect3);
+	        Boolean isTrue = qaList.equals(expectList);
+	        assertEquals(false,isTrue);
+	       
+      
+      }
+     
+    
 }

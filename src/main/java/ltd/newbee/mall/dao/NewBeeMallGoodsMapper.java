@@ -10,6 +10,8 @@ package ltd.newbee.mall.dao;
 
 import java.util.List;
 
+import javax.swing.text.Position;
+
 import org.apache.ibatis.annotations.Param;
 
 import ltd.newbee.mall.entity.GoodsDesc;
@@ -17,6 +19,7 @@ import ltd.newbee.mall.entity.GoodsImage;
 import ltd.newbee.mall.entity.GoodsQa;
 import ltd.newbee.mall.entity.GoodsReview;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
+
 import ltd.newbee.mall.entity.ReviewUserInfo;
 import ltd.newbee.mall.entity.StockNumDTO;
 import ltd.newbee.mall.util.PageQueryUtil;
@@ -57,14 +60,16 @@ public interface NewBeeMallGoodsMapper {
 	 * @param goodsId
 	 * @return
 	 */
-	List<GoodsImage> getImageList(Long goodsId);
-	List<GoodsReview> getGoodsReview(Long goodsId);
-	List<GoodsQa> getGoodsQa(Long goodsId);   
-	List<GoodsDesc> getGoodsDesc(Long goodsId);
-	List<ReviewUserInfo> getReviewUserInfoList(Long goodsId); 
-	    
-	    
-	    
-	    
+    List<GoodsImage> getImageList(Long goodsId);
+    List<GoodsReview> getGoodsReview(Long goodsId);
+    List<GoodsQa> getGoodsQa(Long goodsId);   
+    List<GoodsDesc> getGoodsDesc(Long goodsId);
+    List<ReviewUserInfo> getReviewUserInfoList(Long goodsId);
+    List<GoodsQa> getPaginationList(PageQueryUtil pageUtil);
+
     
+
+
+     
+
 }
