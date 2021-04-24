@@ -55,7 +55,8 @@ public interface NewBeeMallGoodsMapper {
 
     int batchUpdateSellStatus(@Param("orderIds")Long[] orderIds,@Param("sellStatus") int sellStatus);
 
-    
+    int getTotalGoodsQa(PageQueryUtil pageUtil);
+
 	/**
 	 * @param goodsId
 	 * @return
@@ -65,9 +66,23 @@ public interface NewBeeMallGoodsMapper {
     List<GoodsQa> getGoodsQa(Long goodsId);   
     List<GoodsDesc> getGoodsDesc(Long goodsId);
     List<ReviewUserInfo> getReviewUserInfoList(Long goodsId);
-    List<GoodsQa> getPaginationList(PageQueryUtil pageUtil);
+    List<GoodsQa> getPagination(PageQueryUtil pageUtil);
+    /**
+     * @param helped,SubmitDate排序
+     * @retur
+     */
+    List<GoodsQa> getHelpedNum(PageQueryUtil pageUtil);
+    List<GoodsQa> getSubmitDate(PageQueryUtil pageUtil);
+    /**
+     * @param insertGoodsQuestionRequired
+     * @retur
+     */
 
-    
+    int insertGoodsQuestionRequired(GoodsQa question);
+
+    int insertGoodsQa(GoodsQa question);
+
+
 
 
      

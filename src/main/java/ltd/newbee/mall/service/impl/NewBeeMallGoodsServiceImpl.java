@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -143,12 +143,39 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 	
 	@Override 
         public PageResult getPaginationEntityByGoodsId(PageQueryUtil pageUtil) {
-	  List<GoodsQa> goodsList = goodsMapper.getPaginationList(pageUtil); 
-             int total = goodsMapper.getTotalNewBeeMallGoods(pageUtil); 
+	     List<GoodsQa> goodsList = goodsMapper.getPagination(pageUtil); 
+             int total = goodsMapper.getTotalGoodsQa(pageUtil); 
+             PageResult pageResult = new PageResult(goodsList, total, pageUtil.getLimit(), pageUtil.getPage());
+             return pageResult;             
+	}
+
+	
+	@Override 
+        public PageResult getHelpedNumEntityByGoodsId(PageQueryUtil pageUtil) {
+	     List<GoodsQa> goodsList = goodsMapper.getHelpedNum(pageUtil); 
+             int total = goodsMapper.getTotalGoodsQa(pageUtil); 
              PageResult pageResult = new PageResult(goodsList, total, pageUtil.getLimit(), pageUtil.getPage());
              return pageResult; 
              
 	}
+
+	
+	@Override 
+        public PageResult getSubmitDateEntityByGoodsId(PageQueryUtil pageUtil) {
+	     List<GoodsQa> goodsList = goodsMapper.getSubmitDate(pageUtil); 
+             int total = goodsMapper.getTotalGoodsQa(pageUtil); 
+             PageResult pageResult = new PageResult(goodsList, total, pageUtil.getLimit(), pageUtil.getPage());
+             return pageResult; 
+             
+	}
+	 @Override
+	    public String saveGoodsQa(GoodsQa question) {
+	        if (goodsMapper.insertGoodsQuestionRequired(question) > 0) {
+	            return ServiceResultEnum.SUCCESS.getResult();
+	        }
+	        return ServiceResultEnum.DB_ERROR.getResult();
+	    }
+
 
 	 
 }

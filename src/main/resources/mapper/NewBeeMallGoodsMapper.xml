@@ -393,23 +393,80 @@
 	       select id,star,custermer_id,comment_date,goods_id,title,content,picture from goods_review
 	       where goods_id = #{goodsId,jdbcType=BIGINT}
        </select>
-<!-- //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->         
+
        <select id="getReviewUserInfoList" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.ReviewUserInfo">
 		    select n.star,n.comment_date,n.title,n.content,n.picture,u.nick_name,f.goods_name         
 		    from goods_review as n join tb_newbee_mall_user as u on n.custermer_id = u.user_id 
 		    join tb_newbee_mall_goods_info as f on n.goods_id=f.goods_id 
 		    where n.goods_id = #{goodsId,jdbcType=BIGINT}
       </select>
- <!--  ++++++++++++++++++++++++++++++++++++++++++Pagination++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
-	 <select id="getPaginationList" parameterType="Map" resultType= "ltd.newbee.mall.entity.GoodsQa">			   
+
+	 <select id="getPagination" parameterType="Map" resultType= "ltd.newbee.mall.entity.GoodsQa">			   
 			select goods_id,id,question,submit_date,answer,answer_date,helped_num
-		    from goods_qa order by submit_date
-		    limit #{start},#{limit}
-				  
+		    from goods_qa limit #{start},#{limit}				  
 	 </select> 
-  
-  
- 
-  
-  
-</mapper>
+<!-- sort -->	 
+	 <select id="getHelpedNum" parameterType="Map" resultType= "ltd.newbee.mall.entity.GoodsQa">			   
+			select goods_id,id,question,submit_date,answer,answer_date,helped_num
+		    from goods_qa
+		    <if test="orderBy!=null and orderBy!=''">
+		      <choose>
+		           <when test="orderBy == 'submit_date'">
+		           order by submit-date
+		           </when>
+		           <when test="orderBy == 'helped_num'">
+		           order by helped_num
+		           </when>
+		           <otherwise>
+		           order by id
+		           </otherwise>
+		      </choose> 
+		      <if test="start!=null and limit!=null">
+            limit #{start},#{limit}
+              </if>
+		    </if>		  
+	 </select> 	 
+    <select id="getTotalGoodsQa" parameterType="Map" resultType="int">
+        select count(*) from goods_qa
+        limit #{start},#{limit}
+     </select> 
+<!-- insert -->
+    <insert id="insertGoodsQuestionRequired" parameterType="ltd.newbee.mall.entity.GoodsQa">
+         insert into goods_qa (id, question, answer,submit_date,helped_num,answer_date,goods_id )
+          values (#{id,jdbcType=VARCHAR}, #{question,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR},
+          #{answer_date,jdbcType=VARCHAR}, #{helped_num,jdbcType=VARCHAR}, #{submit_date,jdbcType=VARCHAR},  
+	 #{goods_id,jdbcType=BIGINT})         
+    </insert>
+    <insert id="insertGoodsQa" parameterType="ltd.newbee.mall.entity.GoodsQa">
+        insert into goods_qa
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="question != null">
+                question,
+            </if>
+            <if test="submitDate != null">
+                submit_date,
+            </if>         
+            <if test="goodsId != null">
+                goods_id,
+            </if>           
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="Id != null">
+                #{Id,jdbcType=VARCHAR},
+            </if>
+            <if test="question != null">
+                #{question,jdbcType=VARCHAR},
+            </if>
+            <if test="submitDate != null">
+                #{submitDate,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsId != null">
+                #{goodsId,jdbcType=BIGINT},
+            </if>          
+        </trim>
+    </insert>
+    
+ </mapper>

@@ -10,7 +10,6 @@ package ltd.newbee.mall.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 
 import ltd.newbee.mall.entity.GoodsDesc;
 import ltd.newbee.mall.entity.GoodsImage;
@@ -91,12 +90,17 @@ public interface NewBeeMallGoodsService {
     List<GoodsReview> getGoodsReviewEntityByGoodsId(Long goodsId);
     List<ReviewUserInfo> getReviewUserInfoEntityByGoodsId(Long goodsId);    
     PageResult getPaginationEntityByGoodsId(PageQueryUtil pageUtil);
-     
 
-      
-     
+    /*niuxiaofeng
+    *
+    * helpedNum
+    *submitDate排序
+    */  
+    PageResult getHelpedNumEntityByGoodsId(PageQueryUtil pageUtil);
 
+    PageResult getSubmitDateEntityByGoodsId(PageQueryUtil pageUtil);
 
-    
+    String saveGoodsQa(GoodsQa question);
+
 }
 

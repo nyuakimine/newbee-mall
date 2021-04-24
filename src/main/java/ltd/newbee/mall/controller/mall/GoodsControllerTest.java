@@ -14,7 +14,14 @@ import javax.annotation.Resource;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import ltd.newbee.mall.common.ServiceResultEnum;
+import ltd.newbee.mall.entity.Carousel;
 import ltd.newbee.mall.entity.GoodsDesc;
 import ltd.newbee.mall.entity.GoodsImage;
 import ltd.newbee.mall.entity.GoodsQa;
@@ -24,13 +31,16 @@ import ltd.newbee.mall.entity.ReviewUserInfo;
 import ltd.newbee.mall.service.NewBeeMallGoodsService;
 import ltd.newbee.mall.util.PageQueryUtil;
 import ltd.newbee.mall.util.PageResult;
+import ltd.newbee.mall.util.Result;
+import ltd.newbee.mall.util.ResultGenerator;
 
 @SpringBootTest
 class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
 
+    private static final GoodsQa GoodsQa = null;
     @Resource
     private NewBeeMallGoodsService newBeeMallGoodsService;
-    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    private NewBeeMallGoodsService newBeeMallCarouselService;
     @Test
     public void testGoodsImageService() {
 	long o = 10700L;
@@ -47,9 +57,6 @@ class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
 	assertEquals("/goods-img/5488564b-8335-4b0c-a5a4-52f3f03ee728.jpg", path);
 
     }
-
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
     @Test
     public void test1() {
 	long r = 10700L;
@@ -89,8 +96,6 @@ class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
 
     }
 
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
     @Test
     public void test2() {
 	long r = 10700L;
@@ -126,8 +131,6 @@ class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
 	assertEquals("001", id);
 
     }
-
-    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
     @Test
     public void test3() {
@@ -168,8 +171,6 @@ class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
 
     }
 
-    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
     @Test
     public void test4() {
 	long p = 10700L;
@@ -204,52 +205,78 @@ class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
 	String goodsName = z.getGoodsName();
 	assertEquals("荣耀8X 千元屏霸 91%屏占比 2000万AI双摄", goodsName);
     }
- 
+ //Paginationのtest
      @Test
       public void testPagination() { 
+
              Map<String,Object> params = new HashMap<String,Object>();
              params.put("page","1"); 
              params.put("limit","3");
              PageQueryUtil pageUtil = new PageQueryUtil(params); 
              PageResult a =newBeeMallGoodsService.getPaginationEntityByGoodsId(pageUtil);
 	      
-	        List<GoodsQa>qaList = (List<GoodsQa>) a.getList();
+	        List<GoodsQa> qaList = (List<GoodsQa>) a.getList();
 	        int size = 0;
 	        if(qaList != null || !qaList.isEmpty()) {
 	          size = qaList.size(); 
 	          }
 	        assertEquals(3,size); 
-	        GoodsQa expect1 = new GoodsQa();
-	        expect1.setId("001");
-	        expect1.setQuestion("半額でしてくれる？");
-	        expect1.setSubmitDate("2050-04-29 00:00:00");
-	        expect1.setAnswer("だめ！");
-	        expect1.setAnswerDate("1998-05-06 00:00:00");
-	        expect1.setHelpedNum("999");
 	      
-	        GoodsQa expect2 = new GoodsQa();
-	        expect2.setId("002");
-	        expect2.setQuestion("どこに住んでますか");
-	        expect2.setSubmitDate("2040-05-06 00:00:00");
-	        expect2.setAnswer("日本");
-	        expect2.setAnswerDate("1990-05-07 00:00:00");
-	        expect2.setHelpedNum("989");
-	        GoodsQa expect3 = new GoodsQa();
-	        expect3.setId("003");
-	        expect3.setQuestion("この商品の耐久性がありますか");
-	        expect3.setSubmitDate("2021-04-15 00:00:00");
-	        expect3.setAnswer("壊れやすい");
-	        expect3.setAnswerDate("2021-04-15 00:00:00");
-	        expect3.setHelpedNum("2563");
-	        List<GoodsQa> expectList = new ArrayList<GoodsQa>();
-	        expectList.add(expect1);
-	        expectList.add(expect2);
-	        expectList.add(expect3);
-	        Boolean isTrue = qaList.equals(expectList);
-	        assertEquals(false,isTrue);
-	       
-      
-      }
+	        assertEquals("001",qaList.get(0).getId());
+	        assertEquals("002",qaList.get(1).getId());
+	        assertEquals("003",qaList.get(2).getId());
      
-    
+      }
+     @Test
+     public void testSort() { 
+         Map<String,Object> params = new HashMap<String,Object>();
+         params.put("orderBy","helpedNum"); 
+         params.put("page","1"); 
+         params.put("limit","3");
+         PageQueryUtil pageUtil = new PageQueryUtil(params); 
+         PageResult a =newBeeMallGoodsService.getHelpedNumEntityByGoodsId(pageUtil);  
+        
+         List<GoodsQa> qaList = (List<GoodsQa>) a.getList();
+	        int size = 0;
+	        if(qaList != null || !qaList.isEmpty()) {
+	          size = qaList.size(); 
+	          }
+	        assertEquals(3,size); 	      
+	        assertEquals("001",qaList.get(0).getId());
+	        assertEquals("002",qaList.get(1).getId());
+	        assertEquals("003",qaList.get(2).getId());
+
+//	 params.put("orderBy","submitDate"); 
+//	 PageResult b =newBeeMallGoodsService.getSubmitDateEntityByGoodsId(pageUtil);
+     }
+     
+     @Test
+     public void testInsertGoodsQuestionRequired(){ 
+	GoodsQa qa = new GoodsQa ();		
+	 qa.setQuestion("我是谁？");		
+	 qa.setId("99");
+	 qa.setAnswer("我是谁？");
+	 qa.setSubmitDate("20140205");
+	 qa.setAnswerDate("20300105");
+	 qa.setId("123");
+	 qa.setGoodsId(1256L);
+	 String v = newBeeMallGoodsService.saveGoodsQa(qa);
+        assertEquals(ServiceResultEnum.SUCCESS.getResult(),v);
+     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
