@@ -24,6 +24,7 @@ import ltd.newbee.mall.entity.GoodsDesc;
 import ltd.newbee.mall.entity.GoodsImage;
 import ltd.newbee.mall.entity.GoodsQa;
 import ltd.newbee.mall.entity.GoodsReview;
+import ltd.newbee.mall.entity.IndexConfig;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
 
 import ltd.newbee.mall.entity.ReviewUserInfo;
@@ -170,24 +171,21 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 	}
 	 @Override
 	    public String saveGoodsQa(GoodsQa question) {
-	        if (goodsMapper.insertGoodsQuestionRequired(question) > 0) {
+	        if (goodsMapper.insertGoodsQaSelective(question) > 0) {
 	            return ServiceResultEnum.SUCCESS.getResult();
 	        }
 	        return ServiceResultEnum.DB_ERROR.getResult();
 	    }
 
+	@Override
+	public String insertGoodsQaSelective(GoodsQa question) {
+	    // TODO Auto-generated method stub
+	    return null;
+	}
 
-	 
+	@Override
+	public String updateIndexConfig(IndexConfig indexConfig) {
+	    // TODO Auto-generated method stub
+	    return null;
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-

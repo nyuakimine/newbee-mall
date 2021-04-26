@@ -411,12 +411,6 @@
 		    from goods_qa
 		    <if test="orderBy!=null and orderBy!=''">
 		      <choose>
-		           <when test="orderBy == 'submit_date'">
-		           order by submit-date
-		           </when>
-		           <when test="orderBy == 'helped_num'">
-		           order by helped_num
-		           </when>
 		           <otherwise>
 		           order by id
 		           </otherwise>
@@ -431,42 +425,53 @@
         limit #{start},#{limit}
      </select> 
 <!-- insert -->
-    <insert id="insertGoodsQuestionRequired" parameterType="ltd.newbee.mall.entity.GoodsQa">
-         insert into goods_qa (id, question, answer,submit_date,helped_num,answer_date,goods_id )
-          values (#{id,jdbcType=VARCHAR}, #{question,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR},
-          #{answer_date,jdbcType=VARCHAR}, #{helped_num,jdbcType=VARCHAR}, #{submit_date,jdbcType=VARCHAR},  
-	 #{goods_id,jdbcType=BIGINT})         
-    </insert>
-    <insert id="insertGoodsQa" parameterType="ltd.newbee.mall.entity.GoodsQa">
+    <insert id="insertGoodsQa" parameterType="ltd.newbee.mall.entity.GoodsQa"> 
+          insert into goods_qa (id, question, answer,submit_date,answer_date,goods_id)
+          values (#{id,jdbcType=VARCHAR},#{question,jdbcType=VARCHAR},#{answer,jdbcType=VARCHAR},
+          #{submit_date,jdbcType=VARCHAR},#{answer_date,jdbcType=VARCHAR},              
+	      #{goods_id,jdbcType=BIGINT})         
+    </insert>   
+    <insert id="insertGoodsQaSelective" parameterType="ltd.newbee.mall.entity.GoodsQa">
         insert into goods_qa
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
             </if>
-            <if test="question != null">
+             <if test="question != null">
                 question,
             </if>
-            <if test="submitDate != null">
+             <if test="answer != null">
+                answer,
+            </if>
+                <if test="submitDate != null">
                 submit_date,
-            </if>         
+            </if>   
+             <if test="answerDate != null">
+                answer_date,
+            </if>
             <if test="goodsId != null">
                 goods_id,
-            </if>           
+            </if>                     
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="Id != null">
-                #{Id,jdbcType=VARCHAR},
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
             </if>
-            <if test="question != null">
+             <if test="question != null">
                 #{question,jdbcType=VARCHAR},
+            </if>       
+           <if test="answer != null">
+                #{answer,jdbcType=VARCHAR},
             </if>
-            <if test="submitDate != null">
+               <if test="submitDate != null">
                 #{submitDate,jdbcType=VARCHAR},
             </if>
+            <if test="answerDate != null">
+                #{answerDate,jdbcType=VARCHAR},
+            </if>     
             <if test="goodsId != null">
                 #{goodsId,jdbcType=BIGINT},
             </if>          
         </trim>
-    </insert>
-    
+    </insert> 
  </mapper>

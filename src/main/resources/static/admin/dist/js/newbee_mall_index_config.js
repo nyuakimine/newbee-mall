@@ -61,6 +61,7 @@ function configAdd() {
 }
 
 //绑定modal上的保存按钮
+debugger
 $('#saveButton').click(function () {
     var configName = $("#configName").val();
     var configType = $("#configType").val();

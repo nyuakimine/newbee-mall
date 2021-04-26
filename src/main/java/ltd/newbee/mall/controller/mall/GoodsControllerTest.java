@@ -224,13 +224,13 @@ class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
 	      
 	        assertEquals("001",qaList.get(0).getId());
 	        assertEquals("002",qaList.get(1).getId());
-	        assertEquals("003",qaList.get(2).getId());
-     
+	        assertEquals("003",qaList.get(2).getId());     
       }
      @Test
      public void testSort() { 
          Map<String,Object> params = new HashMap<String,Object>();
-         params.put("orderBy","helpedNum"); 
+         params.put("orderBy","id"); 
+       params.put("orderBy","submitDate"); 
          params.put("page","1"); 
          params.put("limit","3");
          PageQueryUtil pageUtil = new PageQueryUtil(params); 
@@ -242,41 +242,24 @@ class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
 	          size = qaList.size(); 
 	          }
 	        assertEquals(3,size); 	      
+	        assertEquals("003",qaList.get(2).getId());
 	        assertEquals("001",qaList.get(0).getId());
 	        assertEquals("002",qaList.get(1).getId());
-	        assertEquals("003",qaList.get(2).getId());
 
 //	 params.put("orderBy","submitDate"); 
 //	 PageResult b =newBeeMallGoodsService.getSubmitDateEntityByGoodsId(pageUtil);
      }
      
      @Test
-     public void testInsertGoodsQuestionRequired(){ 
-	GoodsQa qa = new GoodsQa ();		
-	 qa.setQuestion("我是谁？");		
-	 qa.setId("99");
-	 qa.setAnswer("我是谁？");
-	 qa.setSubmitDate("20140205");
-	 qa.setAnswerDate("20300105");
-	 qa.setId("123");
+     public void testInsertGoods(){ 
+	 GoodsQa qa = new GoodsQa ();	
+	 qa.setId("20");
+	 qa.setQuestion("变绿变绿变绿变绿!!!");			 
+	 qa.setAnswer("好运来变绿！！！");
+	 qa.setSubmitDate("20140205");	 
+	 qa.setAnswerDate("20100806");	 	
 	 qa.setGoodsId(1256L);
 	 String v = newBeeMallGoodsService.saveGoodsQa(qa);
-        assertEquals(ServiceResultEnum.SUCCESS.getResult(),v);
+         assertEquals(ServiceResultEnum.SUCCESS.getResult(),v);
      }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

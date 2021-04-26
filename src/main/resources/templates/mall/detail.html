@@ -141,7 +141,7 @@
 
  <div class="zv-cqa-step-link">
     <span>全2件</span>
-    <span>ページ1/1</span>
+    <span>ページ<span id="currentPageNo">1</span>/5</span>
 
   </div>
   <div class="zv-select-wrap">
@@ -537,6 +537,7 @@
 <script th:src="@{/admin/plugins/jquery/jquery.min.js}"></script>
 <script th:src="@{/admin/plugins/sweetalert/sweetalert.min.js}"></script>
 <script th:src="@{/mall/js/search.js}" type="text/javascript"></script>
+<script th:src="@{/mall/js/detailFunc.js}" type="text/javascript"></script>
 <script type="text/javascript">
     /**
      * 添加到购物车

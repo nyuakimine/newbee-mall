@@ -12,6 +12,7 @@ import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +21,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import ltd.newbee.mall.common.Constants;
 import ltd.newbee.mall.common.NewBeeMallException;
@@ -34,12 +39,16 @@ import ltd.newbee.mall.controller.vo.SearchPageCategoryVO;
 import ltd.newbee.mall.entity.GoodsDesc;
 import ltd.newbee.mall.entity.GoodsImage;
 import ltd.newbee.mall.entity.GoodsQa;
+import ltd.newbee.mall.entity.IndexConfig;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
+import ltd.newbee.mall.entity.PagingQa;
 import ltd.newbee.mall.entity.ReviewUserInfo;
 import ltd.newbee.mall.service.NewBeeMallCategoryService;
 import ltd.newbee.mall.service.NewBeeMallGoodsService;
 import ltd.newbee.mall.util.BeanUtil;
 import ltd.newbee.mall.util.PageQueryUtil;
+import ltd.newbee.mall.util.Result;
+import ltd.newbee.mall.util.ResultGenerator;
 
 @Controller
 public class GoodsController {
@@ -142,17 +151,12 @@ public class GoodsController {
 		GoodsDescVO descVo = new GoodsDescVO();
 		descVo.setColor(color);
 		descVoList.add(descVo);
-
 		String material = a.getMaterial();
 		descVo.setMaterial(material);
-
-
 		String setDate = a.getSetDate();
 		descVo.setSetDate(setDate);
-
 		String size = a.getSize();
 		descVo.setSize(size);
-
 		String warpSize = a.getWarpSize();
 		descVo.setWarpSize(warpSize);
 
@@ -224,23 +228,17 @@ public class GoodsController {
 		String commentDate = d.getCommentDate();
 		ReviewUserInfoVO userinfoVo = new ReviewUserInfoVO();
 		userinfoVo.setCommentDate(commentDate);
-		userInfoVoList.add(userinfoVo);
-		
+		userInfoVoList.add(userinfoVo);		
 		Integer star = d.getStar();
-		userinfoVo.setStar(star);
-		
+		userinfoVo.setStar(star);		
 		String title = d.getTitle();
 		userinfoVo.setTitle(title);
-
 		String content = d.getContent();
-		userinfoVo.setContent(content);
-		
+		userinfoVo.setContent(content);		
 		String picture = d.getPicture();
-		userinfoVo.setPicture(picture);
-		
+		userinfoVo.setPicture(picture);		
 		String nickName = d.getNickName();
-		userinfoVo.setNickName(nickName);
-		
+		userinfoVo.setNickName(nickName);		
 		String GoodsName = d.getGoodsName();
 		userinfoVo.setGoodsName(GoodsName);
 			
@@ -252,5 +250,14 @@ public class GoodsController {
         	request.setAttribute("goodsUserInfoDetail", userInfoVoList);
         	return "mall/detail";
     }
-
-}
+    //20210426//niu
+    @RequestMapping(value = "/goods/qaSort", method = RequestMethod.POST)
+    @ResponseBody
+    public Result qaSort(@RequestBody PagingBean page) {
+        if (page!=null) {
+            System.out.print(page.getPage());
+        } 
+            return ResultGenerator.genFailResult("参数异常！");
+        }
+       
+    }

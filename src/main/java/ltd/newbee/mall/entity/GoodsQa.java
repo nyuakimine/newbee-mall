@@ -7,6 +7,9 @@
  * 版权所有，侵权必究！
  */
 package ltd.newbee.mall.entity;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.util.Date;
 
 public class GoodsQa {
     private String id;
@@ -63,7 +66,5 @@ public class GoodsQa {
 	return "GoodsQa [id=" + id + ", question=" + question + ", submitDate=" + submitDate + ", answer=" + answer
 		+ ", answerDate=" + answerDate + ", helpedNum=" + helpedNum + ", goodsId=" + goodsId + "]";
     }
-	
-
 
 }

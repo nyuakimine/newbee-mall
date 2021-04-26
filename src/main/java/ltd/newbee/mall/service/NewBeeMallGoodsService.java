@@ -15,6 +15,7 @@ import ltd.newbee.mall.entity.GoodsDesc;
 import ltd.newbee.mall.entity.GoodsImage;
 import ltd.newbee.mall.entity.GoodsQa;
 import ltd.newbee.mall.entity.GoodsReview;
+import ltd.newbee.mall.entity.IndexConfig;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
 
 import ltd.newbee.mall.entity.ReviewUserInfo;
@@ -100,7 +101,11 @@ public interface NewBeeMallGoodsService {
 
     PageResult getSubmitDateEntityByGoodsId(PageQueryUtil pageUtil);
 
-    String saveGoodsQa(GoodsQa question);
+    String insertGoodsQaSelective(GoodsQa question);
+
+    String saveGoodsQa(GoodsQa qa);
+
+    String updateIndexConfig(IndexConfig indexConfig);
 
 }
 

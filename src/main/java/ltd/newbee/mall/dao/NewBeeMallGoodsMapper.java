@@ -77,14 +77,8 @@ public interface NewBeeMallGoodsMapper {
      * @param insertGoodsQuestionRequired
      * @retur
      */
+   int insertGoodsQa(GoodsQa question);
 
-    int insertGoodsQuestionRequired(GoodsQa question);
-
-    int insertGoodsQa(GoodsQa question);
-
-
-
-
-     
+    int insertGoodsQaSelective(GoodsQa question);
 
 }
