@@ -10,6 +10,7 @@ package ltd.newbee.mall.controller.mall;
 
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -47,6 +48,7 @@ import ltd.newbee.mall.service.NewBeeMallCategoryService;
 import ltd.newbee.mall.service.NewBeeMallGoodsService;
 import ltd.newbee.mall.util.BeanUtil;
 import ltd.newbee.mall.util.PageQueryUtil;
+import ltd.newbee.mall.util.PageResult;
 import ltd.newbee.mall.util.Result;
 import ltd.newbee.mall.util.ResultGenerator;
 
@@ -253,11 +255,18 @@ public class GoodsController {
     //20210426//niu
     @RequestMapping(value = "/goods/qaSort", method = RequestMethod.POST)
     @ResponseBody
-    public Result qaSort(@RequestBody PagingBean page) {
-        if (page!=null) {
-            System.out.print(page.getPage());
-        } 
-            return ResultGenerator.genFailResult("参数异常！");
+    public Result getHelpedNumEntityByGoodsId(@RequestBody PagingQa page) {
+//        if (page!=null) {
+//            System.out.print(page.getPage());
+//        } 
+	Map<String,Object> params = new HashMap<>();            
+        params.put("page",page.getPage()); 
+        params.put("limit",Constants.GOODS_QA_PAGE_LIMIT);
+        params.put("order","helpedNum");
+        PageQueryUtil pageUtil = new PageQueryUtil(params); 
+        PageResult a =newBeeMallGoodsService.getHelpedNumEntityByGoodsId(pageUtil);
+        return ResultGenerator.genSuccessResult(a);
+
         }
        
     }

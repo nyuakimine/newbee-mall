@@ -152,8 +152,9 @@
     </select>
   </div>
 </div>	
-	  <th:block th:each="qa: ${goodsQaDetail}" th:if="${qa !=null}">		   
-  <div class="zv-cqa">
+	  	   
+  <div class="zv-cqa hiddenQaDiv">
+  <th:block th:each="qa: ${goodsQaDetail}" th:if="${qa !=null}">	
     <div class="zv-cqa-question">
       <span class="zv-space">Q. </span>
    <span class="zv-cqa-step" th:text="${qa.question}">この商品は脚を外してロースタイルにすることは可能でしょうか？</span>
@@ -227,8 +228,9 @@
         </div>
       </div>
     </div>
+      </th:block>
   </div>
-  </th:block>
+
   
   
   <!--<div class="zv-cqa">
@@ -318,7 +320,7 @@
   <div class="zv-cqa-step-link">
     <span>全2件</span>
 
-    <span>ページ1/1</span>
+   <span>ページ<span id="currentPageNo">1</span>/5</span>
 
   </div>
 </div>
@@ -438,8 +440,9 @@
 　　　　　</li>
   	<li class="g-reviewList_item">
 	    <div class="g-lg-flow-sm">
-	    
 
+			
+	</th:block>	
 			<p class="g-score">
 				<span data-score="5.0">
 					<span class="g-clip">text.product.review.Rating</span>
@@ -454,8 +457,7 @@
 	      		</span>
 	      		
 			</p>
-			
-		</th:block>
+    	
 	      <!--	<p class="g-reviewList_user" th:text="${goodsUserInfoDetail.get(0).commentDate}"><b>ルル</b>さん 2021/03/09</p>
 	    </div>
 	    <p class="g-reviewList_info">購入商品:カジュアルソファ(パトレック GR/LBR)</p>

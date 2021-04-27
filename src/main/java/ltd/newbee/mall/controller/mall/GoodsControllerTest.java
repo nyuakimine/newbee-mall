@@ -226,25 +226,48 @@ class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
 	        assertEquals("002",qaList.get(1).getId());
 	        assertEquals("003",qaList.get(2).getId());     
       }
-     @Test
-     public void testSort() { 
-         Map<String,Object> params = new HashMap<String,Object>();
-         params.put("orderBy","id"); 
-       params.put("orderBy","submitDate"); 
-         params.put("page","1"); 
-         params.put("limit","3");
-         PageQueryUtil pageUtil = new PageQueryUtil(params); 
-         PageResult a =newBeeMallGoodsService.getHelpedNumEntityByGoodsId(pageUtil);  
-        
-         List<GoodsQa> qaList = (List<GoodsQa>) a.getList();
-	        int size = 0;
-	        if(qaList != null || !qaList.isEmpty()) {
-	          size = qaList.size(); 
-	          }
-	        assertEquals(3,size); 	      
-	        assertEquals("003",qaList.get(2).getId());
-	        assertEquals("001",qaList.get(0).getId());
-	        assertEquals("002",qaList.get(1).getId());
+     //niu
+                 @Test
+                 public void testSort() { 
+                     Map<String,Object> params = new HashMap<String,Object>();
+//                     params.put("orderBy","id"); 
+                     params.put("orderBy","helpedNum"); 
+                     params.put("page","1"); 
+                     params.put("limit","3");
+                     PageQueryUtil pageUtil = new PageQueryUtil(params); 
+                     PageResult a =newBeeMallGoodsService.getHelpedNumEntityByGoodsId(pageUtil);  
+                    
+                     List<GoodsQa> qaList = (List<GoodsQa>) a.getList();
+            	        int size = 0;
+            	        if(qaList != null || !qaList.isEmpty()) {
+            	          size = qaList.size(); 
+            	          }
+            	        assertEquals(3,size); 	      
+            	        assertEquals("2563",qaList.get(2).getHelpedNum());
+            	        assertEquals("999",qaList.get(0).getHelpedNum());
+            	        assertEquals("989",qaList.get(1).getHelpedNum());
+                 }
+            	    //20210427    
+	        @Test
+	        public void testHelpedNumSort() { 
+	            Map<String,Object> params = new HashMap<String,Object>();
+	           // params.put("orderBy","id"); 
+	            params.put("orderBy","submitDate"); 
+	            params.put("page","1"); 
+	            params.put("limit","3");
+	            PageQueryUtil pageUtil = new PageQueryUtil(params); 
+	            PageResult a =newBeeMallGoodsService.getHelpedNumEntityByGoodsId(pageUtil);  
+	           
+	            List<GoodsQa> qaList = (List<GoodsQa>) a.getList();
+	   	        int size = 0;
+	   	        if(qaList != null || !qaList.isEmpty()) {
+	   	          size = qaList.size(); 
+	   	          }
+	   	        assertEquals(3,size); 	      
+	   	        assertEquals("2021-04-15 00:00:00",qaList.get(2).getSubmitDate());
+	   	        assertEquals("2050-04-29 00:00:00",qaList.get(0).getSubmitDate());
+	   	        assertEquals("2040-05-06 00:00:00",qaList.get(1).getSubmitDate());
+
 
 //	 params.put("orderBy","submitDate"); 
 //	 PageResult b =newBeeMallGoodsService.getSubmitDateEntityByGoodsId(pageUtil);
@@ -253,7 +276,7 @@ class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
      @Test
      public void testInsertGoods(){ 
 	 GoodsQa qa = new GoodsQa ();	
-	 qa.setId("20");
+	 qa.setId("22");
 	 qa.setQuestion("变绿变绿变绿变绿!!!");			 
 	 qa.setAnswer("好运来变绿！！！");
 	 qa.setSubmitDate("20140205");	 

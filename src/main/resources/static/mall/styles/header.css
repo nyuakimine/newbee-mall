@@ -477,7 +477,7 @@ section.g-grid_item.g-sm-block-sm {
 } 
   /*   height: 1500px; */
    /*  overflow: scroll; */
-}
+
 /* 2021/04/02 cssの修正 */
 .zv-cqa-posting-rule {
     border: 1px dotted #bdc3c7;
@@ -1332,4 +1332,7 @@ img {
 }
 .zv-error-message {
     display:none;
+}
+.hiddenQaDiv{
+	disply:none;
 }

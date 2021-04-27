@@ -408,17 +408,8 @@
 <!-- sort -->	 
 	 <select id="getHelpedNum" parameterType="Map" resultType= "ltd.newbee.mall.entity.GoodsQa">			   
 			select goods_id,id,question,submit_date,answer,answer_date,helped_num
-		    from goods_qa
-		    <if test="orderBy!=null and orderBy!=''">
-		      <choose>
-		           <otherwise>
-		           order by id
-		           </otherwise>
-		      </choose> 
-		      <if test="start!=null and limit!=null">
-            limit #{start},#{limit}
-              </if>
-		    </if>		  
+		    from goods_qa order by #{B} limit #{start},#{limit}
+	
 	 </select> 	 
     <select id="getTotalGoodsQa" parameterType="Map" resultType="int">
         select count(*) from goods_qa
