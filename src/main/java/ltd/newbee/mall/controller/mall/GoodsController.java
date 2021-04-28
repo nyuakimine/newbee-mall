@@ -184,7 +184,14 @@ public class GoodsController {
 	 * =BeanUtil.copyList(descEntityList1,GoodsDescVO.class);
 	 */
 	
-	List<GoodsQa> qaList = newBeeMallGoodsService.getGoodsQaEntityByGoodsId(goodsId);
+	Map<String,Object> params = new HashMap<>();            
+        params.put("page",1); 
+        params.put("limit",Constants.GOODS_QA_PAGE_LIMIT);
+        params.put("orderBy","hulped_date");
+        PageQueryUtil pageUtil = new PageQueryUtil(params); 
+        PageResult a =newBeeMallGoodsService.getHelpedNumEntityByGoodsId(pageUtil);
+        List<GoodsQa> qaList = (List<GoodsQa>) a.getList();
+	//List<GoodsQa> qaList = newBeeMallGoodsService.getGoodsQaEntityByGoodsId(goodsId);
 	if (qaList == null || qaList.isEmpty()) {
 	    NewBeeMallException.fail(ServiceResultEnum.GOODS_NOT_EXIST.getResult());
 	}
@@ -256,17 +263,13 @@ public class GoodsController {
     @RequestMapping(value = "/goods/qaSort", method = RequestMethod.POST)
     @ResponseBody
     public Result getHelpedNumEntityByGoodsId(@RequestBody PagingQa page) {
-//        if (page!=null) {
-//            System.out.print(page.getPage());
-//        } 
+
 	Map<String,Object> params = new HashMap<>();            
         params.put("page",page.getPage()); 
         params.put("limit",Constants.GOODS_QA_PAGE_LIMIT);
-        params.put("order","helpedNum");
+        params.put("orderBy","helpedNum");
         PageQueryUtil pageUtil = new PageQueryUtil(params); 
         PageResult a =newBeeMallGoodsService.getHelpedNumEntityByGoodsId(pageUtil);
         return ResultGenerator.genSuccessResult(a);
-
-        }
-       
+        }      
     }

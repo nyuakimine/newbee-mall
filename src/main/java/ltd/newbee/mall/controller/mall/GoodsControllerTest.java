@@ -231,7 +231,7 @@ class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
                  public void testSort() { 
                      Map<String,Object> params = new HashMap<String,Object>();
 //                     params.put("orderBy","id"); 
-                     params.put("orderBy","helpedNum"); 
+                     params.put("orderBy","B"); 
                      params.put("page","1"); 
                      params.put("limit","3");
                      PageQueryUtil pageUtil = new PageQueryUtil(params); 

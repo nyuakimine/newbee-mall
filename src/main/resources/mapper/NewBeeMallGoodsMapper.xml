@@ -408,12 +408,13 @@
 <!-- sort -->	 
 	 <select id="getHelpedNum" parameterType="Map" resultType= "ltd.newbee.mall.entity.GoodsQa">			   
 			select goods_id,id,question,submit_date,answer,answer_date,helped_num
-		    from goods_qa order by #{B} limit #{start},#{limit}
+		    from goods_qa order by #{B}
+		     <!-- limit #{start},#{limit} -->
 	
 	 </select> 	 
     <select id="getTotalGoodsQa" parameterType="Map" resultType="int">
-        select count(*) from goods_qa
-        limit #{start},#{limit}
+        select count(*) from goods_qa 
+   where goods_id = #{goodsId}
      </select> 
 <!-- insert -->
     <insert id="insertGoodsQa" parameterType="ltd.newbee.mall.entity.GoodsQa"> 

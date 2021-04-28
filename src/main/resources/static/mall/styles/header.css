@@ -1336,3 +1336,7 @@ img {
 .hiddenQaDiv{
 	disply:none;
 }
+.previousPage, .nextPage{
+	cursor: pointer;
+	color:#009e69;
+}

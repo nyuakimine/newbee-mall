@@ -140,9 +140,10 @@
 
 
  <div class="zv-cqa-step-link">
+   <span class="previousPage" >前ページ</span>
     <span>全2件</span>
     <span>ページ<span id="currentPageNo">1</span>/5</span>
-
+<span class="nextPage" >次ページ</span>
   </div>
   <div class="zv-select-wrap">
   
@@ -152,9 +153,10 @@
     </select>
   </div>
 </div>	
-	  	   
+<!--++++++++++++++++++++++++++++++++++++QA+++block+++++++++++++++++++++++++++++++++-->
+  <th:block th:each="qa: ${goodsQaDetail}" th:if="${qa !=null}">		  	   
   <div class="zv-cqa hiddenQaDiv">
-  <th:block th:each="qa: ${goodsQaDetail}" th:if="${qa !=null}">	
+
     <div class="zv-cqa-question">
       <span class="zv-space">Q. </span>
    <span class="zv-cqa-step" th:text="${qa.question}">この商品は脚を外してロースタイルにすることは可能でしょうか？</span>
@@ -228,100 +230,21 @@
         </div>
       </div>
     </div>
-      </th:block>
+    
   </div>
-
   
-  
-  <!--<div class="zv-cqa">
+  <!--+++++++++++++++++++++++++++++++第二个QA++++++++++++++++++++++++++++++++++++++++++++-->
 
-    <div class="zv-cqa-question">
-      <span class="zv-space">Q. </span>
-      <span class="zv-cqa-q-text">大人2人で階段などの運搬は可能ですか？</span>
-    </div>
-    <div class="zv-cqa-q-info">
-      <span class="zv-cqa-q-reviewer">投稿者&nbsp; </span>
-      <span class="zv-cqa-q-created-at">投稿日&nbsp;2021年03月17日</span>
-    </div>
-    <div class="zv-cqa-answers">
+    </th:block>
+ 
 
-      <div class="zv-cqa-answer zv-cqa-answer-first">
-        <span class="zv-space">A. </span>
-        <div class="zv-cqa-a-content">
-          <div class="zv-cqa-a-text">
-
-            <p class="zv-p">梱包サイズ・重量は下記となります。</p>
-
-            <p class="zv-p">幅130×奥行78×高さ52cm　重さ：24kg</p>
-
-          </div>
-
-          <div class="zv-cqa-a-info">
-            <span class="zv-space"></span>
-            <span class="zv-cqa-a-reviewer">回答者&nbsp; Nitori-QA-001</span>
-            <span class="zv-cqa-a-created-at">回答日&nbsp;2021年03月21日</span>
-          </div>
-          <div class="zv-helpful-form" data-answer-id="50776">
-            <span class="zv-space"></span>
-            <span class="zv-error-message" id="ZVLoginErrorHelpful-50776">「参考になった/参考にならなかった」を投稿するにはログインが必要です。</span>
-            <span class="zv-helpful-col">
-              <span class="zv-helpful zv-helpful-wrapper zv-helpful-wrapper-yes-50776" data-count="50776" data-clickable="" data-answer-id="50776">
-                <i class="zv-helpful zv-helpful-yes-i"></i>
-                <span class="zv-helpful zv-helpful-yes zv-helpful-yes-50776" data-count="50776" id="ZVHelpfulYes-50776">参考になった</span>
-                <span class="zv-helpful zv-helpful-num zv-helpful-yes-num zv-helpful-yes-num-50776" data-count="50776" id="ZVHelpfulYesNum-50776">(0人)</span>
-              </span>
-            </span>
-            <span class="zv-helpful-col">
-              <span class="zv-helpful zv-helpful-wrapper zv-helpful-wrapper-no-50776" data-count="50776" data-clickable="" data-answer-id="50776">
-                <i class="zv-helpful  zv-helpful-no-i"></i>
-                <span class="zv-helpful zv-helpful-no zv-helpful-no-50776" data-count="50776" id="ZVHelpfulNo-50776">参考にならなかった</span>
-                <span class="zv-helpful zv-helpful-num zv-helpful-no-num zv-helpful-no-num-50776" data-count="50776" id="ZVHelpfulNoNum-50776">(0人)</span>
-              </span>
-            </span>
-            <span class="zv-separator">|</span>
-            <div class="zv-popupModal1">
-              <input type="radio" name="modalPop" id="pop1150776">
-              <label for="pop1150776">違反を報告</label>
-              <input type="radio" name="modalPop" id="pop1250776">
-              <label for="pop1250776">CLOSE</label>
-              <input type="radio" name="modalPop" id="pop1350776">
-              <label for="pop1350776">×</label>
-              <div class="zv-modalPopup2">
-                <div class="zv-modalPopup3">
-                  <h2 class="zv-modalTitle">違反を報告</h2>
-                  <div class="zv-modalMain">
-                    <p>このコンテンツは不適切であり、削除する必要があると思われる場合は、下のボタンをクリックしてお知らせください。</p>
-                    <div class="zv-report zv-btn" data-post-type="answer" data-target-id="50776">違反を報告する</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="zv-cqa-comment">
-            <div class="zv-cqa-comment-actions">
-              <p class="zv-error-message" id="ZVLoginErrorComment-50776">コメントを記入するにはログインが必要です。</p>
-
-
-            </div>
-            <div class="zv-cqa-comment-list-body zv-hide">
-
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-
-    </div>
-  </div>
--->
-
-<div class="zv-cqa-step">
+<div class="zv-cqa-step" id="detailFooter">
   <div class="zv-cqa-step-link">
+  <span class="previousPage" >前ページ</span>
     <span>全2件</span>
 
-   <span>ページ<span id="currentPageNo">1</span>/5</span>
-
+   <span>ページ<span id="currentPageNo" >1</span>/5</span>
+   <span class="nextPage" >次ページ</span>
   </div>
 </div>
 

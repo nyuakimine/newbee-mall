@@ -69,6 +69,4 @@ public class PagingQa {
 		+ ", cofigType=" + cofigType + ", page=" + page + "]";
     }
 
-
-
 }

@@ -1,11 +1,45 @@
+(function(){
+	//disable previous page 
+	debugger;
+	$(".previousPage").css("pointer-events", "none").css("color","grey");
+});  
+  
+  
    $("#zv-cqa-select-sort").change(function(){
-	var page = $("#currentPageNo").text();
+
+      paging(2);
+      });
+      //下一页
+      $( ".nextPage" ).click(function(){
+	   paging(0);
+	   $(".previousPage").css("pointer-events", "auto").css("color","#009e96");
+	   });
+	   //上一页
+	      $( ".previousPage" ).click(function(){
+	   paging(1);
+	   });
+	debugger;   
+	function paging(num){
+	//alert("Handlerfor .click() called." );   
+	 
+      var page = $("#currentPageNo").text();
+      var pageNo = 0;
+      console.log("current page: ",page);
+	//console.log("selected value ",$('#zv-cqa-select-sort :selected').text());
 	var url = "/goods/qaSort";
-	var url = "/goods/qaSort";
-	var data = {
-		"page":page
-	           };
-	debugger;    
+	if(num == 0){
+		//下页
+		 pageNo = parseInt(page) + 1;
+	}else if (num == 1){
+		//上页
+		 pageNo = parseInt(page) - 1;
+	}else{
+		 pageNo = 1 
+	}
+	
+	   data = {
+		"page":pageNo
+	           };	    
         $.ajax({
             type: 'POST',//方法类型
             url: url,
@@ -19,7 +53,7 @@
 						$("#ZVCQuestionsArea").find(".zv-cqa").remove();
 					  	}
 				    
-                    /*var ar = result.data.list;*/
+                    var ar = result.data.list;
                     for(let i = 0; i <ar.length;i++){
 	
 					el = $(".hiddenQaDiv").clone().removeClass("hiddenQaDiv");
@@ -40,5 +74,6 @@
                     icon: "error",
                 });
             }
-        })
-      })
+        });
+       
+      }
