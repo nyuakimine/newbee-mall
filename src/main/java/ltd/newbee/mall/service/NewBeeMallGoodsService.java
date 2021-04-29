@@ -101,11 +101,13 @@ public interface NewBeeMallGoodsService {
 
     PageResult getSubmitDateEntityByGoodsId(PageQueryUtil pageUtil);
 
-    String insertGoodsQaSelective(GoodsQa question);
+    int insertGoodsQaSelective(GoodsQa question);
 
     String saveGoodsQa(GoodsQa qa);
 
     String updateIndexConfig(IndexConfig indexConfig);
+    
+    Long getMaxQaId(Long goodsId);
 
 }
 

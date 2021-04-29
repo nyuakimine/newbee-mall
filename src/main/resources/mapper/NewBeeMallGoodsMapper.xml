@@ -407,14 +407,30 @@
 	 </select> 
 <!-- sort -->	 
 	 <select id="getHelpedNum" parameterType="Map" resultType= "ltd.newbee.mall.entity.GoodsQa">			   
-			select goods_id,id,question,submit_date,answer,answer_date,helped_num
-		    from goods_qa order by #{B}
-		     <!-- limit #{start},#{limit} -->
-	
+			select id,question,submit_date,answer,answer_date,helped_num,goods_id from goods_qa		    
+		    <if test="orderBy!=null and orderBy!=''">
+         <choose>
+                <when test="orderBy == 'submit_date'">
+                    <!-- 发布时间排列 -->
+                    order by submit_date 
+                </when>
+                    <!-- 参考人数排列 -->
+                <when test="orderBy == 'helped_num'">
+                    order by helped_num 
+                </when>
+                <!-- 默认id从小到大 -->
+                <otherwise>             
+                    order by id
+                </otherwise>
+         </choose>
+      </if>
+      <if test="start!=null and limit!=null">
+            limit #{start},#{limit}
+      </if>
 	 </select> 	 
     <select id="getTotalGoodsQa" parameterType="Map" resultType="int">
         select count(*) from goods_qa 
-   where goods_id = #{goodsId}
+        limit #{start},#{limit}
      </select> 
 <!-- insert -->
     <insert id="insertGoodsQa" parameterType="ltd.newbee.mall.entity.GoodsQa"> 
@@ -423,7 +439,7 @@
           #{submit_date,jdbcType=VARCHAR},#{answer_date,jdbcType=VARCHAR},              
 	      #{goods_id,jdbcType=BIGINT})         
     </insert>   
-    <insert id="insertGoodsQaSelective" parameterType="ltd.newbee.mall.entity.GoodsQa">
+    <insert id="insertGoodsQaSelective" parameterType="java.lang.Long">
         insert into goods_qa
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -456,14 +472,18 @@
                 #{answer,jdbcType=VARCHAR},
             </if>
                <if test="submitDate != null">
-                #{submitDate,jdbcType=VARCHAR},
+                #{submitDate,jdbcType=TIMESTAMP},
             </if>
             <if test="answerDate != null">
-                #{answerDate,jdbcType=VARCHAR},
+                #{answerDate,jdbcType=TIMESTAMP},
             </if>     
             <if test="goodsId != null">
                 #{goodsId,jdbcType=BIGINT},
             </if>          
         </trim>
     </insert> 
+    <select id="getMaxQaId" parameterType="java.lang.Long" resultType= "java.lang.Long">			   
+			select max(id) from goods_qa where goods_id = #{goodsId,jdbcType=BIGINT}				  
+	 </select> 
+
  </mapper>

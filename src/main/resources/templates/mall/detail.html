@@ -153,11 +153,13 @@
     </select>
   </div>
 </div>	
-<!--++++++++++++++++++++++++++++++++++++QA+++block+++++++++++++++++++++++++++++++++-->
-  <th:block th:each="qa: ${goodsQaDetail}" th:if="${qa !=null}">		  	   
+<!--++++++++++++++++++++++++++++++++++++QA++block+++++++++++++++++++++++++++++++++-->
+<th:block th:each="qa: ${goodsQaDetail}" th:if="${qa !=null}">		  	   
+ <!-- <div class="zv-cqa">  --> 
   <div class="zv-cqa hiddenQaDiv">
-
+ <!--// <th:block th:each="qa: ${goodsQaDetail}" th:if="${qa !=null}">-->
     <div class="zv-cqa-question">
+     <div class="zv-cqa-question delete">
       <span class="zv-space">Q. </span>
    <span class="zv-cqa-step" th:text="${qa.question}">この商品は脚を外してロースタイルにすることは可能でしょうか？</span>
 
@@ -235,6 +237,86 @@
   
   <!--+++++++++++++++++++++++++++++++第二个QA++++++++++++++++++++++++++++++++++++++++++++-->
 
+ <!-- <div class="zv-cqa hiddenQaDiv">
+
+    <div class="zv-cqa-question">
+     <div class="zv-cqa-question delete">
+      <span class="zv-space">Q. </span>
+   <span class="zv-cqa-step" th:text="${qa.question}">この商品は脚を外してロースタイルにすることは可能でしょうか？</span>
+
+    </div>
+    <div class="zv-cqa-q-info">
+      <span class="zv-cqa-q-reviewer" th:text="${goodsQaDetail.get(0).id}">投稿者&nbsp; </span>
+      <span class="zv-cqa-step" th:text="${qa.submitDate}">投稿日&nbsp;2021年04月02日</span>
+    </div>
+    <div class="zv-cqa-answers">
+
+      <div class="zv-cqa-answer zv-cqa-answer-first">
+        <span class="zv-space">A. </span>
+        <div class="zv-cqa-a-content">
+          <div class="zv-cqa-a-text">
+
+            <p class="zv-cqa-step" th:text="${qa.answer}">脚を取外してのご使用を想定しておりません。床を傷つける恐れがありますので、脚を外してのご使用はお控えください。</p>
+
+          </div>
+
+          <div class="zv-cqa-a-info">
+            <span class="zv-space"></span>
+            <span class="zv-cqa-a-reviewer"th:text="${goodsQaDetail.get(0).id}">回答者&nbsp; Nitori-QA-001</span>
+            <span class="zv-cqa-step" th:text="'回答日:'+${qa.answerDate}">回答日&nbsp;2021年04月05日</span>
+          </div>
+          <div class="zv-helpful-form" data-answer-id="58746">
+            <span class="zv-space"></span>
+            <span class="zv-error-message" id="ZVLoginErrorHelpful-58746" th:text="${goodsQaDetail.get(0).helpedNum}">「参考になった/参考にならなかった」を投稿するにはログインが必要です。</span>
+            <span class="zv-helpful-col">
+              <span class="zv-helpful zv-helpful-wrapper zv-helpful-wrapper-yes-58746" data-count="58746" data-clickable="" data-answer-id="58746">
+                <i class="zv-helpful zv-helpful-yes-i"></i>
+                <span class="zv-helpful zv-helpful-yes zv-helpful-yes-58746" data-count="58746" id="ZVHelpfulYes-58746">参考になった</span>
+                <span class="zv-cqa-step" th:text="${qa.helpedNum}+'人'">(0人)</span>
+              </span>
+            </span>
+            <span class="zv-helpful-col">
+              <span class="zv-helpful zv-helpful-wrapper zv-helpful-wrapper-no-58746" data-count="58746" data-clickable="" data-answer-id="58746">
+                <i class="zv-helpful  zv-helpful-no-i"></i>
+                <span class="zv-helpful zv-helpful-no zv-helpful-no-58746" data-count="58746" id="ZVHelpfulNo-58746">参考にならなかった</span>
+                <span class="zv-helpful zv-helpful-num zv-helpful-no-num zv-helpful-no-num-58746" data-count="58746" id="ZVHelpfulNoNum-58746">(0人)</span>
+              </span>
+            </span>
+            <span class="zv-separator">|</span>
+            <div class="zv-popupModal1">
+              <input type="radio" name="modalPop" id="pop1158746">
+              <label for="pop1158746">違反を報告</label>
+              <input type="radio" name="modalPop" id="pop1258746">
+              <label for="pop1258746">CLOSE</label>
+              <input type="radio" name="modalPop" id="pop1358746">
+              <label for="pop1358746">×</label>
+              <div class="zv-modalPopup2">
+                <div class="zv-modalPopup3">
+                  <h2 class="zv-modalTitle">違反を報告</h2>
+                  <div class="zv-modalMain">
+                    <p>このコンテンツは不適切であり、削除する必要があると思われる場合は、下のボタンをクリックしてお知らせください。</p>
+                    <div class="zv-report zv-btn" data-post-type="answer" data-target-id="58746">違反を報告する</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="zv-cqa-comment">
+            <div class="zv-cqa-comment-actions">
+              <p class="zv-error-message" id="ZVLoginErrorComment-58746">コメントを記入するにはログインが必要です。</p>
+
+
+            </div>
+            <div class="zv-cqa-comment-list-body zv-hide">
+            </div>
+          </div>
+        </div>
+           </div>
+             </th:block>
+      </div>
+    </div>
+    
+  </div>-->
     </th:block>
  
 

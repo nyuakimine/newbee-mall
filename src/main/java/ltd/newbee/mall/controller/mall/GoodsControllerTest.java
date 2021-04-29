@@ -111,7 +111,7 @@ class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
 	assertEquals("半額でしてくれる？", question);
 
 	GoodsQa f = list.get(0);
-	String submitDate = f.getSubmitDate();
+	java.util.Date submitDate = f.getSubmitDate();
 	assertEquals("2050-04-29 00:00:00", submitDate);
 
 	GoodsQa g = list.get(0);
@@ -119,7 +119,7 @@ class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
 	assertEquals("だめ！", answer);
 
 	GoodsQa h = list.get(0);
-	String answerDate = h.getAnswerDate();
+	java.util.Date answerDate = h.getAnswerDate();
 	assertEquals("1998-05-06 00:00:00", answerDate);
 
 	GoodsQa i = list.get(0);
@@ -127,7 +127,7 @@ class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
 	assertEquals("999", helpedNum);
 
 	GoodsQa j = list.get(0);
-	String id = j.getId();
+	Long id = j.getId();
 	assertEquals("001", id);
 
     }
@@ -222,9 +222,9 @@ class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
 	          }
 	        assertEquals(3,size); 
 	      
-	        assertEquals("001",qaList.get(0).getId());
-	        assertEquals("002",qaList.get(1).getId());
-	        assertEquals("003",qaList.get(2).getId());     
+	        assertEquals("1",qaList.get(0).getId());
+	        assertEquals("2",qaList.get(1).getId());
+	        assertEquals("3",qaList.get(2).getId());     
       }
      //niu
                  @Test
@@ -273,16 +273,16 @@ class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
 //	 PageResult b =newBeeMallGoodsService.getSubmitDateEntityByGoodsId(pageUtil);
      }
      
-     @Test
-     public void testInsertGoods(){ 
-	 GoodsQa qa = new GoodsQa ();	
-	 qa.setId("22");
-	 qa.setQuestion("变绿变绿变绿变绿!!!");			 
-	 qa.setAnswer("好运来变绿！！！");
-	 qa.setSubmitDate("20140205");	 
-	 qa.setAnswerDate("20100806");	 	
-	 qa.setGoodsId(1256L);
-	 String v = newBeeMallGoodsService.saveGoodsQa(qa);
-         assertEquals(ServiceResultEnum.SUCCESS.getResult(),v);
-     }
+         @Test
+         public void testInsertGoods(){ 
+    	 GoodsQa qa = new GoodsQa ();	
+    	 qa.setId(22L);
+    	 qa.setQuestion("变绿变绿变绿变绿!!!");			 
+    	 qa.setAnswer("好运来变绿！！！");
+    	 //qa.setSubmitDate(20140205);	 
+    	 //qa.setAnswerDate(20100806);	 	
+    	 qa.setGoodsId(1256L);
+    	 String v = newBeeMallGoodsService.saveGoodsQa(qa);
+             assertEquals(ServiceResultEnum.SUCCESS.getResult(),v);
+         }
 }

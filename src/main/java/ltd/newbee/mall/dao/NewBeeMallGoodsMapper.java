@@ -77,8 +77,12 @@ public interface NewBeeMallGoodsMapper {
      * @param insertGoodsQuestionRequired
      * @retur
      */
-   int insertGoodsQa(GoodsQa question);
+    int insertGoodsQa(GoodsQa question);
+    //added by niu 2021/04/29 qaInsert
 
     int insertGoodsQaSelective(GoodsQa question);
+    //get max qa id
+    Long getMaxQaId(Long goodsId);
+
 
 }

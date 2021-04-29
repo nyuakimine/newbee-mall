@@ -23,6 +23,10 @@ public class PagingQa {
 
     private String page;
 
+    private Date submitDate;
+    
+    private String helpedNum;
+
     public String getOrderBy() {
         return orderBy;
     }
@@ -63,10 +67,27 @@ public class PagingQa {
         this.page = page;
     }
 
+    public Date getSubmitDate() {
+        return submitDate;
+    }
+
+    public void setSubmitDate(Date submitDate) {
+        this.submitDate = submitDate;
+    }
+
+    public String getHelpedNum() {
+        return helpedNum;
+    }
+
+    public void setHelpedNum(String helpedNum) {
+        this.helpedNum = helpedNum;
+    }
+
     @Override
     public String toString() {
 	return "PagingQa [orderBy=" + orderBy + ", configName=" + configName + ", configRank=" + configRank
-		+ ", cofigType=" + cofigType + ", page=" + page + "]";
+		+ ", cofigType=" + cofigType + ", page=" + page + ", submitDate=" + submitDate + ", helpedNum="
+		+ helpedNum + "]";
     }
-
+    
 }

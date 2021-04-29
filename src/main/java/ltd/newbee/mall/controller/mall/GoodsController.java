@@ -10,6 +10,7 @@ package ltd.newbee.mall.controller.mall;
 
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -206,13 +207,13 @@ public class GoodsController {
 		GoodsQaVO qaVo = new GoodsQaVO();
 		qaVo.setQuestion(question);
 
-		String submitDate = b.getSubmitDate();
+		Date submitDate = b.getSubmitDate();
 		qaVo.setSubmitDate(submitDate);
 
 		String answer = b.getAnswer();
 		qaVo.setAnswer(answer);
 	
-		String answerDate = b.getAnswerDate();		
+		Date answerDate = b.getAnswerDate();		
 		qaVo.setAnswerDate(answerDate);
 		
 		String helpedNum = b.getHelpedNum();
@@ -267,9 +268,30 @@ public class GoodsController {
 	Map<String,Object> params = new HashMap<>();            
         params.put("page",page.getPage()); 
         params.put("limit",Constants.GOODS_QA_PAGE_LIMIT);
-        params.put("orderBy","helpedNum");
+        params.put("orderBy","helped_num");
         PageQueryUtil pageUtil = new PageQueryUtil(params); 
         PageResult a =newBeeMallGoodsService.getHelpedNumEntityByGoodsId(pageUtil);
         return ResultGenerator.genSuccessResult(a);
+        }   
+    //added by niu 2021/04/29 insertqa
+    @RequestMapping(value = "/goods/insertQa", method = RequestMethod.POST)
+    @ResponseBody
+    public Result insertGoodsQaSelective(@RequestBody GoodsQa question) {
+        Integer count = null;  
+        Long qaId = newBeeMallGoodsService.getMaxQaId(question.getGoodsId());
+        question.setId(qaId);
+        Date submitDate = new Date();
+        Date answerDate = new Date();
+        question.setSubmitDate(submitDate);
+        question.setAnswerDate(answerDate);
+        
+        if(question != null) {
+            count = newBeeMallGoodsService.insertGoodsQaSelective(question);
+        }
+        if(!(count > 0))  {
+        return ResultGenerator.genFailResult("投稿失敗！");
         }      
+        return ResultGenerator.genSuccessResult(count);
+      
     }
+}
