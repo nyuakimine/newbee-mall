@@ -429,8 +429,8 @@
       </if>
 	 </select> 	 
     <select id="getTotalGoodsQa" parameterType="Map" resultType="int">
-        select count(*) from goods_qa 
-        limit #{start},#{limit}
+        select count(*) from goods_qa where goods_id = #{goodsId,jdbcType=BIGINT} 
+      
      </select> 
 <!-- insert -->
     <insert id="insertGoodsQa" parameterType="ltd.newbee.mall.entity.GoodsQa"> 

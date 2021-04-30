@@ -155,8 +155,11 @@
 </div>	
 <!--++++++++++++++++++++++++++++++++++++QA++block+++++++++++++++++++++++++++++++++-->
 <th:block th:each="qa: ${goodsQaDetail}" th:if="${qa !=null}">		  	   
-  <div class="zv-cqa delete">
+ <!-- <div class="zv-cqa">  --> 
+  <div class="zv-cqa hiddenQaDiv">
+ <!--// <th:block th:each="qa: ${goodsQaDetail}" th:if="${qa !=null}">-->
     <div class="zv-cqa-question">
+     <div class="zv-cqa-question delete">
       <span class="zv-space">Q. </span>
    <span class="zv-cqa-step" th:text="${qa.question}">この商品は脚を外してロースタイルにすることは可能でしょうか？</span>
 
@@ -301,14 +304,18 @@
           <div class="zv-cqa-comment">
             <div class="zv-cqa-comment-actions">
               <p class="zv-error-message" id="ZVLoginErrorComment-58746">コメントを記入するにはログインが必要です。</p>
+
+
             </div>
             <div class="zv-cqa-comment-list-body zv-hide">
             </div>
           </div>
         </div>
            </div>
+             </th:block>
       </div>
     </div>
+    
   </div>
     </th:block>
  

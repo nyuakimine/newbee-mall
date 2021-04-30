@@ -1,32 +1,35 @@
-$("#zv-cqa-select-sort").change( function(){
+/*$("#zv-cqa-select-sort").change( function(){
   var page = $("#currentPageNum").text();
   var url = "/goods/qaSort";
   var data = {
     "page":page
   };
-(function(){
-	//disable previous page 
-	debugger;
-	$(".previousPage").css("pointer-events", "none").css("color","grey");
+ });*/
+ debugger;
+      $(function(){
+	//disable previous page 	  
+	  $(".previousPage").css("pointer-events", "none").css("color","grey");
+	  });   
       $("#zv-cqa-select-sort").change(function(){
       paging(2);
-      });
+      });     
       //下一页
       $( ".nextPage" ).click(function(){
-	   paging(0);
+	  debugger;
+	  paging(0);
 	  $(".previousPage").css("pointer-events", "auto").css("color","#009e96");
 	   });
 	   //上一页
 	  $( ".previousPage" ).click(function(){
-	   paging(1);
-	   });
-	 
-	  $("ZVPostQuestionButton").click(function(){
-		var question = $("#ZVQuestionTextarea").text();
+	  paging(1);
+	  });	 
+
+	  $("#ZVPostQuestionButton").click(function(){	
+		var question = $("#ZVQuestionTextarea").val();
 		//get url
 		var path = window.location.pathname;
 		//split with / 
-		var ar = url.split("/");
+		var ar = path.split("/");
 		//get array 
 		var len = ar.length;
 		var goodsId = ar[len-1];
@@ -35,7 +38,6 @@ $("#zv-cqa-select-sort").change( function(){
 		  "question":question,
 		  "goodsId":goodsId
 	    };	   
-	    
 	    $.ajax({
             type: 'POST',//方法类型
             url: '/goods/insertQa',
@@ -44,7 +46,7 @@ $("#zv-cqa-select-sort").change( function(){
             success: function (result) {
 	//サーバーが成功した場合
                 if (result.resultCode == 200) {
-						debugger;
+				debugger;					
 						swal("質問ご登録ありがとうございました！" ,{
 							icon:"success",
 						});
@@ -59,19 +61,20 @@ $("#zv-cqa-select-sort").change( function(){
                 swal("操作失败", {
                     icon: "error",
                 });
-            }
-        });
-      })
+             }
+         })
+      });
  
 	debugger;   
 	function paging(num){
 	//alert("Handlerfor .click() called." );   
 	 
-      var page = $("#currentPageNo").text();
-      var pageNo = 0;
-      console.log("current page: ",page);
+    var page = $("#currentPageNo").text();
+    var pageNo = 0;
+    console.log("current page: ",page);
 	//console.log("selected value ",$('#zv-cqa-select-sort :selected').text());
 	var url = "/goods/qaSort";
+	
 	if(num == 0){
 		//下页
 		 pageNo = parseInt(page) + 1;
@@ -81,7 +84,7 @@ $("#zv-cqa-select-sort").change( function(){
 	}else{
 		 pageNo = 1 
 	}
-	  var data = {
+	   data = {
 		"page":pageNo
 	           };	    
         $.ajax({
@@ -110,7 +113,10 @@ $("#zv-cqa-select-sort").change( function(){
 		
 							el = $($(".hiddenQaDiv")[0]).clone().removeClass("hiddenQaDiv");
 							el.find(".zv-cqa-question").html(result.data.list[i].question);
-						
+							el.find(".zv-cqa-q-info").html(result.data.list[i].submitDate);
+							el.find(".zv-cqa-a-text").html(result.data.list[i].answer);
+		     				el.find(".zv-cqa-a-info").html(result.data.list[i].answerDate);
+							el.find(".zv-helpful zv-helpful-yes zv-helpful-yes-58746").html(result.data.list[i].helpedNum);
 							$("#detailFooter").before(el);
 							/*qa.appendTo("#ZVCQuestionsArea");*/
 						}
@@ -128,5 +134,3 @@ $("#zv-cqa-select-sort").change( function(){
             }
         });
        }
-    }); 
- }); 

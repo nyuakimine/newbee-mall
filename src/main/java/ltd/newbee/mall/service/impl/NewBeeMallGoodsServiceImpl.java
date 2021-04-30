@@ -148,26 +148,20 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
              int total = goodsMapper.getTotalGoodsQa(pageUtil); 
              PageResult pageResult = new PageResult(goodsList, total, pageUtil.getLimit(), pageUtil.getPage());
              return pageResult;             
-	}
-
-	
+	}	
 	@Override 
         public PageResult getHelpedNumEntityByGoodsId(PageQueryUtil pageUtil) {
 	     List<GoodsQa> goodsList = goodsMapper.getHelpedNum(pageUtil); 
              int total = goodsMapper.getTotalGoodsQa(pageUtil); 
              PageResult pageResult = new PageResult(goodsList, total, pageUtil.getLimit(), pageUtil.getPage());
-             return pageResult; 
-             
+             return pageResult;             
 	}
-
-	
 	@Override 
         public PageResult getSubmitDateEntityByGoodsId(PageQueryUtil pageUtil) {
 	     List<GoodsQa> goodsList = goodsMapper.getSubmitDate(pageUtil); 
              int total = goodsMapper.getTotalGoodsQa(pageUtil); 
              PageResult pageResult = new PageResult(goodsList, total, pageUtil.getLimit(), pageUtil.getPage());
              return pageResult; 
-             
 	}
 	 @Override
 	    public String saveGoodsQa(GoodsQa question) {
@@ -176,7 +170,6 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 	        }
 	        return ServiceResultEnum.DB_ERROR.getResult();
 	    }
-
 	@Override
 	public String updateIndexConfig(IndexConfig indexConfig) {
 	    // TODO Auto-generated method stub
@@ -189,7 +182,6 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 	    int count = goodsMapper.insertGoodsQaSelective(question);
 	    return count;
 	}
-
 	@Override
 	public Long getMaxQaId(Long goodsId) {
 	    Long maxGoodsId = goodsMapper.getMaxQaId(goodsId);
@@ -200,8 +192,4 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
               return 1L;
             }
         }
-	
 }
-	    
-	    
-	    
