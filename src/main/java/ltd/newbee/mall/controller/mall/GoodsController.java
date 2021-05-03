@@ -10,6 +10,7 @@ package ltd.newbee.mall.controller.mall;
 
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -35,6 +36,7 @@ import ltd.newbee.mall.common.ServiceResultEnum;
 import ltd.newbee.mall.controller.vo.GoodsDescVO;
 import ltd.newbee.mall.controller.vo.GoodsImageVO;
 import ltd.newbee.mall.controller.vo.GoodsQaVO;
+import ltd.newbee.mall.controller.vo.GoodsReviewVo;
 import ltd.newbee.mall.controller.vo.NewBeeMallGoodsDetailVO;
 import ltd.newbee.mall.controller.vo.ReviewUserInfoVO;
 import ltd.newbee.mall.controller.vo.SearchPageCategoryVO;
@@ -60,6 +62,7 @@ public class GoodsController {
     private NewBeeMallGoodsService newBeeMallGoodsService;
     @Resource
     private NewBeeMallCategoryService newBeeMallCategoryService;
+    private Object getGoodsReviews;
 
     @GetMapping({ "/search", "/search.html" })
     public String searchPage(@RequestParam Map<String, Object> params, HttpServletRequest request) {
@@ -291,7 +294,16 @@ public class GoodsController {
         if(!(count > 0))  {
         return ResultGenerator.genFailResult("投稿失敗！");
         }      
-        return ResultGenerator.genSuccessResult(count);
-      
+        return ResultGenerator.genSuccessResult(count);    
     }
+    //add by niu 2021/05/03 showMoreReview
+    @RequestMapping(value = "/goods/showMoreReview", method = RequestMethod.POST)
+    @ResponseBody
+    public Result showMoreReview(@RequestBody Long goodsId) {
+ 
+        List<GoodsReviewVo> reviewList = newBeeMallGoodsService.getGoodsReviews(goodsId);
+	 
+        return ResultGenerator.genSuccessResult(reviewList);    
+    }
+    
 }

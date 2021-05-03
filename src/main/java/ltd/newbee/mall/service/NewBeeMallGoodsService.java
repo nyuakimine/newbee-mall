@@ -10,7 +10,7 @@ package ltd.newbee.mall.service;
 
 import java.util.List;
 
-
+import ltd.newbee.mall.controller.vo.GoodsReviewVo;
 import ltd.newbee.mall.entity.GoodsDesc;
 import ltd.newbee.mall.entity.GoodsImage;
 import ltd.newbee.mall.entity.GoodsQa;
@@ -108,6 +108,8 @@ public interface NewBeeMallGoodsService {
     String updateIndexConfig(IndexConfig indexConfig);
     
     Long getMaxQaId(Long goodsId);
+    
+    List<GoodsReviewVo> getGoodsReviews(Long goodsId);
 
 }
 

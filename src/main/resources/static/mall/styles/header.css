@@ -1340,3 +1340,6 @@ img {
 	cursor: pointer;
 	color:#009e69;
 }
+.hiddenList{
+	disply:none;
+}

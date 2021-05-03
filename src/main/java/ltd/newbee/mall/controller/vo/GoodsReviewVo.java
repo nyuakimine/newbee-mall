@@ -6,13 +6,16 @@
  * Copyright (c) 2019-2020 十三 all rights reserved.
  * 版权所有，侵权必究！
  */
-package ltd.newbee.mall.entity;
+package ltd.newbee.mall.controller.vo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
-public class GoodsReview {
+/**
+ * 商品详情页VO
+ */
+public class GoodsReviewVo implements Serializable {
     private int id;
     private int star;
     private String custermerId;
@@ -71,11 +74,9 @@ public class GoodsReview {
     }
     @Override
     public String toString() {
-	return "GoodsReview [id=" + id + ", star=" + star + ", custermerId=" + custermerId + ", commentDate="
+	return "GoodsReviewVo [id=" + id + ", star=" + star + ", custermerId=" + custermerId + ", commentDate="
 		+ commentDate + ", goodsId=" + goodsId + ", title=" + title + ", content=" + content + ", picture="
 		+ picture + "]";
     }
-	
-
- 
+  
 }

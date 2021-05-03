@@ -22,18 +22,68 @@
 	   //上一页
 	  $( ".previousPage" ).click(function(){
 	  paging(1);
-	  });	 
-
+	  });	
+	  
+	 //レビューをもっと見るイベント
+	  $("#showMoreReviewsBtn").click(function(){
+	    var goodsId = getGoodsId();
+	
+	    var data = {
+		  "goodsId":goodsId
+	    };
+	  	    $.ajax({
+            type: 'POST',//方法类型
+            url: '/goods/showMoreReview',
+            contentType: 'application/json',
+            data: JSON.stringify(goodsId),
+            success: function (result) {
+	//サーバーが成功した場合
+                if (result.resultCode == 200) {
+				debugger;	
+						var list = result.data;
+						if(list === undefined){
+								swal("error", {
+                        icon: "error",
+                    });
+							
+						}
+						if(list != undefined && list.length != 0){
+							for(i =0; i<list.length; i++){
+								var el = $(".hiddenList").clone().removeClass("hiddenList");
+								$(".hiddenList").before(el);
+							}
+						}		
+					/*	swal("質問ご登録ありがとうございました！" ,{
+							icon:"success",
+						});*/
+                } else {
+                    	swal(result.message, {
+                        icon: "error",
+                    });
+                }
+                
+            },
+            error: function () {
+                swal("操作失败", {
+                    icon: "error",
+                });
+             }
+         })
+       
+  })
+  
 	  $("#ZVPostQuestionButton").click(function(){	
+		
 		var question = $("#ZVQuestionTextarea").val();
 		//get url
-		var path = window.location.pathname;
+	/*	var path = window.location.pathname;
 		//split with / 
 		var ar = path.split("/");
 		//get array 
 		var len = ar.length;
 		var goodsId = ar[len-1];
-		debugger;
+		debugger;*/
+		var goodsId = getGoodsId();
 	    data = {
 		  "question":question,
 		  "goodsId":goodsId
@@ -134,3 +184,14 @@
             }
         });
        }
+       
+function getGoodsId(){
+	    var path = window.location.pathname;
+		//split with / 
+		var ar = path.split("/");
+		//get array 
+		var len = ar.length;
+		var goodsId = ar[len-1];
+		
+		return goodsId;
+}

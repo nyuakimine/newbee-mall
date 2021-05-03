@@ -391,14 +391,14 @@
 	   </select>      
        <select id="getGoodsReview" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.GoodsReview">
 	       select id,star,custermer_id,comment_date,goods_id,title,content,picture from goods_review
-	       where goods_id = #{goodsId,jdbcType=BIGINT}
+	       where goods_id = #{goodsId,jdbcType=BIGINT} order by star DESC 
        </select>
 
        <select id="getReviewUserInfoList" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.ReviewUserInfo">
 		    select n.star,n.comment_date,n.title,n.content,n.picture,u.nick_name,f.goods_name         
 		    from goods_review as n join tb_newbee_mall_user as u on n.custermer_id = u.user_id 
 		    join tb_newbee_mall_goods_info as f on n.goods_id=f.goods_id 
-		    where n.goods_id = #{goodsId,jdbcType=BIGINT}
+		    where n.goods_id = #{goodsId,jdbcType=BIGINT} order by n.star DESC
       </select>
 
 	 <select id="getPagination" parameterType="Map" resultType= "ltd.newbee.mall.entity.GoodsQa">			   

@@ -142,8 +142,8 @@ class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
 	assertEquals(10700, goodsId);
 
 	GoodsReview p = list.get(0);
-	String id = p.getId();
-	assertEquals("10691", id);
+	int id = p.getId();
+	assertEquals(10691, id);
 
 	GoodsReview k = list.get(0);
 	Integer star = k.getStar();

@@ -61,10 +61,11 @@ public interface NewBeeMallGoodsMapper {
 	 * @param goodsId
 	 * @return
 	 */
-    List<GoodsImage> getImageList(Long goodsId);
+    List<GoodsImage> getImageList(Long goodsId); 
     List<GoodsReview> getGoodsReview(Long goodsId);
     List<GoodsQa> getGoodsQa(Long goodsId);   
     List<GoodsDesc> getGoodsDesc(Long goodsId);
+    //get goodsReview
     List<ReviewUserInfo> getReviewUserInfoList(Long goodsId);
     List<GoodsQa> getPagination(PageQueryUtil pageUtil);
     /**
@@ -82,7 +83,6 @@ public interface NewBeeMallGoodsMapper {
 
     int insertGoodsQaSelective(GoodsQa question);
     //get max qa id
-    Long getMaxQaId(Long goodsId);
-
+    Long getMaxQaId(Long goodsId);    
 
 }

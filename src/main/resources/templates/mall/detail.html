@@ -412,7 +412,7 @@
 		</p>
 	</div>		    
 <ul class="g-reviewList">
-<li class="g-reviewList_item">
+<li class="g-reviewList_item hiddenList">
 	    <p class="g-label-brand g-reviewList_label">ピックアップレビュー</p>
 	     <th:block th:each="userInfo: ${goodsUserInfoDetail}" th:if="${userInfo !=null}">
 	    <div class="g-lg-flow-sm">
@@ -434,13 +434,12 @@
 	 	<p class="g-reviewList_like"><a class="g-link reviewLike0" id="js-hitLike" data-count="0" data="5f157a91791f76004b000099" data-clickable="">
 	 	<i class="g-s g-s-like-g" aria-hidden="true">
 	 		<img class="thumUpImg" src="/goods-img/thumUp.jpg" alt="Italian Trulli">
-	 	</i><span>参考になった（125人）</span></a></p>
+	<!-- 	</i><span>参考になった（125人）</span></a></p>-->
 　　　　　</li>
   	<li class="g-reviewList_item">
 	    <div class="g-lg-flow-sm">
-
 			
-	</th:block>	
+
 			<p class="g-score">
 				<span data-score="5.0">
 					<span class="g-clip">text.product.review.Rating</span>
@@ -450,15 +449,14 @@
 					<img  src="/goods-img/star.jpg">
 					<img  src="/goods-img/star.jpg">
 					<img  src="/goods-img/star.jpg">
-					</span>
-	      		
-	      		</span>
-	      		
+					</span>	      		
+	      		</span>	      		
 			</p>
-    	
-	      <!--	<p class="g-reviewList_user" th:text="${goodsUserInfoDetail.get(0).commentDate}"><b>ルル</b>さん 2021/03/09</p>
+				</th:block>	
+<!--    	+++++++++++++++++++++++++-->
+<!--<p class="g-reviewList_user" th:text="${goodsUserInfoDetail.get(0).commentDate}"><b>ルル</b>さん 2021/03/09</p>-->
 	    </div>
-	    <p class="g-reviewList_info">購入商品:カジュアルソファ(パトレック GR/LBR)</p>
+	  <!--     	  <p class="g-reviewList_info">購入商品:カジュアルソファ(パトレック GR/LBR)</p>
 	    <p class="g-reviewList_h">可愛い</p>
 	    <p>コンパクトで色もめっちゃ可愛いです。本当に買って良かったです。
 組み立ても簡単でした。</p>
@@ -485,11 +483,12 @@
 	 	<ul class="g-sm-flow-sm g-lg-flow g-reviewList_pics">
 		    	<li><img class="g-fw" src="https://p1-a50ece1c.imageflux.jp/c/f=webp:jpeg,w=1024,h=1024,a=0/store/reviewattachmentfile/53/4463/file/dfc67947e0933f0101d34c811355e0e5.jpeg" alt=""></li>
 		    	</ul>
-		<p class="g-reviewList_like"><a class="g-link reviewLike2" id="js-hitLike" data-count="2" data="6021d7f60a039300180000bd" data-clickable=""><i class="g-s g-s-like-g" aria-hidden="true"></i><span>参考になった（96人）</span></a></p>
+		<p class="g-reviewList_like"><a class="g-link reviewLike2" id="js-hitLike" data-count="2" data="6021d7f60a039300180000bd" data-clickable=""><i class="g-s g-s-like-g" aria-hidden="true"></i><span>参考になった（96人）</span></a></p>-->
   	</li>
 
   	</ul>
-		<div id="p-reviewMore" aria-hidden="true"><ul class="g-reviewList">
+<!--		<div id="p-reviewMore" aria-hidden="true">
+<ul class="g-reviewList">
 	<li class="g-reviewList_item">
 	    <div class="g-lg-flow-sm">
 			<p class="g-score">
@@ -515,10 +514,10 @@
   	</li>
 
   	</ul>
-		</div>
+		</div>-->
 	</div></div>
 								<div class="g-foot-v g-foot-sm" id="js-review-more" aria-hidden="false">
-									<p class="g-align-tc">
+									<p class="g-align-tc" id="showMoreReviewsBtn">
 										<a class="g-link displaymorereview" href="#p-reviewMore" role="button" aria-expanded="false" aria-controls="p-reviewMore" data-label="閉じる" data-accordion="{&quot;scroll&quot;:false}">
 										<i class="g-i g-i-arrow-d"></i><span>レビューをもっと見る（3/<span id="js-reviews-more">4</span>）</span></a>
 									</p>
