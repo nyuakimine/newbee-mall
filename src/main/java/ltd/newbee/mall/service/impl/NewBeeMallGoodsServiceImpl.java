@@ -25,6 +25,7 @@ import ltd.newbee.mall.entity.GoodsDesc;
 import ltd.newbee.mall.entity.GoodsImage;
 import ltd.newbee.mall.entity.GoodsQa;
 import ltd.newbee.mall.entity.GoodsReview;
+import ltd.newbee.mall.entity.GoodsReviewHelpNum;
 import ltd.newbee.mall.entity.IndexConfig;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
 
@@ -199,6 +200,21 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
             List<GoodsReview> entitylist = goodsMapper.getGoodsReview(goodsId);
             List<GoodsReviewVo> reviewVoList = BeanUtil.copyList(entitylist,GoodsReviewVo.class);
             return reviewVoList;
+	}
+
+	@Override
+	public boolean addHelpNum(GoodsReviewHelpNum goodsReviewHelpNum) {
+	   
+	    return goodsMapper.insertHelpNum(goodsReviewHelpNum);
 	} 
-	
+	//updata
+	@Override
+	public boolean updateReviewNum(GoodsReviewHelpNum goodsReviewHelpNum) {	   
+	    return goodsMapper.updateReviewNum(goodsReviewHelpNum);
+	} 
+	//查
+	@Override	
+	public long getGoodsReviewHelpNum(int reviewId) {	   
+	    return goodsMapper.getGoodsReviewHelpNum(reviewId);
+	} 
 }

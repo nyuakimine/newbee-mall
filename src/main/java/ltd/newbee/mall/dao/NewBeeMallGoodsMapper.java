@@ -18,6 +18,7 @@ import ltd.newbee.mall.entity.GoodsDesc;
 import ltd.newbee.mall.entity.GoodsImage;
 import ltd.newbee.mall.entity.GoodsQa;
 import ltd.newbee.mall.entity.GoodsReview;
+import ltd.newbee.mall.entity.GoodsReviewHelpNum;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
 
 import ltd.newbee.mall.entity.ReviewUserInfo;
@@ -62,10 +63,11 @@ public interface NewBeeMallGoodsMapper {
 	 * @return
 	 */
     List<GoodsImage> getImageList(Long goodsId); 
+    //get goodsReview
     List<GoodsReview> getGoodsReview(Long goodsId);
     List<GoodsQa> getGoodsQa(Long goodsId);   
     List<GoodsDesc> getGoodsDesc(Long goodsId);
-    //get goodsReview
+  
     List<ReviewUserInfo> getReviewUserInfoList(Long goodsId);
     List<GoodsQa> getPagination(PageQueryUtil pageUtil);
     /**
@@ -84,5 +86,10 @@ public interface NewBeeMallGoodsMapper {
     int insertGoodsQaSelective(GoodsQa question);
     //get max qa id
     Long getMaxQaId(Long goodsId);    
+    
+    boolean insertHelpNum(GoodsReviewHelpNum goodsReviewHelpNum);
 
+    boolean updateReviewNum(GoodsReviewHelpNum goodsReviewHelpNum);
+
+    long getGoodsReviewHelpNum(int reviewId);
 }

@@ -395,7 +395,7 @@
        </select>
 
        <select id="getReviewUserInfoList" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.ReviewUserInfo">
-		    select n.star,n.comment_date,n.title,n.content,n.picture,u.nick_name,f.goods_name         
+		    select n.star,n.comment_date,n.title,n.content,n.picture,n.review_num,u.nick_name,f.goods_name         
 		    from goods_review as n join tb_newbee_mall_user as u on n.custermer_id = u.user_id 
 		    join tb_newbee_mall_goods_info as f on n.goods_id=f.goods_id 
 		    where n.goods_id = #{goodsId,jdbcType=BIGINT} order by n.star DESC
@@ -485,5 +485,18 @@
     <select id="getMaxQaId" parameterType="java.lang.Long" resultType= "java.lang.Long">			   
 			select max(id) from goods_qa where goods_id = #{goodsId,jdbcType=BIGINT}				  
 	 </select> 
-
+	 <insert id="insertHelpNum" parameterType="ltd.newbee.mall.entity.GoodsReviewHelpNum">
+        INSERT INTO help_num(review_id,user_id)
+        VALUES(#{reviewId,jdbcType=INTEGER},#{userId,jdbcType=BIGINT})
+        
+    </insert>
+    <update id="updateReviewNum">
+        update goods_review set review_num = review_num + 1
+        where id = #{reviewId}      
+    </update>
+       <select id="getGoodsReviewHelpNum" parameterType="int" resultType="java.lang.Long">
+	       select review_num
+	       from goods_review  where id = #{reviewId,jdbcType=BIGINT}
+       </select>
+    
  </mapper>

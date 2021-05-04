@@ -19,6 +19,7 @@ import java.util.Objects;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -38,11 +39,13 @@ import ltd.newbee.mall.controller.vo.GoodsImageVO;
 import ltd.newbee.mall.controller.vo.GoodsQaVO;
 import ltd.newbee.mall.controller.vo.GoodsReviewVo;
 import ltd.newbee.mall.controller.vo.NewBeeMallGoodsDetailVO;
+import ltd.newbee.mall.controller.vo.NewBeeMallUserVO;
 import ltd.newbee.mall.controller.vo.ReviewUserInfoVO;
 import ltd.newbee.mall.controller.vo.SearchPageCategoryVO;
 import ltd.newbee.mall.entity.GoodsDesc;
 import ltd.newbee.mall.entity.GoodsImage;
 import ltd.newbee.mall.entity.GoodsQa;
+import ltd.newbee.mall.entity.GoodsReviewHelpNum;
 import ltd.newbee.mall.entity.IndexConfig;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
 import ltd.newbee.mall.entity.PagingQa;
@@ -254,6 +257,8 @@ public class GoodsController {
 		userinfoVo.setNickName(nickName);		
 		String GoodsName = d.getGoodsName();
 		userinfoVo.setGoodsName(GoodsName);
+		Long reviewNum = d.getReviewNum();
+		userinfoVo.setReviewNum(reviewNum);
 			
 	    } 
 	}
@@ -302,8 +307,30 @@ public class GoodsController {
     public Result showMoreReview(@RequestBody Long goodsId) {
  
         List<GoodsReviewVo> reviewList = newBeeMallGoodsService.getGoodsReviews(goodsId);
-	 
-        return ResultGenerator.genSuccessResult(reviewList);    
+        List<GoodsReviewVo> subReviewList = reviewList.subList(2,reviewList.size()-1);
+ 
+        return ResultGenerator.genSuccessResult(subReviewList);    
     }
-    
+    //add by niu 2021/05/04 helpNum
+    @RequestMapping(value = "/goods/helpNum", method = RequestMethod.POST)
+    @ResponseBody
+    public Result helpNum(@RequestBody GoodsReviewHelpNum goodsReviewHelpNum, HttpSession httpSession) {
+	  NewBeeMallUserVO user = (NewBeeMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
+	  if(user != null) {
+	  goodsReviewHelpNum.setUserId(user.getUserId());
+	  }
+        boolean addFlag = newBeeMallGoodsService.addHelpNum(goodsReviewHelpNum);
+        if(addFlag) {
+            boolean updateFlag = newBeeMallGoodsService.updateReviewNum(goodsReviewHelpNum);
+            if(updateFlag) {
+        	long helpNum = newBeeMallGoodsService.getGoodsReviewHelpNum(goodsReviewHelpNum.getReviewId()); 
+        	 return ResultGenerator.genSuccessResult(true); 
+            }else {
+        	 return ResultGenerator.genFailResult("改修失敗！！！");  
+            }             
+        }else {
+            return ResultGenerator.genFailResult("挿入失敗！！！");     
+        }    
+    }
+  
 }

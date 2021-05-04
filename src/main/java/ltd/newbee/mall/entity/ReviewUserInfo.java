@@ -252,6 +252,13 @@ private String content;
 private String picture; 
 private String nickName;
 private String goodsName;
+private Long reviewNum;
+public Long getReviewNum() {
+    return reviewNum;
+}
+public void setReviewNum(Long reviewNum) {
+    this.reviewNum = reviewNum;
+}
 public Long getGoodsId() {
 	return goodsId;
 }
@@ -304,10 +311,7 @@ public void setGoodsName(String goodsName) {
 public String toString() {
     return "ReviewUserInfo [goodsId=" + goodsId + ", star=" + star + ", commentDate=" + commentDate + ", title=" + title
 	    + ", content=" + content + ", picture=" + picture + ", nickName=" + nickName + ", goodsName=" + goodsName
-	    + "]";
+	    + ", reviewNum=" + reviewNum + "]";
 }
-
-
-	
 	
 }

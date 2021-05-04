@@ -24,6 +24,7 @@
 	  paging(1);
 	  });	
 	  
+
 	 //レビューをもっと見るイベント
 	  $("#showMoreReviewsBtn").click(function(){
 	    var goodsId = getGoodsId();
@@ -50,6 +51,9 @@
 						if(list != undefined && list.length != 0){
 							for(i =0; i<list.length; i++){
 								var el = $(".hiddenList").clone().removeClass("hiddenList");
+								/*el.find(".g-clip").html(list[i].id);*/
+								el.find(".hidSpForRevId").html(list[i].id);
+								el.find(".helpNumSpan").on("click",helpNumClickFunc);
 								$(".hiddenList").before(el);
 							}
 						}		
@@ -184,6 +188,45 @@
             }
         });
        }
+ //レビューの参考になった人数
+	  function helpNumClickFunc() {
+			debugger;	
+		var reviewId = $( this ).parent().find(".hidSpForRevId").text();
+		var data = {
+			"reviewId" : reviewId 
+		}
+		var _this = $( this );
+		var url = "/goods/helpNum"
+			debugger;	
+	     $.ajax({
+            type: 'POST',//方法类型
+            url: url,
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (result) {
+	//サーバーが成功した場合
+                if (result.resultCode == 200) {
+				debugger;	
+				_this.text("参考になった("+result.data+"人)");
+		
+					/*	swal("質問ご登録ありがとうございました！" ,{
+							icon:"success",
+						});*/
+                } else {
+                    	swal(result.message, {
+                        icon: "error",
+                    });
+                }
+                
+            },
+            error: function () {
+                swal("操作失败", {
+                    icon: "error",
+                });
+             }
+         })
+       
+  }
        
 function getGoodsId(){
 	    var path = window.location.pathname;

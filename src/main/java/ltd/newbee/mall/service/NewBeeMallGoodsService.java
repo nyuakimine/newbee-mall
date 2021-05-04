@@ -15,6 +15,7 @@ import ltd.newbee.mall.entity.GoodsDesc;
 import ltd.newbee.mall.entity.GoodsImage;
 import ltd.newbee.mall.entity.GoodsQa;
 import ltd.newbee.mall.entity.GoodsReview;
+import ltd.newbee.mall.entity.GoodsReviewHelpNum;
 import ltd.newbee.mall.entity.IndexConfig;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
 
@@ -108,8 +109,14 @@ public interface NewBeeMallGoodsService {
     String updateIndexConfig(IndexConfig indexConfig);
     
     Long getMaxQaId(Long goodsId);
-    
+    //show more review
     List<GoodsReviewVo> getGoodsReviews(Long goodsId);
+    //HelpNum
+    boolean addHelpNum(GoodsReviewHelpNum goodsReviewHelpNum);
+    //updateReviewNum
+    boolean updateReviewNum(GoodsReviewHelpNum goodsReviewHelpNum);
+
+    long getGoodsReviewHelpNum(int reviewId);
 
 }
 
