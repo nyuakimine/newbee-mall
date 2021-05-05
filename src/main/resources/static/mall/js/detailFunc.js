@@ -9,6 +9,7 @@
       $(function(){
 	//disable previous page 	  
 	  $(".previousPage").css("pointer-events", "none").css("color","grey");
+	  $("#closeBtn").hide();
 	  });   
       $("#zv-cqa-select-sort").change(function(){
       paging(2);
@@ -22,6 +23,12 @@
 	   //上一页
 	  $( ".previousPage" ).click(function(){
 	  paging(1);
+	  });	
+	 //閉じる
+	    $( "#closeBtn" ).click(function(){
+		$(".g-reviewList_item").hide();
+		$("#closeBtn").hide();
+		$("#showMoreReviewsBtn").show();
 	  });	
 	  
 
@@ -42,6 +49,9 @@
                 if (result.resultCode == 200) {
 				debugger;	
 						var list = result.data;
+						
+						$(".g-reviewList_item").show();
+						
 						if(list === undefined){
 								swal("error", {
                         icon: "error",
@@ -60,6 +70,10 @@
 					/*	swal("質問ご登録ありがとうございました！" ,{
 							icon:"success",
 						});*/
+						//レビューをもっと見るの非表示
+						$("#showMoreReviewsBtn").hide();
+						//閉じるボタンを表示させる
+						$("#closeBtn").show();
                 } else {
                     	swal(result.message, {
                         icon: "error",

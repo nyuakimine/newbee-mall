@@ -321,10 +321,10 @@ public class GoodsController {
 	  }
         boolean addFlag = newBeeMallGoodsService.addHelpNum(goodsReviewHelpNum);
         if(addFlag) {
-            boolean updateFlag = newBeeMallGoodsService.updateReviewNum(goodsReviewHelpNum);
-            if(updateFlag) {
+          boolean updateFlag = newBeeMallGoodsService.updateReviewNum(goodsReviewHelpNum);
+          if(updateFlag) {
         	long helpNum = newBeeMallGoodsService.getGoodsReviewHelpNum(goodsReviewHelpNum.getReviewId()); 
-        	 return ResultGenerator.genSuccessResult(true); 
+        	 return ResultGenerator.genSuccessResult(helpNum); 
             }else {
         	 return ResultGenerator.genFailResult("改修失敗！！！");  
             }             

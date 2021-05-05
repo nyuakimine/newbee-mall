@@ -294,7 +294,7 @@
 											<div class="zv-cqa hiddenQaDiv">
 
 												<div class="zv-cqa-question">
-													<div class="zv-cqa-question delete">
+													<div class="zv-cqa-question">
 														<span class="zv-space">Q. </span>
 														<span class="zv-cqa-step"
 															th:text="${qa.question}">この商品は脚を外してロースタイルにすることは可能でしょうか？</span>
@@ -546,18 +546,20 @@
 													data="5f157a91791f76004b000099" data-clickable="">
 													<i class="g-s g-s-like-g" aria-hidden="true">
 													</i>
-													<span class="helpNumSpan">参考になった</span>
-													<!--参考人数-->
-													<span class="hidSpForRevId" th:text="${userInfo.reviewNum}"></span>
+													<span class="helpNumSpan" th:text="${userInfo.reviewNum}">参考になった</span>
+														
+													<!--参考人数id-->
+													<span class="hidSpForRevId"></span>
 												</a>
 											</p>
 
-											<!--
-	 	<p class="g-reviewList_like"><a class="g-link reviewLike0" id="js-hitLike" data-count="0" 
-	 	data="5f157a91791f76004b000099" data-clickable="">
-	 	<i class="g-s g-s-like-g" aria-hidden="true">
-	 		<img class="thumUpImg" src="/goods-img/thumUp.jpg" alt="Italian Trulli">
-	 	</i><span>参考になった（125人）</span></a></p>-->
+
+											<!--<p class="g-reviewList_like"><a class="g-link reviewLike0" id="js-hitLike"
+													data-count="0" data="5f157a91791f76004b000099" data-clickable="">
+													<i class="g-s g-s-like-g" aria-hidden="true">
+														<img class="thumUpImg" src="/goods-img/thumUp.jpg"
+															alt="Italian Trulli">
+													</i><span>参考になった（125人）</span></a></p>-->
 											　　　　　
 									</li>
 									<li class="g-reviewList_item">
@@ -645,15 +647,27 @@
   	</ul>
 		</div>-->
 							</div>
-
 						</div>
 						<div class="g-foot-v g-foot-sm" id="js-review-more" aria-hidden="false">
+							<!--開く-->
 							<p class="g-align-tc" id="showMoreReviewsBtn">
 								<a class="g-link displaymorereview" href="#p-reviewMore" role="button"
 									aria-expanded="false" aria-controls="p-reviewMore" data-label="閉じる"
 									data-accordion="{&quot;scroll&quot;:false}">
-									<i class="g-i g-i-arrow-d"></i><span>レビューをもっと見る（3/<span
-											id="js-reviews-more">4</span>）</span></a>
+									<i class="g-i g-i-arrow-d"></i>
+									<span id="showMoreLabel">レビューをもっと見る（3/
+										<span id="js-reviews-more">4</span>）</span>
+								</a>
+							</p>
+							<!--閉じる-->
+							<p class="g-align-tc" id="closeBtn">
+								<a class="g-link displaymorereview" href="#p-reviewMore" role="button"
+									aria-expanded="false" aria-controls="p-reviewMore" data-label="閉じる"
+									data-accordion="{&quot;scroll&quot;:false}">
+									<!--<i class="g-i g-i-arrow-d"></i><span>レビューをもっと見る（3/<span
+											id="js-reviews-more">4</span>）</span>-->
+									<span id="closeLabel">閉じる</span>
+								</a>
 							</p>
 						</div>
 					</section>
