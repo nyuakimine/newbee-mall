@@ -1334,18 +1334,21 @@ img {
     display:none;
 }
 .hiddenQaDiv{
-	disply:none;
+	display:none;
 }
 .previousPage, .nextPage{
 	cursor: pointer;
 	color:#009e69;
 }
 .hiddenList{
-	disply:none;
+	display:none;
 }
 .hidSpForRevId{
-	disply:none;
+	display:none;
 }
 .helpNumSpan{
+	cursor:pointer;
+}
+.slgcolumn{
 	cursor:pointer;
 }

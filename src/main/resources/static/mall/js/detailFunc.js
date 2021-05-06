@@ -26,7 +26,7 @@
 	  });	
 	 //閉じる
 	    $( "#closeBtn" ).click(function(){
-		$(".g-reviewList_item").hide();
+		$("#p-reviewMore").hide();
 		$("#closeBtn").hide();
 		$("#showMoreReviewsBtn").show();
 	  });	
@@ -50,7 +50,7 @@
 				debugger;	
 						var list = result.data;
 						
-						$(".g-reviewList_item").show();
+						$("#p-reviewMore").show();
 						
 						if(list === undefined){
 								swal("error", {
@@ -252,3 +252,7 @@ function getGoodsId(){
 		
 		return goodsId;
 }
+function clickImage(src){
+	$(".swiper-container").find("img").attr('src',src);
+} 
+

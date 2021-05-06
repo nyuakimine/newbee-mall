@@ -63,7 +63,7 @@
 
 				<th:block th:each="image:${goodsImageDetail}">
 					<div class="slgcolumn">
-						<img class="slgdemo" th:src="@{${image.path}}">
+						<img class="slgdemo" th:src="@{${image.path}}" th:attr="onclick=|clickImage('${image.path}')|">
 					</div>
 				</th:block>
 
@@ -513,14 +513,14 @@
 									</p>
 									<p class="g-score">
 										<span data-score="4.7"></span>
-										<th:block th:each="userInfo: ${goodsUserInfoDetail}" th:if="${userInfo !=null}">
-											<span>(<span id="js-reviews" th:text="${userInfo.star}">4</span>)</span>
+										<!--<th:block th:each="userInfo: ${goodsUserInfoDetail}" th:if="${userInfo !=null}">-->
+											<span>(<span id="js-reviews">4</span>)</span>
 									</p>
 								</div>
 
 								<ul class="g-reviewList">
 
-									<li class="g-reviewList_item hiddenList">
+									<li class="g-reviewList_item">
 										<p class="g-label-brand g-reviewList_label">ピックアップレビュー</p>
 										<th:block th:each="userInfo: ${goodsUserInfoDetail}" th:if="${userInfo !=null}">
 											<div class="g-lg-flow-sm">
@@ -530,7 +530,6 @@
 													</span>
 												</p>
 											</div>
-
 											<p class="g-reviewList_info">購入商品:カジュアルソファ(パトレック GR/MBR）</p>
 											<p class="g-reviewList_user"><b th:text="${userInfo.nickName}"> </b>さん<span
 													class="g-clip" th:text="${userInfo.commentDate}">2020/07/20</p>
@@ -547,9 +546,7 @@
 													<i class="g-s g-s-like-g" aria-hidden="true">
 													</i>
 													<span class="helpNumSpan" th:text="${userInfo.reviewNum}">参考になった</span>
-														
-													<!--参考人数id-->
-													<span class="hidSpForRevId"></span>
+												<span class="hidSpForRevId"> </span>
 												</a>
 											</p>
 
@@ -582,70 +579,85 @@
 											<!--    	+++++++++++++++++++++++++-->
 											<!--<p class="g-reviewList_user" th:text="${goodsUserInfoDetail.get(0).commentDate}"><b>ルル</b>さん 2021/03/09</p>-->
 										</div>
-										<!--  </th:block>	-->
-										<!--     	  <p class="g-reviewList_info">購入商品:カジュアルソファ(パトレック GR/LBR)</p>
-	    <p class="g-reviewList_h">可愛い</p>
-	    <p>コンパクトで色もめっちゃ可愛いです。本当に買って良かったです。
-組み立ても簡単でした。</p>
-	 	<p class="g-reviewList_like"><a class="g-link reviewLike1" id="js-hitLike" data-count="1" data="60476d48d3d291002900011a" data-clickable=""><i class="g-s g-s-like-g" aria-hidden="true"></i><span>参考になった（2人）</span></a></p>
-  	</li>
 
-  	<li class="g-reviewList_item">
-	    <div class="g-lg-flow-sm">
-			<p class="g-score">
-				<span data-score="5.0">
-					<span class="g-clip">text.product.review.Rating</span>
-	      		</span>
-			</p>
-	      	<p class="g-reviewList_user"><b>ねち</b>さん 2021/02/09</p>
-	    </div>
-	    <p class="g-reviewList_info">購入商品:カジュアルソファ(パトレック GR/LBR)</p>
-	    <p class="g-reviewList_h">カワイイ</p>
-	    <p>6.7畳の部屋にちょうど良いです。
-まだ使用して1週間ですが、座面が硬めでしっかりしてるけど座り心地良いです！
-肘おきもそこまで硬くないので枕にして横になれます。色も写真通りで鮮やかな色です。
-足の取り付けも簡単です。
-背もたれのクッションはマジックテープになっていて取り外し可能、掃除もしやすいです。
-</p>
-	 	<ul class="g-sm-flow-sm g-lg-flow g-reviewList_pics">
-		    	<li><img class="g-fw" src="https://p1-a50ece1c.imageflux.jp/c/f=webp:jpeg,w=1024,h=1024,a=0/store/reviewattachmentfile/53/4463/file/dfc67947e0933f0101d34c811355e0e5.jpeg" alt=""></li>
-		    	</ul>
-		<p class="g-reviewList_like"><a class="g-link reviewLike2" id="js-hitLike" data-count="2" data="6021d7f60a039300180000bd" data-clickable=""><i class="g-s g-s-like-g" aria-hidden="true"></i><span>参考になった（96人）</span></a></p>-->
+										<p class="g-reviewList_info">購入商品:カジュアルソファ(パトレック GR/LBR)</p>
+										<p class="g-reviewList_h">可愛い</p>
+										<p>コンパクトで色もめっちゃ可愛いです。本当に買って良かったです。
+											組み立ても簡単でした。</p>
+										<p class="g-reviewList_like"><a class="g-link reviewLike1" id="js-hitLike"
+												data-count="1" data="60476d48d3d291002900011a" data-clickable=""><i
+													class="g-s g-s-like-g"
+													aria-hidden="true"></i><span>参考になった（2人）</span></a></p>
+									</li>
+
+									<li class="g-reviewList_item">
+										<div class="g-lg-flow-sm">
+											<p class="g-score">
+												<span data-score="5.0">
+													<span class="g-clip">text.product.review.Rating</span>
+												</span>
+											</p>
+											<p class="g-reviewList_user"><b>ねち</b>さん 2021/02/09</p>
+										</div>
+										<p class="g-reviewList_info">購入商品:カジュアルソファ(パトレック GR/LBR)</p>
+										<p class="g-reviewList_h">カワイイ</p>
+										<p>6.7畳の部屋にちょうど良いです。
+											まだ使用して1週間ですが、座面が硬めでしっかりしてるけど座り心地良いです！
+											肘おきもそこまで硬くないので枕にして横になれます。色も写真通りで鮮やかな色です。
+											足の取り付けも簡単です。
+											背もたれのクッションはマジックテープになっていて取り外し可能、掃除もしやすいです。
+										</p>
+										<ul class="g-sm-flow-sm g-lg-flow g-reviewList_pics">
+											<li><img class="g-fw"
+													src="https://p1-a50ece1c.imageflux.jp/c/f=webp:jpeg,w=1024,h=1024,a=0/store/reviewattachmentfile/53/4463/file/dfc67947e0933f0101d34c811355e0e5.jpeg"
+													alt=""></li>
+										</ul>
+										<p class="g-reviewList_like"><a class="g-link reviewLike2" id="js-hitLike"
+												data-count="2" data="6021d7f60a039300180000bd" data-clickable=""><i
+													class="g-s g-s-like-g"
+													aria-hidden="true"></i><span>参考になった（96人）</span></a></p>
 									</li>
 
 								</ul>
+								<div id="p-reviewMore" aria-hidden="true">
+								<!--++++++++++++++++++++++++++++++++++ajax++++++++++++++++++++++++++++++++-->
+									<ul class="g-reviewList">
+			<!--hiddenList-->			<li class="g-reviewList_item hiddenList">
+											<div class="g-lg-flow-sm">
+												<p class="g-score">
+													<span data-score="4.0">
+														<span class="g-clip">text.product.review.Rating</span>
+													</span>
+												</p>
+												<p class="g-reviewList_user"
+													th:text="${goodsUserInfoDetail.get(0).commentDate}">
+													<b>nery</b>さん 2020/11/17</p>
+											</div>
+											<p class="g-reviewList_info">購入商品:カジュアルソファ(パトレック GR/LBR)</p>
+											<p class="g-reviewList_h">お値段以上</p>
+											<p>サイズ、デザイン、価格の優先順位でこちらの商品を買うことに決めました
+												ソファ本体はとても軽いです
+												移動も楽々で、模様替え好きな私にはありがたいです
+												配達時にもドライバーさんが一人で抱えて運べるくらいコンパクトかつ軽量です
 
-								<!--		<div id="p-reviewMore" aria-hidden="true">
-<ul class="g-reviewList">
-	<li class="g-reviewList_item">
-	    <div class="g-lg-flow-sm">
-			<p class="g-score">
-				<span data-score="4.0">
-					<span class="g-clip">text.product.review.Rating</span>
-	      		</span>
-			</p>
-	      	<p class="g-reviewList_user" th:text="${goodsUserInfoDetail.get(0).commentDate}"><b>nery</b>さん 2020/11/17</p>
-	    </div>
-	    <p class="g-reviewList_info">購入商品:カジュアルソファ(パトレック GR/LBR)</p>
-	    <p class="g-reviewList_h">お値段以上</p>
-	    <p>サイズ、デザイン、価格の優先順位でこちらの商品を買うことに決めました
-ソファ本体はとても軽いです
-移動も楽々で、模様替え好きな私にはありがたいです
-配達時にもドライバーさんが一人で抱えて運べるくらいコンパクトかつ軽量です
+												軽いからといってチャチな作りではなく、座面はやや硬め、背中は張りがあるものの柔らかめ、肘掛けは硬めでしっかりしています
+												色も画像通りのキレイなグリーンで、布地も触り心地がよく、毛玉が出来たりもしてません
+												星一つ減らしたのは、背中のクッション部分のボタンが使用1週間で既に緩くなってるためです
+												取れたら縫い止めればいいだけですが、裁縫苦手な人だと洋服のボタンのように簡単には直せないのでは？と思いました
+												使用感は満足です！</p>
+											<p class="g-reviewList_like"><a class="g-link reviewLike3" id="js-hitLike"
+													data-count="3" data="5fb3e0f96de8420031000384" data-clickable="">
+										 			<i class="g-s g-s-like-g" aria-hidden="true"></i>
+    <!--helpNumSpan	-->	                            <span class="helpNumSpan">参考になった（53人）</span>
+														
+													<!--参考人数id-->
+	<!--<span class="hidSpForRevId"></span>	-->	<span class="hidSpForRevId"> </span>
+												</a>
+											</p>
+										</li>
 
-軽いからといってチャチな作りではなく、座面はやや硬め、背中は張りがあるものの柔らかめ、肘掛けは硬めでしっかりしています
-色も画像通りのキレイなグリーンで、布地も触り心地がよく、毛玉が出来たりもしてません
-星一つ減らしたのは、背中のクッション部分のボタンが使用1週間で既に緩くなってるためです
-取れたら縫い止めればいいだけですが、裁縫苦手な人だと洋服のボタンのように簡単には直せないのでは？と思いました
-使用感は満足です！</p>
-	 	<p class="g-reviewList_like"><a class="g-link reviewLike3" id="js-hitLike" data-count="3"
-	 	 data="5fb3e0f96de8420031000384" data-clickable="">
-	 	 <i class="g-s g-s-like-g" aria-hidden="true"></i><span>参考になった（53人）</span></a>
-	 	 </p>
-  	</li>
-
-  	</ul>
-		</div>-->
+									</ul>
+								</div>
 							</div>
 						</div>
 						<div class="g-foot-v g-foot-sm" id="js-review-more" aria-hidden="false">

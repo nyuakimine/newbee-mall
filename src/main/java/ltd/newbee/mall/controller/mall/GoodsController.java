@@ -307,7 +307,7 @@ public class GoodsController {
     public Result showMoreReview(@RequestBody Long goodsId) {
  
         List<GoodsReviewVo> reviewList = newBeeMallGoodsService.getGoodsReviews(goodsId);
-        List<GoodsReviewVo> subReviewList = reviewList.subList(2,reviewList.size()-1);
+        List<GoodsReviewVo> subReviewList = reviewList.subList(3,reviewList.size()-1);
  
         return ResultGenerator.genSuccessResult(subReviewList);    
     }
