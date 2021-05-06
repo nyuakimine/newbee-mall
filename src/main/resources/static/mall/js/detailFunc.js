@@ -30,12 +30,9 @@
 		$("#closeBtn").hide();
 		$("#showMoreReviewsBtn").show();
 	  });	
-	  
-
 	 //レビューをもっと見るイベント
 	  $("#showMoreReviewsBtn").click(function(){
 	    var goodsId = getGoodsId();
-	
 	    var data = {
 		  "goodsId":goodsId
 	    };
@@ -49,27 +46,27 @@
                 if (result.resultCode == 200) {
 				debugger;	
 						var list = result.data;
-						
+						$(".g-reviewList_item").show();
 						$("#p-reviewMore").show();
-						
 						if(list === undefined){
 								swal("error", {
                         icon: "error",
                     });
-							
 						}
 						if(list != undefined && list.length != 0){
 							for(i =0; i<list.length; i++){
+								/*$(".g-reviewList").find(".delete").remove();*/
 								var el = $(".hiddenList").clone().removeClass("hiddenList");
-								/*el.find(".g-clip").html(list[i].id);*/
+							
+								el.find(".g-reviewList_user").html(list[i].nickName);
+							    el.find(".g-clip").html(list[i].commentDate);
+								el.find(".g-reviewList_h").html(list[i].title);
+			     				el.find(".g-link reviewLike0").html(list[i].reviewNum);
 								el.find(".hidSpForRevId").html(list[i].id);
-								el.find(".helpNumSpan").on("click",helpNumClickFunc);
-								$(".hiddenList").before(el);
+								el.find(".helpNumSpan").on("click",helpNumClickFunc);								
+				                $(".p-reviewMore").before(el);					
 							}
-						}		
-					/*	swal("質問ご登録ありがとうございました！" ,{
-							icon:"success",
-						});*/
+						}					
 						//レビューをもっと見るの非表示
 						$("#showMoreReviewsBtn").hide();
 						//閉じるボタンを表示させる
@@ -87,11 +84,8 @@
                 });
              }
          })
-       
   })
-  
 	  $("#ZVPostQuestionButton").click(function(){	
-		
 		var question = $("#ZVQuestionTextarea").val();
 		//get url
 	/*	var path = window.location.pathname;
@@ -132,7 +126,6 @@
              }
          })
       });
- 
 	debugger;   
 	function paging(num){
 	//alert("Handlerfor .click() called." );   
@@ -144,6 +137,7 @@
 	var url = "/goods/qaSort";
 	
 	if(num == 0){
+
 		//下页
 		 pageNo = parseInt(page) + 1;
 	}else if (num == 1){
@@ -165,26 +159,28 @@
                 if (result.resultCode == 200) {
 	                    var el;
 	                    if(result.data.list.length > 0){
+
 							$("#ZVCQuestionsArea").find(".delete").remove();
 					  	}
 				        var ar = result.data.list;
-	                    if(ar.length>0){
+	                   /* if(ar.length>0){
 							$("#ZVCQuestionsArea").find(".zv-cqa").remove();
-					    }
-	                    for(let i=0; i<ar.length;i++){
-							var qa =$(".hiddenQaDiv").clone().removeClass("hiddenQaDiv");
+					    }*/
+	                    /*for(let i=0; i<ar.length;i++){*/
+							/*var qa =$(".hiddenQaDiv").clone().removeClass("hiddenQaDiv");
 							qa.find(".zv-cqa-q-text").html(ar[i].question);
-							$("#detailFooter").before(qa);
+							$("#detailFooter").before(qa);*/
 							//qa.appendTo("#ZVCQuestionsArea");
-					    }
+					    /*}*/
+					    debugger;
 	                    for(let i = 0; i <ar.length;i++){
 		
 							el = $($(".hiddenQaDiv")[0]).clone().removeClass("hiddenQaDiv");
-							el.find(".zv-cqa-question").html(result.data.list[i].question);
-							el.find(".zv-cqa-q-info").html(result.data.list[i].submitDate);
-							el.find(".zv-cqa-a-text").html(result.data.list[i].answer);
-		     				el.find(".zv-cqa-a-info").html(result.data.list[i].answerDate);
-							el.find(".zv-helpful zv-helpful-yes zv-helpful-yes-58746").html(result.data.list[i].helpedNum);
+							el.find(".zv-cqa-question").html(ar[i].question);
+							el.find(".zv-cqa-q-info").html(ar[i].submitDate);
+							el.find(".zv-cqa-a-text").html(ar[i].answer);
+		     				el.find(".zv-cqa-a-info").html(ar[i].answerDate);
+							el.find(".zv-helpful zv-helpful-yes zv-helpful-yes-58746").html(ar[i].helpedNum);
 							$("#detailFooter").before(el);
 							/*qa.appendTo("#ZVCQuestionsArea");*/
 						}
@@ -239,9 +235,7 @@
                 });
              }
          })
-       
   }
-       
 function getGoodsId(){
 	    var path = window.location.pathname;
 		//split with / 
@@ -255,4 +249,3 @@ function getGoodsId(){
 function clickImage(src){
 	$(".swiper-container").find("img").attr('src',src);
 } 
-

@@ -307,9 +307,8 @@ public class GoodsController {
     public Result showMoreReview(@RequestBody Long goodsId) {
  
         List<GoodsReviewVo> reviewList = newBeeMallGoodsService.getGoodsReviews(goodsId);
-        List<GoodsReviewVo> subReviewList = reviewList.subList(3,reviewList.size()-1);
- 
-        return ResultGenerator.genSuccessResult(subReviewList);    
+      //List<GoodsReviewVo> subReviewList = reviewList.subList(2,reviewList.size()-1);
+        return ResultGenerator.genSuccessResult(reviewList);    
     }
     //add by niu 2021/05/04 helpNum
     @RequestMapping(value = "/goods/helpNum", method = RequestMethod.POST)
@@ -332,5 +331,4 @@ public class GoodsController {
             return ResultGenerator.genFailResult("挿入失敗！！！");     
         }    
     }
-  
 }
