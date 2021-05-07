@@ -302,13 +302,15 @@ public class GoodsController {
         return ResultGenerator.genSuccessResult(count);    
     }
     //add by niu 2021/05/03 showMoreReview
+    @SuppressWarnings("rawtypes")
     @RequestMapping(value = "/goods/showMoreReview", method = RequestMethod.POST)
     @ResponseBody
     public Result showMoreReview(@RequestBody Long goodsId) {
- 
-        List<GoodsReviewVo> reviewList = newBeeMallGoodsService.getGoodsReviews(goodsId);
-      //List<GoodsReviewVo> subReviewList = reviewList.subList(2,reviewList.size()-1);
-        return ResultGenerator.genSuccessResult(reviewList);    
+	List<ReviewUserInfo> userInfoList = newBeeMallGoodsService.getReviewUserInfoEntityByGoodsId(goodsId);
+
+        //List<GoodsReviewVo> reviewList = newBeeMallGoodsService.getGoodsReviews(goodsId);
+        //List<GoodsReviewVo> subReviewList = reviewList.subList(1,reviewList.size()-1);
+        return ResultGenerator.genSuccessResult(userInfoList);    
     }
     //add by niu 2021/05/04 helpNum
     @RequestMapping(value = "/goods/helpNum", method = RequestMethod.POST)

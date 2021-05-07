@@ -209,44 +209,44 @@ class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
      @Test
       public void testPagination() { 
 
-             Map<String,Object> params = new HashMap<String,Object>();
-             params.put("page","1"); 
-             params.put("limit","3");
-             PageQueryUtil pageUtil = new PageQueryUtil(params); 
-             PageResult a =newBeeMallGoodsService.getPaginationEntityByGoodsId(pageUtil);
+     Map<String,Object> params = new HashMap<String,Object>();
+     params.put("page","1"); 
+     params.put("limit","3");
+     PageQueryUtil pageUtil = new PageQueryUtil(params); 
+     PageResult a =newBeeMallGoodsService.getPaginationEntityByGoodsId(pageUtil);
 	      
-	        List<GoodsQa> qaList = (List<GoodsQa>) a.getList();
-	        int size = 0;
-	        if(qaList != null || !qaList.isEmpty()) {
-	          size = qaList.size(); 
-	          }
-	        assertEquals(3,size); 
+     List<GoodsQa> qaList = (List<GoodsQa>) a.getList();
+     int size = 0;
+       if(qaList != null || !qaList.isEmpty()) {
+          size = qaList.size(); 
+       }
+	  assertEquals(3,size); 
 	      
-	        assertEquals("1",qaList.get(0).getId());
-	        assertEquals("2",qaList.get(1).getId());
-	        assertEquals("3",qaList.get(2).getId());     
-      }
-     //niu
-                 @Test
-                 public void testSort() { 
-                     Map<String,Object> params = new HashMap<String,Object>();
+	  assertEquals("1",qaList.get(0).getId());
+	  assertEquals("2",qaList.get(1).getId());
+	  assertEquals("3",qaList.get(2).getId());     
+    }
+ //niu
+     @Test
+     public void testSort() { 
+         Map<String,Object> params = new HashMap<String,Object>();
 //                     params.put("orderBy","id"); 
-                     params.put("orderBy","B"); 
-                     params.put("page","1"); 
-                     params.put("limit","3");
-                     PageQueryUtil pageUtil = new PageQueryUtil(params); 
-                     PageResult a =newBeeMallGoodsService.getHelpedNumEntityByGoodsId(pageUtil);  
-                    
-                     List<GoodsQa> qaList = (List<GoodsQa>) a.getList();
-            	        int size = 0;
-            	        if(qaList != null || !qaList.isEmpty()) {
-            	          size = qaList.size(); 
-            	          }
-            	        assertEquals(3,size); 	      
-            	        assertEquals("2563",qaList.get(2).getHelpedNum());
-            	        assertEquals("999",qaList.get(0).getHelpedNum());
-            	        assertEquals("989",qaList.get(1).getHelpedNum());
-                 }
+         params.put("orderBy","B"); 
+         params.put("page","1"); 
+         params.put("limit","3");
+         PageQueryUtil pageUtil = new PageQueryUtil(params); 
+         PageResult a =newBeeMallGoodsService.getHelpedNumEntityByGoodsId(pageUtil);  
+        
+         List<GoodsQa> qaList = (List<GoodsQa>) a.getList();
+	 int size = 0;
+	     if(qaList != null || !qaList.isEmpty()) {
+	          size = qaList.size(); 
+	     }
+	        assertEquals(3,size); 	      
+	        assertEquals("2563",qaList.get(2).getHelpedNum());
+	        assertEquals("999",qaList.get(0).getHelpedNum());
+	        assertEquals("989",qaList.get(1).getHelpedNum());
+             }
             	    //20210427    
 	        @Test
 	        public void testHelpedNumSort() { 
@@ -273,16 +273,20 @@ class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
 //	 PageResult b =newBeeMallGoodsService.getSubmitDateEntityByGoodsId(pageUtil);
      }
      
-         @Test
-         public void testInsertGoods(){ 
-    	 GoodsQa qa = new GoodsQa ();	
-    	 qa.setId(22L);
-    	 qa.setQuestion("变绿变绿变绿变绿!!!");			 
-    	 qa.setAnswer("好运来变绿！！！");
-    	 //qa.setSubmitDate(20140205);	 
-    	 //qa.setAnswerDate(20100806);	 	
-    	 qa.setGoodsId(1256L);
-    	 String v = newBeeMallGoodsService.saveGoodsQa(qa);
-             assertEquals(ServiceResultEnum.SUCCESS.getResult(),v);
-         }
+             @Test
+             public void testInsertGoods(){ 
+        	 GoodsQa qa = new GoodsQa ();	
+        	 qa.setId(22L);
+        	 qa.setQuestion("变绿变绿变绿变绿!!!");			 
+        	 qa.setAnswer("好运来变绿！！！");
+        	 //qa.setSubmitDate(20140205);	 
+        	 //qa.setAnswerDate(20100806);	 	
+        	 qa.setGoodsId(1256L);
+        	 String v = newBeeMallGoodsService.saveGoodsQa(qa);
+                 assertEquals(ServiceResultEnum.SUCCESS.getResult(),v);
+                     }
+//            @Test
+//            public void testSearch(){ 
+//                
+//            }
 }

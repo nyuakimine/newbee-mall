@@ -47,7 +47,7 @@
 				debugger;	
 						var list = result.data;
 						$(".g-reviewList_item").show();
-						$("#p-reviewMore").show();
+						//$("#p-reviewMore").show();
 						if(list === undefined){
 								swal("error", {
                         icon: "error",
@@ -58,13 +58,16 @@
 								/*$(".g-reviewList").find(".delete").remove();*/
 								var el = $(".hiddenList").clone().removeClass("hiddenList");
 							
-								el.find(".g-reviewList_user").html(list[i].nickName);
+						
 							    el.find(".g-clip").html(list[i].commentDate);
+						        el.find(".g-reviewList_user").html(list[i].nickName);
 								el.find(".g-reviewList_h").html(list[i].title);
+								el.find(".re_content").html(list[i].content);
+								el.find(".re_picture").html(list[i].picture);
 			     				el.find(".g-link reviewLike0").html(list[i].reviewNum);
 								el.find(".hidSpForRevId").html(list[i].id);
 								el.find(".helpNumSpan").on("click",helpNumClickFunc);								
-				                $(".p-reviewMore").before(el);					
+				                $(".hiddenList").before(el);					
 							}
 						}					
 						//レビューをもっと見るの非表示
