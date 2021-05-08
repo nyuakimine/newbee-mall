@@ -93,5 +93,5 @@ public interface NewBeeMallGoodsMapper {
 
     long getGoodsReviewHelpNum(int reviewId);
     //关键词搜索
-    List<NewBeeMallGoods> getGoodsBySearch(PageQueryUtil pageUtil);
+    List<NewBeeMallGoods> getGoodsBySearch(NewBeeMallGoods goodsName);
 }

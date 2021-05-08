@@ -123,6 +123,8 @@ public interface NewBeeMallGoodsService {
      * @param pageUtil
      * @return
      */
-    PageResult searchGoods(PageQueryUtil pageUtil);
+    PageResult searchGoods(NewBeeMallGoods goodsName);
+
+   //  searchGoods(NewBeeMallGoods goodsName);
 }
 

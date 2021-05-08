@@ -148,11 +148,8 @@ public class GoodsController {
 	    a = descList.get(i);
 	    if (a != null) {
 
-		
 		  //added by niu 2021/04/20 add descList // List<GoodsDesc> descEntityList =
 		  //newBeeMallGoodsService.getDescList(10700);
-		 
-
 		// copy list List<GoodsDescVO> descEntityList1
 		BeanUtil.copyList(descList, GoodsDescVO.class);
 
@@ -333,4 +330,50 @@ public class GoodsController {
             return ResultGenerator.genFailResult("挿入失敗！！！");     
         }    
     }
+    //伪代码
+//    @RequestMapping(value = "/searchHistory/getSearchHistory", method = RequestMethod.POST)
+//    @ResponseBody
+//    public Result getSearchHistory(HttpSession httpSession) {
+//
+//    	List<NewBeeMallGoods> list = new ArrayList<NewBeeMallGoods>();
+//    
+//    	NewBeeMallGoods goods1 = new NewBeeMallGoods();
+//    	NewBeeMallGoods goods2 = new NewBeeMallGoods();
+//    	NewBeeMallGoods goods3 = new NewBeeMallGoods();
+//    
+//    	goods1.setGoodsId(10700L);
+//    	goods1.setGoodsName("iphone10");
+//    	list.add(goods1);
+//    
+//    	goods2.setGoodsId(10003L);
+//    	goods2.setGoodsName("无印良品 MUJI 基础润肤化妆水");
+//    	list.add(goods2);
+//    	goods3.setGoodsId(10004L);
+//    	goods3.setGoodsName("无印良品 MUJI 柔和洁面泡沫");
+//    	list.add(goods3);
+//    
+//    	return ResultGenerator.genSuccessResult(list);
+//    }
+    
+    //add by niu 20210508 //keyword
+
+  @RequestMapping(value = "/searchHistory/getSearchHistory", method = RequestMethod.POST)
+  @ResponseBody
+  public Result getSearchHistory(HttpSession httpSession) {
+      List<NewBeeMallGoods> list = new ArrayList<NewBeeMallGoods>();
+      for (int i = 0; i < list.size(); i++) {
+	    NewBeeMallGoods keyword = new NewBeeMallGoods();
+	    keyword = list.get(i);
+	    if (keyword != null) {
+	    String goodsName = keyword.getGoodsName();
+	    keyword.setGoodsName(goodsName);
+            }
+      }
+       return ResultGenerator.genSuccessResult(list);
+  }
 }
+//List<NewBeeMallGoods> list = newBeeMallGoodsService.searchGoods(NewBeeMallGoods goodsName);
+//NewBeeMallGoods goods1 = new NewBeeMallGoods();
+//	goods1.setGoodsId(10700L);
+//	goods1.setGoodsName("iphone10");
+//	list.add(goods1);

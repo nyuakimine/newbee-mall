@@ -1,3 +1,5 @@
+var currentImageIndex = 1;
+
 /*$("#zv-cqa-select-sort").change( function(){
   var page = $("#currentPageNum").text();
   var url = "/goods/qaSort";
@@ -64,9 +66,17 @@
 								el.find(".g-reviewList_h").html(list[i].title);
 								el.find(".re_content").html(list[i].content);
 								el.find(".re_picture").html(list[i].picture);
-			     				el.find(".g-link reviewLike0").html(list[i].reviewNum);
+							    el.find(".helpNumSpan").text("参考になった（" + list[i].reviewNum +"人)" )
+			     				//el.find(".helpNumSpan").text(list[i].reviewNum);
 								el.find(".hidSpForRevId").html(list[i].id);
-								el.find(".helpNumSpan").on("click",helpNumClickFunc);								
+								el.find(".helpNumSpan").on("click",helpNumClickFunc);	
+								
+								var img = "<img src='/goods-img/star.jpg'>";//星星
+								var star = list[i].star;
+								for(var j=0; j<star; j++){
+								el.find(".g-clip").append(img)
+							
+								}							
 				                $(".hiddenList").before(el);					
 							}
 						}					
@@ -251,4 +261,29 @@ function getGoodsId(){
 }
 function clickImage(src){
 	$(".swiper-container").find("img").attr('src',src);
+	
+	var length = 3;
+	for(var i = 2;i<= length+1;i++){
+		var imageSrc = $( ".slgrow div:nth-child("+i+")" ).find("img").attr('src');
+		if(imageSrc == src){
+			currentImageIndex = i-1;
+		}
+	}
 } 
+// num is 1 or -1
+function plusSlides(num){
+	var nextIndex = currentImageIndex + num;
+	if(nextIndex == 0){
+		nextIndex = 3;
+	}
+	if(nextIndex == 4){
+		nextIndex = 1;
+	}
+	console.log(nextIndex);
+    var nextIndexInDiv = nextIndex + 1
+    var src = $( ".slgrow div:nth-child("+nextIndexInDiv+")" ).find("img").attr('src');
+    console.log(src);
+    $(".swiper-container ").find("img").attr('src',src);
+    currentImageIndex = nextIndex;
+
+}

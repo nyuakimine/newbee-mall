@@ -1352,3 +1352,22 @@ img {
 .slgcolumn{
 	cursor:pointer;
 }
+.slgnext{
+	cursor:pointer;
+}
+.slgprev{
+	cursor:pointer;
+}
+.dumyLi{
+    display:none;
+}
+#searchResultUl{
+    display:none;
+    z-index:1000;
+    border: 1px solid #c5c5c5;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 360px;
+    background-color: #fff;
+    width:300px;
+}

@@ -501,4 +501,6 @@
  	<select id="getGoodsBySearch" parameterType="Map" resultType="int">
      select goods_id,goods_name from tb_newbee_mall_goods_info where goods_name like CONCAT('%',#{keyword},'%')
     </select>
+    
+   <!--  select * from search_history where user_id=? And keyword= ? Order by ? limit ? -->
  </mapper>

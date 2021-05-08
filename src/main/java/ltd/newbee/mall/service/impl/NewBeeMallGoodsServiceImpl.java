@@ -217,12 +217,9 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 	public long getGoodsReviewHelpNum(int reviewId) {	   
 	    return goodsMapper.getGoodsReviewHelpNum(reviewId);
 	}
-        //add by niu 20210507 关键字搜索
+        //add by niu 20210507 关键字搜索	
 	@Override
-	 public PageResult searchGoods(PageQueryUtil pageUtil) {
-	 List<NewBeeMallGoods> keyword = goodsMapper.getGoodsBySearch(pageUtil);
-	 int total = goodsMapper.getTotalGoodsQa(pageUtil); 
-         PageResult pageResult = new PageResult(keyword, total, pageUtil.getLimit(), pageUtil.getPage());
-	 return pageResult;
-	}	
+	 public PageResult searchGoods(NewBeeMallGoods goodsName) {
+	    return (PageResult) goodsMapper.getGoodsBySearch(goodsName);
+	}
 }
