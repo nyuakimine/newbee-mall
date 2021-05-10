@@ -217,9 +217,4 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 	public long getGoodsReviewHelpNum(int reviewId) {	   
 	    return goodsMapper.getGoodsReviewHelpNum(reviewId);
 	}
-        //add by niu 20210507 关键字搜索	
-	@Override
-	 public PageResult searchGoods(NewBeeMallGoods goodsName) {
-	    return (PageResult) goodsMapper.getGoodsBySearch(goodsName);
-	}
 }

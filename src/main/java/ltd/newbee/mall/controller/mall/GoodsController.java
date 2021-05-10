@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import ltd.newbee.mall.common.Constants;
 import ltd.newbee.mall.common.NewBeeMallException;
@@ -330,50 +331,60 @@ public class GoodsController {
             return ResultGenerator.genFailResult("挿入失敗！！！");     
         }    
     }
-    //伪代码
-//    @RequestMapping(value = "/searchHistory/getSearchHistory", method = RequestMethod.POST)
-//    @ResponseBody
-//    public Result getSearchHistory(HttpSession httpSession) {
-//
-//    	List<NewBeeMallGoods> list = new ArrayList<NewBeeMallGoods>();
-//    
-//    	NewBeeMallGoods goods1 = new NewBeeMallGoods();
-//    	NewBeeMallGoods goods2 = new NewBeeMallGoods();
-//    	NewBeeMallGoods goods3 = new NewBeeMallGoods();
-//    
-//    	goods1.setGoodsId(10700L);
-//    	goods1.setGoodsName("iphone10");
-//    	list.add(goods1);
-//    
-//    	goods2.setGoodsId(10003L);
-//    	goods2.setGoodsName("无印良品 MUJI 基础润肤化妆水");
-//    	list.add(goods2);
-//    	goods3.setGoodsId(10004L);
-//    	goods3.setGoodsName("无印良品 MUJI 柔和洁面泡沫");
-//    	list.add(goods3);
-//    
-//    	return ResultGenerator.genSuccessResult(list);
-//    }
+   // 伪代码
+    @RequestMapping(value = "/searchHistory/getSearchHistory", method = RequestMethod.POST)
+    @ResponseBody
+    public Result getSearchHistory(HttpSession httpSession) {
+
+    	List<NewBeeMallGoods> list = new ArrayList<NewBeeMallGoods>();
+    
+    	NewBeeMallGoods goods1 = new NewBeeMallGoods();
+    	NewBeeMallGoods goods2 = new NewBeeMallGoods();
+    	NewBeeMallGoods goods3 = new NewBeeMallGoods();
+    
+    	goods1.setGoodsId(10700L);
+    	goods1.setGoodsName("iphone10");
+    	list.add(goods1);
+    
+    	goods2.setGoodsId(10003L);
+    	goods2.setGoodsName("无印良品 MUJI 基础润肤化妆水");
+    	list.add(goods2);
+    	goods3.setGoodsId(10004L);
+    	goods3.setGoodsName("无印良品 MUJI 柔和洁面泡沫");
+    	list.add(goods3);
+    
+    	return ResultGenerator.genSuccessResult(list);
+    }
     
     //add by niu 20210508 //keyword
 
-  @RequestMapping(value = "/searchHistory/getSearchHistory", method = RequestMethod.POST)
-  @ResponseBody
-  public Result getSearchHistory(HttpSession httpSession) {
-      List<NewBeeMallGoods> list = new ArrayList<NewBeeMallGoods>();
-      for (int i = 0; i < list.size(); i++) {
-	    NewBeeMallGoods keyword = new NewBeeMallGoods();
-	    keyword = list.get(i);
-	    if (keyword != null) {
-	    String goodsName = keyword.getGoodsName();
-	    keyword.setGoodsName(goodsName);
-            }
-      }
-       return ResultGenerator.genSuccessResult(list);
-  }
+//  @RequestMapping(value = "/searchHistory/getSearchHistory", method = RequestMethod.POST)
+//  @ResponseBody
+//  public Result getSearchHistory(HttpSession httpSession) {
+//      List<NewBeeMallGoods> list = new ArrayList<NewBeeMallGoods>();
+//      for (int i = 0; i < list.size(); i++) {
+//	    NewBeeMallGoods keyword = new NewBeeMallGoods();
+//	    keyword = list.get(i);
+//	    if (keyword != null) {
+//	    String goodsName = keyword.getGoodsName();
+//	    keyword.setGoodsName(goodsName);
+//            }
+//      }
+//       return ResultGenerator.genSuccessResult(list);
+//  }
+    //add by niu 20210510 keyword
+  //get hit goods
+    @RequestMapping(value = "/goods/search", method = RequestMethod.POST)
+    @ResponseBody
+    //public Result getHitGoodsList(@RequestParam Map<String, Object> params) {
+    public Result getHitGoodsList(@RequestBody String goodsName) {
+    	Map<String, Object> params = new HashMap<String, Object>();
+    	params.put("keyword", goodsName);
+    	params.put("page", 1);
+    	params.put("limit", 9);
+        //params.put("start", 0);
+        PageQueryUtil pageUtil = new PageQueryUtil(params);
+        return ResultGenerator.genSuccessResult(newBeeMallGoodsService.searchNewBeeMallGoods(pageUtil));
+    }
+    
 }
-//List<NewBeeMallGoods> list = newBeeMallGoodsService.searchGoods(NewBeeMallGoods goodsName);
-//NewBeeMallGoods goods1 = new NewBeeMallGoods();
-//	goods1.setGoodsId(10700L);
-//	goods1.setGoodsName("iphone10");
-//	list.add(goods1);

@@ -117,14 +117,6 @@ public interface NewBeeMallGoodsService {
     boolean updateReviewNum(GoodsReviewHelpNum goodsReviewHelpNum);
 
     long getGoodsReviewHelpNum(int reviewId);
-    /**
-     * 商品搜索关键字
-     *
-     * @param pageUtil
-     * @return
-     */
-    PageResult searchGoods(NewBeeMallGoods goodsName);
-
-   //  searchGoods(NewBeeMallGoods goodsName);
+  
 }
 

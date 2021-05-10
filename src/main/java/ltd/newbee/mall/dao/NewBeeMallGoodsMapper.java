@@ -92,6 +92,5 @@ public interface NewBeeMallGoodsMapper {
     boolean updateReviewNum(GoodsReviewHelpNum goodsReviewHelpNum);
 
     long getGoodsReviewHelpNum(int reviewId);
-    //关键词搜索
-    List<NewBeeMallGoods> getGoodsBySearch(NewBeeMallGoods goodsName);
+
 }

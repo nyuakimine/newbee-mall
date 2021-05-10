@@ -20,12 +20,16 @@ function search() {
 
 //ajax与后台通信，查找查询履历
 $( "#keyword" ).focus(function(){
+	var keyword = $( "#keyword" ).val();
+	if(keyword != ""){
+		$( "#keyword" ).trigger("keyup");
+	}
 	//console.log("focused");
 		    $.ajax({
             type: 'POST',//方法类型
             url: '/searchHistory/getSearchHistory',
             contentType: 'application/json',
-            data: JSON.stringify(keyword),
+            //data: JSON.stringify(keyword),
             success: function (result) {
 	//サーバーが成功した場合
                 if (result.resultCode == 200) {
@@ -49,21 +53,59 @@ $( "#keyword" ).focus(function(){
 $("#keyword").focusout(function(){
 	if(MouseOnSearchResultUl)
 	return;
+    clearResultList()
+	//hide #searchResultUl
+	$("#searchResultUl").hide();
+})
+//ajax あいまい検索
+$("#keyword").keyup(function(){
+	debugger;
+	var keyword = $("#keyword").val();
+	   
+	    $.ajax({
+            type: 'get',//方法类型  //method = "POST"
+            url: "/goods/search?goodsName="+keyword,  //Post送信先のurl
+            //contentType: 'application/json',
+            //data: JSON.stringify(keyword),
+            dataType:"json",
+            success: function (json_data) {
+			debugger;
+			clearResultList();
+			showResultForLikeSearch(json_data);
+		},
+		error: function() {
+			debugger;
+			alert("Service Error. Pleasy try again later.");
+		}
+	});
+		
+});
+function clearResultList(){
 	$("#searchResultUl").children().toArray().forEach(function(value,index,array){
 		var incFlag = $(value).attr('class').includes("dumyLi");
 		if(!incFlag){
 			$(value).remove();
 		}
 	})
-	//hide #searchResultUl
-	$("#searchResultUl").hide();
-})
-//ajax あいまい検索
-$("#keyword").keyup(function(){
-	console.log("Handler for .keyup() called.");
-});	
+}
+
 function showResult(result){
 	var list = result.data;
+	//href="/goods/detail/10700"
+	var _href = "/goods/detail";
+	for(var i = 0; i< list.length; i++){
+		var el = $(".dumyLi").clone().removeClass("dumyLi");
+		var link = el.find("a");
+		link.text(list[i].goodsName);
+		link.attr("href", _href + list[i].goodsId);
+		$(".dumyLi").before(el);
+	}
+	$("#searchResultUl").show();
+	appendToSearchBar($("#searchResultUl"));
+}
+
+function showResultForLikeSearch(result){
+	var list = result.data.list;
 	//href="/goods/detail/10700"
 	var _href = "/goods/detail";
 	for(var i = 0; i< list.length; i++){
@@ -101,3 +143,5 @@ $("#searchResultUl").mousemove(function(){
 $("#searchResultUl").mouseleave(function(){
 	MouseOnSearchResultUl = false;
 })
+
+       
