@@ -27,6 +27,7 @@ import ltd.newbee.mall.entity.GoodsQa;
 import ltd.newbee.mall.entity.GoodsReview;
 import ltd.newbee.mall.entity.GoodsReviewHelpNum;
 import ltd.newbee.mall.entity.IndexConfig;
+import ltd.newbee.mall.entity.InsertKeyword;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
 
 import ltd.newbee.mall.entity.ReviewUserInfo;
@@ -217,4 +218,20 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 	public long getGoodsReviewHelpNum(int reviewId) {	   
 	    return goodsMapper.getGoodsReviewHelpNum(reviewId);
 	}
+        //insertKeyWord by niu 20210510
+	@Override
+	public int insertKeyword(InsertKeyword id) {
+	    int count = goodsMapper.instKeyword(id);
+	    return count;
+	}
+	//getMaxKeywordID
+	@Override
+	public Long getMaxKeywordId(Long userId) {
+	    Long a = goodsMapper.getMaxKeywordId(userId);
+	     if(a !=null) {
+	     return a + 1;
+	     }else {
+	       return 1L;
+	     }
+	 }
 }

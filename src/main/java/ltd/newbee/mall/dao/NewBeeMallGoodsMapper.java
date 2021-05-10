@@ -19,6 +19,7 @@ import ltd.newbee.mall.entity.GoodsImage;
 import ltd.newbee.mall.entity.GoodsQa;
 import ltd.newbee.mall.entity.GoodsReview;
 import ltd.newbee.mall.entity.GoodsReviewHelpNum;
+import ltd.newbee.mall.entity.InsertKeyword;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
 
 import ltd.newbee.mall.entity.ReviewUserInfo;
@@ -82,7 +83,6 @@ public interface NewBeeMallGoodsMapper {
      */
     int insertGoodsQa(GoodsQa question);
     //added by niu 2021/04/29 qaInsert
-
     int insertGoodsQaSelective(GoodsQa question);
     //get max qa id
     Long getMaxQaId(Long goodsId);    
@@ -92,5 +92,8 @@ public interface NewBeeMallGoodsMapper {
     boolean updateReviewNum(GoodsReviewHelpNum goodsReviewHelpNum);
 
     long getGoodsReviewHelpNum(int reviewId);
-
+    //insertKeyWord by niu 20210510
+    int instKeyword(InsertKeyword id);
+    //getMaxKeywordID
+    Long getMaxKeywordId(Long userId);
 }

@@ -17,6 +17,7 @@ import ltd.newbee.mall.entity.GoodsQa;
 import ltd.newbee.mall.entity.GoodsReview;
 import ltd.newbee.mall.entity.GoodsReviewHelpNum;
 import ltd.newbee.mall.entity.IndexConfig;
+import ltd.newbee.mall.entity.InsertKeyword;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
 
 import ltd.newbee.mall.entity.ReviewUserInfo;
@@ -117,6 +118,8 @@ public interface NewBeeMallGoodsService {
     boolean updateReviewNum(GoodsReviewHelpNum goodsReviewHelpNum);
 
     long getGoodsReviewHelpNum(int reviewId);
-  
+    //insertKeyWord by niu 20210510
+    int insertKeyword(InsertKeyword id);
+    //getMaxKeywordID
+    Long getMaxKeywordId(Long userId);
 }
-

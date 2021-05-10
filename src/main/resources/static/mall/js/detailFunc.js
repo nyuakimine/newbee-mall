@@ -98,47 +98,47 @@ var currentImageIndex = 1;
              }
          })
   })
-	  $("#ZVPostQuestionButton").click(function(){	
-		var question = $("#ZVQuestionTextarea").val();
-		//get url
-	/*	var path = window.location.pathname;
-		//split with / 
-		var ar = path.split("/");
-		//get array 
-		var len = ar.length;
-		var goodsId = ar[len-1];
-		debugger;*/
-		var goodsId = getGoodsId();
-	    data = {
-		  "question":question,
-		  "goodsId":goodsId
-	    };	   
-	    $.ajax({
-            type: 'POST',//方法类型
-            url: '/goods/insertQa',
-            contentType: 'application/json',
-            data: JSON.stringify(data),
-            success: function (result) {
-	//サーバーが成功した場合
-                if (result.resultCode == 200) {
-				debugger;					
-						swal("質問ご登録ありがとうございました！" ,{
-							icon:"success",
-						});
-                } else {
-                    	swal(result.message, {
-                        icon: "error",
-                    });
-                }
-                
-            },
-            error: function () {
-                swal("操作失败", {
+  $("#ZVPostQuestionButton").click(function(){	
+	var question = $("#ZVQuestionTextarea").val();
+	//get url
+/*	var path = window.location.pathname;
+	//split with / 
+	var ar = path.split("/");
+	//get array 
+	var len = ar.length;
+	var goodsId = ar[len-1];
+	debugger;*/
+	var goodsId = getGoodsId();
+    data = {
+	  "question":question,
+	  "goodsId":goodsId
+    };	   
+    $.ajax({
+        type: 'POST',//方法类型
+        url: '/goods/insertQa',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function (result) {
+//サーバーが成功した場合
+            if (result.resultCode == 200) {
+			debugger;					
+					swal("質問ご登録ありがとうございました！" ,{
+						icon:"success",
+					});
+            } else {
+                	swal(result.message, {
                     icon: "error",
                 });
-             }
-         })
-      });
+            }
+            
+        },
+        error: function () {
+            swal("操作失败", {
+                icon: "error",
+            });
+         }
+     })
+  });
 	debugger;   
 	function paging(num){
 	//alert("Handlerfor .click() called." );   

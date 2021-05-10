@@ -48,6 +48,7 @@ import ltd.newbee.mall.entity.GoodsImage;
 import ltd.newbee.mall.entity.GoodsQa;
 import ltd.newbee.mall.entity.GoodsReviewHelpNum;
 import ltd.newbee.mall.entity.IndexConfig;
+import ltd.newbee.mall.entity.InsertKeyword;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
 import ltd.newbee.mall.entity.PagingQa;
 import ltd.newbee.mall.entity.ReviewUserInfo;
@@ -120,9 +121,9 @@ public class GoodsController {
 	request.setAttribute("goodsDetail", goodsDetailVO);
 
 	List<GoodsImage> imageList = newBeeMallGoodsService.getGoodsImageEntityByGoodsId(goodsId);
-	if (imageList == null || imageList.isEmpty()) {
+//	if (imageList == null || imageList.isEmpty()) {
 	    NewBeeMallException.fail(ServiceResultEnum.GOODS_NOT_EXIST.getResult());
-	}
+//	}
 
 	List<GoodsImageVO> imageVoList = new ArrayList<GoodsImageVO>();
 	for (int i = 0; i < imageList.size(); i++) {
@@ -387,4 +388,24 @@ public class GoodsController {
         return ResultGenerator.genSuccessResult(newBeeMallGoodsService.searchNewBeeMallGoods(pageUtil));
     }
     
+    //added by niu 2021/05/10 insertKeyword
+    @RequestMapping(value = "/goods/insertKeyword", method = RequestMethod.POST)
+    @ResponseBody
+    public Result insertKeyword(@RequestBody InsertKeyword id) {
+        Integer count = null;  
+        Long keyWordId = newBeeMallGoodsService.getMaxKeywordId(id.getUserId());
+        id.setId(keyWordId);
+        Date date = new Date();
+        String keyword = new String();
+        id.setDate(date);
+        id.setKeyword(keyword);
+        
+        if(id != null) {
+            count = newBeeMallGoodsService.insertKeyword(id);
+        }
+        if(!(count > 0))  {
+        return ResultGenerator.genFailResult("投稿失敗！");
+        }      
+        return ResultGenerator.genSuccessResult(count);    
+    }
 }
