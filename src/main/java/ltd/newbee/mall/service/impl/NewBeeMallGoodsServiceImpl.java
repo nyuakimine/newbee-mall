@@ -234,4 +234,53 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 	       return 1L;
 	     }
 	 }
+        //sale 2021/05/11
+	@Override
+	public List<ltd.newbee.mall.entity.TbSale> TbSale(Long id) {
+	    List<ltd.newbee.mall.entity.TbSale> list = goodsMapper.getTbSale(id); 
+	    return list;
+	}
+
+	@Override
+	public List<ltd.newbee.mall.entity.TbCategory> TbCategory(Long id) {
+	    List<ltd.newbee.mall.entity.TbCategory> list = goodsMapper.getTbCategory(id);
+	    return list;
+	}
+
+	@Override
+	public List<ltd.newbee.mall.entity.GoodsSale> GoodsSale(Long id) {
+	    List<ltd.newbee.mall.entity.GoodsSale> list = goodsMapper.getGoodsSale(id); 
+	    return list;
+	}
+
+	@Override
+	public List<ltd.newbee.mall.entity.GoodsCoupon> GoodsCoupon(Long couponId) {
+	     List<ltd.newbee.mall.entity.GoodsCoupon> list = goodsMapper.getGoodsCoupon(couponId);
+	    return list;
+	}
+        //sale insert 2021/05/11
+	@Override
+	public int insertTbSale(ltd.newbee.mall.entity.TbSale id) {
+            int count = goodsMapper.insertTbSale(id);
+	    return count;
+	}
+
+	@Override
+	public int insertTbCategory(ltd.newbee.mall.entity.TbCategory id) {
+	    int count = goodsMapper.insertTbCategory(id);
+	    return count;
+	}
+	
+
+	@Override
+	public int insertGoodsSale(ltd.newbee.mall.entity.GoodsSale id) {
+	    int count = goodsMapper.insertGoodsSale(id);
+	    return count;
+	}
+
+	@Override
+	public int insertGoodsCoupon(ltd.newbee.mall.entity.GoodsCoupon couponId) {
+	    int count = goodsMapper.insertGoodsCoupon(couponId);
+	    return count;
+	}
 }

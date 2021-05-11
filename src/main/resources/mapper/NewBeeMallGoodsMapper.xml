@@ -534,4 +534,186 @@
 			select max(id) from inst_keyword where user_id = #{user_id,jdbcType=BIGINT}				  
 	 </select> 
    <!--  select * from search_history where user_id=? And keyword= ? Order by ? limit ? -->
+<!--  sale 20210511-->
+	   <select id="getTbSale" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.TbSale">
+	       select id,goods_id,start_date,end_date from tb_sale
+	       where id = #{id,jdbcType=BIGINT}
+	   </select>
+	   <select id="getTbCategory" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.TbCategory">
+	       select id,category_id,start_date,end_date from tb_category
+		   where id = #{id,jdbcType=BIGINT}
+	   </select>    
+	   <select id="getGoodsSale" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.GoodsSale">
+	       select id,name,start_date,end_date,campaign,content1,content2,content3,content4,content5,flag
+	       from goods_sale
+		   where id = #{id,jdbcType=BIGINT}
+	   </select>
+	  	    
+	   <select id="getGoodsCoupon" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.GoodsCoupon">
+	       select coupon_id,coupon_name,flag
+	       from goods_coupon
+		   where coupon_id = #{couponId,jdbcType=BIGINT}
+	   </select>
+<!--    insert sale 20210511 -->
+	      <insert id="insertTbSale" parameterType="java.lang.Long">
+        insert into tb_sale
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+             </if>
+             <if test="goodsId != null">
+                goods_id,
+             </if>    
+             <if test="startDate != null">
+                start_date,
+             </if>
+             <if test="endDate != null">
+                end_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="goodsId != null">
+                #{goodsId,jdbcType=BIGINT},
+            </if>     
+             <if test="startDate != null">
+                #{startDate,jdbcType=TIMESTAMP},
+            </if>       
+            <if test="endDate != null">
+                #{endDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert> 
+       <insert id="insertTbCategory" parameterType="java.lang.Long">
+        insert into tb_category
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+             <if test="categoryId != null">
+                category_id,
+            </if>    
+             <if test="startDate != null">
+                start_date,
+            </if>
+             <if test="endDate != null">
+                end_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+             <if test="id != null">
+                #{id,jdbcType=BIGINT},
+             </if>
+             <if test="categoryId != null">
+                #{categoryId,jdbcType=BIGINT},
+             </if>     
+             <if test="startDate != null">
+                #{startDate,jdbcType=TIMESTAMP},
+             </if>       
+             <if test="endDate != null">
+                #{endDate,jdbcType=TIMESTAMP},
+             </if>
+        </trim>
+    </insert> 
+     <insert id="insertGoodsSale" parameterType="java.lang.Long">
+        insert into goods_sale
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>                 
+            <if test="startDate != null">
+                start_date,
+            </if>
+             <if test="endDate != null">
+                end_date,
+            </if>
+             <if test="campaign != null">
+                campaign,
+            </if>
+             <if test="content1 != null">
+                content1,
+            </if>
+            <if test="content2 != null">
+                content2,
+            </if>                 
+            <if test="content3 != null">
+                content3,
+            </if>
+             <if test="content4 != null">
+                content4,
+            </if>
+             <if test="content5 != null">
+                content5,
+            </if>
+             <if test="flag != null">
+                flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>     
+             <if test="startDate != null">
+                #{startDate,jdbcType=TIMESTAMP},
+            </if>       
+            <if test="endDate != null">
+                #{endDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="campaign != null">
+                #{campaign,jdbcType=VARCHAR},
+            </if>     
+             <if test="content1 != null">
+                #{content1,jdbcType=VARCHAR},
+            </if>       
+            <if test="content2 != null">
+                #{content2,jdbcType=VARCHAR},
+            </if>
+            <if test="content3 != null">
+                #{content3,jdbcType=VARCHAR},
+            </if>     
+             <if test="content4 != null">
+                #{content4,jdbcType=VARCHAR},
+            </if>       
+            <if test="content5 != null">
+                #{content5,jdbcType=VARCHAR},
+            </if>
+             <if test="flag != null">
+                #{flag,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert> 
+    <insert id="insertGoodsCoupon" parameterType="java.lang.Long">
+        insert into goods_coupon
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="couponId != null">
+                coupon_id,
+            </if>
+             <if test="couponName != null">
+                coupon_name,
+            </if>    
+             <if test="flag != null">
+                flag,
+            </if>                        
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+             <if test="couponId != null">
+                #{couponId,jdbcType=BIGINT},
+             </if>
+             <if test="couponName != null">
+                #{couponName,jdbcType=VARCHAR},
+             </if>     
+             <if test="flag != null">
+                #{flag,jdbcType=VARCHAR},
+             </if>                
+        </trim>
+    </insert> 
+
  </mapper>

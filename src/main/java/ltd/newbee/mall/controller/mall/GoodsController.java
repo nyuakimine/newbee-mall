@@ -121,9 +121,9 @@ public class GoodsController {
 	request.setAttribute("goodsDetail", goodsDetailVO);
 
 	List<GoodsImage> imageList = newBeeMallGoodsService.getGoodsImageEntityByGoodsId(goodsId);
-//	if (imageList == null || imageList.isEmpty()) {
+	if (imageList == null || imageList.isEmpty()) {
 	    NewBeeMallException.fail(ServiceResultEnum.GOODS_NOT_EXIST.getResult());
-//	}
+	}
 
 	List<GoodsImageVO> imageVoList = new ArrayList<GoodsImageVO>();
 	for (int i = 0; i < imageList.size(); i++) {

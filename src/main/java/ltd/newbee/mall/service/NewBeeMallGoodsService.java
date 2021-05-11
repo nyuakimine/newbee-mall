@@ -122,4 +122,14 @@ public interface NewBeeMallGoodsService {
     int insertKeyword(InsertKeyword id);
     //getMaxKeywordID
     Long getMaxKeywordId(Long userId);
+    //sale 20210511
+    List<ltd.newbee.mall.entity.TbSale>TbSale(Long id); 
+    List<ltd.newbee.mall.entity.TbCategory>TbCategory(Long id);
+    List<ltd.newbee.mall.entity.GoodsSale>GoodsSale(Long id);   
+    List<ltd.newbee.mall.entity.GoodsCoupon>GoodsCoupon(Long couponId);
+    //sale insert 20210511
+    int insertTbSale(ltd.newbee.mall.entity.TbSale id);
+    int insertTbCategory(ltd.newbee.mall.entity.TbCategory id);
+    int insertGoodsSale(ltd.newbee.mall.entity.GoodsSale id);
+    int insertGoodsCoupon(ltd.newbee.mall.entity.GoodsCoupon couponId);
 }

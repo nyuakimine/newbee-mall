@@ -10,20 +10,21 @@ package ltd.newbee.mall.dao;
 
 import java.util.List;
 
-import javax.swing.text.Position;
-
 import org.apache.ibatis.annotations.Param;
 
+import ltd.newbee.mall.entity.GoodsCoupon;
 import ltd.newbee.mall.entity.GoodsDesc;
 import ltd.newbee.mall.entity.GoodsImage;
 import ltd.newbee.mall.entity.GoodsQa;
 import ltd.newbee.mall.entity.GoodsReview;
 import ltd.newbee.mall.entity.GoodsReviewHelpNum;
+import ltd.newbee.mall.entity.GoodsSale;
 import ltd.newbee.mall.entity.InsertKeyword;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
-
 import ltd.newbee.mall.entity.ReviewUserInfo;
 import ltd.newbee.mall.entity.StockNumDTO;
+import ltd.newbee.mall.entity.TbCategory;
+import ltd.newbee.mall.entity.TbSale;
 import ltd.newbee.mall.util.PageQueryUtil;
 
 public interface NewBeeMallGoodsMapper {
@@ -92,8 +93,19 @@ public interface NewBeeMallGoodsMapper {
     boolean updateReviewNum(GoodsReviewHelpNum goodsReviewHelpNum);
 
     long getGoodsReviewHelpNum(int reviewId);
-    //insertKeyWord by niu 20210510
+    //insertKeyWord by niu 2021/05/10
     int instKeyword(InsertKeyword id);
     //getMaxKeywordID
     Long getMaxKeywordId(Long userId);
+    //sale 2021/05/11
+    List<TbSale> getTbSale(Long id); 
+    List<TbCategory> getTbCategory(Long id);
+    List<GoodsSale> getGoodsSale(Long id);   
+    List<GoodsCoupon> getGoodsCoupon(Long couponId);
+    //sale insert 2021/05/11
+    int insertTbSale(TbSale id);
+    int insertTbCategory(TbCategory id);
+    int insertGoodsSale(GoodsSale id);
+    int insertGoodsCoupon(GoodsCoupon couponId);
+
 }
