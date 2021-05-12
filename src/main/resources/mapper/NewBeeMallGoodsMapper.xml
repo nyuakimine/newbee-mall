@@ -521,7 +521,7 @@
            <if test="userId != null">
               #{userId,jdbcType=BIGINT},
           </if>       
-         <if test="keyword != null">
+          <if test="keyword != null">
               #{keyword,jdbcType=VARCHAR},
           </if>
              <if test="date != null">
@@ -531,7 +531,8 @@
   </insert> 
      <!--  getMaxKeywordID 20210510 -->
      <select id="getMaxKeywordId" parameterType="java.lang.Long" resultType= "java.lang.Long">			   
-			select max(id) from inst_keyword where user_id = #{user_id,jdbcType=BIGINT}				  
+			select max(id) from inst_keyword 
+			<!-- where user_id = #{user_id,jdbcType=BIGINT}		 -->		  
 	 </select> 
    <!--  select * from search_history where user_id=? And keyword= ? Order by ? limit ? -->
 <!--  sale 20210511-->
@@ -550,7 +551,7 @@
 	   </select>
 	  	    
 	   <select id="getGoodsCoupon" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.GoodsCoupon">
-	       select coupon_id,coupon_name,flag
+	       select coupon_id,coupon_name,flag,start_date,end_date
 	       from goods_coupon
 		   where coupon_id = #{couponId,jdbcType=BIGINT}
 	   </select>
@@ -701,7 +702,13 @@
             </if>    
              <if test="flag != null">
                 flag,
-            </if>                        
+            </if>   
+            <if test="startDate != null">
+                #{startDate,jdbcType=TIMESTAMP},
+            </if>       
+            <if test="endDate != null">
+                #{endDate,jdbcType=TIMESTAMP},
+            </if>                     
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
              <if test="couponId != null">
@@ -712,6 +719,12 @@
              </if>     
              <if test="flag != null">
                 #{flag,jdbcType=VARCHAR},
+             </if>
+             <if test="startDate != null">
+                #{startDate,jdbcType=TIMESTAMP},
+             </if>       
+             <if test="endDate != null">
+                #{endDate,jdbcType=TIMESTAMP},
              </if>                
         </trim>
     </insert> 

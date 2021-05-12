@@ -6,12 +6,17 @@
  * Copyright (c) 2019-2020 十三 all rights reserved.
  * 版权所有，侵权必究！
  */
-package ltd.newbee.mall.entity;
-import com.fasterxml.jackson.annotation.JsonFormat;
+package ltd.newbee.mall.controller.vo;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
-public class GoodsCoupon {
+/**
+ * 商品详情页VO
+ */
+public class GoodsCouponVO implements Serializable {
+
     private Long couponId;
     private String couponName;
     private String flag;
@@ -52,6 +57,5 @@ public class GoodsCoupon {
 	return "GoodsCoupon [couponId=" + couponId + ", couponName=" + couponName + ", flag=" + flag + ", startDate="
 		+ startDate + ", end_date=" + end_date + "]";
     }
-    
-  
+
 }

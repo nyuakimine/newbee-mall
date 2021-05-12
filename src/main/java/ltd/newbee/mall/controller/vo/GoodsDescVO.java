@@ -73,4 +73,10 @@ public class GoodsDescVO implements Serializable {
 		this.warpSize = warpSize;
 	}
 
+	    @Override
+	    public String toString() {
+		return "GoodsDescVO [goodsId=" + goodsId + ", color=" + color + ", size=" + size + ", material=" + material
+			+ ", weight=" + weight + ", warrantyYear=" + warrantyYear + ", setDate=" + setDate + ", warpSize="
+			+ warpSize + "]";
+	    }
 }

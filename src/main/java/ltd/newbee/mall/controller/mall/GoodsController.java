@@ -9,6 +9,7 @@
 package ltd.newbee.mall.controller.mall;
 
 import java.awt.Image;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -391,21 +392,53 @@ public class GoodsController {
     //added by niu 2021/05/10 insertKeyword
     @RequestMapping(value = "/goods/insertKeyword", method = RequestMethod.POST)
     @ResponseBody
-    public Result insertKeyword(@RequestBody InsertKeyword id) {
-        Integer count = null;  
-        Long keyWordId = newBeeMallGoodsService.getMaxKeywordId(id.getUserId());
-        id.setId(keyWordId);
-        Date date = new Date();
-        String keyword = new String();
-        id.setDate(date);
-        id.setKeyword(keyword);
+    public Result insertKeyword(@RequestBody InsertKeyword keywordId, HttpSession httpSession) {
+	 NewBeeMallUserVO user = (NewBeeMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
+	  if(user != null) {
+	      keywordId.setUserId(user.getUserId());
+	  }
+	  SimpleDateFormat i = new SimpleDateFormat();
+		i.applyPattern("yyyy-MM-dd HH:mm:ss a");
+		Date date = new Date();
+	Integer count = null;  
+        Long keyWordId = newBeeMallGoodsService.getMaxKeywordId(keywordId.getUserId());
+        keywordId.setId(keyWordId);
+//        Date date = new Date();
+//        String keyword = new String();
+        keywordId.setDate(date);
+//        keywordId.setKeyword(keyWordId);
         
-        if(id != null) {
-            count = newBeeMallGoodsService.insertKeyword(id);
+        if(keywordId != null) {
+            count = newBeeMallGoodsService.insertKeyword(keywordId);
         }
         if(!(count > 0))  {
         return ResultGenerator.genFailResult("投稿失敗！");
         }      
         return ResultGenerator.genSuccessResult(count);    
     }
+    //改修insert
+//    @RequestMapping(value = "/goods/insertKeyword", method = RequestMethod.POST)
+//   
+//    public Result insertKeyword(HttpSession httpSession,@RequestParam NewBeeMallGoods newBeeMallGoods) {
+//	
+//	NewBeeMallUserVO user = (NewBeeMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
+//	Long userId = user.getUserId();
+//	
+//	SimpleDateFormat i = new SimpleDateFormat();
+//	i.applyPattern("yyyy-MM-dd HH:mm:ss a");
+//	Date date = new Date();
+//	
+//	InsertKeyword insertKeyword = new InsertKeyword();
+//	insertKeyword.setId(newBeeMallGoods.getGoodsId());
+//	insertKeyword.setUserId(userId);
+//	insertKeyword.setKeyword(newBeeMallGoods.getGoodsName());
+//	insertKeyword.setDate(date);
+//	String result = newBeeMallGoodsService.saveInsertKeyword(insertKeyword);
+//        if (ServiceResultEnum.SUCCESS.getResult().equals(result)) {
+//            return ResultGenerator.genSuccessResult();
+//        }else {
+//    	return ResultGenerator.genFailResult(result);
+//        }
+//    }
+    
 }

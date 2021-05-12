@@ -11,16 +11,19 @@ package ltd.newbee.mall.service;
 import java.util.List;
 
 import ltd.newbee.mall.controller.vo.GoodsReviewVo;
+import ltd.newbee.mall.entity.GoodsCoupon;
 import ltd.newbee.mall.entity.GoodsDesc;
 import ltd.newbee.mall.entity.GoodsImage;
 import ltd.newbee.mall.entity.GoodsQa;
 import ltd.newbee.mall.entity.GoodsReview;
 import ltd.newbee.mall.entity.GoodsReviewHelpNum;
+import ltd.newbee.mall.entity.GoodsSale;
 import ltd.newbee.mall.entity.IndexConfig;
 import ltd.newbee.mall.entity.InsertKeyword;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
-
 import ltd.newbee.mall.entity.ReviewUserInfo;
+import ltd.newbee.mall.entity.TbCategory;
+import ltd.newbee.mall.entity.TbSale;
 import ltd.newbee.mall.util.PageQueryUtil;
 import ltd.newbee.mall.util.PageResult;
 
@@ -119,17 +122,18 @@ public interface NewBeeMallGoodsService {
 
     long getGoodsReviewHelpNum(int reviewId);
     //insertKeyWord by niu 20210510
-    int insertKeyword(InsertKeyword id);
+    int insertKeyword(InsertKeyword keywordId);
     //getMaxKeywordID
     Long getMaxKeywordId(Long userId);
     //sale 20210511
-    List<ltd.newbee.mall.entity.TbSale>TbSale(Long id); 
-    List<ltd.newbee.mall.entity.TbCategory>TbCategory(Long id);
-    List<ltd.newbee.mall.entity.GoodsSale>GoodsSale(Long id);   
-    List<ltd.newbee.mall.entity.GoodsCoupon>GoodsCoupon(Long couponId);
+    List<TbSale>TbSale(Long id); 
+    List<TbCategory>TbCategory(Long id);
+    List<GoodsSale>GoodsSale(Long id);   
+    List<GoodsCoupon>GoodsCoupon(Long couponId);
     //sale insert 20210511
-    int insertTbSale(ltd.newbee.mall.entity.TbSale id);
-    int insertTbCategory(ltd.newbee.mall.entity.TbCategory id);
-    int insertGoodsSale(ltd.newbee.mall.entity.GoodsSale id);
-    int insertGoodsCoupon(ltd.newbee.mall.entity.GoodsCoupon couponId);
+    int insertTbSale(TbSale id);
+    int insertTbCategory(TbCategory id);
+    int insertGoodsSale(GoodsSale id);
+    int insertGoodsCoupon(GoodsCoupon couponId);
+
 }

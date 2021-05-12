@@ -72,6 +72,21 @@ $("#keyword").keyup(function(){
 			debugger;
 			clearResultList();
 			showResultForLikeSearch(json_data);
+			
+			debugger;
+               //var list =json_data.data.list[0];
+             /*  var keyRecord=list[0];
+               var index = keyRecord.goodsName.indexOf(keyword);
+               var spaceIndex=keyRecord.goodsName.indexOf(' ',index)
+               var key = keyRecord.goodsName.substring(index, spaceIndex);
+               keywordInsert(key);*/
+              var list = json_data.data.list[0];
+              var str = list.goodsName;
+              var arr = str.split(" ");
+              arr.filter(keyword => keyword.includes(keyword));  
+
+              keywordInsert(keyword);
+               
 		},
 		error: function() {
 			debugger;
@@ -144,7 +159,7 @@ $("#searchResultUl").mouseleave(function(){
 	MouseOnSearchResultUl = false;
 })
 //insert
- $("#keywordButton").click(function(){	
+function keywordInsert(keyword){	
 	debugger;
 			var keyword = $("#keyword").val();
 			/*var id = getId();*/
@@ -177,5 +192,5 @@ $("#searchResultUl").mouseleave(function(){
 	                });
 	             }
 	         })
-	      });
+	      };
        

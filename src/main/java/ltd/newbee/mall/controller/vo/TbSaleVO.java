@@ -6,34 +6,31 @@
  * Copyright (c) 2019-2020 十三 all rights reserved.
  * 版权所有，侵权必究！
  */
-package ltd.newbee.mall.entity;
-import com.fasterxml.jackson.annotation.JsonFormat;
+package ltd.newbee.mall.controller.vo;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
-public class GoodsCoupon {
-    private Long couponId;
-    private String couponName;
-    private String flag;
+/**
+ * 商品详情页VO
+ */
+public class TbSaleVO implements Serializable {
+    private Long id;
+    private Long goodsId;
     private Date startDate;
     private Date end_date;
-    public Long getCouponId() {
-        return couponId;
+    public Long getId() {
+        return id;
     }
-    public void setCouponId(Long couponId) {
-        this.couponId = couponId;
+    public void setId(Long id) {
+        this.id = id;
     }
-    public String getCouponName() {
-        return couponName;
+    public Long getGoodsId() {
+        return goodsId;
     }
-    public void setCouponName(String couponName) {
-        this.couponName = couponName;
-    }
-    public String getFlag() {
-        return flag;
-    }
-    public void setFlag(String flag) {
-        this.flag = flag;
+    public void setGoodsId(Long goodsId) {
+        this.goodsId = goodsId;
     }
     public Date getStartDate() {
         return startDate;
@@ -49,9 +46,8 @@ public class GoodsCoupon {
     }
     @Override
     public String toString() {
-	return "GoodsCoupon [couponId=" + couponId + ", couponName=" + couponName + ", flag=" + flag + ", startDate="
-		+ startDate + ", end_date=" + end_date + "]";
+	return "TbSale [id=" + id + ", goodsId=" + goodsId + ", startDate=" + startDate + ", end_date=" + end_date
+		+ "]";
     }
-    
-  
+
 }

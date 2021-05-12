@@ -36,5 +36,10 @@ public class GoodsImageVO implements Serializable {
 		this.path = path;
 	}
 
+	@Override
+	public String toString() {
+	    return "GoodsImageVO [goodsId=" + goodsId + ", path=" + path + "]";
+	}
+
 
 }

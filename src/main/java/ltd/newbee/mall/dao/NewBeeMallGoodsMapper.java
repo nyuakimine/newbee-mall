@@ -94,7 +94,7 @@ public interface NewBeeMallGoodsMapper {
 
     long getGoodsReviewHelpNum(int reviewId);
     //insertKeyWord by niu 2021/05/10
-    int instKeyword(InsertKeyword id);
+    int instKeyword(InsertKeyword keywordId);
     //getMaxKeywordID
     Long getMaxKeywordId(Long userId);
     //sale 2021/05/11
@@ -107,5 +107,7 @@ public interface NewBeeMallGoodsMapper {
     int insertTbCategory(TbCategory id);
     int insertGoodsSale(GoodsSale id);
     int insertGoodsCoupon(GoodsCoupon couponId);
+
+    String saveInsertKeyword(InsertKeyword insertKeyword);
 
 }
