@@ -244,11 +244,14 @@ public class GoodsController {
 		String commentDate = d.getCommentDate();
 		ReviewUserInfoVO userinfoVo = new ReviewUserInfoVO();
 		userinfoVo.setCommentDate(commentDate);
-		userInfoVoList.add(userinfoVo);		
+		userInfoVoList.add(userinfoVo);	
+		
 		Integer star = d.getStar();
 		userinfoVo.setStar(star);		
+		
 		String title = d.getTitle();
 		userinfoVo.setTitle(title);
+		
 		String content = d.getContent();
 		userinfoVo.setContent(content);		
 		String picture = d.getPicture();
@@ -337,17 +340,15 @@ public class GoodsController {
     @RequestMapping(value = "/searchHistory/getSearchHistory", method = RequestMethod.POST)
     @ResponseBody
     public Result getSearchHistory(HttpSession httpSession) {
-
     	List<NewBeeMallGoods> list = new ArrayList<NewBeeMallGoods>();
-    
+
     	NewBeeMallGoods goods1 = new NewBeeMallGoods();
     	NewBeeMallGoods goods2 = new NewBeeMallGoods();
     	NewBeeMallGoods goods3 = new NewBeeMallGoods();
-    
+    	
     	goods1.setGoodsId(10700L);
     	goods1.setGoodsName("iphone10");
     	list.add(goods1);
-    
     	goods2.setGoodsId(10003L);
     	goods2.setGoodsName("无印良品 MUJI 基础润肤化妆水");
     	list.add(goods2);
@@ -357,28 +358,10 @@ public class GoodsController {
     
     	return ResultGenerator.genSuccessResult(list);
     }
-    
-    //add by niu 20210508 //keyword
-
-//  @RequestMapping(value = "/searchHistory/getSearchHistory", method = RequestMethod.POST)
-//  @ResponseBody
-//  public Result getSearchHistory(HttpSession httpSession) {
-//      List<NewBeeMallGoods> list = new ArrayList<NewBeeMallGoods>();
-//      for (int i = 0; i < list.size(); i++) {
-//	    NewBeeMallGoods keyword = new NewBeeMallGoods();
-//	    keyword = list.get(i);
-//	    if (keyword != null) {
-//	    String goodsName = keyword.getGoodsName();
-//	    keyword.setGoodsName(goodsName);
-//            }
-//      }
-//       return ResultGenerator.genSuccessResult(list);
-//  }
     //add by niu 20210510 keyword
-  //get hit goods
+    //get hit goods
     @RequestMapping(value = "/goods/search", method = RequestMethod.POST)
     @ResponseBody
-    //public Result getHitGoodsList(@RequestParam Map<String, Object> params) {
     public Result getHitGoodsList(@RequestBody String goodsName) {
     	Map<String, Object> params = new HashMap<String, Object>();
     	params.put("keyword", goodsName);
@@ -388,25 +371,21 @@ public class GoodsController {
         PageQueryUtil pageUtil = new PageQueryUtil(params);
         return ResultGenerator.genSuccessResult(newBeeMallGoodsService.searchNewBeeMallGoods(pageUtil));
     }
-    
     //added by niu 2021/05/10 insertKeyword
     @RequestMapping(value = "/goods/insertKeyword", method = RequestMethod.POST)
     @ResponseBody
     public Result insertKeyword(@RequestBody InsertKeyword keywordId, HttpSession httpSession) {
-	 NewBeeMallUserVO user = (NewBeeMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
-	  if(user != null) {
+	NewBeeMallUserVO user = (NewBeeMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
+	if(user != null) {
 	      keywordId.setUserId(user.getUserId());
-	  }
-	  SimpleDateFormat i = new SimpleDateFormat();
+        }
+	SimpleDateFormat i = new SimpleDateFormat();
 		i.applyPattern("yyyy-MM-dd HH:mm:ss a");
 		Date date = new Date();
 	Integer count = null;  
         Long keyWordId = newBeeMallGoodsService.getMaxKeywordId(keywordId.getUserId());
         keywordId.setId(keyWordId);
-//        Date date = new Date();
-//        String keyword = new String();
         keywordId.setDate(date);
-//        keywordId.setKeyword(keyWordId);
         
         if(keywordId != null) {
             count = newBeeMallGoodsService.insertKeyword(keywordId);
@@ -416,29 +395,4 @@ public class GoodsController {
         }      
         return ResultGenerator.genSuccessResult(count);    
     }
-    //改修insert
-//    @RequestMapping(value = "/goods/insertKeyword", method = RequestMethod.POST)
-//   
-//    public Result insertKeyword(HttpSession httpSession,@RequestParam NewBeeMallGoods newBeeMallGoods) {
-//	
-//	NewBeeMallUserVO user = (NewBeeMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
-//	Long userId = user.getUserId();
-//	
-//	SimpleDateFormat i = new SimpleDateFormat();
-//	i.applyPattern("yyyy-MM-dd HH:mm:ss a");
-//	Date date = new Date();
-//	
-//	InsertKeyword insertKeyword = new InsertKeyword();
-//	insertKeyword.setId(newBeeMallGoods.getGoodsId());
-//	insertKeyword.setUserId(userId);
-//	insertKeyword.setKeyword(newBeeMallGoods.getGoodsName());
-//	insertKeyword.setDate(date);
-//	String result = newBeeMallGoodsService.saveInsertKeyword(insertKeyword);
-//        if (ServiceResultEnum.SUCCESS.getResult().equals(result)) {
-//            return ResultGenerator.genSuccessResult();
-//        }else {
-//    	return ResultGenerator.genFailResult(result);
-//        }
-//    }
-    
 }

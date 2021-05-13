@@ -68,6 +68,31 @@ $(function () {
             }
         }
     });
+    
+    //DIY add by niu 2021/05/13
+        //图片上传插件初始化 用于商品预览图上传
+        debugger;
+    new AjaxUpload('#testUploadGoodsCoverImg', {
+        action: '/admin/uploadtest/file?goodsId' + 1,
+        name: 'file',
+        autoSubmit: true,
+        responseType: "json",
+        onSubmit: function (file, extension) {
+            if (!(extension && /^(jpg|jpeg|png|gif|csv)$/.test(extension.toLowerCase()))) {
+                alert('只支持jpg、png、gif、csv格式的文件！');
+                return false;
+            }
+        },
+        onComplete: function (file, r) {
+            if (r != null && r.resultCode == 200) {
+                $("#goodsCoverImg").attr("src", r.data);
+                $("#goodsCoverImg").attr("style", "width: 128px;height: 128px;display:block;");
+                return false;
+            } else {
+                alert("error");
+            }
+        }
+    });
 });
 
 $('#saveButton').click(function () {

@@ -177,20 +177,17 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 	    }
 	@Override
 	public String updateIndexConfig(IndexConfig indexConfig) {
-	    // TODO Auto-generated method stub
 	    return null;
 	}
 	//added by niu 2021/04/29 
 	@Override
 	public int insertGoodsQaSelective(GoodsQa question) {
-	    // TODO Auto-generated method stub
 	    int count = goodsMapper.insertGoodsQaSelective(question);
 	    return count;
 	}
 	@Override
 	public Long getMaxQaId(Long goodsId) {
 	    Long maxGoodsId = goodsMapper.getMaxQaId(goodsId);
-	    // TODO Auto-generated method stub
 	    if(maxGoodsId !=null) {
 	    return maxGoodsId + 1;
             }else {

@@ -61,7 +61,6 @@ $("#keyword").focusout(function(){
 $("#keyword").keyup(function(){
 	debugger;
 	var keyword = $("#keyword").val();
-	   
 	    $.ajax({
             type: 'get',//方法类型  //method = "POST"
             url: "/goods/search?goodsName="+keyword,  //Post送信先のurl
@@ -72,21 +71,17 @@ $("#keyword").keyup(function(){
 			debugger;
 			clearResultList();
 			showResultForLikeSearch(json_data);
-			
 			debugger;
-               //var list =json_data.data.list[0];
-             /*  var keyRecord=list[0];
-               var index = keyRecord.goodsName.indexOf(keyword);
-               var spaceIndex=keyRecord.goodsName.indexOf(' ',index)
-               var key = keyRecord.goodsName.substring(index, spaceIndex);
-               keywordInsert(key);*/
-              var list = json_data.data.list[0];
-              var str = list.goodsName;
-              var arr = str.split(" ");
-              arr.filter(keyword => keyword.includes(keyword));  
-
-              keywordInsert(keyword);
-               
+	   	    var list = json_data.data.list[0];
+		    var str = list.goodsName;
+		    var arr = str.split(" ");
+		    // arr.filter(keyword => keyword.includes(keyword),length > 2);  
+		    for (var i=0;i<arr.length;i++){
+			  if(arr[i].includes(keyword)){
+				keyword = arr[i];
+			  }
+		    }  
+            keywordInsert(keyword);
 		},
 		error: function() {
 			debugger;
@@ -161,7 +156,7 @@ $("#searchResultUl").mouseleave(function(){
 //insert
 function keywordInsert(keyword){	
 	debugger;
-			var keyword = $("#keyword").val();
+			//var keyword = $("#keyword").val();
 			/*var id = getId();*/
 		    data = {
 			  "keyword":keyword,
@@ -176,9 +171,9 @@ function keywordInsert(keyword){
 		//サーバーが成功した場合
 	                if (result.resultCode == 200) {
 					debugger;					
-							swal("質問ご登録ありがとうございました！" ,{
+							/*swal("質問ご登録ありがとうございました！" ,{
 								icon:"success",
-							});
+							});*/
 	                } else {
 	                    	swal(result.message, {
 	                        icon: "error",
