@@ -728,5 +728,13 @@
              </if>                
         </trim>
     </insert> 
-
+    
+    <select id="getGoodsSaleDownload" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.GoodsSale">
+	       select id,name,start_date,end_date,campaign,content1,content2,content3,content4,content5,flag
+	       from goods_sale
+		   where id in 
+		   <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+          </foreach>
+	 </select>
  </mapper>

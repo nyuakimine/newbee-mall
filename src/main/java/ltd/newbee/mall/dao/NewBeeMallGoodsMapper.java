@@ -109,5 +109,7 @@ public interface NewBeeMallGoodsMapper {
     int insertGoodsCoupon(GoodsCoupon couponId);
 
     String saveInsertKeyword(InsertKeyword insertKeyword);
+    //Download add by niu 2021/05/14 
+    int getGoodsSaleDownload(Integer[] ids);
 
 }

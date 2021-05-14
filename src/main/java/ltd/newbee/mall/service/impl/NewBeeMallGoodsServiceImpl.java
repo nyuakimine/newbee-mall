@@ -282,5 +282,13 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 	    int count = goodsMapper.insertGoodsCoupon(couponId);
 	    return count;
 	}
-	
+	   //Download add by niu 2021/05/14 
+	 @Override
+	    public Boolean getGoodsSaleDownload(Integer[] ids) {
+	        if (ids.length < 1) {
+	            return false;
+	        }
+	        //删除数据
+	        return goodsMapper.getGoodsSaleDownload(ids) > 0;
+	    } 
 }

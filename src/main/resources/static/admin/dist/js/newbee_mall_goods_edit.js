@@ -68,7 +68,6 @@ $(function () {
             }
         }
     });
-    
     //DIY add by niu 2021/05/13
         //图片上传插件初始化 用于商品预览图上传
         debugger;
@@ -324,3 +323,37 @@ $('#levelTwo').on('change', function () {
         }
     });
 });
+
+//download by niu 20210514
+$("#download-csv").click(function(){
+	    
+	  	    $.ajax({
+            type: 'GET',//方法类型
+            url: '/goodsSale/download',
+            contentType: 'application/json',
+            data: JSON.stringify(id),
+            
+            success: function (result) {
+	        //サーバーが成功した場合
+                if (result.resultCode == 200) {
+	               data.url     // file path  
+					               
+				   function Download(url) {
+				   document.getElementById('my_iframe').src = url;
+				   };
+	               
+                } else {
+                    	swal(result.message, {
+                        icon: "error",
+                    });
+                }
+                
+            },
+            error: function () {
+                swal("操作失败", {
+                    icon: "error",
+                });
+             }
+         })
+  })
+  
