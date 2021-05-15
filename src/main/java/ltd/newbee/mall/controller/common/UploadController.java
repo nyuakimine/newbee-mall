@@ -212,7 +212,7 @@ public class UploadController {
             e.printStackTrace();
         }
 	Result resultSuccess = ResultGenerator.genSuccessResult();
-	resultSuccess.setData("/upload/test.csv");
+	resultSuccess.setData("/upload/tset.csv");
 	return resultSuccess;
     }
 }

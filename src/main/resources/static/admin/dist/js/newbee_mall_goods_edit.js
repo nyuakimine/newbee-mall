@@ -330,7 +330,7 @@ $('#levelTwo').on('change', function () {
   
 $("#download-csv").on('click',function(){
 	      debugger;
-	        var _data = [1,2]
+	        var _data = [1,2,5]
 	  	    $.ajax({
             type: 'POST',//方法类型
             url: '/admin/goodsSale/download',
@@ -342,8 +342,8 @@ $("#download-csv").on('click',function(){
 	        //サーバーが成功した場合
                 if (result.resultCode == 200) {
 	              debugger;
-	              var url = window.location.assign(result.data);
-	              Download(url);
+	             // var url = window.location.assign(result.data);
+	              Download(result.data);
                 } else {
                     	swal(result.message, {
                         icon: "error",
