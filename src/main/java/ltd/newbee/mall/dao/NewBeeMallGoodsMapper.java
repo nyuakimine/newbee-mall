@@ -110,6 +110,6 @@ public interface NewBeeMallGoodsMapper {
 
     String saveInsertKeyword(InsertKeyword insertKeyword);
     //Download add by niu 2021/05/14 
-    int getGoodsSaleDownload(Integer[] ids);
+    List<GoodsSale> getGoodsSaleDownload(Integer[] ids);
 
 }

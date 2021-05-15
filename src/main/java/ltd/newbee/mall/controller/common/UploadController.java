@@ -34,8 +34,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -44,6 +47,7 @@ import org.springframework.web.multipart.support.StandardServletMultipartResolve
 
 import ltd.newbee.mall.common.Constants;
 import ltd.newbee.mall.entity.GoodsSale;
+import ltd.newbee.mall.entity.PagingQa;
 import ltd.newbee.mall.service.NewBeeMallGoodsService;
 import ltd.newbee.mall.util.NewBeeMallUtils;
 import ltd.newbee.mall.util.Result;
@@ -185,9 +189,30 @@ public class UploadController {
         return ResultGenerator.genSuccessResult();
     }    
     
-    //diy niu download
-//    @PostMapping({"/uploadtest/file"})
-//    @ResponseBody
-//    public Result uploadTest(HttpServletRequest httpServletRequest, @RequestParam("file") MultipartFile file) throws URISyntaxException, ParseException {
-   
+//diy niu download 2021/05/14
+    @RequestMapping(value = "/goodsSale/download", method = RequestMethod.POST)
+   // @GetMapping({"/goodsSale/download"})
+    @ResponseBody
+    public Result download(@RequestBody Integer[] ids) throws URISyntaxException, ParseException {
+	File f = new File("C:\\Users\\USER\\Desktop\\upload\\tset.csv");
+	try {
+	    BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+	    List<GoodsSale> list = newBeeMallGoodsService.getGoodsSaleDownload(ids);
+            list.stream().forEach( c -> {
+        	   try {
+		    bw.write(c.toString());
+		    bw.newLine();//空一行
+		} catch (IOException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		}
+            });
+            bw.close();
+	}catch (IOException e) {
+            e.printStackTrace();
+        }
+	Result resultSuccess = ResultGenerator.genSuccessResult();
+	resultSuccess.setData("/upload/test.csv");
+	return resultSuccess;
+    }
 }

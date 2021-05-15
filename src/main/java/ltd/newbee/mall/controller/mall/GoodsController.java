@@ -156,16 +156,20 @@ public class GoodsController {
 		// copy list List<GoodsDescVO> descEntityList1
 		BeanUtil.copyList(descList, GoodsDescVO.class);
 
-		String color = a.getColor();
 		GoodsDescVO descVo = new GoodsDescVO();
+		
+		String color = a.getColor();
 		descVo.setColor(color);
-		descVoList.add(descVo);
+		
 		String material = a.getMaterial();
 		descVo.setMaterial(material);
+		
 		String setDate = a.getSetDate();
 		descVo.setSetDate(setDate);
+		
 		String size = a.getSize();
 		descVo.setSize(size);
+		
 		String warpSize = a.getWarpSize();
 		descVo.setWarpSize(warpSize);
 
@@ -177,6 +181,7 @@ public class GoodsController {
 	
 		
 		descVo.setGoodsId(goodsId);
+		descVoList.add(descVo);
 		descVoList.add(descVo);
 		
 

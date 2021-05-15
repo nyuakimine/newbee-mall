@@ -136,5 +136,5 @@ public interface NewBeeMallGoodsService {
     int insertGoodsSale(GoodsSale id);
     int insertGoodsCoupon(GoodsCoupon couponId);
     //Download add by niu 2021/05/14 
-    Boolean getGoodsSaleDownload(Integer[] ids);
+    List<GoodsSale> getGoodsSaleDownload(Integer[] ids);
 }

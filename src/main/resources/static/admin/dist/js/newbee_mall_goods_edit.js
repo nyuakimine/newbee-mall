@@ -72,7 +72,7 @@ $(function () {
         //图片上传插件初始化 用于商品预览图上传
         debugger;
     new AjaxUpload('#testUploadGoodsCoverImg', {
-        action: '/admin/uploadtest/file?goodsId' + 1,
+        action: '/admin/uploadtest/file',
         name: 'file',
         autoSubmit: true,
         responseType: "json",
@@ -325,23 +325,25 @@ $('#levelTwo').on('change', function () {
 });
 
 //download by niu 20210514
-$("#download-csv").click(function(){
-	    
+
+ 
+  
+$("#download-csv").on('click',function(){
+	      debugger;
+	        var _data = [1,2]
 	  	    $.ajax({
-            type: 'GET',//方法类型
-            url: '/goodsSale/download',
+            type: 'POST',//方法类型
+            url: '/admin/goodsSale/download',
             contentType: 'application/json',
-            data: JSON.stringify(id),
+            data: JSON.stringify(_data),
+            //data:1,
             
             success: function (result) {
 	        //サーバーが成功した場合
                 if (result.resultCode == 200) {
-	               data.url     // file path  
-					               
-				   function Download(url) {
-				   document.getElementById('my_iframe').src = url;
-				   };
-	               
+	              debugger;
+	              var url = window.location.assign(result.data);
+	              Download(url);
                 } else {
                     	swal(result.message, {
                         icon: "error",
@@ -355,5 +357,9 @@ $("#download-csv").click(function(){
                 });
              }
          })
-  })
+  });
   
+function Download(url) {
+   document.getElementById('my_iframe').src = url;
+};
+ 

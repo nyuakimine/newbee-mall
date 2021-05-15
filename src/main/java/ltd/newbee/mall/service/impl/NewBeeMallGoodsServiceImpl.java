@@ -284,11 +284,8 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 	}
 	   //Download add by niu 2021/05/14 
 	 @Override
-	    public Boolean getGoodsSaleDownload(Integer[] ids) {
-	        if (ids.length < 1) {
-	            return false;
-	        }
-	        //删除数据
-	        return goodsMapper.getGoodsSaleDownload(ids) > 0;
+	    public List<GoodsSale> getGoodsSaleDownload(Integer[] ids) {
+	     List<GoodsSale> list = goodsMapper.getGoodsSaleDownload(ids);
+	     return list;
 	    } 
 }

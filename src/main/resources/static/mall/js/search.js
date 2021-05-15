@@ -166,7 +166,7 @@ function keywordInsert(keyword){
 	            type: 'POST',//方法类型
 	            url: '/goods/insertKeyword',
 	            contentType: 'application/json',
-	            data: JSON.stringify(data),
+	            data: JSON.stringify(data),//data:keyword变量
 	            success: function (result) {
 		//サーバーが成功した場合
 	                if (result.resultCode == 200) {

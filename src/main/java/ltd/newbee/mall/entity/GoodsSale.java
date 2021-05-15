@@ -11,6 +11,7 @@ package ltd.newbee.mall.entity;
 import java.util.Date;
 
 public class GoodsSale {
+ 
     private Long id;
     private String name;
     private Date startDate;
@@ -90,9 +91,7 @@ public class GoodsSale {
     }
     @Override
     public String toString() {
-	return "GoodsSale [id=" + id + ", name=" + name + ", startDate=" + startDate + ", endDate=" + endDate
-		+ ", campaign=" + campaign + ", content1=" + content1 + ", content2=" + content2 + ", content3="
-		+ content3 + ", content4=" + content4 + ", content5=" + content5 + ", flag=" + flag + "]";
+    return "\"" + id + "\"" + "," + name + ","  + startDate + "," +  endDate+ ","  + campaign+ ","  +  content1+ ","  +  content2+ ","  + 
+    content3+ ","  + content4+ ","  +  content5+ ","  +  flag ;
     }
-   
 }
