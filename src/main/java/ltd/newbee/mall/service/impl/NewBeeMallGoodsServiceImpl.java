@@ -282,10 +282,18 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 	    int count = goodsMapper.insertGoodsCoupon(couponId);
 	    return count;
 	}
-	   //Download add by niu 2021/05/14 
+	  //Download add by niu 2021/05/14 
 	 @Override
 	    public List<GoodsSale> getGoodsSaleDownload(Integer[] ids) {
 	     List<GoodsSale> list = goodsMapper.getGoodsSaleDownload(ids);
 	     return list;
 	    } 
+	 //add by niu 2021/05/16
+	    @Override
+	    public PageResult goodsSalePagAndSort(PageQueryUtil pageUtil) {
+	        List<GoodsSale> goodsList = goodsMapper.goodsSalePagAndSort(pageUtil);
+	        int total = goodsMapper.getGoodsSale(pageUtil);
+	        PageResult pageResult = new PageResult(goodsList, total, pageUtil.getLimit(), pageUtil.getPage());
+	        return pageResult;
+	    }
 }

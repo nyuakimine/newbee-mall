@@ -400,4 +400,5 @@ public class GoodsController {
         }      
         return ResultGenerator.genSuccessResult(count);    
     }
+    
 }

@@ -111,5 +111,9 @@ public interface NewBeeMallGoodsMapper {
     String saveInsertKeyword(InsertKeyword insertKeyword);
     //Download add by niu 2021/05/14 
     List<GoodsSale> getGoodsSaleDownload(Integer[] ids);
+    //add by niu 2021/05/16	
+    List<GoodsSale> goodsSalePagAndSort(PageQueryUtil pageUtil);
+    //add by niu 2021/05/16	
+    int getGoodsSale(PageQueryUtil pageUtil);
 
 }

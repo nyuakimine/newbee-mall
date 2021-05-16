@@ -137,4 +137,6 @@ public interface NewBeeMallGoodsService {
     int insertGoodsCoupon(GoodsCoupon couponId);
     //Download add by niu 2021/05/14 
     List<GoodsSale> getGoodsSaleDownload(Integer[] ids);
+    //add by niu 2021/05/16
+    PageResult goodsSalePagAndSort(PageQueryUtil pageUtil);
 }

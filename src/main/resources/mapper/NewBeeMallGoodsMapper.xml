@@ -719,7 +719,7 @@
              </if>     
              <if test="flag != null">
                 #{flag,jdbcType=VARCHAR},
-             </if>
+             </if>C
              <if test="startDate != null">
                 #{startDate,jdbcType=TIMESTAMP},
              </if>       
@@ -738,14 +738,10 @@
           </foreach>
 	 </select>
 	<!--  2021/05/15 分页 排序 -->
-	  <select id="goodsSaleListBySearch" parameterType="Map" resultMap="BaseResultMap">
+	  <select id="goodsSalePagAndSort" parameterType="Map" resultMap="BaseResultMap">
          select id,name,start_date,end_date,campaign,content1,content2,content3,content4,content5,flag
-	       from goods_sale
-        <where>
-            <if test="keyword!=null and keyword!=''">
-                and name like CONCAT('%',#{keyword},'%')
-            </if>
-        </where>
-            limit #{start},#{limit}
+	    from goods_sale
+        order by #{orderBy} #{ascOrDesc}
+        limit #{start},#{limit}
     </select>
  </mapper>
