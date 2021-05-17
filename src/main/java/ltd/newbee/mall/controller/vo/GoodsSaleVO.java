@@ -94,10 +94,5 @@ public class GoodsSaleVO implements Serializable {
     public void setFlag(String flag) {
         this.flag = flag;
     }
-    @Override
-    public String toString() {
-	return "GoodsSale [id=" + id + ", name=" + name + ", startDate=" + startDate + ", endDate=" + endDate
-		+ ", campaign=" + campaign + ", content1=" + content1 + ", content2=" + content2 + ", content3="
-		+ content3 + ", content4=" + content4 + ", content5=" + content5 + ", flag=" + flag + "]";
-    }
+
 }

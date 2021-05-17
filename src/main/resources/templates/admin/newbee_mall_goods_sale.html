@@ -1,0 +1,49 @@
+<!-- Copyright (c) 2019-2020 十三 all rights reserved. -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<header th:replace="admin/header::header-fragment"></header>
+
+<body class="hold-transition sidebar-mini">
+	<div class="wrapper">
+		<!-- 引入页面头header-fragment -->
+		<div th:replace="admin/header::header-nav"></div>
+		<!-- 引入工具栏sidebar-fragment -->
+		<div th:replace="admin/sidebar::sidebar-fragment(${path})"></div>
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<div class="content-header">
+				<div class="container-fluid">
+				</div><!-- /.container-fluid -->
+			</div>
+			<!-- Main content -->
+			<div class="content">
+				<div class="container-fluid">
+					<div class="card card-primary card-outline">
+						<div class="card-header">
+							<h3 class="card-title">キャンペーン管理</h3>
+						</div> <!-- /.card-body -->
+						<div class="card-body">
+							<div class="grid-btn">
+								<button class="btn btn-info" onclick="campaignAdd()"><i
+										class="fa fa-plus"></i>&nbsp;新規追加
+								</button>
+								<button class="btn btn-info" onclick="csvUpload()"><i
+										class="fa fa-pencil-square-o"></i>&nbsp;CSV登録
+								</button>
+							</div>
+							<br>
+							<div>
+								<div style="float:left; width:30%;height:50px;">
+									<span>
+										<b>すべて(0)</b>
+									</span>
+								</div>
+								<div style="float:left;width:30%;height:50px;">
+									<span>
+										<b>クローズ(0)</b>
+									</span>
+								</div>
+							</div>
+							<br>
+							<div>

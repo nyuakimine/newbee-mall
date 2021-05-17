@@ -17,22 +17,19 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
@@ -49,7 +46,6 @@ import org.springframework.web.multipart.support.StandardServletMultipartResolve
 
 import ltd.newbee.mall.common.Constants;
 import ltd.newbee.mall.entity.GoodsSale;
-import ltd.newbee.mall.entity.PagingQa;
 import ltd.newbee.mall.service.NewBeeMallGoodsService;
 import ltd.newbee.mall.util.NewBeeMallUtils;
 import ltd.newbee.mall.util.PageQueryUtil;
@@ -220,16 +216,20 @@ public class UploadController {
     }
     
   //add by niu 2021/05/16
-    @RequestMapping(value = "/goods/saleSort", method = RequestMethod.POST)
-    @ResponseBody
-    public Result goodsSale(@RequestBody PagingQa page) {
-
-	Map<String,Object> params = new HashMap<>();            
-        params.put("page",page.getPage()); 
-        params.put("limit",Constants.INDEX_GOODS_RECOMMOND_NUMBER);
-        params.put("keyword","name");
-        params.put("orderBy",page.getOrderBy());
-        PageQueryUtil pageUtil = new PageQueryUtil(params); 
-          return ResultGenerator.genSuccessResult(newBeeMallGoodsService.searchNewBeeMallGoods(pageUtil));
-        }    
+    //@RequestMapping(value = "/goods/saleSort", method = RequestMethod.POST)
+//    @GetMapping({"/goods/saleSort"}) 
+//    @ResponseBody
+//    public Result goodsSale(@RequestParam HttpServletRequest request) {
+//
+//	Map<String,Object> params = new HashMap<>();            
+//        params.put("page",1); 
+//        params.put("limit",Constants.INDEX_GOODS_RECOMMOND_NUMBER);
+//        params.put("keyword","name");//
+//        params.put("orderBy","id");
+//        PageQueryUtil pageUtil = new PageQueryUtil(params); 
+//        PageResult a =newBeeMallGoodsService.goodsSalePagAndSort(pageUtil);
+//        return ResultGenerator.genSuccessResult(a);
+//        }    
+    
+ 
 }

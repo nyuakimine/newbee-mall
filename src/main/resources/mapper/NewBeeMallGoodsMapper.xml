@@ -91,7 +91,7 @@
         from tb_newbee_mall_goods_info
         <where>
             <if test="keyword!=null and keyword!=''">
-                and (goods_name like CONCAT('%',#{keyword},'%') or goods_intro like CONCAT('%',#{keyword},'%'))
+                and (goods_name like c or goods_intro like CONCAT('%',#{keyword},'%'))
             </if>
             <if test="goodsCategoryId!=null and goodsCategoryId!=''">
                 and goods_category_id = #{goodsCategoryId}
@@ -738,10 +738,23 @@
           </foreach>
 	 </select>
 	<!--  2021/05/15 分页 排序 -->
-	  <select id="goodsSalePagAndSort" parameterType="Map" resultMap="BaseResultMap">
-         select id,name,start_date,end_date,campaign,content1,content2,content3,content4,content5,flag
-	    from goods_sale
-        order by #{orderBy} #{ascOrDesc}
-        limit #{start},#{limit}
-    </select>
+    <select id="goodsSalePagAndSort" parameterType="Map" resultMap="BaseResultMap">
+         select id,name,start_date,end_date,campaign,
+         content1,content2,content3,content4,content5,flag
+	     from goods_sale 
+      <where>
+            <if test="keyword!=null and keyword!=''">
+	        and name like CONCAT('%',#{keyword},'%')
+	        </if>	       
+	  </where>
+	        <if test="orderBy!=null and orderBy!=''"> 
+	        order by #{orderBy} #{ascOrDesc}
+	        </if>
+	        <if test="start!=null and limit!=null">
+            limit #{start},#{limit}
+            </if>
+   </select>
+   <select id="getGoodsSaleTotal" parameterType="Map" resultType="int">
+        select count(*) from goods_sale where id = #{id,jdbcType=BIGINT} 
+   </select> 
  </mapper>

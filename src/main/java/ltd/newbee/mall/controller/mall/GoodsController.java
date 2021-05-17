@@ -199,7 +199,7 @@ public class GoodsController {
 	Map<String,Object> params = new HashMap<>();            
         params.put("page",1); 
         params.put("limit",Constants.GOODS_QA_PAGE_LIMIT);
-        params.put("orderBy","hulped_date");
+        params.put("orderBy","helped_date");
         PageQueryUtil pageUtil = new PageQueryUtil(params); 
         PageResult a =newBeeMallGoodsService.getHelpedNumEntityByGoodsId(pageUtil);
         List<GoodsQa> qaList = (List<GoodsQa>) a.getList();
@@ -400,5 +400,5 @@ public class GoodsController {
         }      
         return ResultGenerator.genSuccessResult(count);    
     }
-    
+  
 }
