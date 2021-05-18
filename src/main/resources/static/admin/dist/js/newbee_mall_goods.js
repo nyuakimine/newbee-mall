@@ -82,6 +82,12 @@ function reload() {
 function addGoods() {
     window.location.href = "/admin/goods/edit";
 }
+/**
+ * 添加商品niu
+ */
+function addGoods() {
+    window.location.href = "/admin/goods/sale";
+}
 
 /**
  * 修改商品
@@ -93,6 +99,15 @@ function editGoods() {
     }
     window.location.href = "/admin/goods/edit/" + id;
 }
+
+function editGoods() {
+    var id = getSelectedRow();
+    if (id == null) {
+        return;
+    }
+    window.location.href = "/admin/goods/sale/" + id;
+}
+
 
 /**
  * 上架

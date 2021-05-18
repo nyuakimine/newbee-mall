@@ -69,9 +69,9 @@ public class GoodsSaleController {
     private StandardServletMultipartResolver standardServletMultipartResolver;
     //add by niu 2021/05/16
     //@RequestMapping(value = "/goods/saleSort", method = RequestMethod.POST)
-    @GetMapping({ "/goods/saleSort"})
-    @ResponseBody
-    public Result goodsSale(@RequestParam Map<String, Object> params, HttpServletRequest request) {
+    @GetMapping({ "/goods/sale","/goodsSale.html" })
+  
+    public String goodsSale(@RequestParam Map<String, Object> params, HttpServletRequest request) {
 	if (StringUtils.isEmpty(params.get("page"))) {
 	    params.put("page", 1);
 	}
@@ -89,7 +89,10 @@ public class GoodsSaleController {
 	params.put("keyword", keyword);
 	// 封装商品数据
 	PageQueryUtil pageUtil = new PageQueryUtil(params);
+	
 	request.setAttribute("pageResult", newBeeMallGoodsService.goodsSalePagAndSort(pageUtil));
-        return ResultGenerator.genSuccessResult(newBeeMallGoodsService.goodsSalePagAndSort(pageUtil));
+	//request.setAttribute("path", "goods-sale");
+        //return ResultGenerator.genSuccessResult(newBeeMallGoodsService.goodsSalePagAndSort(pageUtil));
+	return "admin/goodsSale";
     }
 }

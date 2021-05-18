@@ -290,23 +290,33 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 	     return list;
 	    } 
 	 //add by niu 2021/05/16
+//	    @Override
+//	    public PageResult goodsSalePagAndSort(PageQueryUtil pageUtil) {
+//	        List<GoodsSale> goodsList = goodsMapper.goodsSalePagAndSort(pageUtil);
+//	        int total = goodsMapper.getGoodsSaleTotal(pageUtil);
+//	        List<GoodsSaleVO> GoodsSaleVOS = new ArrayList<>();
+//	        if (!CollectionUtils.isEmpty(goodsList)) {
+//	            GoodsSaleVOS = BeanUtil.copyList(goodsList, GoodsSaleVO.class);
+//	            for (GoodsSaleVO goodsSaleVO : GoodsSaleVOS) {
+//	                String name = goodsSaleVO.getName();
+//	                // 字符串过长导致文字超出的问题
+////	                if (name.length() > 28) {
+////	                    name = name.substring(0, 28) + "...";
+////	                    goodsSaleVO.setName(name);
+////	                }
+//	            }
+//	        }
+//	        PageResult pageResult = new PageResult(GoodsSaleVOS, total, pageUtil.getLimit(), pageUtil.getPage());
+//	        return pageResult;
+//	    }
+	   //改修 
+	 //add by niu 2021/05/16
+	
 	    @Override
 	    public PageResult goodsSalePagAndSort(PageQueryUtil pageUtil) {
 	        List<GoodsSale> goodsList = goodsMapper.goodsSalePagAndSort(pageUtil);
 	        int total = goodsMapper.getGoodsSaleTotal(pageUtil);
-	        List<GoodsSaleVO> GoodsSaleVOS = new ArrayList<>();
-	        if (!CollectionUtils.isEmpty(goodsList)) {
-	            GoodsSaleVOS = BeanUtil.copyList(goodsList, GoodsSaleVO.class);
-	            for (GoodsSaleVO goodsSaleVO : GoodsSaleVOS) {
-	                String name = goodsSaleVO.getName();
-	                // 字符串过长导致文字超出的问题
-//	                if (name.length() > 28) {
-//	                    name = name.substring(0, 28) + "...";
-//	                    goodsSaleVO.setName(name);
-//	                }
-	            }
-	        }
-	        PageResult pageResult = new PageResult(GoodsSaleVOS, total, pageUtil.getLimit(), pageUtil.getPage());
+	        PageResult pageResult = new PageResult(goodsList, total, pageUtil.getLimit(), pageUtil.getPage());
 	        return pageResult;
 	    }
 }

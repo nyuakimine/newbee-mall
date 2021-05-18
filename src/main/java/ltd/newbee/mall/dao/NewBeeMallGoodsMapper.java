@@ -113,7 +113,6 @@ public interface NewBeeMallGoodsMapper {
     List<GoodsSale> getGoodsSaleDownload(Integer[] ids);
     //add by niu 2021/05/16	
     List<GoodsSale> goodsSalePagAndSort(PageQueryUtil pageUtil);
-    //add by niu 2021/05/16	
     int getGoodsSaleTotal(PageQueryUtil pageUtil);
 
 }

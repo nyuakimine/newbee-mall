@@ -18,6 +18,19 @@
         <result column="update_user" jdbcType="INTEGER" property="updateUser"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
     </resultMap>
+        <resultMap id="GoodsSaleResultMap" type="ltd.newbee.mall.entity.GoodsSale">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="start_date" jdbcType="TIMESTAMP" property="startDate"/>
+        <result column="end_date" jdbcType="TIMESTAMP" property="endDate"/>
+        <result column="campaign" jdbcType="VARCHAR" property="campaign"/>
+        <result column="content1" jdbcType="VARCHAR" property="content1"/>
+        <result column="content2" jdbcType="VARCHAR" property="content2"/>
+        <result column="content3" jdbcType="VARCHAR" property="content3"/>
+        <result column="content4" jdbcType="VARCHAR" property="content4"/>
+        <result column="content5" jdbcType="VARCHAR" property="content5"/>
+        <result column="flag" jdbcType="VARCHAR" property="flag"/>
+    </resultMap>
     <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="ltd.newbee.mall.entity.NewBeeMallGoods">
         <result column="goods_detail_content" jdbcType="LONGVARCHAR" property="goodsDetailContent"/>
     </resultMap>
@@ -67,7 +80,7 @@
         from tb_newbee_mall_goods_info
         <where>
             <if test="goodsName!=null and goodsName!=''">
-                and goods_name like CONCAT('%','#{goodsName}','%')
+                and goods_name like CONCAT('%',#{goodsName},'%')
             </if>
             <if test="goodsSellStatus!=null and goodsSellStatus!=''">
                 and goods_sell_status = #{goodsSellStatus}
@@ -738,16 +751,14 @@
           </foreach>
 	 </select>
 	<!--  2021/05/15 分页 排序 -->
-    <select id="goodsSalePagAndSort" parameterType="Map" resultMap="BaseResultMap">
-         select id,name,start_date,end_date,campaign,
-         content1,content2,content3,content4,content5,flag
-	     from goods_sale 
-      <where>
-            <if test="keyword!=null and keyword!=''">
+    <select id="goodsSalePagAndSort" parameterType="Map" resultMap="GoodsSaleResultMap">
+         select id,name,start_date,end_date,campaign,content1,content2,content3,content4,content5,flag from goods_sale 
+     <!--  <where>
+            <if test="keyword !=null and keyword!=''">
 	        and name like CONCAT('%',#{keyword},'%')
 	        </if>	       
-	  </where>
-	        <if test="orderBy!=null and orderBy!=''"> 
+	  </where> -->
+	        <if test="orderBy!=null and orderBy!='' and ascOrDesc!=null and ascOrDesc!=''"> 
 	        order by #{orderBy} #{ascOrDesc}
 	        </if>
 	        <if test="start!=null and limit!=null">
