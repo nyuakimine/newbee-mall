@@ -285,5 +285,4 @@ function plusSlides(num){
     console.log(src);
     $(".swiper-container ").find("img").attr('src',src);
     currentImageIndex = nextIndex;
-
 }

@@ -47,7 +47,10 @@
 	                        <div class="campaignDownload"  style="float:left; width:50%;height:50px;">
 	                        	<form name="input" action="html_form_action.php" method="get">
 									<select type="text" name="キャンペーン名" id="campaignName" style="width:200px"></select>
-									<button id="dumy download">Download</button>
+									 <!-- diy //niu 2021/04/14-->
+                               <button id="downloadsale" style="border: none; background-color: #17a2b8;border-color: #17a2b8;color: #fff;" type="button">Download CSV</button>
+                                 <!--<button id="download-csv">Download CSV File</button>-->
+                              <iframe id="my_iframe" style="display:none;"></iframe>
 								</form>
 	                        </div>
 	                        <div class="campaignSearch"  style="float:left;width:50%;height:50px;">
@@ -57,32 +60,55 @@
                         </div>
                         <br>
                         <div class="campaignTable">
+                       
 	                        <table id="table" border="1" style="width:1200px">
 	                        	<thead>
 						            <tr>
 						                <th style="width:20px">
 						                    <input type="checkbox" id="checkAll"/>
 						                </th>
-						                <th style="width:80px">キャンペーンID</th>
+						                <th style="width:80px" >キャンペーンID</th>
 						                <th style="width:180px">キャンペーン名</th>
 						                <th style="width:150px">開始時間</th>
 						                <th style="width:150px">終了時間</th>
 						                <th style="width:80px">ステータス</th>
 						            </tr>
 						        </thead>
+						        
 						        <tbody>
-						            <tr>
+						        <th:block th:each="goodsSale:${goodsSaleDetail}" th:if="${goodsSale !=null}">
+						            <tr class="akimine delete">
 						                <td>
 						                    <input type="checkbox"/>
 						                </td>
-						                <td></td>
-						                <td></td>
-						                <td></td>
-						                <td></td>
-						                <td></td>
+						                <td th:text="${goodsSale.id}"></td>
+						                <td th:text="${goodsSale.name}"></td>
+						                <td th:text="${goodsSale.startDate}"></td>
+						                <td th:text="${goodsSale.endDate}"></td>
+						                <td th:text="${goodsSale.flag}"></td>
 						            </tr>
+						             </th:block>
+						                 <tr class="akimine hidden">
+						                <td>
+						                    <input type="checkbox"/>
+						                </td>
+						                <td class="saleId"></td>
+						                <td class="saleName"></td>
+						                <td class="saleStart"></td>
+						                <td class="saleEnd"></td>
+						                <td class="saleFlag"></td>
+						            </tr>
+						             
 								</tbody>
+       						 </div>
 							</table>
+		
+							<div class="zv-cqa-step-link">
+								<span class="previousPageSale">前ページ</span>
+								<span> </span>
+								<span><span id="currentPageNoN"> </span></span>
+								<span class="nextPageSale">次ページ</span>
+							</div>
 						</div>
                     </div><!-- /.card-body -->
                 </div>
@@ -92,7 +118,8 @@
     <!-- 引入页脚footer-fragment -->
     <div th:replace="admin/footer::footer-fragment"></div>
 </div>
-
+<!-- jqgrid -->
+<script th:src="@{/admin/plugins/jqgrid-5.5.2/jquery.jqGrid.min.js}"></script>
 <!-- jQuery -->
 <script th:src="@{/admin/plugins/jquery/jquery.min.js}"></script>
 <!-- Bootstrap 4 -->
@@ -106,7 +133,7 @@
 <!-- wangEditor -->
 <script type="text/javascript" src="//unpkg.com/wangeditor/dist/wangEditor.min.js"></script>
 <script th:src="@{/admin/dist/js/public.js}"></script>
-<script th:src="@{/admin/dist/js/sale.js}"></script>
+<script th:src="@{/admin/dist/js/goodssale.js}"></script>
 
 </body>
 </html>

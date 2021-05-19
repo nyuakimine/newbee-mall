@@ -40,6 +40,7 @@ import ltd.newbee.mall.controller.vo.GoodsDescVO;
 import ltd.newbee.mall.controller.vo.GoodsImageVO;
 import ltd.newbee.mall.controller.vo.GoodsQaVO;
 import ltd.newbee.mall.controller.vo.GoodsReviewVo;
+import ltd.newbee.mall.controller.vo.GoodsSaleVO;
 import ltd.newbee.mall.controller.vo.NewBeeMallGoodsDetailVO;
 import ltd.newbee.mall.controller.vo.NewBeeMallUserVO;
 import ltd.newbee.mall.controller.vo.ReviewUserInfoVO;
@@ -48,6 +49,7 @@ import ltd.newbee.mall.entity.GoodsDesc;
 import ltd.newbee.mall.entity.GoodsImage;
 import ltd.newbee.mall.entity.GoodsQa;
 import ltd.newbee.mall.entity.GoodsReviewHelpNum;
+import ltd.newbee.mall.entity.GoodsSale;
 import ltd.newbee.mall.entity.IndexConfig;
 import ltd.newbee.mall.entity.InsertKeyword;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
@@ -234,7 +236,7 @@ public class GoodsController {
 		qaVoList.add(qaVo);				
 	    } 
 	}
-        
+
 	List<ReviewUserInfo> userInfoList = newBeeMallGoodsService.getReviewUserInfoEntityByGoodsId(goodsId);
 	if (userInfoList == null || userInfoList.isEmpty()) {
 	    NewBeeMallException.fail(ServiceResultEnum.GOODS_NOT_EXIST.getResult());
@@ -274,21 +276,22 @@ public class GoodsController {
         	request.setAttribute("goodsDescDetail", descVoList);
         	request.setAttribute("goodsQaDetail", qaVoList);
         	request.setAttribute("goodsUserInfoDetail", userInfoVoList);
+        	
         	return "mall/detail";
     }
     //20210426//niu
-    @RequestMapping(value = "/goods/qaSort", method = RequestMethod.POST)
-    @ResponseBody
-    public Result getHelpedNumEntityByGoodsId(@RequestBody PagingQa page) {
-
-	Map<String,Object> params = new HashMap<>();            
-        params.put("page",page.getPage()); 
-        params.put("limit",Constants.GOODS_QA_PAGE_LIMIT);
-        params.put("orderBy","helped_num");
-        PageQueryUtil pageUtil = new PageQueryUtil(params); 
-        PageResult a =newBeeMallGoodsService.getHelpedNumEntityByGoodsId(pageUtil);
-        return ResultGenerator.genSuccessResult(a);
-        }   
+//    @RequestMapping(value = "/goods/qaSort", method = RequestMethod.POST)
+//    @ResponseBody
+//    public Result getHelpedNumEntityByGoodsId(@RequestBody PagingQa page) {
+//
+//	Map<String,Object> params = new HashMap<>();            
+//        params.put("page",page.getPage()); 
+//        params.put("limit",Constants.GOODS_QA_PAGE_LIMIT);
+//        params.put("orderBy","helped_num");
+//        PageQueryUtil pageUtil = new PageQueryUtil(params); 
+//        PageResult a =newBeeMallGoodsService.getHelpedNumEntityByGoodsId(pageUtil);
+//        return ResultGenerator.genSuccessResult(a);
+//        }   
     //added by niu 2021/04/29 insertqa
     @RequestMapping(value = "/goods/insertQa", method = RequestMethod.POST)
     @ResponseBody

@@ -21,6 +21,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -45,8 +46,12 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 
 import ltd.newbee.mall.common.Constants;
+import ltd.newbee.mall.common.NewBeeMallException;
+import ltd.newbee.mall.common.ServiceResultEnum;
+import ltd.newbee.mall.controller.vo.GoodsSaleVO;
 import ltd.newbee.mall.entity.GoodsSale;
 import ltd.newbee.mall.service.NewBeeMallGoodsService;
+import ltd.newbee.mall.util.BeanUtil;
 import ltd.newbee.mall.util.NewBeeMallUtils;
 import ltd.newbee.mall.util.PageQueryUtil;
 import ltd.newbee.mall.util.PageResult;
@@ -75,7 +80,7 @@ public class GoodsSaleController {
 	if (StringUtils.isEmpty(params.get("page"))) {
 	    params.put("page", 1);
 	}
-	params.put("limit", Constants.GOODS_SEARCH_PAGE_LIMIT);
+	params.put("limit", 2);//Constants.GOODS_SEARCH_PAGE_LIMIT
 	// 封装参数供前端回显
 	if (params.containsKey("orderBy") && !StringUtils.isEmpty(params.get("orderBy") + "")) {
 	    request.setAttribute("orderBy", params.get("orderBy") + "");
@@ -91,8 +96,22 @@ public class GoodsSaleController {
 	PageQueryUtil pageUtil = new PageQueryUtil(params);
 	
 	request.setAttribute("pageResult", newBeeMallGoodsService.goodsSalePagAndSort(pageUtil));
+	
 	//request.setAttribute("path", "goods-sale");
         //return ResultGenerator.genSuccessResult(newBeeMallGoodsService.goodsSalePagAndSort(pageUtil));
+	//niu 2021/05/19  sale
+	Map<String,Object> paramsSa = new HashMap<>();            
+            paramsSa.put("page",1); 
+            paramsSa.put("limit",2);
+          //params.put("orderBy","id");
+            PageQueryUtil pageUtilSa = new PageQueryUtil(paramsSa); 
+            PageResult Sa =newBeeMallGoodsService.goodsSalePagAndSort(pageUtilSa);
+            List<GoodsSale> gsList = (List<GoodsSale>) Sa.getList();
+            	if (gsList == null || gsList.isEmpty()) {
+            	    NewBeeMallException.fail(ServiceResultEnum.GOODS_NOT_EXIST.getResult());
+            	}
+	List<GoodsSaleVO> gsVoList = BeanUtil.copyList(gsList, GoodsSaleVO.class);//copyList
+	request.setAttribute("goodsSaleDetail", gsVoList);        
 	return "admin/goodsSale";
     }
 }

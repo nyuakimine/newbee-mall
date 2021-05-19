@@ -372,13 +372,14 @@ class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
 //	assertEquals(b, qaList.get(1).getId());
 //	assertEquals(c, qaList.get(2).getId());
 //  }
-  @Test public void testSaleSort() {
+    //獲取數據，page是1時初始化頁面
+  @Test public void testPage1() {
 	  Map<String, Object> params = new HashMap<>();
 	  params.put("page", 1);
-	  params.put("limit", 10);
-	  params.put("keyword", "甩");
+	  params.put("limit", 2);
+	  //params.put("keyword", "甩");
 	  params.put("ascOrDesc", "desc");
-	  params.put("ascOrDesc", "asc");
+	  //params.put("ascOrDesc", "asc");
 	  params.put("orderBy", "id");
 	  PageQueryUtil pageUtil = new PageQueryUtil(params);
 	  PageResult result = newBeeMallGoodsService.goodsSalePagAndSort((pageUtil));
@@ -389,36 +390,108 @@ class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
 		  size=List.size();
 	  }
           assertEquals(2,size);
+            Long a = 1L;
+            Long b = 2L;
+    	  assertEquals(a,List.get(0).getId());
+    	  assertEquals(b,List.get(1).getId());
+    	  assertEquals("大甩卖",List.get(0).getName());
+    	  assertEquals("清倉處理",List.get(1).getName());
+    	  SimpleDateFormat dmyFormat = new SimpleDateFormat("yyyy-MM-dd");
+          String startDate1 = dmyFormat.format(List.get(0).getStartDate());
+    	  String startDate2 = dmyFormat.format(List.get(1).getStartDate());
+    	  String endDate3 = dmyFormat.format(List.get(0).getEndDate());
+          String endDate4 = dmyFormat.format(List.get(1).getEndDate());
+    	  assertEquals("2021-05-13",startDate1);
+    	  assertEquals("2021-05-13",startDate2);
+    	  assertEquals("2021-04-04",endDate3);
+    	  assertEquals("2022-04-04",endDate4);
+    	  assertEquals("满三百减一百",List.get(0).getCampaign());
+    	  assertEquals("买一送一",List.get(1).getCampaign());
+    	  assertEquals(null,List.get(0).getContent1());
+    	  assertEquals(null,List.get(1).getContent1());
+    	  assertEquals(null,List.get(0).getContent2());
+    	  assertEquals(null,List.get(1).getContent2());
+    	  assertEquals("有效",List.get(0).getFlag());
+    	  assertEquals("有效",List.get(1).getFlag());
+   }
+//下一頁
+  @Test public void testPage2() {
+	  Map<String, Object> params = new HashMap<>();
+	  params.put("page", 2);
+	  params.put("limit", 2);
+	  //params.put("keyword", "甩");
+	  params.put("ascOrDesc", "desc");
+	  //params.put("ascOrDesc", "asc");
+	  params.put("orderBy", "id");
+	  PageQueryUtil pageUtil = new PageQueryUtil(params);
+	  PageResult result = newBeeMallGoodsService.goodsSalePagAndSort((pageUtil));
+	  List<GoodsSale> List = (List<GoodsSale>) result.getList();
+	  // confirm size = limit
+	  int size = 0;
+	  if(List!=null || !List.isEmpty()) {
+		  size=List.size();
+	  }
+          assertEquals(2,size);
+            Long a = 3L;
+            Long b = 4L;
+	  assertEquals(a,List.get(0).getId());
+	  assertEquals(b,List.get(1).getId());
+	  assertEquals("雙十一",List.get(0).getName());
+	  assertEquals("年末大降價",List.get(1).getName());
+	  SimpleDateFormat dmyFormat = new SimpleDateFormat("yyyy-MM-dd");
+          String startDate1 = dmyFormat.format(List.get(0).getStartDate());
+	  String startDate2 = dmyFormat.format(List.get(1).getStartDate());
+	  String endDate3 = dmyFormat.format(List.get(0).getEndDate());
+          String endDate4 = dmyFormat.format(List.get(1).getEndDate());
+	  assertEquals("2021-05-15",startDate1);
+	  assertEquals("2021-05-16",startDate2);
+	  assertEquals("2022-05-01",endDate3);
+	  assertEquals("2026-03-04",endDate4);
+	  assertEquals("打折50%",List.get(0).getCampaign());
+	  assertEquals("直降九九九",List.get(1).getCampaign());
+	  assertEquals(null,List.get(0).getContent1());
+	  assertEquals(null,List.get(1).getContent1());
+	  assertEquals(null,List.get(0).getContent2());
+	  assertEquals(null,List.get(1).getContent2());
+	  assertEquals("無效",List.get(0).getFlag());
+	  assertEquals("無效",List.get(1).getFlag());
+}
+  //keyword
+  @Test public void testKeyword() {
+	  Map<String, Object> params = new HashMap<>();
+	  params.put("page", 1);
+	  params.put("limit", 3);
+	  params.put("keyword", "甩");
+	 // params.put("ascOrDesc", "desc");
+	  params.put("ascOrDesc", "asc");
+	  params.put("orderBy", "id");
+	  PageQueryUtil pageUtil = new PageQueryUtil(params);
+	  PageResult result = newBeeMallGoodsService.goodsSalePagAndSort((pageUtil));
+	  List<GoodsSale> List = (List<GoodsSale>) result.getList();
+	  // confirm size = limit
+	  int size = 0;
+	  if(List!=null || !List.isEmpty()) {
+		  size=List.size();
+	  }
+        assertEquals(1,size);
         Long a = 1L;
-        Long b = 2L;
 	assertEquals(a,List.get(0).getId());
-	assertEquals(b,List.get(1).getId());
 
 	assertEquals("大甩卖",List.get(0).getName());
-	assertEquals("無料案内",List.get(1).getName());
-
+	
 	SimpleDateFormat dmyFormat = new SimpleDateFormat("yyyy-MM-dd");
         String startDate1 = dmyFormat.format(List.get(0).getStartDate());
-	String startDate2 = dmyFormat.format(List.get(1).getStartDate());
 	String endDate3 = dmyFormat.format(List.get(0).getEndDate());
-        String endDate4 = dmyFormat.format(List.get(1).getEndDate());
 	assertEquals("2021-05-13",startDate1);
-	assertEquals("2021-05-13",startDate2);
 	assertEquals("2021-04-04",endDate3);
-	assertEquals("2022-04-04",endDate4);
 	
 	assertEquals("满三百减一百",List.get(0).getCampaign());
-	assertEquals("买一送一",List.get(1).getCampaign());
 	
 	assertEquals(null,List.get(0).getContent1());
-	assertEquals(null,List.get(1).getContent1());
 	
 	assertEquals(null,List.get(0).getContent2());
-	assertEquals(null,List.get(1).getContent2());
 	
-	assertEquals(null,List.get(0).getFlag());
-	assertEquals(null,List.get(1).getFlag());
+	assertEquals("有效",List.get(0).getFlag());
 
-   }
-
+}
 }

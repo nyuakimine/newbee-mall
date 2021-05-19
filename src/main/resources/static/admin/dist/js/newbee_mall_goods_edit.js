@@ -324,44 +324,7 @@ $('#levelTwo').on('change', function () {
     });
 });
 
-//download by niu 20210514
 
- 
-  
-$("#download-csv").on('click',function(){
-	      debugger;
-	        var _data = [1,2,5]
-	  	    $.ajax({
-            type: 'POST',//方法类型
-            url: '/admin/goodsSale/download',
-            contentType: 'application/json',
-            data: JSON.stringify(_data),
-            //data:1,
-            
-            success: function (result) {
-	        //サーバーが成功した場合
-                if (result.resultCode == 200) {
-	              debugger;
-	             // var url = window.location.assign(result.data);
-	              Download(result.data);
-                } else {
-                    	swal(result.message, {
-                        icon: "error",
-                    });
-                }
-                
-            },
-            error: function () {
-                swal("操作失败", {
-                    icon: "error",
-                });
-             }
-         })
-  });
-  
-function Download(url) {
-   document.getElementById('my_iframe').src = url;
-};
 //add by niu 2021/05/17 分页 排序
 
  
