@@ -2,83 +2,115 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <header th:replace="admin/header::header-fragment"></header>
+
 <body class="hold-transition sidebar-mini">
-<div class="wrapper">
-    <!-- 引入页面头header-fragment -->
-    <div th:replace="admin/header::header-nav"></div>
-    <!-- 引入工具栏sidebar-fragment -->
-    <div th:replace="admin/sidebar::sidebar-fragment(${path})"></div>
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
-            <div class="container-fluid">
-            </div><!-- /.container-fluid -->
+	<div class="wrapper">
+		<!-- 引入页面头header-fragment -->
+		<div th:replace="admin/header::header-nav"></div>
+		<!-- 引入工具栏sidebar-fragment -->
+		<div th:replace="admin/sidebar::sidebar-fragment(${path})"></div>
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<div class="content-header">
+				<div class="container-fluid">
+				</div><!-- /.container-fluid -->
+			</div>
+			<!-- Main content -->
+			<div class="content">
+				<div class="container-fluid">
+					<div class="card card-primary card-outline">
+						<div class="card-header">
+							<h3 class="card-title">キャンペーン管理</h3>
+						</div> <!-- /.card-body -->
+						<div class="card-body">
+	                     <div class="col-sm-4">
+							<th:block th:if="${null == goods}">
+								
+							</th:block>
+							<th:block th:unless="${null == goods}">
+                               
+                            </th:block>
+                           </div>
+							<div class="grid-btn">
+								<button class="btn btn-info" onclick="campaignAdd()"><i
+										class="fa fa-plus"></i>&nbsp;新規追加
+								</button>
+										
+								<button class="btn btn-info" id="testUploadGoodsCoverImg" onclick="csvUpload()"><i
+										class="fa fa-pencil-square-o"></i>&nbsp;CSV登録
+								</button>
+                                     <!-- //DIY add by niu 2021/05/20-->
+                                   <!-- <div class="col-sm-4">
+                                        <button class="btn btn-info" onclick="campaignAdd()"
+                                                id="testUploadGoodsCoverImg">
+                                            <i class="fa fa-pencil-square-o"></i>&nbsp;CSV登録
+                                        </button>
+                                    </div>-->
+							</div>
+							<br>
+							<div>
+								<div style="float:left; width:30%;height:50px;">
+									<span>
+										<b>すべて(0)</b>
+									</span>
+								</div>
+								<div style="float:left;width:30%;height:50px;">
+									<span>
+										<b>クローズ(0)</b>
+									</span>
+								</div>
+							</div>
+							<br>
+							<div>
+								<div class="campaignDownload" style="float:left; width:50%;height:50px;">
+									<form name="input" action="html_form_action.php" method="get">
+										<select type="text" name="キャンペーン名" id="campaignName"
+											style="width:200px"></select>
+										<!-- diy //niu 2021/04/14-->
+										<button id="downloadsale"
+											style="border: none; background-color: #17a2b8;border-color: #17a2b8;color: #fff;"
+											type="button">Download CSV</button>
+										<!--<button id="download-csv">Download CSV File</button>-->
+										<iframe id="my_iframe" style="display:none;"></iframe>
+									</form>
+								</div>
+								<!--<div class="campaignSearch" style="float:left;width:50%;height:50px;">
+									<input type="search" id="keyword">
+									<button id="dumy search">絞り込み検索</button>
+								</div>-->
+								       <div class="fr">
+            <div class="search">
+                <input class="text" type="text" id="keyword" autocomplete="off">
+                <button id="dumy search">絞り込み検索</button>
+                <div class="search_hot">
+                </div>
+            </div>
+            <div class="button iconfont icon-search" id="keywordButton" onclick="search()"> </div>
         </div>
-        <!-- Main content -->
-         <div class="content">
-            <div class="container-fluid">
-                <div class="card card-primary card-outline">
-                    <div class="card-header">
-                        <h3 class="card-title">キャンペーン管理</h3>
-                    </div> <!-- /.card-body -->
-                    <div class="card-body">
-                        <div class="grid-btn">
-                            <button class="btn btn-info" onclick="campaignAdd()"><i class="fa fa-plus"></i>&nbsp;新規追加
-                            </button>
-                            <button class="btn btn-info" onclick="csvUpload()"><i class="fa fa-pencil-square-o"></i>&nbsp;CSV登録
-                            </button>
-                        </div>
-                        <br>
-                        <div>
-	                        <div style="float:left; width:30%;height:50px;">
-	                        	<span>
-	                        		<b>すべて(0)</b>
-	                        	</span>
-	                        </div>
-	                        <div style="float:left;width:30%;height:50px;">
-	                        	<span>
-	                        		<b>クローズ(0)</b>
-	                        	</span>
-	                        </div>
-	                        </div>
-                        <br>
-                        <div>
-	                        <div class="campaignDownload"  style="float:left; width:50%;height:50px;">
-	                        	<form name="input" action="html_form_action.php" method="get">
-									<select type="text" name="キャンペーン名" id="campaignName" style="width:200px"></select>
-									 <!-- diy //niu 2021/04/14-->
-                               <button id="downloadsale" style="border: none; background-color: #17a2b8;border-color: #17a2b8;color: #fff;" type="button">Download CSV</button>
-                                 <!--<button id="download-csv">Download CSV File</button>-->
-                              <iframe id="my_iframe" style="display:none;"></iframe>
-								</form>
-	                        </div>
-	                        <div class="campaignSearch"  style="float:left;width:50%;height:50px;">
-	                        	<input type="search" id="searchForCampaign" >
-								<button id="dumy search">絞り込み検索</button>
-	                        </div>
-                        </div>
-                        <br>
-                        <div class="campaignTable">
-                       
-	                        <table id="table" border="1" style="width:1200px">
-	                        	<thead>
+							</div>
+							<br>
+							<div class="campaignTable">
+
+								<table id="table" border="1" style="width:1200px">
+									<thead>
+										<tr>
+											<th style="width:20px">
+												<input type="checkbox" id="checkAll" />
+											</th>
+											<th style="width:80px">キャンペーンID</th>
+											<th style="width:180px">キャンペーン名</th>
+											<th style="width:150px">開始時間</th>
+											<th style="width:150px">終了時間</th>
+											<th style="width:80px">ステータス</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<th:block th:unless="${#lists.isEmpty(pageResult.list)}">
+						          <th:block th:each="goodsSale:${pageResult.list}">
 						            <tr>
-						                <th style="width:20px">
-						                    <input type="checkbox" id="checkAll"/>
-						                </th>
-						                <th style="width:80px" >キャンペーンID</th>
-						                <th style="width:180px">キャンペーン名</th>
-						                <th style="width:150px">開始時間</th>
-						                <th style="width:150px">終了時間</th>
-						                <th style="width:80px">ステータス</th>
-						            </tr>
-						        </thead>
-						        
-						        <tbody>
-						        <th:block th:each="goodsSale:${goodsSaleDetail}" th:if="${goodsSale !=null}">
-						            <tr class="akimine delete">
-						                <td>
+						             <td>
 						                    <input type="checkbox"/>
 						                </td>
 						                <td th:text="${goodsSale.id}"></td>
@@ -88,32 +120,56 @@
 						                <td th:text="${goodsSale.flag}"></td>
 						            </tr>
 						             </th:block>
-						                 <tr class="akimine hidden">
-						                <td>
-						                    <input type="checkbox"/>
-						                </td>
-						                <td class="saleId"></td>
-						                <td class="saleName"></td>
-						                <td class="saleStart"></td>
-						                <td class="saleEnd"></td>
-						                <td class="saleFlag"></td>
-						            </tr>
-						             
+						             </th:block>
 								</tbody>
        						 </div>
 							</table>
-		
-							<div class="zv-cqa-step-link">
-								<span class="previousPageSale">前ページ</span>
-								<span> </span>
-								<span><span id="currentPageNoN"> </span></span>
-								<span class="nextPageSale">次ページ</span>
-							</div>
 						</div>
                     </div><!-- /.card-body -->
                 </div>
             </div><!-- /.container-fluid -->
         </div>
+        
+                <div class="page_wrap">
+            <th:block th:if="${null != pageResult and !#lists.isEmpty(pageResult.list)}">
+            <span class="page_span1">
+                 <a th:href="@{${pageResult.currPage==1}?'##':'/admin/goods/sale?keyword='+${keyword==null?'':keyword}+'&page=' + ${pageResult.currPage-1}+'&orderBy='+${orderBy==null?'':orderBy}}">
+                                    < 上一页
+                                </a>
+                <th:block th:if="${pageResult.currPage-2 >=1}"><a
+                        th:href="@{'/admin/goods/sale?keyword='+${keyword==null?'':keyword}+'&page=' + ${pageResult.currPage-2}+'&orderBy='+${orderBy==null?'':orderBy}}"
+                        th:text="${pageResult.currPage -2}">1</a></th:block>
+                <th:block th:if="${pageResult.currPage-1 >=1}"><a
+                        th:href="@{'/admin/goods/sale?keyword='+${keyword==null?'':keyword}+'&page=' + ${pageResult.currPage-1}+'&orderBy='+${orderBy==null?'':orderBy}}"
+                        th:text="${pageResult.currPage -1}">1</a></th:block>
+                <a href="##" class="active" th:text="${pageResult.currPage}">1</a>
+                <th:block th:if="${pageResult.currPage+1<=pageResult.totalPage}"><a
+                        th:href="@{'/admin/goods/sale?keyword='+${keyword==null?'':keyword}+'&page=' + ${pageResult.currPage+1}+'&orderBy='+${orderBy==null?'':orderBy}}"
+                        th:text="${pageResult.currPage +1}">1</a></th:block>
+                <th:block th:if="${pageResult.currPage+2<=pageResult.totalPage}"><a
+                        th:href="@{'/admin/goods/sale?keyword='+${keyword==null?'':keyword}+'&page=' + ${pageResult.currPage+2}+'&orderBy='+${orderBy==null?'':orderBy}}"
+                        th:text="${pageResult.currPage +2}">1</a></th:block>
+                 <a th:href="@{${pageResult.currPage>=pageResult.totalPage}?'##':'/admin/goods/sale?keyword='+${keyword==null?'':keyword}+'&page=' + ${pageResult.currPage+1}+'&orderBy='+${orderBy==null?'':orderBy}}">
+                                    下一页 >
+                                </a>
+					</span>
+            </th:block>
+        </div>
+        
+        <!--排序-->
+<!--<div class="sort">
+    <div class="list">
+        <a th:href="@{'/search?keyword='+${keyword==null?'':keyword}+'&goodsCategoryId='+${goodsCategoryId==null?'':goodsCategoryId}+'&orderBy=default'}">
+            <div th:class="${orderBy==null || orderBy=='default'?'active':''}">推荐</div>
+        </a>
+        <a th:href="@{'/search?keyword='+${keyword==null?'':keyword}+'&goodsCategoryId='+${goodsCategoryId==null?'':goodsCategoryId}+'&orderBy=new'}">
+            <div th:class="${orderBy=='new'?'active':''}">新品</div>
+        </a>
+        <a th:href="@{'/search?keyword='+${keyword==null?'':keyword}+'&goodsCategoryId='+${goodsCategoryId==null?'':goodsCategoryId}+'&orderBy=price'}">
+            <div th:class="${orderBy=='price'?'active':''}">价格</div>
+        </a>
+    </div>
+</div>-->
     <!-- /.content-wrapper -->
     <!-- 引入页脚footer-fragment -->
     <div th:replace="admin/footer::footer-fragment"></div>
@@ -134,6 +190,16 @@
 <script type="text/javascript" src="//unpkg.com/wangeditor/dist/wangEditor.min.js"></script>
 <script th:src="@{/admin/dist/js/public.js}"></script>
 <script th:src="@{/admin/dist/js/goodssale.js}"></script>
+<link rel="stylesheet" th:href="@{/admin/dist/css/goodssale.css}">
+<script th:src="@{/admin/plugins/jquery/jquery.min.js}"></script>
+ <ul id ="searchResultUl">
+	   	<li class="dumyLi searchLi">
+	       <a>
+	           link
+	       </a>
+	    </li>
+	</ul>
+
 
 </body>
 </html>

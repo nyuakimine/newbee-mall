@@ -68,6 +68,8 @@ $(function () {
             }
         }
     });
+    
+   // btn btn-info
     //DIY add by niu 2021/05/13
         //图片上传插件初始化 用于商品预览图上传
         debugger;

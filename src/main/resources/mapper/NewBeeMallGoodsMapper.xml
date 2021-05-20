@@ -765,7 +765,16 @@
             limit #{start},#{limit}
             </if>
    </select>
-   <select id="getGoodsSaleTotal" parameterType="Map" resultType="int">
+  <!--  <select id="getGoodsSaleTotal" parameterType="Map" resultType="int">
         select count(*) from goods_sale where id = #{id,jdbcType=BIGINT} 
    </select> 
+    -->
+   <select id="getGoodsSaleTotal" parameterType="Map" resultType="int">
+        select count(*) from goods_sale
+        <where>
+            <if test="keyword!=null and keyword!=''">
+         name like CONCAT('%',#{keyword},'%')
+   </if>        
+  </where>
+    </select>
  </mapper>

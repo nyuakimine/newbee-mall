@@ -280,18 +280,18 @@ public class GoodsController {
         	return "mall/detail";
     }
     //20210426//niu
-//    @RequestMapping(value = "/goods/qaSort", method = RequestMethod.POST)
-//    @ResponseBody
-//    public Result getHelpedNumEntityByGoodsId(@RequestBody PagingQa page) {
-//
-//	Map<String,Object> params = new HashMap<>();            
-//        params.put("page",page.getPage()); 
-//        params.put("limit",Constants.GOODS_QA_PAGE_LIMIT);
-//        params.put("orderBy","helped_num");
-//        PageQueryUtil pageUtil = new PageQueryUtil(params); 
-//        PageResult a =newBeeMallGoodsService.getHelpedNumEntityByGoodsId(pageUtil);
-//        return ResultGenerator.genSuccessResult(a);
-//        }   
+    @RequestMapping(value = "/goods/qaSort", method = RequestMethod.POST)
+    @ResponseBody
+    public Result getHelpedNumEntityByGoodsId(@RequestBody PagingQa page) {
+
+	Map<String,Object> params = new HashMap<>();            
+        params.put("page",page.getPage()); 
+        params.put("limit",Constants.GOODS_QA_PAGE_LIMIT);
+        params.put("orderBy","helped_num");
+        PageQueryUtil pageUtil = new PageQueryUtil(params); 
+        PageResult a =newBeeMallGoodsService.getHelpedNumEntityByGoodsId(pageUtil);
+        return ResultGenerator.genSuccessResult(a);
+        }   
     //added by niu 2021/04/29 insertqa
     @RequestMapping(value = "/goods/insertQa", method = RequestMethod.POST)
     @ResponseBody

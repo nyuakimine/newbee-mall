@@ -29,6 +29,7 @@ import java.util.Random;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,11 @@ import ltd.newbee.mall.common.Constants;
 import ltd.newbee.mall.common.NewBeeMallException;
 import ltd.newbee.mall.common.ServiceResultEnum;
 import ltd.newbee.mall.controller.vo.GoodsSaleVO;
+import ltd.newbee.mall.controller.vo.NewBeeMallUserVO;
 import ltd.newbee.mall.entity.GoodsSale;
+import ltd.newbee.mall.entity.InsertKeyword;
+import ltd.newbee.mall.entity.NewBeeMallGoods;
+import ltd.newbee.mall.service.NewBeeMallCategoryService;
 import ltd.newbee.mall.service.NewBeeMallGoodsService;
 import ltd.newbee.mall.util.BeanUtil;
 import ltd.newbee.mall.util.NewBeeMallUtils;
@@ -70,17 +75,19 @@ public class GoodsSaleController {
 
     @Resource
     private NewBeeMallGoodsService newBeeMallGoodsService;
+    @Resource
+    private NewBeeMallCategoryService newBeeMallCategoryService;
     @Autowired
     private StandardServletMultipartResolver standardServletMultipartResolver;
     //add by niu 2021/05/16
-    //@RequestMapping(value = "/goods/saleSort", method = RequestMethod.POST)
+    //@RequestMapping(value = "/goods/sale", method = RequestMethod.POST)
     @GetMapping({ "/goods/sale","/goodsSale.html" })
   
     public String goodsSale(@RequestParam Map<String, Object> params, HttpServletRequest request) {
 	if (StringUtils.isEmpty(params.get("page"))) {
 	    params.put("page", 1);
 	}
-	params.put("limit", 2);//Constants.GOODS_SEARCH_PAGE_LIMIT
+	params.put("limit",2);//Constants.GOODS_SEARCH_PAGE_LIMIT
 	// 封装参数供前端回显
 	if (params.containsKey("orderBy") && !StringUtils.isEmpty(params.get("orderBy") + "")) {
 	    request.setAttribute("orderBy", params.get("orderBy") + "");
@@ -97,21 +104,69 @@ public class GoodsSaleController {
 	
 	request.setAttribute("pageResult", newBeeMallGoodsService.goodsSalePagAndSort(pageUtil));
 	
-	//request.setAttribute("path", "goods-sale");
-        //return ResultGenerator.genSuccessResult(newBeeMallGoodsService.goodsSalePagAndSort(pageUtil));
-	//niu 2021/05/19  sale
-	Map<String,Object> paramsSa = new HashMap<>();            
-            paramsSa.put("page",1); 
-            paramsSa.put("limit",2);
-          //params.put("orderBy","id");
-            PageQueryUtil pageUtilSa = new PageQueryUtil(paramsSa); 
-            PageResult Sa =newBeeMallGoodsService.goodsSalePagAndSort(pageUtilSa);
-            List<GoodsSale> gsList = (List<GoodsSale>) Sa.getList();
-            	if (gsList == null || gsList.isEmpty()) {
-            	    NewBeeMallException.fail(ServiceResultEnum.GOODS_NOT_EXIST.getResult());
-            	}
-	List<GoodsSaleVO> gsVoList = BeanUtil.copyList(gsList, GoodsSaleVO.class);//copyList
-	request.setAttribute("goodsSaleDetail", gsVoList);        
 	return "admin/goodsSale";
     }
+    
+    // 伪代码
+    @RequestMapping(value = "/searchHistory/getSearchHistory", method = RequestMethod.POST)
+    @ResponseBody
+    public Result getSearchHistory(HttpSession httpSession) {
+    	List<NewBeeMallGoods> list = new ArrayList<NewBeeMallGoods>();
+
+    	NewBeeMallGoods goods1 = new NewBeeMallGoods();
+    	NewBeeMallGoods goods2 = new NewBeeMallGoods();
+    	NewBeeMallGoods goods3 = new NewBeeMallGoods();
+    	
+    	goods1.setGoodsId(10700L);
+    	goods1.setGoodsName("iphone10");
+    	list.add(goods1);
+    	goods2.setGoodsId(10003L);
+    	goods2.setGoodsName("无印良品 MUJI 基础润肤化妆水");
+    	list.add(goods2);
+    	goods3.setGoodsId(10004L);
+    	goods3.setGoodsName("无印良品 MUJI 柔和洁面泡沫");
+    	list.add(goods3);
+    
+    	return ResultGenerator.genSuccessResult(list);
+    }
+    
+    //add by niu 20210520 keyword
+    //get hit goods
+    @RequestMapping(value = "/goods/search", method = RequestMethod.POST)
+    @ResponseBody
+    public Result getHitGoodsList(@RequestBody String goodsName) {
+    	Map<String, Object> params = new HashMap<String, Object>();
+    	params.put("keyword", goodsName);
+    	params.put("page", 1);
+    	params.put("limit", 9);
+        //params.put("start", 0);
+        PageQueryUtil pageUtil = new PageQueryUtil(params);
+        return ResultGenerator.genSuccessResult(newBeeMallGoodsService.searchNewBeeMallGoods(pageUtil));
+    }
+    //added by niu 2021/05/10 insertKeyword
+    @RequestMapping(value = "/goods/insertKeyword", method = RequestMethod.POST)
+   //  @GetMapping({"/goods/insertKeyword"})
+    @ResponseBody
+    public Result insertKeyword(@RequestBody InsertKeyword keywordId, HttpSession httpSession) {
+	NewBeeMallUserVO user = (NewBeeMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
+	if(user != null) {
+	      keywordId.setUserId(user.getUserId());
+        }
+	SimpleDateFormat i = new SimpleDateFormat();
+		i.applyPattern("yyyy-MM-dd HH:mm:ss a");
+		Date date = new Date();
+	Integer count = null;  
+        Long keyWordId = newBeeMallGoodsService.getMaxKeywordId(keywordId.getUserId());
+        keywordId.setId(keyWordId);
+        keywordId.setDate(date);
+        
+        if(keywordId != null) {
+            count = newBeeMallGoodsService.insertKeyword(keywordId);
+        }
+        if(!(count > 0))  {
+        return ResultGenerator.genFailResult("投稿失敗！");
+        }      
+        return ResultGenerator.genSuccessResult(count);    
+    }
+  
 }

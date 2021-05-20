@@ -214,22 +214,4 @@ public class UploadController {
 	resultSuccess.setData("/upload/tset.csv");
 	return resultSuccess;
     }
-    
-  //add by niu 2021/05/16
-    //@RequestMapping(value = "/goods/saleSort", method = RequestMethod.POST)
-//    @GetMapping({"/goods/saleSort"}) 
-//    @ResponseBody
-//    public Result goodsSale(@RequestParam HttpServletRequest request) {
-//
-//	Map<String,Object> params = new HashMap<>();            
-//        params.put("page",1); 
-//        params.put("limit",Constants.INDEX_GOODS_RECOMMOND_NUMBER);
-//        params.put("keyword","name");//
-//        params.put("orderBy","id");
-//        PageQueryUtil pageUtil = new PageQueryUtil(params); 
-//        PageResult a =newBeeMallGoodsService.goodsSalePagAndSort(pageUtil);
-//        return ResultGenerator.genSuccessResult(a);
-//        }    
-    
- 
 }
