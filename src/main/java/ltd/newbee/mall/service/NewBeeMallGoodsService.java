@@ -113,30 +113,57 @@ public interface NewBeeMallGoodsService {
     String updateIndexConfig(IndexConfig indexConfig);
     
     Long getMaxQaId(Long goodsId);
-    //show more review
+    /* 
+     * niuxiaofeng
+     * show more review
+     */
     List<GoodsReviewVo> getGoodsReviews(Long goodsId);
-    //HelpNum
+    /* 
+     * niuxiaofeng
+     * HelpNum
+     */
     boolean addHelpNum(GoodsReviewHelpNum goodsReviewHelpNum);
-    //updateReviewNum
+    /* 
+     * niuxiaofeng
+     * updateReviewNum
+     */
     boolean updateReviewNum(GoodsReviewHelpNum goodsReviewHelpNum);
 
     long getGoodsReviewHelpNum(int reviewId);
-    //insertKeyWord by niu 20210510
+    /* 
+     * niuxiaofeng
+     * insertKeyWord by niu 20210510
+     */
     int insertKeyword(InsertKeyword keywordId);
-    //getMaxKeywordID
+    /* 
+     * niuxiaofeng
+     * getMaxKeywordID
+     */
     Long getMaxKeywordId(Long userId);
-    //sale 20210511
+    /* 
+     * niuxiaofeng
+     * sale 2021/05/11
+     */
     List<TbSale>TbSale(Long id); 
     List<TbCategory>TbCategory(Long id);
     List<GoodsSale>GoodsSale(Long id);   
     List<GoodsCoupon>GoodsCoupon(Long couponId);
-    //sale insert 20210511
+    /* 
+     * niuxiaofeng
+     * sale insert 20210511
+     */
     int insertTbSale(TbSale id);
     int insertTbCategory(TbCategory id);
     int insertGoodsSale(GoodsSale id);
     int insertGoodsCoupon(GoodsCoupon couponId);
-    //Download add by niu 2021/05/14 
+    /* 
+     * niuxiaofeng
+     * Download add by niu 2021/05/14 
+     */
     List<GoodsSale> getGoodsSaleDownload(Integer[] ids);
-    //add by niu 2021/05/16
+    /* 
+     * niuxiaofeng
+     * add by niu 2021/05/16
+     */
     PageResult goodsSalePagAndSort(PageQueryUtil pageUtil);
 }

@@ -18,7 +18,7 @@
         <result column="update_user" jdbcType="INTEGER" property="updateUser"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
     </resultMap>
-        <resultMap id="GoodsSaleResultMap" type="ltd.newbee.mall.entity.GoodsSale">
+    <resultMap id="GoodsSaleResultMap" type="ltd.newbee.mall.entity.GoodsSale">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="start_date" jdbcType="TIMESTAMP" property="startDate"/>
@@ -104,7 +104,7 @@
         from tb_newbee_mall_goods_info
         <where>
             <if test="keyword!=null and keyword!=''">
-                and (goods_name like c or goods_intro like CONCAT('%',#{keyword},'%'))
+                and (goods_name like CONCAT('%',#{keyword},'%') or goods_intro like CONCAT('%',#{keyword},'%'))
             </if>
             <if test="goodsCategoryId!=null and goodsCategoryId!=''">
                 and goods_category_id = #{goodsCategoryId}
@@ -167,7 +167,7 @@
         select count(*) from tb_newbee_mall_goods_info
         <where>
             <if test="goodsName!=null and goodsName!=''">
-                and goods_name like CONCAT('%','#{goodsName}','%')
+                and goods_name like CONCAT('%',#{goodsName},'%')
             </if>
             <if test="goodsSellStatus!=null and goodsSellStatus!=''">
                 and goods_sell_status = #{goodsSellStatus}
@@ -545,9 +545,7 @@
      <!--  getMaxKeywordID 20210510 -->
      <select id="getMaxKeywordId" parameterType="java.lang.Long" resultType= "java.lang.Long">			   
 			select max(id) from inst_keyword 
-			<!-- where user_id = #{user_id,jdbcType=BIGINT}		 -->		  
 	 </select> 
-   <!--  select * from search_history where user_id=? And keyword= ? Order by ? limit ? -->
 <!--  sale 20210511-->
 	   <select id="getTbSale" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.TbSale">
 	       select id,goods_id,start_date,end_date from tb_sale
@@ -558,8 +556,7 @@
 		   where id = #{id,jdbcType=BIGINT}
 	   </select>    
 	   <select id="getGoodsSale" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.GoodsSale">
-	       select id,name,start_date,end_date,campaign,content1,content2,content3,content4,content5,flag
-	       from goods_sale
+	       select id,name,start_date,end_date,campaign,content1,content2,content3,content4,content5,flag from goods_sale
 		   where id = #{id,jdbcType=BIGINT}
 	   </select>
 	  	    
@@ -732,7 +729,7 @@
              </if>     
              <if test="flag != null">
                 #{flag,jdbcType=VARCHAR},
-             </if>C
+             </if>
              <if test="startDate != null">
                 #{startDate,jdbcType=TIMESTAMP},
              </if>       
@@ -743,9 +740,7 @@
     </insert> 
     
     <select id="getGoodsSaleDownload" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.GoodsSale">
-	       select id,name,start_date,end_date,campaign,content1,content2,content3,content4,content5,flag
-	       from goods_sale
-		   where id in 
+	       select id,name,start_date,end_date,campaign,content1,content2,content3,content4,content5,flag from goods_sale where id in 
 		   <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
           </foreach>
@@ -765,16 +760,7 @@
             limit #{start},#{limit}
             </if>
    </select>
-  <!--  <select id="getGoodsSaleTotal" parameterType="Map" resultType="int">
-        select count(*) from goods_sale where id = #{id,jdbcType=BIGINT} 
-   </select> 
-    -->
    <select id="getGoodsSaleTotal" parameterType="Map" resultType="int">
         select count(*) from goods_sale
-        <where>
-            <if test="keyword!=null and keyword!=''">
-         name like CONCAT('%',#{keyword},'%')
-   </if>        
-  </where>
-    </select>
+  </select>
  </mapper>

@@ -297,7 +297,6 @@ $('#levelOne').on('change', function () {
         }
     });
 });
-
 $('#levelTwo').on('change', function () {
     $.ajax({
         url: '/admin/categories/listForSelect?categoryId=' + $(this).val(),
@@ -325,8 +324,3 @@ $('#levelTwo').on('change', function () {
         }
     });
 });
-
-
-//add by niu 2021/05/17 分页 排序
-
- 

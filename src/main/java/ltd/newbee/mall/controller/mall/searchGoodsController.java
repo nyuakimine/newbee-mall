@@ -66,7 +66,6 @@ public class searchGoodsController {
     private NewBeeMallGoodsService newBeeMallGoodsService;
     @Resource
     private NewBeeMallCategoryService newBeeMallCategoryService;
-
     //get hit goods
     @RequestMapping(value = "/goods/search", method = RequestMethod.GET)
     //public GoodsQa getHitGoodsList(@RequestBody String goodsName)
@@ -82,5 +81,15 @@ public class searchGoodsController {
         PageQueryUtil pageUtil = new PageQueryUtil(params); 
         PageResult a =newBeeMallGoodsService.searchNewBeeMallGoods(pageUtil);
         return ResultGenerator.genSuccessResult(a);
-        }      
+        }  
+    //add by niu 2021/05/20 keyword
+    @RequestMapping(value = "/goods/searchSale", method = RequestMethod.GET)
+    public Result searchSale(@RequestParam String name) {
+    	Map<String, Object> paramsSale = new HashMap<String, Object>();
+    	paramsSale.put("keyword", name);
+    	paramsSale.put("page", 1);
+    	paramsSale.put("limit", 5);
+        PageQueryUtil pageUtil = new PageQueryUtil(paramsSale);
+        return ResultGenerator.genSuccessResult(newBeeMallGoodsService.goodsSalePagAndSort(pageUtil));
+    }
 }

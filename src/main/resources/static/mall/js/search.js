@@ -17,14 +17,12 @@ function search() {
         window.location.href = '/search?keyword=' + q;
     }
 }
-
 //ajax与后台通信，查找查询履历
 $( "#keyword" ).focus(function(){
 	var keyword = $( "#keyword" ).val();
 	if(keyword != ""){
 		$( "#keyword" ).trigger("keyup");
 	}
-	//console.log("focused");
 		    $.ajax({
             type: 'POST',//方法类型
             url: '/searchHistory/getSearchHistory',
@@ -140,14 +138,7 @@ function appendToSearchBar(el){
 	//el.left(rect.left);
 	el.css({top: rect.top + sbHeight,left: rect.left,position:'absolute'});//相对定位relative  绝对定位absolute
 	}
-//click if mouse is over search result
-	/*function checkIfMouseOver(){
-		var rect = document.getElementById("searchResultUl").getBoundingClientRect();
-	}*/
 $("#searchResultUl").mousemove(function(){
-/*	var msg = "Handler for .mousemove() called at ";
-	msg += event.pageX + "," + event.pageY;
-	$("#log"),append("<div>"+ msg + "</div>");*/
 	MouseOnSearchResultUl = true;
 });
 $("#searchResultUl").mouseleave(function(){
@@ -156,8 +147,7 @@ $("#searchResultUl").mouseleave(function(){
 //insert
 function keywordInsert(keyword){	
 	debugger;
-			//var keyword = $("#keyword").val();
-			/*var id = getId();*/
+			var keyword = $("#keyword").val();
 		    data = {
 			  "keyword":keyword,
 			 /* "id":id*/

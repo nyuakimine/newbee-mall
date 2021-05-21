@@ -59,11 +59,10 @@ public interface NewBeeMallGoodsMapper {
     int batchUpdateSellStatus(@Param("orderIds")Long[] orderIds,@Param("sellStatus") int sellStatus);
 
     int getTotalGoodsQa(PageQueryUtil pageUtil);
-
-	/**
-	 * @param goodsId
-	 * @return
-	 */
+     /**
+     * @param goodsId
+     * @return
+     */
     List<GoodsImage> getImageList(Long goodsId); 
     //get goodsReview
     List<GoodsReview> getGoodsReview(Long goodsId);
@@ -87,11 +86,8 @@ public interface NewBeeMallGoodsMapper {
     int insertGoodsQaSelective(GoodsQa question);
     //get max qa id
     Long getMaxQaId(Long goodsId);    
-    
     boolean insertHelpNum(GoodsReviewHelpNum goodsReviewHelpNum);
-
     boolean updateReviewNum(GoodsReviewHelpNum goodsReviewHelpNum);
-
     long getGoodsReviewHelpNum(int reviewId);
     //insertKeyWord by niu 2021/05/10
     int instKeyword(InsertKeyword keywordId);
@@ -107,12 +103,10 @@ public interface NewBeeMallGoodsMapper {
     int insertTbCategory(TbCategory id);
     int insertGoodsSale(GoodsSale id);
     int insertGoodsCoupon(GoodsCoupon couponId);
-
     String saveInsertKeyword(InsertKeyword insertKeyword);
     //Download add by niu 2021/05/14 
     List<GoodsSale> getGoodsSaleDownload(Integer[] ids);
-    //add by niu 2021/05/16	
+    //goodsSalePagAndSort add by niu 2021/05/16	
     List<GoodsSale> goodsSalePagAndSort(PageQueryUtil pageUtil);
     int getGoodsSaleTotal(PageQueryUtil pageUtil);
-
 }

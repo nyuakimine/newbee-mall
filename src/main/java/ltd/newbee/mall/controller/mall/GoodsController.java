@@ -189,15 +189,6 @@ public class GoodsController {
 
 	    } 
 	}
-
-	/*
-	 * // //added by niu 2021/04/20 add descList // List<GoodsDesc> descEntityList =
-	 * newBeeMallGoodsService.getDescList(10700);
-	 * 
-	 * //copy list List<GoodsDescVO> descEntityList1
-	 * =BeanUtil.copyList(descEntityList1,GoodsDescVO.class);
-	 */
-	
 	Map<String,Object> params = new HashMap<>();            
         params.put("page",1); 
         params.put("limit",Constants.GOODS_QA_PAGE_LIMIT);
@@ -344,7 +335,7 @@ public class GoodsController {
             return ResultGenerator.genFailResult("挿入失敗！！！");     
         }    
     }
-   // 伪代码
+    // 伪代码
     @RequestMapping(value = "/searchHistory/getSearchHistory", method = RequestMethod.POST)
     @ResponseBody
     public Result getSearchHistory(HttpSession httpSession) {
@@ -366,11 +357,10 @@ public class GoodsController {
     
     	return ResultGenerator.genSuccessResult(list);
     }
-    //add by niu 20210510 keyword
-    //get hit goods
+    //add by niu 20210510 keyword get hit goods
     @RequestMapping(value = "/goods/search", method = RequestMethod.POST)
-    @ResponseBody
-    public Result getHitGoodsList(@RequestBody String goodsName) {
+    //@ResponseBody
+    public Result getHitGoodsList(@RequestParam String goodsName) {
     	Map<String, Object> params = new HashMap<String, Object>();
     	params.put("keyword", goodsName);
     	params.put("page", 1);
@@ -403,5 +393,4 @@ public class GoodsController {
         }      
         return ResultGenerator.genSuccessResult(count);    
     }
-  
 }

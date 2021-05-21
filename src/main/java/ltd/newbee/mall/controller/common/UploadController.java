@@ -96,7 +96,6 @@ public class UploadController {
             return ResultGenerator.genFailResult("文件上传失败");
         }
     }
-
     @PostMapping({"/upload/files"})
     @ResponseBody
     public Result uploadV2(HttpServletRequest httpServletRequest) throws URISyntaxException {
@@ -150,13 +149,11 @@ public class UploadController {
         resultSuccess.setData(fileNames);
         return resultSuccess;
     }
-
-    //diy niu
+    //diy niu uploadtest
     @PostMapping({"/uploadtest/file"})
     @ResponseBody
     public Result uploadTest(HttpServletRequest httpServletRequest, @RequestParam("file") MultipartFile file) throws URISyntaxException, ParseException {
         try {
- //           Integer count = null;
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
             InputStream is = file.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -171,14 +168,6 @@ public class UploadController {
                 saleId.setEndDate(formatter.parse(data[3]));
                 saleId.setCampaign(data[4]);
                 int flag = newBeeMallGoodsService.insertGoodsSale(saleId);
-//                if(saleId !=null) {
-//                    count = newBeeMallGoodsService.insertGoodsSale(saleId);
-//             }
-//              if(!(count > 0))  {
-//                     return ResultGenerator.genFailResult("投稿失敗！");
-//                    }
-//              
-//              return ResultGenerator.genSuccessResult(count);
             }
             br.close();
               }
@@ -187,13 +176,12 @@ public class UploadController {
         }
         return ResultGenerator.genSuccessResult();
     }    
-    
-//diy niu download 2021/05/14
+   //diy niu download 2021/05/14
     @RequestMapping(value = "/goodsSale/download", method = RequestMethod.POST)
    // @GetMapping({"/goodsSale/download"})
     @ResponseBody
     public Result download(@RequestBody Integer[] ids) throws URISyntaxException, ParseException {
-	File f = new File("C:\\Users\\USER\\Desktop\\upload\\tset.csv");
+	File f = new File(Constants.FILE_UPLOAD_CSV);
 	try {
 	    BufferedWriter bw = new BufferedWriter(new FileWriter(f));
 	    List<GoodsSale> list = newBeeMallGoodsService.getGoodsSaleDownload(ids);
@@ -202,7 +190,6 @@ public class UploadController {
 		    bw.write(c.toString());
 		    bw.newLine();//空一行
 		} catch (IOException e) {
-		    // TODO Auto-generated catch block
 		    e.printStackTrace();
 		}
             });
@@ -211,7 +198,7 @@ public class UploadController {
             e.printStackTrace();
         }
 	Result resultSuccess = ResultGenerator.genSuccessResult();
-	resultSuccess.setData("/upload/tset.csv");
+	resultSuccess.setData(Constants.FILE_UPLOAD_TEST_CSV);
 	return resultSuccess;
     }
 }
