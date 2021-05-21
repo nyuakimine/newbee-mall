@@ -25,26 +25,21 @@
 						<div class="card-body">
 							<div class="col-sm-4"> </div>
 							<div class="grid-btn">
-								<button class="btn btn-info" onclick="campaignAdd()"><i
-										class="fa fa-plus"></i>&nbsp;新規追加
-								</button>
-
-								<button class="btn btn-info" id="testUploadGoodsCoverImg" onclick="csvUpload()"><i
+								<button class="btn btn-info" id="shinnki" onclick="campaignAdd()"><i
+										class="fa fa-plus"></i>&nbsp;新規追加&nbsp;
+								</button>&nbsp;&nbsp;&nbsp;&nbsp;
+								<button class="btn btn-info" id="csvtouroku" onclick="csvUpload()"><i
 										class="fa fa-pencil-square-o"></i>&nbsp;CSV登録
 								</button>
 							</div>
-							<br>
+						
 							<div>
-								<div class="toukyou">
-									<span>
-										<b>すべて(0)</b>
-									</span>
-								</div>
-								<div class="shinnjyuyku">
-									<span>
-										<b>クローズ(0)</b>
-									</span>
-								</div>
+								<button class="btn btn-info" id="toukyou" onclick="campaignAdd()">
+								&nbsp;す べ て&nbsp;
+								</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<button class="btn btn-info" id="shinnjyuyku" onclick="campaignAdd()">&nbsp;クローズ(0)
+								</button>
+							
 							</div>
 							<br>
 							<div>
@@ -52,7 +47,7 @@
 									<form name="input" action="html_form_action.php" method="get">
 										<select type="text" name="キャンペーン名" id="campaignName"></select>
 										<!-- diy //niu 2021/04/14-->
-										<button id="downloadsale"
+										<button class="btn btn-info" id="downloadsale"
 											type="button">Download</button>
 										<iframe id="my_iframe"></iframe>
 									</form>
@@ -60,16 +55,15 @@
 								<div class="fr">
 									<div class="search">
 										<input type="search" id="keywordSale" autocomplete="off">
-										<button id="keyword">絞り込み検索</button>
+										<button class="btn btn-info">絞り込み検索</button>
 										<div class="search_hot">
 										</div>
 									</div>
 								</div>
 							</div>
-							<br>
 							<div class="campaignTable">
 								<table class="col-7" id="table" border="1">
-									<thead>
+									<thead class="biaotou">
 										<tr>
 											<th class="ikebukuro">
 												<input type="checkbox" id="checkAll" />

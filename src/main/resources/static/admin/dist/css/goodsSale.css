@@ -37,15 +37,25 @@
 }
 /*add by niu css
 */
-.toukyou{
-	float:left;
-	width:30%;
-	height:50px;
+#shinnki{
+	margin-left: 0%;
+	width:10%;
+	height:40px;
+}
+#csvtouroku{
+	margin-left: 0%;
+	width:10%;
+	height:40px;
+}
+#toukyou{
+	margin-left: 0%;
+	width:10%;
+	height:40px;
 } 
-.shinnjyuyku{
-	float:left;
-	width:30%;
-	height:50px;
+#shinnjyuyku{
+	margin-left: 0%;
+	width:10%;
+	height:40px;
 }
 .campaignDownload{
     float:left; 
@@ -89,4 +99,7 @@
 }
 .akiba{
 	width:80px;
-}								
+}		
+.biaotou{
+	background-color: #00FF00;
+}					 

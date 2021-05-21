@@ -87,7 +87,7 @@ public class GoodsSaleController {
 	if (StringUtils.isEmpty(params.get("page"))) {
 	    params.put("page", 1);
 	}
-	params.put("limit",2);//Constants.GOODS_SEARCH_PAGE_LIMIT
+	params.put("limit",5);//Constants.GOODS_SEARCH_PAGE_LIMIT
 	// 封装参数供前端回显
 	if (params.containsKey("orderBy") && !StringUtils.isEmpty(params.get("orderBy") + "")) {
 	    request.setAttribute("orderBy", params.get("orderBy") + "");
