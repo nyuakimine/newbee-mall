@@ -83,13 +83,6 @@ function addGoods() {
     window.location.href = "/admin/goods/edit";
 }
 /**
- * 添加商品niu
- */
-function addGoods() {
-    window.location.href = "/admin/goods/sale";
-}
-
-/**
  * 修改商品
  */
 function editGoods() {

@@ -25,68 +25,69 @@
 						<div class="card-body">
 							<div class="col-sm-4"> </div>
 							<div class="grid-btn">
-								<button class="btn btn-info" id="shinnki" onclick="campaignAdd()"><i
-										class="fa fa-plus"></i>&nbsp;新規追加&nbsp;
+					
+								<button class="btn btn-info" id="modal-open" onclick="campaignAdd(2)"> 
+										<i class="fa fa-plus" id="shinnki"> </i>&nbsp;新規追加
 								</button>&nbsp;&nbsp;&nbsp;&nbsp;
-								<button class="btn btn-info" id="csvtouroku" onclick="csvUpload()"><i
+									
+								<button class="btn btn-info" id="col-119" onclick="csvUpload()"><i
 										class="fa fa-pencil-square-o"></i>&nbsp;CSV登録
 								</button>
 							</div>
 						
 							<div>
-								<button class="btn btn-info" id="toukyou" onclick="campaignAdd()">
-								&nbsp;す べ て&nbsp;
+								<button class="btn btn-info" id="col-119" onclick="campaignAdd()">
+								す べ て
 								</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<button class="btn btn-info" id="shinnjyuyku" onclick="campaignAdd()">&nbsp;クローズ(0)
+								
+								<button class="btn btn-info" id="col-119" onclick="campaignAdd(1)">&nbsp;クローズ
 								</button>
-							
+							 
 							</div>
 							<br>
 							<div>
-								<div class="campaignDownload">
+								<div class="col-6">
 									<form name="input" action="html_form_action.php" method="get">
 										<select type="text" name="キャンペーン名" id="campaignName"></select>
 										<!-- diy //niu 2021/04/14-->
-										<button class="btn btn-info" id="downloadsale"
+										<button class="btn btn-info" id="downloadsale" 
 											type="button">Download</button>
 										<iframe id="my_iframe"></iframe>
 									</form>
 								</div>
-								<div class="fr">
-									<div class="search">
+									<div class="col-6">
 										<input type="search" id="keywordSale" autocomplete="off">
 										<button class="btn btn-info">絞り込み検索</button>
 										<div class="search_hot">
 										</div>
 									</div>
-								</div>
 							</div>
 							<div class="campaignTable">
-								<table class="col-7" id="table" border="1">
+								<table class="col-12" id="table" border="1">
 									<thead class="biaotou">
 										<tr>
-											<th class="ikebukuro">
+											<th class="col-1">
 												<input type="checkbox" id="checkAll" />
 											</th>
-											<th class="kawaguti">キャンペーンID</th>
-											<th class="sibuya">キャンペーン名</th>
-											<th class="oukubu">開始時間</th>
-											<th class="ueno">終了時間</th>
-											<th class="akiba">ステータス</th>
+											<th class="col-1">Campaign ID</th>
+											<th class="col-2">Campaign Name</th>
+											<th class="col-2">開始時間</th>
+											<th class="col-2">終了時間</th>
+											<th class="col-2">ステータス</th>
 										</tr>
 									</thead>
 									<tbody>
 										<th:block th:unless="${#lists.isEmpty(pageResult.list)}">
 						          <th:block th:each="goodsSale:${pageResult.list}">
 						            <tr>
-						             <td>
+						             <td class="col-1">
 						                    <input type="checkbox"/>
 						                </td>
-						                <td th:text="${goodsSale.id}"></td>
-						                <td th:text="${goodsSale.name}"></td>
-						                <td th:text="${goodsSale.startDate}"></td>
-						                <td th:text="${goodsSale.endDate}"></td>
-						                <td th:text="${goodsSale.flag}"></td>
+						                <td class="col-1" th:text="${goodsSale.id}"></td>
+						                <td class="col-1" th:text="${goodsSale.name}"></td>
+						                <td class="col-1" th:text="${goodsSale.startDate}"></td>
+						                <td class="col-1" th:text="${goodsSale.endDate}"></td>
+						                <td class="col-1" th:text="${goodsSale.flag}"></td>
 						            </tr>
 						             </th:block>
 						             </th:block>
@@ -130,6 +131,55 @@
 		     </a>
 		 </li>
     </ul>
+	   <div id="modal-main">モーダルウィンドウ
+	        </div>
+        <div class="content">
+            <!-- 模态框（Modal） -->
+            <div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="categoryModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h6 class="modal-title" id="categoryModalLabel">Modal</h6>
+                        </div>
+                        <div class="modal-body">
+                            <form id="categoryForm">
+                                <div class="form-group">
+                                    <div class="alert alert-danger" id="edit-error-msg" style="display: none;">
+                                        错误信息展示栏。
+                                    </div>
+                                </div>
+                                <input type="hidden" class="form-control" id="categoryId" name="categoryId">
+                                <input type="hidden" id="categoryLevel" th:value="${categoryLevel}">
+                                <input type="hidden" id="parentId" th:value="${parentId}">
+                                <input type="hidden" id="backParentId" th:value="${backParentId}">
+                                <div class="form-group">
+                                    <label for="categoryName" class="control-label">分类名称:</label>
+                                    <input type="text" class="form-control" id="categoryName" name="categoryName"
+                                           placeholder="请输入分类名称" required="true">
+                                </div>
+                                <div class="form-group">
+                                    <label for="categoryName" class="control-label">排序值:</label>
+                                    <input type="number" class="form-control" id="categoryRank" name="categoryRank"
+                                           placeholder="请输入分类排序值" required="true">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary" id="saveButton">确认</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal -->
+        </div>
+
+	    <!-- #contents START -->
+	  <div id="contents">
+	   <!-- <p><a id="modal-open">新規追加</a></p>-->
+	  </div>
     <!-- /.content-wrapper -->
     <!-- 引入页脚footer-fragment -->
     <div th:replace="admin/footer::footer-fragment"></div>
