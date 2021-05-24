@@ -295,4 +295,15 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 	        PageResult pageResult = new PageResult(goodsList, total, pageUtil.getLimit(), pageUtil.getPage());
 	        return pageResult;
 	    }
+
+	    //add by niu 2021/05/24 insertSaleMaxId
+	    @Override
+	    public Long insertSale(Long id) {
+		 Long maxId = goodsMapper.insertSale(id);
+		    if(maxId !=null) {
+		    return maxId + 1;
+		    }else {
+		      return 1L;
+		    }
+	    }
 }

@@ -51,6 +51,7 @@ import ltd.newbee.mall.common.NewBeeMallException;
 import ltd.newbee.mall.common.ServiceResultEnum;
 import ltd.newbee.mall.controller.vo.GoodsSaleVO;
 import ltd.newbee.mall.controller.vo.NewBeeMallUserVO;
+import ltd.newbee.mall.entity.GoodsQa;
 import ltd.newbee.mall.entity.GoodsSale;
 import ltd.newbee.mall.entity.InsertKeyword;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
@@ -106,5 +107,24 @@ public class GoodsSaleController {
 	
 	return "admin/goodsSale";
     }
-   
+    //added by niu 2021/05/24 insertSale
+    @RequestMapping(value = "/goods/insertSale", method = RequestMethod.POST)
+    @ResponseBody
+    public Result insertSale(@RequestBody GoodsSale goodsSale) {
+	GoodsSale list = new GoodsSale();
+        Integer count = null;  
+        Long saleId = newBeeMallGoodsService.insertSale(list.getId());
+        list.setId(saleId);
+        list.setName(goodsSale.getName());
+        list.setStartDate(goodsSale.getStartDate());
+        list.setEndDate(goodsSale.getEndDate());
+        
+        if(list != null) {
+            count = newBeeMallGoodsService.insertGoodsSale(list);
+        }
+        if(!(count > 0))  {
+        return ResultGenerator.genFailResult("投稿失敗！");
+        }      
+        return ResultGenerator.genSuccessResult(count);    
+    }
 }

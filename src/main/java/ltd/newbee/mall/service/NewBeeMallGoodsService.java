@@ -166,4 +166,10 @@ public interface NewBeeMallGoodsService {
      * add by niu 2021/05/16
      */
     PageResult goodsSalePagAndSort(PageQueryUtil pageUtil);
+    /* 
+     * niuxiaofeng
+     * add by niu 2021/05/24
+     * insertSaleMaxId
+     */
+    Long insertSale(Long id); 
 }

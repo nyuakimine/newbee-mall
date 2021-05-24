@@ -98,6 +98,7 @@ var currentImageIndex = 1;
              }
          })
   })
+  //insertQa
   $("#ZVPostQuestionButton").click(function(){	
 	var question = $("#ZVQuestionTextarea").val();
 	//get url

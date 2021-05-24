@@ -1,5 +1,5 @@
 var MouseOnSearchResultUl  //全局变量
-     //download by niu 20210514
+  //download by niu 20210514
 $("#downloadsale").on('click',function(){
 	        debugger;
 	        var ids = [];
@@ -7,9 +7,9 @@ $("#downloadsale").on('click',function(){
 			    ids.push($(this).text())
 			    return ids;
 			})
-			if (ids == null ){
+			if (!ids){
 			    swal("请选择一条记录" ,{
-				icon:"success",
+				icon:"warning",
 				});
 			    return
 		    }
@@ -43,9 +43,8 @@ $("#downloadsale").on('click',function(){
 function Download(url) {
    document.getElementById('my_iframe').src = url;
 };
-    //DIY add by niu 2021/05/20
-        debugger;
-    new AjaxUpload('#col-119', {
+  //DIY add by niu upload 2021/05/20
+new AjaxUpload('#col-119', {
         action: '/admin/uploadtest/file',
         name: 'file',
         autoSubmit: true,
@@ -65,9 +64,8 @@ function Download(url) {
                 alert("error");
             }
         }
-    });
-    
-    //ajax与后台通信，查找查询履历
+ });
+    //keyword 2021/05/21 ajax与后台通信，查找查询履历
 $( "#keywordSale" ).focus(function(){
 	var keyword = $( "#keywordSale" ).val();
 	if(keyword != ""){
@@ -97,13 +95,6 @@ $("#keywordSale").keyup(function(){
 			debugger;
 	   	    var list = json_data.data.list[0];
 		    var str = list.name;
-		/*    var arr = str.split(" ");
-		    // arr.filter(keyword => keyword.includes(keyword),length > 2);  
-		    for (var i=0;i<arr.length;i++){
-			  if(arr[i].includes(keyword)){
-				keyword = arr[i];
-			  }
-		    }  */
 		},
 		error: function() {
 			debugger;
@@ -147,40 +138,62 @@ $("#searchResultUl").mouseleave(function(){
 	MouseOnSearchResultUl = false;
 })
 
-//modal 2021/05/22
-$(function(){
-  //テキストリンクをクリックしたら
- $("#modal-open").click(function(){
-      //body内の最後に<div id="modal-bg"></div>を挿入
-     $("body").append('<div id="modal-bg"></div>');
-    //画面中央を計算する関数を実行
-      modalResize();
-    //モーダルウィンドウを表示
-      $("#modal-bg,#modal-main").fadeIn("slow");
-    //画面のどこかをクリックしたらモーダルを閉じる
-      $("#modal-bg,#modal-main").click(function(){
-      $("#modal-main,#modal-bg").fadeOut("slow",function(){
-    //挿入した<div id="modal-bg"></div>を削除
-      $('#modal-bg').remove() ;
-         });
- 
+// 2021/05/22 Listen for click on toggle checkbox 
+$('#select-all').click(function(event) {   
+    if(this.checked) {
+        // Iterate each checkbox
+        $(':checkbox').each(function() {
+            this.checked = true;                        
         });
- 
-    //画面の左上からmodal-mainの横幅・高さを引き、その値を2で割ると画面中央の位置が計算できます
-     $(window).resize(modalResize);
-      function modalResize(){
- 
-            var w = $(window).width();
-            var h = $(window).height();
- 
-            var cw = $("#modal-main").outerWidth();
-            var ch = $("#modal-main").outerHeight();
- 
-        //取得した値をcssに追加する
-            $("#modal-main").css({
-                "left": ((w - cw)/2) + "px",
-                "top": ((h - ch)/2) + "px"
-          });
-     }
-   });
+    } else {
+        $(':checkbox').each(function() {
+            this.checked = false;                       
+        });
+    }
 });
+//2021/05/24 modal test
+$(function(){
+	$("#modal-open").click(function(){
+		$(".modal").fadeIn();
+	});
+	$("#datequxiao").click(function(){
+		$(".modal").fadeOut();
+	});
+});
+//2021/05/24 insertSale 绑定modal上的保存按钮
+$("#saveSaleButton").click(function(){	
+	var name = $("#campaignSaleName").val();
+	var startDate = $("#startDateSale").val();
+	var endDate = $("#endDateSale").val();
+    data = {
+	  "name":name,
+	"startDate":startDate,
+	"endDate":endDate,
+    };	  
+    $.ajax({
+        type: 'POST',//方法类型
+        url: '/admin/goods/insertSale',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function (result) {
+//サーバーが成功した場合
+            if (result.resultCode == 200) {
+			debugger;					
+					swal("ご登録ありがとうございました！" ,{
+						icon:"success",
+					});
+            } else {
+                	swal(result.message, {
+                    icon: "error",
+                });
+            }
+            
+        },
+        error: function () {
+            swal("操作失败", {
+                icon: "error",
+            });
+         }
+     })
+  });
+

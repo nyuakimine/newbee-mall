@@ -25,8 +25,7 @@
 						<div class="card-body">
 							<div class="col-sm-4"> </div>
 							<div class="grid-btn">
-					
-								<button class="btn btn-info" id="modal-open" onclick="campaignAdd(2)"> 
+								<button class="btn btn-info" id="modal-open"> 
 										<i class="fa fa-plus" id="shinnki"> </i>&nbsp;新規追加
 								</button>&nbsp;&nbsp;&nbsp;&nbsp;
 									
@@ -36,7 +35,7 @@
 							</div>
 						
 							<div>
-								<button class="btn btn-info" id="col-119" onclick="campaignAdd()">
+								<button class="btn btn-info" id="col-119" onclick="campaignAdd(2)">
 								す べ て
 								</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								
@@ -47,19 +46,25 @@
 							<br>
 							<div>
 								<div class="col-6">
-									<form name="input" action="html_form_action.php" method="get">
-										<select type="text" name="キャンペーン名" id="campaignName"></select>
-										<!-- diy //niu 2021/04/14-->
-										<button class="btn btn-info" id="downloadsale" 
-											type="button">Download</button>
-										<iframe id="my_iframe"></iframe>
-									</form>
+									<div class="input-group">
+										<select class="custom-select" id="inputGroupSelect04">
+											<option "selected">Choose...</option>
+											<option value="1">ファイル (.txt)</option>
+										 	<option value="2"> ファイル (.csv)</option>
+									    </select>
+										 <div class="input-group-append">
+											<button id="downloadsale" type="button">Download</button>
+										 </div>
+									</div>
+									<iframe id="my_iframe"></iframe>
 								</div>
 									<div class="col-6">
-										<input type="search" id="keywordSale" autocomplete="off">
-										<button class="btn btn-info">絞り込み検索</button>
-										<div class="search_hot">
-										</div>
+									<div class="col-6">
+											<input type="search" id="keywordSale" autocomplete="off">
+											<button class="btn btn-info" type="button" id="downloadsale">絞り込み検索</button>
+											<div class="search_hot">
+											</div>
+									</div>
 									</div>
 							</div>
 							<div class="campaignTable">
@@ -67,7 +72,7 @@
 									<thead class="biaotou">
 										<tr>
 											<th class="col-1">
-												<input type="checkbox" id="checkAll" />
+												<input type="checkbox" name="select-all" id="select-all" />Toggle All<br/>
 											</th>
 											<th class="col-1">Campaign ID</th>
 											<th class="col-2">Campaign Name</th>
@@ -85,8 +90,8 @@
 						                </td>
 						                <td class="col-1" th:text="${goodsSale.id}"></td>
 						                <td class="col-1" th:text="${goodsSale.name}"></td>
-						                <td class="col-1" th:text="${goodsSale.startDate}"></td>
-						                <td class="col-1" th:text="${goodsSale.endDate}"></td>
+						                <td class="col-1" th:text="${#dates.format(goodsSale.startDate, 'yyyy-MM-dd')}"></td>
+						                <td class="col-1" th:text="${#dates.format(goodsSale.endDate, 'yyyy-MM-dd')}"></td>
 						                <td class="col-1" th:text="${goodsSale.flag}"></td>
 						            </tr>
 						             </th:block>
@@ -124,6 +129,7 @@
 					</span>
             </th:block>	
         </div>
+        <!--あいまい検索keyword-->
 	<ul id ="searchResultUl">
 		 <li class="dumyLi searchLi">
 		     <a>
@@ -131,51 +137,47 @@
 		     </a>
 		 </li>
     </ul>
-	   <div id="modal-main">モーダルウィンドウ
+	  
 	        </div>
-        <div class="content">
-            <!-- 模态框（Modal） -->
-            <div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="categoryModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                    aria-hidden="true">&times;</span></button>
-                            <h6 class="modal-title" id="categoryModalLabel">Modal</h6>
-                        </div>
-                        <div class="modal-body">
-                            <form id="categoryForm">
-                                <div class="form-group">
-                                    <div class="alert alert-danger" id="edit-error-msg" style="display: none;">
-                                        错误信息展示栏。
-                                    </div>
-                                </div>
-                                <input type="hidden" class="form-control" id="categoryId" name="categoryId">
-                                <input type="hidden" id="categoryLevel" th:value="${categoryLevel}">
-                                <input type="hidden" id="parentId" th:value="${parentId}">
-                                <input type="hidden" id="backParentId" th:value="${backParentId}">
-                                <div class="form-group">
-                                    <label for="categoryName" class="control-label">分类名称:</label>
-                                    <input type="text" class="form-control" id="categoryName" name="categoryName"
-                                           placeholder="请输入分类名称" required="true">
-                                </div>
-                                <div class="form-group">
-                                    <label for="categoryName" class="control-label">排序值:</label>
-                                    <input type="number" class="form-control" id="categoryRank" name="categoryRank"
-                                           placeholder="请输入分类排序值" required="true">
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                            <button type="button" class="btn btn-primary" id="saveButton">确认</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /.modal -->
-        </div>
+<!--2021/05/23 modal niu -->
+ <div id="modal-main">モーダルウィンドウ
+<div class="button open">OPEN</div>
+<!--<div class="modal">-->
+<div class="modal" id="campaignSaleModal" tabindex="-1" role="dialog" aria-labelledby="campaignSaleModalLabel">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+				aria-hidden="true">&times;</span></button>
+		<h6 class="modal-title" id="categoryModalLabel">Modal</h6>
+	</div>
 
+	<div class="modal_bg"></div>
+	<div class="modal_window" id="campaignSaleModal">
+		<h3>モーダルウィンドウ</h3>
+		<div class="form-group">
+			<label for="campaignName" class="control-label">Campaign Name</label>
+			<input type="text" class="form-control" id="campaignSaleName" name="campaignName"
+				placeholder="campaignNameを入力してください" required="true">
+		</div>
+
+		<div class="form-group">
+			<label for="startDate" class="control-label">開始時間</label>
+			<input type="date" class="form-control" id="startDateSale" name="categoryRank"
+				placeholder="startDateを入力してください" required="true">
+		</div>
+		<div class="form-group">
+			<label for="endDate" class="control-label">終了時間</label>
+			<input type="date" class="form-control" id="endDateSale" name="categoryRank" placeholder="endDateを入力してください"
+				required="true">
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" id="datequxiao">キャンセル</button>
+			<button type="button" class="btn btn-primary" id="saveSaleButton">確認</button>
+		</div>
+		<!--	<div class="button close">CLOSE</div>-->
+	</div>
+</div>
+</div>
+	<!--</div>-->
 	    <!-- #contents START -->
 	  <div id="contents">
 	   <!-- <p><a id="modal-open">新規追加</a></p>-->
@@ -183,7 +185,7 @@
     <!-- /.content-wrapper -->
     <!-- 引入页脚footer-fragment -->
     <div th:replace="admin/footer::footer-fragment"></div>
-</div>
+
 <!-- jQuery -->
 <script th:src="@{/admin/plugins/jquery/jquery.min.js}"></script>
 <!-- Bootstrap 4 -->

@@ -154,7 +154,7 @@ public class UploadController {
     @ResponseBody
     public Result uploadTest(HttpServletRequest httpServletRequest, @RequestParam("file") MultipartFile file) throws URISyntaxException, ParseException {
         try {
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             InputStream is = file.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             String s = null;

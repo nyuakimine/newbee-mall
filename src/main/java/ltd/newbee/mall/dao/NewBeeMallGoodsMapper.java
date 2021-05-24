@@ -109,4 +109,5 @@ public interface NewBeeMallGoodsMapper {
     //goodsSalePagAndSort add by niu 2021/05/16	
     List<GoodsSale> goodsSalePagAndSort(PageQueryUtil pageUtil);
     int getGoodsSaleTotal(PageQueryUtil pageUtil);
+    Long insertSale(Long id);    
 }

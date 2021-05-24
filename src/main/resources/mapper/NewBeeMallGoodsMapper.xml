@@ -763,4 +763,8 @@
    <select id="getGoodsSaleTotal" parameterType="Map" resultType="int">
         select count(*) from goods_sale
   </select>
+ <!--  2021/05/24 insertSale -->
+      <select id="insertSale" parameterType="java.lang.Long" resultType= "java.lang.Long">			   
+			select max(id) from goods_sale		  
+	 </select> 
  </mapper>
