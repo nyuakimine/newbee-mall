@@ -107,3 +107,7 @@ h3{
 	left:0;
 	width: 50%;
 }
+.page_wrap{
+	width:50%;
+	float:right; 
+}

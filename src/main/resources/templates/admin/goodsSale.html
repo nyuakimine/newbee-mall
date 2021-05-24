@@ -74,10 +74,11 @@
 											<th class="col-1">
 												<input type="checkbox" name="select-all" id="select-all" />Toggle All<br/>
 											</th>
-											<th class="col-1">Campaign ID</th>
-											<th class="col-2">Campaign Name</th>
-											<th class="col-2">開始時間</th>
-											<th class="col-2">終了時間</th>
+											
+											<th class="col-1" id="0">Campaign ID<span id="sort0" sort=""></span></th>
+											<th class="col-2" id="1">Campaign Name<span id="sort1" sort=""></span></th>
+											<th class="col-2" id="2">開始時間<span id="sort2" sort=""></span></th>
+											<th class="col-2" id="3">終了時間<span id="sort3" sort=""></span></th>
 											<th class="col-2">ステータス</th>
 										</tr>
 									</thead>
@@ -97,8 +98,8 @@
 						             </th:block>
 						             </th:block>
 								</tbody>
-       						 </div>
-							</table>
+							   </table>
+							 </div>
 						</div>
                     </div><!-- /.card-body -->
                 </div>
@@ -108,7 +109,7 @@
             <th:block th:if="${null != pageResult and !#lists.isEmpty(pageResult.list)}">
             <span class="page_span1">
                  <a th:href="@{${pageResult.currPage==1}?'##':'/admin/goods/sale?keyword='+${keyword==null?'':keyword}+'&page=' + ${pageResult.currPage-1}+'&orderBy='+${orderBy==null?'':orderBy}}">
-                                    < 上一页
+                                    < 前ページ
                                 </a>
                 <th:block th:if="${pageResult.currPage-2 >=1}"><a
                         th:href="@{'/admin/goods/sale?keyword='+${keyword==null?'':keyword}+'&page=' + ${pageResult.currPage-2}+'&orderBy='+${orderBy==null?'':orderBy}}"
@@ -124,7 +125,7 @@
                         th:href="@{'/admin/goods/sale?keyword='+${keyword==null?'':keyword}+'&page=' + ${pageResult.currPage+2}+'&orderBy='+${orderBy==null?'':orderBy}}"
                         th:text="${pageResult.currPage +2}">1</a></th:block>
                  <a th:href="@{${pageResult.currPage>=pageResult.totalPage}?'##':'/admin/goods/sale?keyword='+${keyword==null?'':keyword}+'&page=' + ${pageResult.currPage+1}+'&orderBy='+${orderBy==null?'':orderBy}}">
-                                    下一页 >
+                                    次ページ>
                                 </a>
 					</span>
             </th:block>	
@@ -140,8 +141,8 @@
 	  
 	        </div>
 <!--2021/05/23 modal niu -->
- <div id="modal-main">モーダルウィンドウ
-<div class="button open">OPEN</div>
+ <div id="modal-main">
+<div class="button open"> </div>
 <!--<div class="modal">-->
 <div class="modal" id="campaignSaleModal" tabindex="-1" role="dialog" aria-labelledby="campaignSaleModalLabel">
 	<div class="modal-header">
@@ -150,9 +151,9 @@
 		<h6 class="modal-title" id="categoryModalLabel">Modal</h6>
 	</div>
 
-	<div class="modal_bg"></div>
+	<div class="modal_bg"> </div>
 	<div class="modal_window" id="campaignSaleModal">
-		<h3>モーダルウィンドウ</h3>
+<!--		<h3>モーダルウィンドウ</h3>-->
 		<div class="form-group">
 			<label for="campaignName" class="control-label">Campaign Name</label>
 			<input type="text" class="form-control" id="campaignSaleName" name="campaignName"

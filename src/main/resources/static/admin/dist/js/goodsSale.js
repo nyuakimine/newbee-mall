@@ -195,5 +195,90 @@ $("#saveSaleButton").click(function(){
             });
          }
      })
+     $(".modal").fadeOut();
   });
+//2021/05/24 sort
+$(function(){
+  // カラムのクリックイベント
+  $("th").click(function(){
+    // ★span要素の独自属性（sort）の値を取得
+    var sortClass = $(this).find("span").attr("sort");
+    var sortFlag = "asc";
+    // 初期化
+    $("table thead tr span").text("");
+    $("table thead tr span").attr("sort", "");
 
+    // 空欄チェック
+    if(isBlank(sortClass) || sortClass == "asc") {
+      $(this).find("span").text("▼");
+      // ★独自属性（sort）の値を変更する
+      $(this).find("span").attr("sort", "desc");
+      sortFlag = "desc";
+    } else if(sortClass == "desc") {
+      $(this).find("span").text("▲");
+      $(this).find("span").attr("sort", "asc"); 
+      sortFlag = "asc";
+    }
+
+    var element = $(this).attr("id");
+    sort(element, sortFlag);
+  });
+  /******** 共通関数 ********/
+  function sort(element, sortFlag) {
+    // ソート
+    // ★sort()で前後の要素を比較して並び変える。※対象が文字か数値で処理を変更
+    var arr = $("table tbody tr").sort(function(a, b) {
+      if ($.isNumeric($(a).find("td").eq(element).text())) {
+        // ソート対象が数値の場合
+        var a_num = Number($(a).find("td").eq(element).text());
+        var b_num = Number($(b).find("td").eq(element).text());
+
+        if(isBlank(sortFlag) || sortFlag == "desc") {
+          // 降順
+          return b_num - a_num;
+        } else {
+          // 昇順
+          return a_num - b_num;
+        }
+      } else {
+        // ソート対象が数値以外の場合
+        var sortNum = 1;
+        if($(a).find("td").eq(element).text() 
+             > $(b).find("td").eq(element).text()) {
+          sortNum = 1;
+        } else {
+          sortNum = -1;
+        }
+        if(isBlank(sortFlag) || sortFlag == "desc") {
+          // 降順
+          sortNum *= (-1) ;
+        }
+
+        return sortNum;
+      }
+    });
+    // 表を置き換える
+    // ★html()要素を置き換える
+    $("table tbody").html(arr);
+  }
+
+  function sum(){
+    // 表の金額を取得する(tdの奇数列を取得)
+    var pricelist = $("table td[class=id]").map(function(index, val){
+      var id = parseInt($(val).text());
+      if(id >= 0) {
+        return id;
+      } else {
+        return null;
+      }
+    });
+  }
+  //バリデーションチェック
+  function isBlank(data){
+    if (data.length ==0 || data == ''){
+      return true;
+    } else {
+      return false;
+    }
+  }
+});
