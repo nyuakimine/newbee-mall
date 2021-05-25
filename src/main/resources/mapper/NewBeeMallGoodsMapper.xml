@@ -556,8 +556,7 @@
 		   where id = #{id,jdbcType=BIGINT}
 	   </select>    
 	   <select id="getGoodsSale" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.GoodsSale">
-	       select id,name,start_date,end_date,campaign,content1,content2,content3,content4,content5,flag from goods_sale
-		   where id = #{id,jdbcType=BIGINT}
+	       select id,name,start_date,end_date,campaign,content1,content2,content3,content4,content5,flag from goods_sale where id = #{id,jdbcType=BIGINT}
 	   </select>
 	  	    
 	   <select id="getGoodsCoupon" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.GoodsCoupon">

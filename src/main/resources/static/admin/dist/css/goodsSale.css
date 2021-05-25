@@ -58,9 +58,14 @@
 #campaignName{
 	width: 25%;
 }	
-#keywordSale{
-	width: 58.33%;
-	
+.light-table-filter{
+	width: 75%;
+	float: right;
+	border-radius: 8px;
+	border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
 }											
 #downloadsale{
 	border: 2px solid rgb(0, 0, 255);
@@ -106,6 +111,8 @@
 	left:50%;
 	transform: translate(-50%,-50%);
 	text-align: center;
+	max-height: 90vh;
+	overflow: auto;
 }
 h3{
 	top: 50%;
@@ -115,6 +122,10 @@ h3{
 .input-group{
 	left:0;
 	width: 50%;
+	border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
 }
 .page_span1 {
 	width: 60%;
@@ -125,14 +136,10 @@ h3{
     width: 25%;
 	float:right; 
 }
-input:focus{
-    border-color: #66afe9;
-    outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+/*検索*/
+.order-table{
+	width: 100%;
 }
-/*
-作者：Devops海洋的渔夫
-链接：https://www.jianshu.com/p/9b4b60b8d475
-來源：简书
-简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。*/
+#namejuzhong{
+	width: 60%;
+}

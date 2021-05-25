@@ -113,11 +113,18 @@ public class GoodsSaleController {
     public Result insertSale(@RequestBody GoodsSale goodsSale) {
 	GoodsSale list = new GoodsSale();
         Integer count = null;  
-        Long saleId = newBeeMallGoodsService.insertSale(list.getId());
+        Long saleId = newBeeMallGoodsService.insertSale(goodsSale.getId());
         list.setId(saleId);
         list.setName(goodsSale.getName());
         list.setStartDate(goodsSale.getStartDate());
         list.setEndDate(goodsSale.getEndDate());
+        list.setCampaign(goodsSale.getCampaign());
+        list.setContent1(goodsSale.getContent1());
+        list.setContent2(goodsSale.getContent2());
+        list.setContent3(goodsSale.getContent3());
+        list.setContent4(goodsSale.getContent4());
+        list.setContent5(goodsSale.getContent5());
+        list.setFlag(goodsSale.getFlag());
         
         if(list != null) {
             count = newBeeMallGoodsService.insertGoodsSale(list);

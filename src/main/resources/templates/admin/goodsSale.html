@@ -55,22 +55,21 @@
 										 	<option value="2"> ファイル (.csv)</option>
 									    </select>
 										 <div class="input-group-append">
-											<button id="downloadsale" onclick="downloadSelected()" type="button">Download</button>
+											<button id="download" onclick="downloadSelected()" type="button">DownloadCSV</button>
 										 </div>
 									</div>
 									<iframe id="my_iframe"></iframe>
 								</div>
 									<div class="col-6">
 										<div class="col-7">
-											<input type="search" id="keywordSale" autocomplete="off">
-											<button class="btn btn-info" type="button" id="downloadsale">絞り込み検索</button>
-											<div class="search_hot">
-											</div>
+											<input type="search" class="light-table-filter" data-table="order-table" placeholder="絞り込み検索" />
+											<!--<button   type="button" id="downloadsale">絞り込み検索</button>-->
+											<div class="search_hot"> </div>
 										</div>
 									</div>
 							</div>
 							<div class="campaignTable">
-								<table class="col-12" id="table" border="1">
+								<table class="order-table" border="1">
 									<thead class="biaotou">
 										<tr>
 											<th class="col-1" id="0"><span id="sort0" sort=""></span>
@@ -153,23 +152,57 @@
 	<div class="modal_bg"> </div>
 	<div class="modal_window" id="campaignSaleModal">
 　　　　<h3>新規追加</h3>
-        <h2 id="showtime"></h2>
 		<div class="form-group">
-			<label for="campaignName" class="control-label">Campaign Name</label>
-			<input type="text" class="form-control" id="campaignSaleName" name="campaignName"
-				placeholder="campaignNameを入力してください" required="true">
+			<label for="Name" class="control-label" id="namejuzhong">Name</label>
+			<input type="text" class="form-control" id="Name" name="Name"
+				placeholder="Nameを入力してください" required="true">
 		</div>
-
 		<div class="form-group">
 			<label for="startDate" class="control-label">開始時間</label>
-			<input type="datetime-local" class="form-control" id="startDateSale" name="categoryRank"
+			<input type="date" class="form-control" id="startDateSale" name="categoryRank"
 				placeholder="startDateを入力してください" required="true">
 		</div>
 		<div class="form-group">
 			<label for="endDate" class="control-label">終了時間</label>
-			<input type="datetime-local" class="form-control" id="endDateSale" name="categoryRank" placeholder="endDateを入力してください"
+			<input type="date" class="form-control" id="endDateSale" name="categoryRank" placeholder="endDateを入力してください"
 				required="true">
 		</div>
+		<div class="form-group">
+			<label for="Campaign" class="control-label">Campaign</label>
+			<input type="text" class="form-control" id="campaignSaleName" name="Campaign"
+				placeholder="Campaignを入力してください" required="true">
+		</div>
+		<div class="form-group">
+			<label for="Content1" class="control-label">Content1</label>
+			<input type="text" class="form-control" id="campaignSaleName" name="Content1"
+				placeholder="Content1を入力してください" required="true">
+		</div>
+		<div class="form-group">
+			<label for="Content2" class="control-label">Content2</label>
+			<input type="text" class="form-control" id="campaignSaleName" name="Content2"
+				placeholder="Content2を入力してください" required="true">
+		</div>
+		<div class="form-group">
+			<label for="Content3" class="control-label">Content3</label>
+			<input type="text" class="form-control" id="campaignSaleName" name="Content3"
+				placeholder="Content3を入力してください" required="true">
+		</div>
+		<div class="form-group">
+			<label for="Content4" class="control-label">Content4</label>
+			<input type="text" class="form-control" id="campaignSaleName" name="Content4"
+				placeholder="Content4を入力してください" required="true">
+		</div>
+		<div class="form-group">
+			<label for="Content5" class="control-label">Content5</label>
+			<input type="text" class="form-control" id="campaignSaleName" name="Content5"
+				placeholder="Content5を入力してください" required="true">
+		</div>
+		<div class="form-group">
+			<label for="flag" class="control-label">flag</label>
+			<input type="text" class="form-control" id="campaignSaleName" name="flag"
+				placeholder="flagを入力してください" required="true">
+		</div>
+
 		<div class="modal-footer">
 			<button type="button" class="btn btn-default" id="datequxiao">キャンセル</button>
 			<button type="button" class="btn btn-primary" id="saveSaleButton">確認</button>
