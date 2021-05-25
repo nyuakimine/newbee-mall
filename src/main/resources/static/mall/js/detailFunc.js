@@ -1,12 +1,4 @@
 var currentImageIndex = 1;
-
-/*$("#zv-cqa-select-sort").change( function(){
-  var page = $("#currentPageNum").text();
-  var url = "/goods/qaSort";
-  var data = {
-    "page":page
-  };
- });*/
  debugger;
       $(function(){
 	//disable previous page 	  
@@ -101,14 +93,6 @@ var currentImageIndex = 1;
   //insertQa
   $("#ZVPostQuestionButton").click(function(){	
 	var question = $("#ZVQuestionTextarea").val();
-	//get url
-/*	var path = window.location.pathname;
-	//split with / 
-	var ar = path.split("/");
-	//get array 
-	var len = ar.length;
-	var goodsId = ar[len-1];
-	debugger;*/
 	var goodsId = getGoodsId();
     data = {
 	  "question":question,
@@ -143,7 +127,6 @@ var currentImageIndex = 1;
 	debugger;   
 	function paging(num){
 	//alert("Handlerfor .click() called." );   
-	 
     var page = $("#currentPageNo").text();
     var pageNo = 0;
     console.log("current page: ",page);
@@ -177,15 +160,6 @@ var currentImageIndex = 1;
 							$("#ZVCQuestionsArea").find(".delete").remove();
 					  	}
 				        var ar = result.data.list;
-	                   /* if(ar.length>0){
-							$("#ZVCQuestionsArea").find(".zv-cqa").remove();
-					    }*/
-	                    /*for(let i=0; i<ar.length;i++){*/
-							/*var qa =$(".hiddenQaDiv").clone().removeClass("hiddenQaDiv");
-							qa.find(".zv-cqa-q-text").html(ar[i].question);
-							$("#detailFooter").before(qa);*/
-							//qa.appendTo("#ZVCQuestionsArea");
-					    /*}*/
 					    debugger;
 	                    for(let i = 0; i <ar.length;i++){
 		
@@ -196,7 +170,6 @@ var currentImageIndex = 1;
 		     				el.find(".zv-cqa-a-info").html(ar[i].answerDate);
 							el.find(".zv-helpful zv-helpful-yes zv-helpful-yes-58746").html(ar[i].helpedNum);
 							$("#detailFooter").before(el);
-							/*qa.appendTo("#ZVCQuestionsArea");*/
 						}
                 } else {
                     swal(result.message, {
@@ -232,10 +205,6 @@ var currentImageIndex = 1;
                 if (result.resultCode == 200) {
 				debugger;	
 				_this.text("参考になった("+result.data+"人)");
-		
-					/*	swal("質問ご登録ありがとうございました！" ,{
-							icon:"success",
-						});*/
                 } else {
                     	swal(result.message, {
                         icon: "error",

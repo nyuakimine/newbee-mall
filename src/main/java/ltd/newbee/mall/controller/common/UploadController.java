@@ -124,7 +124,7 @@ public class UploadController {
             String fileName = multipartFiles.get(i).getOriginalFilename();
             String suffixName = fileName.substring(fileName.lastIndexOf("."));
             //生成文件名称通用方法
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Random r = new Random();
             StringBuilder tempName = new StringBuilder();
             tempName.append(sdf.format(new Date())).append(r.nextInt(100)).append(suffixName);

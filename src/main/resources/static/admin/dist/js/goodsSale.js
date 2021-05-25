@@ -7,6 +7,10 @@ $("#downloadsale").on('click',function(){
 			    ids.push($(this).text())
 			    return ids;
 			})
+			var index = ids.indexOf("Campaign ID");
+			  if (index > -1) {
+			  ids.splice(index, 1);
+			}
 			if (!ids){
 			    swal("请选择一条记录" ,{
 				icon:"warning",
@@ -137,7 +141,6 @@ $("#searchResultUl").mousemove(function(){
 $("#searchResultUl").mouseleave(function(){
 	MouseOnSearchResultUl = false;
 })
-
 // 2021/05/22 Listen for click on toggle checkbox 
 $('#select-all').click(function(event) {   
     if(this.checked) {
@@ -151,7 +154,7 @@ $('#select-all').click(function(event) {
         });
     }
 });
-//2021/05/24 modal test
+//2021/05/24 modal 154-199
 $(function(){
 	$("#modal-open").click(function(){
 		$(".modal").fadeIn();
@@ -197,7 +200,7 @@ $("#saveSaleButton").click(function(){
      })
      $(".modal").fadeOut();
   });
-//2021/05/24 sort
+//2021/05/24 sort niuxiaofeng 201-271
 $(function(){
   // カラムのクリックイベント
   $("th").click(function(){
@@ -207,7 +210,6 @@ $(function(){
     // 初期化
     $("table thead tr span").text("");
     $("table thead tr span").attr("sort", "");
-
     // 空欄チェック
     if(isBlank(sortClass) || sortClass == "asc") {
       $(this).find("span").text("▼");
@@ -219,7 +221,6 @@ $(function(){
       $(this).find("span").attr("sort", "asc"); 
       sortFlag = "asc";
     }
-
     var element = $(this).attr("id");
     sort(element, sortFlag);
   });
@@ -257,21 +258,8 @@ $(function(){
         return sortNum;
       }
     });
-    // 表を置き換える
-    // ★html()要素を置き換える
+  // 表を置き換える  ★html()要素を置き換える
     $("table tbody").html(arr);
-  }
-
-  function sum(){
-    // 表の金額を取得する(tdの奇数列を取得)
-    var pricelist = $("table td[class=id]").map(function(index, val){
-      var id = parseInt($(val).text());
-      if(id >= 0) {
-        return id;
-      } else {
-        return null;
-      }
-    });
   }
   //バリデーションチェック
   function isBlank(data){

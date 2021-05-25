@@ -309,7 +309,6 @@ public class GoodsController {
     @ResponseBody
     public Result showMoreReview(@RequestBody Long goodsId) {
 	List<ReviewUserInfo> userInfoList = newBeeMallGoodsService.getReviewUserInfoEntityByGoodsId(goodsId);
-
         //List<GoodsReviewVo> reviewList = newBeeMallGoodsService.getGoodsReviews(goodsId);
         //List<GoodsReviewVo> subReviewList = reviewList.subList(1,reviewList.size()-1);
         return ResultGenerator.genSuccessResult(userInfoList);    
@@ -354,7 +353,6 @@ public class GoodsController {
     	goods3.setGoodsId(10004L);
     	goods3.setGoodsName("无印良品 MUJI 柔和洁面泡沫");
     	list.add(goods3);
-    
     	return ResultGenerator.genSuccessResult(list);
     }
     //add by niu 20210510 keyword get hit goods

@@ -19,12 +19,20 @@
 .col-11 {width: 91.66%;}
 .col-12 {width: 100%;}
 .card-title{
-	width: 16.66%;
+	width: 41.66%;
+	float:left;
+	font-size: 30px; 
 }
 #shinnki{
 	width: 16.66%;
 }
 #col-119{
+	width: 8.33%;
+    margin-left: 3%;
+	height:auto;
+	color: rgb(0, 0, 0);
+}
+#col-120{
 	width: 8.33%;
     margin-left: 0%;
 	height:auto;
@@ -46,13 +54,13 @@
     background-color: #fff;
     width:16.66%;
 }
-/*add by niu css
-*/
+/*add by niu css*/
 #campaignName{
 	width: 25%;
 }	
 #keywordSale{
-	width: 50%;
+	width: 58.33%;
+	
 }											
 #downloadsale{
 	border: 2px solid rgb(0, 0, 255);
@@ -66,7 +74,7 @@
 .biaotou{
 	background-color: rgb(128, 128, 128);
 }
-/*2021/05/24  modal 	*/
+/*2021/05/24  modal*/
 #datequxiao {
 	background-color: rgb(192, 192, 192);
 }
@@ -100,6 +108,7 @@
 	text-align: center;
 }
 h3{
+	top: 50%;
 	margin-bottom: 10%;
 }
 /*csv txt 2021/05/24*/
@@ -107,7 +116,23 @@ h3{
 	left:0;
 	width: 50%;
 }
-.page_wrap{
-	width:50%;
+.page_span1 {
+	width: 60%;
 	float:right; 
 }
+/*show time*/
+#showtime{
+    width: 25%;
+	float:right; 
+}
+input:focus{
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+}
+/*
+作者：Devops海洋的渔夫
+链接：https://www.jianshu.com/p/9b4b60b8d475
+來源：简书
+简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。*/
