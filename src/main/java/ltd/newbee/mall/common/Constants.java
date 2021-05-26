@@ -22,6 +22,10 @@ public class Constants {
     public final static String FILE_UPLOAD_CSV = "C:\\Users\\USER\\Desktop\\upload\\tset.csv";//上傳csv文件
     
     public final static String FILE_UPLOAD_TEST_CSV = ("/upload/tset.csv");//resultSuccess("/upload/tset.csv");
+    
+    public final static String FILE_UPLOAD_TXT = "C:\\Users\\USER\\Desktop\\demo.txt";//上傳txt文件
+    
+    public final static String FILE_UPLOAD_TEST_TXT = ("/demo.txt");//resultSuccess("/upload/tset.txt");
 	    
     public final static int INDEX_CAROUSEL_NUMBER = 5;//首页轮播图数量(可根据自身需求修改)
 

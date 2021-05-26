@@ -125,7 +125,6 @@ public class GoodsSaleController {
         list.setContent4(goodsSale.getContent4());
         list.setContent5(goodsSale.getContent5());
         list.setFlag(goodsSale.getFlag());
-        
         if(list != null) {
             count = newBeeMallGoodsService.insertGoodsSale(list);
         }

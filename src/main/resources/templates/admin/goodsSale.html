@@ -24,7 +24,6 @@
 							 <h2 id="showtime"></h2>
 						</div> <!-- /.card-body -->
 						<div class="card-body">
-						
 							<div class="col-sm-4"> </div>
 							<div class="grid-btn">
 								<button class="btn btn-info" id="modal-open"> 
@@ -35,8 +34,7 @@
 										class="fa fa-pencil-square-o"></i>&nbsp;CSV登録
 								</button>
 							</div>
-						
-							<div>
+						<!--	<div>
 								<span id="col-119">
 								す べ て
 								</span>
@@ -44,26 +42,37 @@
 								<span id="col-119">&nbsp;クローズ
 								</span>
 							 
-							</div>
+							</div>-->
 							<br>
 							<div>
 								<div class="col-6">
 									<div class="input-group">
+									<div class="inputsale">
 										<select class="custom-select" id="inputGroupSelect04">
-											<option "selected">Choose...</option>
-											<option value="1">ファイル (.txt)</option>
-										 	<option value="2"> ファイル (.csv)</option>
+											<option value="selected">Choose...</option>
+											<option value="txt">ファイル (.txt)</option>
+										 	<option value="csv">ファイル (.csv)</option>
 									    </select>
-										 <div class="input-group-append">
-											<button id="download" onclick="downloadSelected()" type="button">DownloadCSV</button>
-										 </div>
+									    </div>&nbsp;&nbsp;
+										<!--<div class="input-group-append">
+											<button id="download" onclick="downloadSelected()" type="button">DownloadCsv</button>
+										 </div>-->
+										
+										<button id="downloadsale"
+										type="button">DownloadCSV</button>&nbsp;&nbsp;
+										
+										 <button id="downloadTxt"
+										type="button">DownloadTXT</button>
+										
+										<!--<iframe id="my_iframes"> </iframe>-->
 									</div>
 									<iframe id="my_iframe"></iframe>
 								</div>
+								<div class="downloadttt">
 									<div class="col-6">
 										<div class="col-7">
-											<input type="search" class="light-table-filter" data-table="order-table" placeholder="絞り込み検索" />
-											<!--<button   type="button" id="downloadsale">絞り込み検索</button>-->
+											<input type="search" class="light-table-filter" id="searchSale" placeholder="絞り込み検索" />&nbsp;
+											<button type="button" id="kennsaku">絞り込み検索</button>
 											<div class="search_hot"> </div>
 										</div>
 									</div>
@@ -153,8 +162,8 @@
 	<div class="modal_window" id="campaignSaleModal">
 　　　　<h3>新規追加</h3>
 		<div class="form-group">
-			<label for="Name" class="control-label" id="namejuzhong">Name</label>
-			<input type="text" class="form-control" id="Name" name="Name"
+			<label for="Name" class="control-label">Name</label>
+			<input type="text" class="form-control" id="campaignSaleName" name="Name"
 				placeholder="Nameを入力してください" required="true">
 		</div>
 		<div class="form-group">
@@ -169,37 +178,37 @@
 		</div>
 		<div class="form-group">
 			<label for="Campaign" class="control-label">Campaign</label>
-			<input type="text" class="form-control" id="campaignSaleName" name="Campaign"
+			<input type="text" class="form-control" id="campaignSale" name="Campaign"
 				placeholder="Campaignを入力してください" required="true">
 		</div>
 		<div class="form-group">
 			<label for="Content1" class="control-label">Content1</label>
-			<input type="text" class="form-control" id="campaignSaleName" name="Content1"
+			<input type="text" class="form-control" id="content1Sale" name="Content1"
 				placeholder="Content1を入力してください" required="true">
 		</div>
 		<div class="form-group">
 			<label for="Content2" class="control-label">Content2</label>
-			<input type="text" class="form-control" id="campaignSaleName" name="Content2"
+			<input type="text" class="form-control" id="content2Sale" name="Content2"
 				placeholder="Content2を入力してください" required="true">
 		</div>
 		<div class="form-group">
 			<label for="Content3" class="control-label">Content3</label>
-			<input type="text" class="form-control" id="campaignSaleName" name="Content3"
+			<input type="text" class="form-control" id="content3Sale" name="Content3"
 				placeholder="Content3を入力してください" required="true">
 		</div>
 		<div class="form-group">
 			<label for="Content4" class="control-label">Content4</label>
-			<input type="text" class="form-control" id="campaignSaleName" name="Content4"
+			<input type="text" class="form-control" id="content4Sale" name="Content4"
 				placeholder="Content4を入力してください" required="true">
 		</div>
 		<div class="form-group">
 			<label for="Content5" class="control-label">Content5</label>
-			<input type="text" class="form-control" id="campaignSaleName" name="Content5"
+			<input type="text" class="form-control" id="content5Sale" name="Content5"
 				placeholder="Content5を入力してください" required="true">
 		</div>
 		<div class="form-group">
 			<label for="flag" class="control-label">flag</label>
-			<input type="text" class="form-control" id="campaignSaleName" name="flag"
+			<input type="text" class="form-control" id="flagSale" name="flag"
 				placeholder="flagを入力してください" required="true">
 		</div>
 

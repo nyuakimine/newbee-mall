@@ -283,7 +283,7 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 	}
 	  //Download add by niu 2021/05/14 
 	 @Override
-	    public List<GoodsSale> getGoodsSaleDownload(Integer[] ids) {
+	    public List<GoodsSale> getGoodsSaleDownload(Integer[] ids,String format) {
 	     List<GoodsSale> list = goodsMapper.getGoodsSaleDownload(ids);
 	     return list;
 	    } 

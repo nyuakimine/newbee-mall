@@ -1,5 +1,52 @@
-  //download by niu 20210514
-$("#download").on('click',function(){
+  //download csv by niu 2021/05/14
+$("#downloadsale").on('click',function(){
+	        debugger;
+	        var ids = [];
+			var format=$("#inputGroupSelect04").val();
+			var index = ids.indexOf("Campaign ID");
+			  if (index > -1) {
+			  ids.splice(index, 1);
+			}
+			var data = {
+				"ids": ids,
+				"format": format,
+			}
+			$('input:checkbox:checked').parent().next().map(function (){
+			    ids.push($(this).text())
+			    return ids;
+			})
+			if (!ids){
+			    swal("请选择一条记录" ,{
+				icon:"warning",
+				});
+			    return
+		    }
+	  	    $.ajax({
+            type: 'POST',//方法类型
+            url: '/admin/goodsSale/download',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (result) {
+	        //サーバーが成功した場合
+                if (result.resultCode == 200) {
+	              debugger;
+	              Download(result.data);
+                } else {
+                    	swal(result.message, {
+                        icon: "error",
+                    });
+                }
+                
+            },
+            error: function () {
+                swal("操作失败", {
+                    icon: "error",
+                });
+             }
+         })
+  });
+  //download txt by niu 2021/05/26
+$("#downloadTxt").on('click',function(){
 	        debugger;
 	        var ids = [];
 	        $('input:checkbox:checked').parent().next().map(function (){
@@ -18,16 +65,13 @@ $("#download").on('click',function(){
 		    }
 	  	    $.ajax({
             type: 'POST',//方法类型
-            url: '/admin/goodsSale/download',
+            url: '/admin/goodsSale/download/txt',
             contentType: 'application/json',
             data: JSON.stringify(ids),
-            //data:1,
-            
             success: function (result) {
 	        //サーバーが成功した場合
                 if (result.resultCode == 200) {
 	              debugger;
-	             // var url = window.location.assign(result.data);
 	              Download(result.data);
                 } else {
                     	swal(result.message, {
@@ -69,39 +113,13 @@ new AjaxUpload('#col-120', {
         }
  });
 //絞り込み検索 改修 2021/05/25
-(function(document) {
-  'use strict';
-  var LightTableFilter = (function(Arr) {
-    var _input;
-    function _onInputEvent(e) {
-      _input = e.target;
-      var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
-      Arr.forEach.call(tables, function(table) {
-        Arr.forEach.call(table.tBodies, function(tbody) {
-          Arr.forEach.call(tbody.rows, _filter);
-        });
-      });
-    }
-    function _filter(row) {
-      var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
-      row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
-    }
-    return {
-      init: function() {
-        var inputs = document.getElementsByClassName('light-table-filter');
-        Arr.forEach.call(inputs, function(input) {
-          input.oninput = _onInputEvent;
-        });
-      }
-    };
-  })(Array.prototype);
-  document.addEventListener('readystatechange', function() {
-    if (document.readyState === 'complete') {
-      LightTableFilter.init();
-    }
-  });
-
-})(document);
+$(function() {
+     $('#kennsaku').on('click', function() {
+         $('table tbody tr').hide()
+             .filter(":contains('" + ($('#searchSale').val()) + "')")
+             .show();
+     })
+ })
 // 2021/05/22 Listen for click on toggle checkbox 
 $('#select-all').click(function(event) {   
     if(this.checked) {
@@ -129,10 +147,24 @@ $("#saveSaleButton").click(function(){
 	var name = $("#campaignSaleName").val();
 	var startDate = $("#startDateSale").val();
 	var endDate = $("#endDateSale").val();
-    data = {
-	  "name":name,
+	var campaign = $("#campaignSale").val();
+	var content1 = $("#content1Sale").val();
+	var content2 = $("#content2Sale").val();
+	var content3 = $("#content3Sale").val();
+	var content4 = $("#content4Sale").val();
+	var content5 = $("#content5Sale").val();
+	var flag = $("#flagSale").val();
+    var data = {
+	"name":name,
 	"startDate":startDate,
 	"endDate":endDate,
+	"campaign": campaign,
+	"content1": content1,
+	"content2": content2,
+	"content3": content3,
+	"content4": content4,
+	"content5": content5,
+	"flag": flag,
     };	  
     $.ajax({
         type: 'POST',//方法类型

@@ -180,11 +180,17 @@ public class UploadController {
     @RequestMapping(value = "/goodsSale/download", method = RequestMethod.POST)
    // @GetMapping({"/goodsSale/download"})
     @ResponseBody
-    public Result download(@RequestBody Integer[] ids) throws URISyntaxException, ParseException {
-	File f = new File(Constants.FILE_UPLOAD_CSV);
+    public Result download(@RequestBody Integer[] ids,@RequestBody String format) throws URISyntaxException, ParseException {
+	 File f = new File(Constants.FILE_UPLOAD_CSV);
+	 File n = new File(Constants.FILE_UPLOAD_TXT);
+       
+	    if(format != null && format == "csv"){ 
+		
+	}
+	    else
 	try {
 	    BufferedWriter bw = new BufferedWriter(new FileWriter(f));
-	    List<GoodsSale> list = newBeeMallGoodsService.getGoodsSaleDownload(ids);
+	    List<GoodsSale> list = newBeeMallGoodsService.getGoodsSaleDownload(ids, format);
             list.stream().forEach( c -> {
         	   try {
 		    bw.write(c.toString());
@@ -199,6 +205,30 @@ public class UploadController {
         }
 	Result resultSuccess = ResultGenerator.genSuccessResult();
 	resultSuccess.setData(Constants.FILE_UPLOAD_TEST_CSV);
+	return resultSuccess;
+    }
+    //diy niu download txt 2021/05/26
+    @RequestMapping(value = "/goodsSale/download/txt", method = RequestMethod.POST)
+    @ResponseBody
+    public Result downloadCsv(@RequestBody Integer[] ids,String format) throws URISyntaxException, ParseException {
+	File f = new File(Constants.FILE_UPLOAD_TXT);
+	try {
+	    BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+	    List<GoodsSale> list = newBeeMallGoodsService.getGoodsSaleDownload(ids, format);
+            list.stream().forEach( c -> {
+        	   try {
+		    bw.write(c.toString());
+		    bw.newLine();//空一行
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+            });
+            bw.close();
+	}catch (IOException e) {
+            e.printStackTrace();
+        }
+	Result resultSuccess = ResultGenerator.genSuccessResult();
+	resultSuccess.setData(Constants.FILE_UPLOAD_TEST_TXT);
 	return resultSuccess;
     }
 }
