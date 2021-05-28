@@ -248,8 +248,8 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 	}
 
 	@Override
-	public List<GoodsSale> GoodsSale(Long id) {
-	    List<GoodsSale> list = goodsMapper.getGoodsSale(id); 
+	public List<GoodsSale> GoodsSale() {
+	    List<GoodsSale> list = goodsMapper.getGoodsSale(); 
 	    return list;
 	}
 

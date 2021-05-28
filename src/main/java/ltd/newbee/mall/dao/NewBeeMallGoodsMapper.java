@@ -96,7 +96,7 @@ public interface NewBeeMallGoodsMapper {
     //sale 2021/05/11
     List<TbSale> getTbSale(Long id); 
     List<TbCategory> getTbCategory(Long id);
-    List<GoodsSale> getGoodsSale(Long id);   
+    List<GoodsSale> getGoodsSale();   
     List<GoodsCoupon> getGoodsCoupon(Long couponId);
     //sale insert 2021/05/11
     int insertTbSale(TbSale id);

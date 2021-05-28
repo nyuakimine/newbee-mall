@@ -146,7 +146,7 @@ public interface NewBeeMallGoodsService {
      */
     List<TbSale>TbSale(Long id); 
     List<TbCategory>TbCategory(Long id);
-    List<GoodsSale>GoodsSale(Long id);   
+    List<GoodsSale>GoodsSale();   
     List<GoodsCoupon>GoodsCoupon(Long couponId);
     /* 
      * niuxiaofeng
@@ -171,5 +171,5 @@ public interface NewBeeMallGoodsService {
      * add by niu 2021/05/24
      * insertSaleMaxId
      */
-    Long insertSale(Long id); 
+    Long insertSale(Long id);
 }

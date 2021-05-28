@@ -2,7 +2,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <header th:replace="admin/header::header-fragment"></header>
-<body class="hold-transition sidebar-mini" onload="time()">
+
+<body class="hold-transition sidebar-mini">
 	<div class="wrapper">
 		<!-- 引入页面头header-fragment -->
 		<div th:replace="admin/header::header-nav"></div>
@@ -21,12 +22,14 @@
 					<div class="card card-primary card-outline">
 						<div class="card-header">
 							<h3 class="card-title">GoodsCategory</h3>
-							</div> 
-						 <div class="card-body"> <!-- /.card-body -->
+						</div>
+						<div class="card-body">
+							<!-- /.card-body -->
 							<div>
 								<div>
 									<table class="order-table">
 										<tbody>
+										
 											<tr>
 												<td>
 													<select class="custom-select" id="inputGroupSelect04">
@@ -36,35 +39,30 @@
 													</select></td>
 												<td>
 													<input type="checkbox" /> 家电 数码 手机
-													<button class="button1" id="xialakuang">➕</button>
+													<button class="button1" id="button2">➕</button>
 												</td>
 											</tr>
-							   						<ul id="searchResultUl">
-															<li class="dumyLi">
-																<a>
-																	link
-																</a>
-															</li>
-														</ul>
 										</tbody>
 									</table>
-									  
-  
+									<ul id="searchResultUl">
+											<li class="dumyLi">
+												<a>
+												link
+											</a>
+										</li>
+									</ul>
 								</div>
-							
 								<div>
-								
-							
 								</div><!-- /.card-body -->
 							</div><!-- /.container-fluid -->
-							</div>
-							</div>
-	    <!-- #contents START -->
-	  <div id="contents">
-	  </div>
-    <!-- /.content-wrapper -->
-    <!-- 引入页脚footer-fragment -->
-    <div th:replace="admin/footer::footer-fragment"></div>
+						</div>
+					</div>
+<!-- #contents START -->
+<div id="contents">
+</div>
+<!-- /.content-wrapper -->
+<!-- 引入页脚footer-fragment -->
+<div th:replace="admin/footer::footer-fragment"></div>
 
 <!-- jQuery -->
 <script th:src="@{/admin/plugins/jquery/jquery.min.js}"></script>
@@ -84,4 +82,5 @@
 </body>
 <script>
 </script>
+
 </html>

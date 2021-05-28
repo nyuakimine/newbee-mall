@@ -12,6 +12,7 @@ import ltd.newbee.mall.common.Constants;
 import ltd.newbee.mall.common.NewBeeMallCategoryLevelEnum;
 import ltd.newbee.mall.common.ServiceResultEnum;
 import ltd.newbee.mall.entity.GoodsCategory;
+import ltd.newbee.mall.entity.GoodsSale;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
 import ltd.newbee.mall.service.NewBeeMallCategoryService;
 import ltd.newbee.mall.service.NewBeeMallGoodsService;
@@ -41,29 +42,16 @@ public class GoodsCategoryController {
     @Resource
     private NewBeeMallCategoryService newBeeMallCategoryService;
 
-    @GetMapping({ "/goodsCategory","/goodsCategory.html" })
-    
-    public String goodsCategory(@RequestParam Map<String, Object> params, HttpServletRequest request) {
-	if (StringUtils.isEmpty(params.get("page"))) {
-	    params.put("page", 1);
-	}
-	params.put("limit",10);//Constants.GOODS_SEARCH_PAGE_LIMIT
-	// 封装参数供前端回显
-	if (params.containsKey("orderBy") && !StringUtils.isEmpty(params.get("orderBy") + "")) {
-	    request.setAttribute("orderBy", params.get("orderBy") + "");
-	}
-	String keyword = "";
-	// 对keyword做过滤 去掉空格
-	if (params.containsKey("keyword") && !StringUtils.isEmpty((params.get("keyword") + "").trim())) {
-	    keyword = params.get("keyword") + "";
-	}
-	request.setAttribute("keyword", keyword);
-	params.put("keyword", keyword);
-	// 封装商品数据
-	PageQueryUtil pageUtil = new PageQueryUtil(params);
-	
-	request.setAttribute("pageResult", newBeeMallGoodsService.goodsSalePagAndSort(pageUtil));
-	
-	return "admin/goodsCategory";
-    }
+   @GetMapping({ "/goodsCategory","/goodsCategory.html" })
+   public String firstLevel(HttpServletRequest request) {
+         request.setAttribute("path", "edit");
+         List<GoodsCategory> firstLevelCategories = newBeeMallCategoryService.selectByLevelAndParentIdsAndNumber(
+         Collections.singletonList(0L), NewBeeMallCategoryLevelEnum.LEVEL_ONE.getLevel());
+         List<GoodsSale> goodsSaleList = newBeeMallGoodsService.GoodsSale();
+        
+         request.setAttribute("goodsSaleList", goodsSaleList);
+         request.setAttribute("firstLevelCategories", firstLevelCategories);
+         request.setAttribute("path", "goods-edit");
+         return "admin/goodsCategory";
+        }
 }
