@@ -3,18 +3,19 @@ $("#downloadsale").on('click',function(){
 	        debugger;
 	        var ids = [];
 			var format=$("#inputGroupSelect04").val();
+			$('input:checkbox:checked').parent().next().map(function (){
+			    ids.push($(this).text())
+			    return ids;
+			})
 			var index = ids.indexOf("Campaign ID");
 			  if (index > -1) {
 			  ids.splice(index, 1);
 			}
 			var data = {
 				"ids": ids,
-				"format": format,
+				"format": format
 			}
-			$('input:checkbox:checked').parent().next().map(function (){
-			    ids.push($(this).text())
-			    return ids;
-			})
+		
 			if (!ids){
 			    swal("请选择一条记录" ,{
 				icon:"warning",
@@ -26,48 +27,6 @@ $("#downloadsale").on('click',function(){
             url: '/admin/goodsSale/download',
             contentType: 'application/json',
             data: JSON.stringify(data),
-            success: function (result) {
-	        //サーバーが成功した場合
-                if (result.resultCode == 200) {
-	              debugger;
-	              Download(result.data);
-                } else {
-                    	swal(result.message, {
-                        icon: "error",
-                    });
-                }
-                
-            },
-            error: function () {
-                swal("操作失败", {
-                    icon: "error",
-                });
-             }
-         })
-  });
-  //download txt by niu 2021/05/26
-$("#downloadTxt").on('click',function(){
-	        debugger;
-	        var ids = [];
-	        $('input:checkbox:checked').parent().next().map(function (){
-			    ids.push($(this).text())
-			    return ids;
-			})
-			var index = ids.indexOf("Campaign ID");
-			  if (index > -1) {
-			  ids.splice(index, 1);
-			}
-			if (!ids){
-			    swal("请选择一条记录" ,{
-				icon:"warning",
-				});
-			    return
-		    }
-	  	    $.ajax({
-            type: 'POST',//方法类型
-            url: '/admin/goodsSale/download/txt',
-            contentType: 'application/json',
-            data: JSON.stringify(ids),
             success: function (result) {
 	        //サーバーが成功した場合
                 if (result.resultCode == 200) {
@@ -112,14 +71,6 @@ new AjaxUpload('#col-120', {
             }
         }
  });
-//絞り込み検索 改修 2021/05/25
-$(function() {
-     $('#kennsaku').on('click', function() {
-         $('table tbody tr').hide()
-             .filter(":contains('" + ($('#searchSale').val()) + "')")
-             .show();
-     })
- })
 // 2021/05/22 Listen for click on toggle checkbox 
 $('#select-all').click(function(event) {   
     if(this.checked) {
@@ -276,3 +227,41 @@ $(function() {
   // Excelの文字化け対策
   var bom = new Uint8Array([0xEF, 0xBB, 0xBF])
 });
+//絞り込み検索 改修 2021/05/25
+$(function() {
+     $('#kennsaku').on('click', function() {
+         $('table tbody tr').hide()
+             .filter(":contains('" + ($('#searchSale').val()) + "')")
+             .show();
+     })
+ })
+//ajax あいまい検索
+/*$("#searchSale").keyup(function(){
+	debugger;
+	var keyword = $("#searchSale").val();
+	    $.ajax({
+            type: 'get',//方法类型  //method = "POST"
+            url: "/admin/goods/sale?name="+keyword,  //Post送信先のurl
+            //contentType: 'application/json',
+            //data: JSON.stringify(keyword),
+            dataType:"json",
+            success: function (json_data) {
+	   	   
+	   	    var list = json_data.data.list[0];
+		    var str = list.name;
+		    var arr = str.split(" ");
+		    // arr.filter(keyword => keyword.includes(keyword));  
+		    for (var i=0;i<arr.length;i++){
+			  if(arr[i].includes(keyword)){
+				keyword = arr[i];
+			  }
+		    }  
+            keywordInsert(keyword);
+		},
+		error: function() {
+			debugger;
+			alert("Service Error. Pleasy try again later.");
+		}
+	});
+		
+});*/

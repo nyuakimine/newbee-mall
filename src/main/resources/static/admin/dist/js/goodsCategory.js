@@ -1,27 +1,10 @@
+//メニュー
 var MouseOnSearchResultUl  //全局变量
-$(function () {
-    $('#keyword').keypress(function (e) {
-        var key = e.which; //e.which是按键的值
-        if (key == 13) {
-            var q = $(this).val();
-            if (q && q != '') {
-                window.location.href = '/search?keyword=' + q;
-            }
-        }
-    });
-});
-
-function search() {
-    var q = $('#keyword').val();
-    if (q && q != '') {
-        window.location.href = '/search?keyword=' + q;
-    }
-}
 //ajax与后台通信，查找查询履历
-$( "#keyword" ).focus(function(){
-	var keyword = $( "#keyword" ).val();
+$( "#xialakuang" ).focus(function(){
+	var keyword = $( "#xialakuang" ).val();
 	if(keyword != ""){
-		$( "#keyword" ).trigger("keyup");
+		$( "#xialakuang" ).trigger("keyup");
 	}
 		    $.ajax({
             type: 'POST',//方法类型
@@ -48,7 +31,7 @@ $( "#keyword" ).focus(function(){
          })
 });		
 //鼠标移开时候删除elements的内容delete elements when focus out
-$("#keyword").focusout(function(){
+$("#xialakuang").focusout(function(){
 	if(MouseOnSearchResultUl)
 	return;
     clearResultList()
@@ -56,9 +39,9 @@ $("#keyword").focusout(function(){
 	$("#searchResultUl").hide();
 })
 //ajax あいまい検索
-$("#keyword").keyup(function(){
+$("#xialakuang").keyup(function(){
 	debugger;
-	var keyword = $("#keyword").val();
+	var keyword = $("#xialakuang").val();
 	    $.ajax({
             type: 'get',//方法类型  //method = "POST"
             url: "/goods/search?goodsName="+keyword,  //Post送信先のurl
@@ -79,7 +62,7 @@ $("#keyword").keyup(function(){
 				keyword = arr[i];
 			  }
 		    }  
-            keywordInsert(keyword);
+          /*  keywordInsert(keyword);*/
 		},
 		error: function() {
 			debugger;
@@ -112,7 +95,7 @@ function showResult(result){
 	appendToSearchBar($("#searchResultUl"));
 }
 
-function showResultForLikeSearch(result){
+/*function showResultForLikeSearch(result){
 	var list = result.data.list;
 	//href="/goods/detail/10700"
 	var _href = "/goods/detail/";
@@ -126,17 +109,17 @@ function showResultForLikeSearch(result){
 	$("#searchResultUl").show();
 	appendToSearchBar($("#searchResultUl"));
 }
-
+*/
 function appendToSearchBar(el){
 	debugger;
-	var searchBar = $("#keyword");//jquery object
-	//var searchBar = document.getElementById("keyword");//dom
+	var searchBar = $("#xialakuang");//jquery object
+	//var searchBar = document.getElementById("xialakuang");//dom
 	var rect = searchBar[0].getBoundingClientRect();//转换成dom加[0]  convert jquery object to dom by searchBar[0]
 	console.log(rect.top,rect.right,rect.bottom,rect.left);
-	var sbHeight = searchBar.height();
+	//var sbHeight = searchBar.height();
 	//el.height(rect.top + sbHeight)
 	//el.left(rect.left);
-	el.css({top: rect.top + sbHeight,left: rect.left,position:'absolute'});//相对定位relative  绝对定位absolute
+	el.css({top: rect.top,left: rect.right,position:'relative'});//相对定位relative  绝对定位absolute
 	}
 $("#searchResultUl").mousemove(function(){
 	MouseOnSearchResultUl = true;
@@ -145,9 +128,9 @@ $("#searchResultUl").mouseleave(function(){
 	MouseOnSearchResultUl = false;
 })
 //insert
-function keywordInsert(keyword){	
+ function keywordInsert(keyword){	
 	debugger;
-			var keyword = $("#keyword").val();
+			var keyword = $("#xialakuang").val();
 		    data = {
 			  "keyword":keyword,
 			 /* "id":id*/
@@ -161,9 +144,7 @@ function keywordInsert(keyword){
 		//サーバーが成功した場合
 	                if (result.resultCode == 200) {
 					debugger;					
-							/*swal("質問ご登録ありがとうございました！" ,{
-								icon:"success",
-							});*/
+						
 	                } else {
 	                    	swal(result.message, {
 	                        icon: "error",
@@ -178,4 +159,3 @@ function keywordInsert(keyword){
 	             }
 	         })
 	      };
-       

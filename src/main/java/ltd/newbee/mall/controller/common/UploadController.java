@@ -45,6 +45,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 
 import ltd.newbee.mall.common.Constants;
+import ltd.newbee.mall.entity.DownloadFormat;
 import ltd.newbee.mall.entity.GoodsSale;
 import ltd.newbee.mall.service.NewBeeMallGoodsService;
 import ltd.newbee.mall.util.NewBeeMallUtils;
@@ -178,57 +179,40 @@ public class UploadController {
     }    
    //diy niu download 2021/05/14
     @RequestMapping(value = "/goodsSale/download", method = RequestMethod.POST)
-   // @GetMapping({"/goodsSale/download"})
     @ResponseBody
-    public Result download(@RequestBody Integer[] ids,@RequestBody String format) throws URISyntaxException, ParseException {
-	 File f = new File(Constants.FILE_UPLOAD_CSV);
-	 File n = new File(Constants.FILE_UPLOAD_TXT);
-       
-	    if(format != null && format == "csv"){ 
-		
+    public Result download(@RequestBody DownloadFormat csvTxt) {
+	StringBuilder txCv = new StringBuilder();
+	txCv.append("." + csvTxt.getFormat());
+	String test = "test" + txCv;
+	File f = new File(Constants.FILE_UPLOAD_DIC + test);
+	BufferedWriter bw = null;
+	try {
+	    bw = new BufferedWriter(new FileWriter(f));
+	} catch (IOException e1) {
+	    e1.printStackTrace();
 	}
-	    else
-	try {
-	    BufferedWriter bw = new BufferedWriter(new FileWriter(f));
-	    List<GoodsSale> list = newBeeMallGoodsService.getGoodsSaleDownload(ids, format);
-            list.stream().forEach( c -> {
-        	   try {
-		    bw.write(c.toString());
-		    bw.newLine();//空一行
+	List<GoodsSale> gsList = newBeeMallGoodsService.getGoodsSaleDownload(csvTxt.getIds());
+	for (int i = 0; i < gsList.size(); i++) {
+	    GoodsSale gs = gsList.get(i);
+	    if (gs != null) {
+		try {
+		    bw.write(gs.toString());
+		    bw.newLine();
 		} catch (IOException e) {
+
 		    e.printStackTrace();
 		}
-            });
-            bw.close();
-	}catch (IOException e) {
-            e.printStackTrace();
-        }
-	Result resultSuccess = ResultGenerator.genSuccessResult();
-	resultSuccess.setData(Constants.FILE_UPLOAD_TEST_CSV);
-	return resultSuccess;
-    }
-    //diy niu download txt 2021/05/26
-    @RequestMapping(value = "/goodsSale/download/txt", method = RequestMethod.POST)
-    @ResponseBody
-    public Result downloadCsv(@RequestBody Integer[] ids,String format) throws URISyntaxException, ParseException {
-	File f = new File(Constants.FILE_UPLOAD_TXT);
+	    }
+	}
 	try {
-	    BufferedWriter bw = new BufferedWriter(new FileWriter(f));
-	    List<GoodsSale> list = newBeeMallGoodsService.getGoodsSaleDownload(ids, format);
-            list.stream().forEach( c -> {
-        	   try {
-		    bw.write(c.toString());
-		    bw.newLine();//空一行
-		} catch (IOException e) {
-		    e.printStackTrace();
-		}
-            });
-            bw.close();
-	}catch (IOException e) {
-            e.printStackTrace();
-        }
+	    bw.close();
+	} catch (IOException e) {
+
+	    e.printStackTrace();
+	}
 	Result resultSuccess = ResultGenerator.genSuccessResult();
-	resultSuccess.setData(Constants.FILE_UPLOAD_TEST_TXT);
+	resultSuccess.setData("/upload/" + test);
 	return resultSuccess;
+
     }
 }

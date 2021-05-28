@@ -93,14 +93,6 @@ function editGoods() {
     window.location.href = "/admin/goods/edit/" + id;
 }
 
-function editGoods() {
-    var id = getSelectedRow();
-    if (id == null) {
-        return;
-    }
-    window.location.href = "/admin/goods/sale/" + id;
-}
-
 
 /**
  * 上架

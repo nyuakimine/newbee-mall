@@ -160,7 +160,7 @@ public interface NewBeeMallGoodsService {
      * niuxiaofeng
      * Download add by niu 2021/05/14 
      */
-    List<GoodsSale> getGoodsSaleDownload(Integer[] ids,String format);
+    List<GoodsSale> getGoodsSaleDownload(Integer[] ids);
     /* 
      * niuxiaofeng
      * add by niu 2021/05/16

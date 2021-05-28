@@ -345,13 +345,13 @@ public class GoodsController {
     	NewBeeMallGoods goods3 = new NewBeeMallGoods();
     	
     	goods1.setGoodsId(10700L);
-    	goods1.setGoodsName("iphone10");
+    	goods1.setGoodsName("家电");
     	list.add(goods1);
     	goods2.setGoodsId(10003L);
-    	goods2.setGoodsName("无印良品 MUJI 基础润肤化妆水");
+    	goods2.setGoodsName("数码");
     	list.add(goods2);
     	goods3.setGoodsId(10004L);
-    	goods3.setGoodsName("无印良品 MUJI 柔和洁面泡沫");
+    	goods3.setGoodsName("手机");
     	list.add(goods3);
     	return ResultGenerator.genSuccessResult(list);
     }
