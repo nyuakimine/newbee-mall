@@ -21,6 +21,7 @@ import ltd.newbee.mall.controller.vo.GoodsReviewVo;
 import ltd.newbee.mall.controller.vo.GoodsSaleVO;
 import ltd.newbee.mall.controller.vo.NewBeeMallSearchGoodsVO;
 import ltd.newbee.mall.dao.NewBeeMallGoodsMapper;
+import ltd.newbee.mall.entity.GoodsCategory;
 import ltd.newbee.mall.entity.GoodsCoupon;
 import ltd.newbee.mall.entity.GoodsDesc;
 import ltd.newbee.mall.entity.GoodsImage;
@@ -295,7 +296,6 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 	        PageResult pageResult = new PageResult(goodsList, total, pageUtil.getLimit(), pageUtil.getPage());
 	        return pageResult;
 	    }
-
 	    //add by niu 2021/05/24 insertSaleMaxId
 	    @Override
 	    public Long insertSale(Long id) {

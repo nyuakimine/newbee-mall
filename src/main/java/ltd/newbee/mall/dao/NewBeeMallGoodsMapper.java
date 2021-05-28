@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import ltd.newbee.mall.entity.GoodsCategory;
 import ltd.newbee.mall.entity.GoodsCoupon;
 import ltd.newbee.mall.entity.GoodsDesc;
 import ltd.newbee.mall.entity.GoodsImage;
@@ -109,5 +110,7 @@ public interface NewBeeMallGoodsMapper {
     //goodsSalePagAndSort add by niu 2021/05/16	
     List<GoodsSale> goodsSalePagAndSort(PageQueryUtil pageUtil);
     int getGoodsSaleTotal(PageQueryUtil pageUtil);
-    Long insertSale(Long id);    
+    Long insertSale(Long id);
+    int getGoodsCouponTotal(PageQueryUtil pageUtil);  
+    
 }

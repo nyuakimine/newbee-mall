@@ -21,7 +21,7 @@
  .button1 {
 	 -webkit-transition-duration: 0.4s;
 	 transition-duration: 0.4s;
-	 padding: 6px 8px;
+	 padding: 1px 1px;
 	 text-align: center;
 	 background-color: white;
 	 color: black;
@@ -46,5 +46,11 @@
     width:300px;
 }
 .order-table{
-	width: 24.5%;
+	width: 30%;
+}
+.fontSize{
+	font-size: 20px;
+}
+#inputGroupSelect05{
+	width: 66.66%;
 }

@@ -11,6 +11,7 @@ package ltd.newbee.mall.service;
 import java.util.List;
 
 import ltd.newbee.mall.controller.vo.GoodsReviewVo;
+import ltd.newbee.mall.entity.GoodsCategory;
 import ltd.newbee.mall.entity.GoodsCoupon;
 import ltd.newbee.mall.entity.GoodsDesc;
 import ltd.newbee.mall.entity.GoodsImage;
@@ -172,4 +173,5 @@ public interface NewBeeMallGoodsService {
      * insertSaleMaxId
      */
     Long insertSale(Long id);
+   
 }

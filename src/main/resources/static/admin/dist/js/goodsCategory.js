@@ -2,18 +2,16 @@
 var MouseOnSearchResultUl  //全局变量
  $("#button2").click(function(){	
 	var keyword = $( "#button2" ).val();
-	if(keyword != ""){
-		$( "#button2" ).trigger("keyup");
-	}
 		    $.ajax({
             type: 'POST',//方法类型
             url: '/searchHistory/getSearchHistory',
             contentType: 'application/json',
             //data: JSON.stringify(keyword),
             success: function (result) {
-	//サーバーが成功した場合
+				//サーバーが成功した場合
                 if (result.resultCode == 200) {
-				debugger;					
+				debugger;
+				    clearResultList();					
 					showResult(result);
                 } else {
                     	swal(result.message, {
@@ -29,35 +27,13 @@ var MouseOnSearchResultUl  //全局变量
              }
          })
 });
-$("#button2").keyup(function(){
-	debugger;
-	var keyword = $("#button2").val();
-	    $.ajax({
-            type: 'get',//方法类型  //method = "POST"
-            url: "/goods/search?goodsName="+keyword,  //Post送信先のurl
-            dataType:"json",
-            success: function (json_data) {
-			debugger;
-			clearResultList();
-			//showResultForLikeSearch(json_data);
-			debugger;
-	   	    var list = json_data.data.list[0];
-		    var str = list.goodsName;
-		    var arr = str.split(" ");
-		    // arr.filter(keyword => keyword.includes(keyword));  
-		    for (var i=0;i<arr.length;i++){
-			  if(arr[i].includes(keyword)){
-				keyword = arr[i];
-			  }
-		    }  
-		},
-		error: function() {
-			debugger;
-			alert("Service Error. Pleasy try again later.");
-		}
-	});
-		
-});
+$("#button2").focusout(function(){
+	if(MouseOnSearchResultUl)
+	return;
+    clearResultList()
+	//hide #searchResultUl
+	$("#searchResultUl").hide();
+})
 function clearResultList(){
 	$("#searchResultUl").children().toArray().forEach(function(value,index,array){
 		var incFlag = $(value).attr('class').includes("dumyLi");
@@ -66,7 +42,6 @@ function clearResultList(){
 		}
 	})
 }
-
 function showResult(result){
 	var list = result.data;
 	//href="/goods/detail/10700"
@@ -81,7 +56,6 @@ function showResult(result){
 	$("#searchResultUl").show();
 	appendToSearchBar($("#searchResultUl"));
 }
-
 function appendToSearchBar(el){
 	debugger;
 	var searchBar = $("#button2");//jquery object
@@ -91,7 +65,7 @@ function appendToSearchBar(el){
 	//var sbHeight = searchBar.height();
 	//el.height(rect.top + sbHeight)
 	//el.left(rect.left);
-	el.css({top: rect.top,left: rect.right,position:'absolute'});//相对定位relative  绝对定位absolute
+	el.css({top: rect.top,left: rect.right,position:'fixed'});//相对定位relative  绝对定位absolute
 	}
 $("#searchResultUl").mousemove(function(){
 	MouseOnSearchResultUl = true;
@@ -99,35 +73,10 @@ $("#searchResultUl").mousemove(function(){
 $("#searchResultUl").mouseleave(function(){
 	MouseOnSearchResultUl = false;
 })
-//insert
- function keywordInsert(keyword){	
-	debugger;
-			var keyword = $("#button2").val();
-		    data = {
-			  "keyword":keyword,
-			 /* "id":id*/
-		    };	   
-		    $.ajax({
-	            type: 'POST',//方法类型
-	            url: '/goods/insertKeyword',
-	            contentType: 'application/json',
-	            data: JSON.stringify(data),//data:keyword变量
-	            success: function (result) {
-		//サーバーが成功した場合
-	                if (result.resultCode == 200) {
-					debugger;					
-						
-	                } else {
-	                    	swal(result.message, {
-	                        icon: "error",
-	                    });
-	                }
-	                
-	            },
-	            error: function () {
-	                swal("操作失败", {
-	                    icon: "error",
-	                });
-	             }
-	         })
-	      };
+
+	      
+$(document).ready(function () {
+	 $("#checkbox1").prop('checked', flase); 
+     $(".fontSize").text(" 家电 数码 手机");
+  
+});

@@ -18,6 +18,10 @@
         <result column="update_user" jdbcType="INTEGER" property="updateUser"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
     </resultMap>
+    <sql id="Base_Column_List">
+    category_id, category_level, parent_id, category_name, category_rank, is_deleted, 
+    create_time, create_user, update_time, update_user
+  </sql>
     <resultMap id="GoodsSaleResultMap" type="ltd.newbee.mall.entity.GoodsSale">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
@@ -549,11 +553,11 @@
 <!--  sale 20210511-->
 	   <select id="getTbSale" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.TbSale">
 	       select id,goods_id,start_date,end_date from tb_sale
-	       where id = #{id,jdbcType=BIGINT}
+	       where goods_id = #{goodsId,jdbcType=BIGINT}
 	   </select>
 	   <select id="getTbCategory" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.TbCategory">
 	       select id,category_id,start_date,end_date from tb_category
-		   where id = #{id,jdbcType=BIGINT}
+		   where category_id = #{categoryId,jdbcType=BIGINT}
 	   </select>    
 	   <select id="getGoodsSale" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.GoodsSale">
 	       select id,name,start_date,end_date,campaign,content1,content2,content3,content4,content5,flag from goods_sale 
@@ -766,4 +770,7 @@
       <select id="insertSale" parameterType="java.lang.Long" resultType= "java.lang.Long">			   
 			select max(id) from goods_sale		  
 	 </select> 
+	    <select id="getGoodsCouponTotal" parameterType="Map" resultType="int">
+        select count(*) from goods_coupon
+   </select>
  </mapper>
