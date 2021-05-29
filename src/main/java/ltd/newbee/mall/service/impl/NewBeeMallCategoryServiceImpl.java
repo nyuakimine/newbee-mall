@@ -192,8 +192,8 @@ public class NewBeeMallCategoryServiceImpl implements NewBeeMallCategoryService 
 
     // 2021/05/28
     @Override
-    public List<GoodsCategory> selectByLevelAndParentIds(List<Long> categoryId, int categoryLevel) {
-	return goodsCategoryMapper.selectByLevelAndParentIds(categoryId, categoryLevel);
+    public List<GoodsCategory> findCategoryIds() {
+	return goodsCategoryMapper.findCategoryId();
     }
 
     @Override

@@ -63,7 +63,7 @@ public interface NewBeeMallCategoryService {
      * add by niu 2021/05/28
      * selectByLevelAndParentIds
      */
-    List<GoodsCategory> selectByLevelAndParentIds(List<Long> categoryId, int categoryLevel);
+    List<GoodsCategory> findCategoryIds();
     /* 
      * niuxiaofeng
      * sale 2021/05/28

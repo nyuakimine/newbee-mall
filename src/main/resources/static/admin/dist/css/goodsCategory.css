@@ -19,8 +19,8 @@
 .col-11 {width: 91.66%;}
 .col-12 {width: 100%;}
  .button1 {
-	 -webkit-transition-duration: 0.4s;
-	 transition-duration: 0.4s;
+	 -webkit-transition-duration: 1.5s;
+	 transition-duration: 1s;
 	 padding: 1px 1px;
 	 text-align: center;
 	 background-color: white;
@@ -43,14 +43,24 @@
     overflow-y: auto;
     max-height: 360px;
     background-color: #fff;
-    width:300px;
+    width: 745px;
 }
 .order-table{
-	width: 30%;
+	width: 57%;
 }
 .fontSize{
 	font-size: 20px;
 }
+
 #inputGroupSelect05{
-	width: 66.66%;
+	width: 25%;
+}
+.hight1{
+	height:60px;	
+}
+#col-119{
+	 color: rgb(128, 128, 64);
+}
+#time1{
+	width: 180px;
 }

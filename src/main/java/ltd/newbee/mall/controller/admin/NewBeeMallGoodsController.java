@@ -167,8 +167,6 @@ public class NewBeeMallGoodsController {
             return ResultGenerator.genFailResult(result);
         }
     }
-
-
     /**
      * 修改
      */

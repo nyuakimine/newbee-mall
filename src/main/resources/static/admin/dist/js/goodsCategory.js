@@ -77,6 +77,6 @@ $("#searchResultUl").mouseleave(function(){
 	      
 $(document).ready(function () {
 	 $("#checkbox1").prop('checked', flase); 
-     $(".fontSize").text(" 家电 数码 手机");
+     //$(".fontSize").text(" 家电 数码 手机");
   
 });

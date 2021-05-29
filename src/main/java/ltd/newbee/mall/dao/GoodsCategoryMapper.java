@@ -43,7 +43,7 @@ public interface GoodsCategoryMapper {
     List<TbSale> getTbSale(Long goodsId); 
     List<TbCategory> getTbCategory(Long categoryId);
   //selectByLevelAndParentIds 2021/05/28
-    List<GoodsCategory> selectByLevelAndParentIds(List<Long> categoryId, int categoryLevel);
+    List<GoodsCategory> findCategoryId();
     
     List<TbSale> getTbsaleGoods(Long id);
     List<TbCategory> getCategoryGoods(Long id);

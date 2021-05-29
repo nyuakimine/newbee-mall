@@ -16,6 +16,8 @@ import ltd.newbee.mall.entity.GoodsCategory;
 import ltd.newbee.mall.entity.GoodsReviewHelpNum;
 import ltd.newbee.mall.entity.GoodsSale;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
+import ltd.newbee.mall.entity.TbCategory;
+import ltd.newbee.mall.entity.TbSale;
 import ltd.newbee.mall.service.NewBeeMallCategoryService;
 import ltd.newbee.mall.service.NewBeeMallGoodsService;
 import ltd.newbee.mall.util.PageQueryUtil;
@@ -31,7 +33,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import java.util.*;
-
 /**
  * @author 13
  * @qq交流群 796794009
@@ -47,15 +48,20 @@ public class GoodsCategoryController {
     private NewBeeMallCategoryService newBeeMallCategoryService;
 
    @GetMapping({ "/goodsCategory","/goodsCategory.html" })
-   public String firstLevel(HttpServletRequest request) {
-         request.setAttribute("path", "edit");
-         List<GoodsCategory> firstLevelCategories = newBeeMallCategoryService.selectByLevelAndParentIdsAndNumber(
-         Collections.singletonList(0L), NewBeeMallCategoryLevelEnum.LEVEL_ONE.getLevel());
+   public String category(HttpServletRequest request,Long goodsId,Long id) {
+         //カテゴリの抽出
+         List<GoodsCategory> firstLevelCategories = newBeeMallCategoryService.findCategoryIds();
+         List<TbSale> tsale = newBeeMallCategoryService.TbSale(goodsId); 
+         //該当カテゴリがキャンペーンの適応有無をチェックする。
+         List<TbCategory> tCategory = newBeeMallCategoryService.TbCategory(id);
+         //キャンペーンの抽出
          List<GoodsSale> goodsSaleList = newBeeMallGoodsService.GoodsSale();
-        
+       
          request.setAttribute("goodsSaleList", goodsSaleList);
          request.setAttribute("firstLevelCategories", firstLevelCategories);
-         request.setAttribute("path", "goods-edit");
+         request.setAttribute("tsale", tsale);
+         request.setAttribute("tCategory", tCategory);
+
          return "admin/goodsCategory";
         }
 }

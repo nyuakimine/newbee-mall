@@ -22,37 +22,44 @@
 					<div class="card card-primary card-outline">
 						<div class="card-header">
 							<h3 class="card-title">GoodsCategory</h3>
-						</div>
-						<div class="card-body">
-							<!-- /.card-body -->
-							<div>
-								<div>
+								</div>
+									<div>
 									<table class="order-table">
 										<tbody>
+											<th:block th:unless="${#lists.isEmpty(firstLevelCategories)}">
+												<th:block th:each="c : ${firstLevelCategories}">
 											<tr>
-												<td>
+												<td class="hight1">
 													<select class="custom-select" id="inputGroupSelect04">
-														<option value="selected">Choose...</option>
-														<option value="txt">换季大促销(40%)</option>
-														<option value="csv">换季大促销(40%)</option>
+													<th:block th:unless="${#lists.isEmpty(goodsSaleList)}">
+													 <th:block th:each="gs : ${goodsSaleList}">
+														<option value="gs.id"> <th:block th:text="${gs.name}"></option>
+												   </th:block>
+												</th:block>
 													</select>
 											    </td>
 												<td class="fontSize">&nbsp;
-													<input type="checkbox" / id="checkbox1">家电 数码 手机
+													<input type="checkbox" th:value="${c.categoryId}"
+													th:text="${c.categoryName}"/>
+										        	<span id="col-119" th:object="${goodsSaleList}">
+													開始日<input type="date" id="time1">
+													</span>
+													<span id="col-119">
+													終了日<input type="date" id="time1">
+													</span>
 													<button class="button1" id="button2">➕</button>
 												</td>
 											</tr>
+											</th:block>
+											</th:block>
 										</tbody>
 									</table>
-								</div>
-								<div>
 								</div><!-- /.card-body -->
 							</div><!-- /.container-fluid -->
 						</div>
 					</div>
-<!-- #contents START -->
-<div id="contents">
-</div>
+					
+<!--secondLevelCategories-->
 <ul id="searchResultUl">
 		<li class="dumyLi">
 		<select class="custom-select" id="inputGroupSelect05">
@@ -63,14 +70,16 @@
 		<input type="checkbox" />
 			<a>
 			link
-		</a>
+		</a>&nbsp;&nbsp;開始日
+		<input type="date">&nbsp;&nbsp;終了日
+		<input type="date">
 		<button class="button1" id="button2">➕</button>
 	</li>
 </ul>
 <!-- /.content-wrapper -->
 <!-- 引入页脚footer-fragment -->
 <div th:replace="admin/footer::footer-fragment"></div>
-
+</body>
 <!-- jQuery -->
 <script th:src="@{/admin/plugins/jquery/jquery.min.js}"></script>
 <!-- Bootstrap 4 -->
@@ -86,7 +95,6 @@
 <script th:src="@{/admin/dist/js/public.js}"></script>
 <script th:src="@{/admin/dist/js/goodsCategory.js}"></script>
 <link rel="stylesheet" th:href="@{/admin/dist/css/goodsCategory.css}">
-</body>
 <script>
 </script>
 

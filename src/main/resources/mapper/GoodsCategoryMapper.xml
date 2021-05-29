@@ -218,16 +218,16 @@
 	       select id,category_id,start_date,end_date from tb_category
 		   where category_id = #{categoryId,jdbcType=BIGINT}
 	   </select>    
-      <select id="findCategoryId" parameterType="Map" resultMap="ltd.newbee.mall.entity.GoodsCategory">
+      <select id="findCategoryId" parameterType="Map" resultMap="BaseResultMap">
         select  category_id, category_level, parent_id, category_name, category_rank, is_deleted, 
         create_time, create_user, update_time, update_user from tb_newbee_mall_goods_category
-        where category_level = #{categoryLevel,jdbcType=TINYINT} and category_id = #{categoryId,jdbcType=BIGINT}
+        where parent_id = 0
      </select>
-     <select id="getTbsaleGoods" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.ReviewUserInfo">
+     <select id="getTbsaleGoods" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.TbSale">
 		select n.id,n.name,n.start_date,n.end_date,n.campaign,n.content1,n.content2,n.content3,n.content4,n.content5,n.flag,m.id,m.goods_id,m.start_date,m.end_date from goods_sale as n join tb_sale as m on n.id = m.id 
 		    where n.id = #{id,jdbcType=BIGINT}
       </select>
-      <select id="getCategoryGoods" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.ReviewUserInfo">
+      <select id="getCategoryGoods" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.TbCategory">
 		select n.id,n.name,n.start_date,n.end_date,n.campaign,n.content1,n.content2,n.content3,n.content4,n.content5,n.flag,m.id,m.categry_id,m.start_date,m.end_date from goods_sale as n join tb_categry as m on n.id = m.id 
 		    where n.id = #{id,jdbcType=BIGINT}
       </select>

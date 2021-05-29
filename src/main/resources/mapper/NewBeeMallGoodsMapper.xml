@@ -18,10 +18,6 @@
         <result column="update_user" jdbcType="INTEGER" property="updateUser"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
     </resultMap>
-    <sql id="Base_Column_List">
-    category_id, category_level, parent_id, category_name, category_rank, is_deleted, 
-    create_time, create_user, update_time, update_user
-  </sql>
     <resultMap id="GoodsSaleResultMap" type="ltd.newbee.mall.entity.GoodsSale">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
