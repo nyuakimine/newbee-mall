@@ -8,6 +8,7 @@
  */
 package ltd.newbee.mall.dao;
 
+import ltd.newbee.mall.entity.CategoryIdAndId;
 import ltd.newbee.mall.entity.GoodsCategory;
 import ltd.newbee.mall.entity.ReviewUserInfo;
 import ltd.newbee.mall.entity.TbCategory;
@@ -47,4 +48,8 @@ public interface GoodsCategoryMapper {
     
     List<TbSale> getTbsaleGoods(Long id);
     List<TbCategory> getCategoryGoods(Long id);
+    //2021/05/30
+    List<CategoryIdAndId>getCategoryIdAndName(Long categoryId);  
+    //2021/05/30
+    int deletePaK(Long categoryId);
 }

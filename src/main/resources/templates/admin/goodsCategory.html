@@ -26,28 +26,26 @@
 									<div>
 									<table class="order-table">
 										<tbody>
-											<th:block th:unless="${#lists.isEmpty(firstLevelCategories)}">
-												<th:block th:each="c : ${firstLevelCategories}">
+										<th:block th:unless="${#lists.isEmpty(tCategory)}">
+													 <th:block th:each="gs : ${tCategory}">
 											<tr>
 												<td class="hight1">
 													<select class="custom-select" id="inputGroupSelect04">
-													<th:block th:unless="${#lists.isEmpty(goodsSaleList)}">
-													 <th:block th:each="gs : ${goodsSaleList}">
-														<option value="gs.id"> <th:block th:text="${gs.name}"></option>
-												   </th:block>
-												</th:block>
+														<option th:each="s : ${goodsSaleList}"
+														        th:text="${s.name}"
+														        th:selected="${s.id == gs.id} ? true:false" > 
+														</option>
 													</select>
 											    </td>
 												<td class="fontSize">&nbsp;
-													<input type="checkbox" th:value="${c.categoryId}"
-													th:text="${c.categoryName}"/>
-										        	<span id="col-119" th:object="${goodsSaleList}">
-													開始日<input type="date" id="time1">
-													</span>
-													<span id="col-119">
-													終了日<input type="date" id="time1">
-													</span>
-													<button class="button1" id="button2">➕</button>
+													<input type="checkbox" id="checkId" th:value="${gs.categoryId} "th:checked="${gs.id} !=null? true:false" th:text="${gs.categoryName}"/>
+													<span>開始日
+														  <input type="date" id="time1" th:value="${#dates.format(gs.startDate,'yyyy-MM-dd')}">
+														</span>
+														<span>終了日
+														  <input type="date" id="time1" th:value="${#dates.format(gs.endDate,'yyyy-MM-dd')}">
+														</span>
+													<button class="button1" id="button2" th:if="${gs.id}">➕</button>
 												</td>
 											</tr>
 											</th:block>

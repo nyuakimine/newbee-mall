@@ -4,7 +4,7 @@ var MouseOnSearchResultUl  //全局变量
 	var keyword = $( "#button2" ).val();
 		    $.ajax({
             type: 'POST',//方法类型
-            url: '/searchHistory/getSearchHistory',
+            url: '/admin/goodsCategory',
             contentType: 'application/json',
             //data: JSON.stringify(keyword),
             success: function (result) {
@@ -75,8 +75,89 @@ $("#searchResultUl").mouseleave(function(){
 })
 
 	      
-$(document).ready(function () {
+/*$(document).ready(function () {
 	 $("#checkbox1").prop('checked', flase); 
      //$(".fontSize").text(" 家电 数码 手机");
   
+});*/
+//2021/05/30
+ $("#checkId").change(function() {
+ var ischecked = $(this).is(':checked');
+ if (!ischecked) {
+  var categoryId = $('#checkId').val();
+ }
+
+ var url = '/admin/delete/categoryId';
+ var swlMessage = '刪除成功';
+debugger;
+ $.ajax({
+  type: 'POST',//方法类型
+  url: url,
+  contentType: 'application/json',
+  data: JSON.stringify(categoryId),
+  success: function(result) {
+   if (result.resultCode == 200) {
+    swal({
+     title: swlMessage,
+     type: 'success',
+     showCancelButton: false,
+     confirmButtonColor: '#1baeae',
+     confirmButtonText: '確定',
+     confirmButtonClass: 'btn btn-success',
+     buttonsStyling: false
+    }).then(function() {
+     window.location.href = "/admin/goods/sale";
+    })
+   } else {
+    swal(result.message, {
+     icon: "error",
+    });
+   }
+   ;
+  },
+  error: function() {
+   swal("操作失败", {
+    icon: "error",
+   });
+  }
+ });
 });
+//2021/05/30
+/*$("#checkId").change(function() {
+
+    var ids = getCategoryId();
+    if (ids == null) {
+        return;
+    }
+    swal({
+        title: "确认弹框",
+        text: "确认要删除数据吗?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    }).then((flag) => {
+            if (flag) {
+                $.ajax({
+                    type: "POST",
+                    url: "/admin/delete/categoryId",
+                    contentType: "application/json",
+                    data: JSON.stringify(ids),
+                    success: function (r) {
+                        if (r.resultCode == 200) {
+                            swal("删除成功", {
+                                icon: "success",
+                            });
+                            $("#jqGrid").trigger("reloadGrid");
+                        } else {
+                            swal(r.message, {
+                                icon: "error",
+                            });
+                        }
+                    }
+                });
+            }
+        }
+    )
+    ;
+})
+*/

@@ -56,11 +56,15 @@
 	width: 25%;
 }
 .hight1{
-	height:60px;	
+	
+	height: 60px;	
 }
 #col-119{
 	 color: rgb(128, 128, 64);
 }
 #time1{
 	width: 180px;
+}
+#time1{
+	width: 25%;
 }

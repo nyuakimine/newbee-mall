@@ -12,6 +12,7 @@ import ltd.newbee.mall.common.Constants;
 import ltd.newbee.mall.common.NewBeeMallCategoryLevelEnum;
 import ltd.newbee.mall.common.ServiceResultEnum;
 import ltd.newbee.mall.controller.vo.NewBeeMallUserVO;
+import ltd.newbee.mall.entity.CategoryIdAndId;
 import ltd.newbee.mall.entity.GoodsCategory;
 import ltd.newbee.mall.entity.GoodsReviewHelpNum;
 import ltd.newbee.mall.entity.GoodsSale;
@@ -46,22 +47,26 @@ public class GoodsCategoryController {
     private NewBeeMallGoodsService newBeeMallGoodsService;
     @Resource
     private NewBeeMallCategoryService newBeeMallCategoryService;
-
+  
    @GetMapping({ "/goodsCategory","/goodsCategory.html" })
-   public String category(HttpServletRequest request,Long goodsId,Long id) {
-         //カテゴリの抽出
-         List<GoodsCategory> firstLevelCategories = newBeeMallCategoryService.findCategoryIds();
-         List<TbSale> tsale = newBeeMallCategoryService.TbSale(goodsId); 
+   public String category(HttpServletRequest request,Long categoryId) {
          //該当カテゴリがキャンペーンの適応有無をチェックする。
-         List<TbCategory> tCategory = newBeeMallCategoryService.TbCategory(id);
+         List<CategoryIdAndId> tCategory = newBeeMallCategoryService.CategoryIdAndName(categoryId); 
          //キャンペーンの抽出
          List<GoodsSale> goodsSaleList = newBeeMallGoodsService.GoodsSale();
-       
          request.setAttribute("goodsSaleList", goodsSaleList);
-         request.setAttribute("firstLevelCategories", firstLevelCategories);
-         request.setAttribute("tsale", tsale);
          request.setAttribute("tCategory", tCategory);
-
          return "admin/goodsCategory";
         }
+   @PostMapping(value = "/delete/categoryId")
+   @ResponseBody
+   public Result deleteId(@RequestBody Long categoryId) {
+       boolean deleteResult = newBeeMallCategoryService.deleteCaId(categoryId);
+       //删除成功
+       if (deleteResult) {
+           return ResultGenerator.genSuccessResult();
+       }
+       //删除失败
+       return ResultGenerator.genFailResult(ServiceResultEnum.OPERATE_ERROR.getResult());
+   }
 }

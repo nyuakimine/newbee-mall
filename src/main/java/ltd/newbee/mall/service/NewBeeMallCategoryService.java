@@ -8,15 +8,16 @@
  */
 package ltd.newbee.mall.service;
 
+import java.util.List;
+
 import ltd.newbee.mall.controller.vo.NewBeeMallIndexCategoryVO;
 import ltd.newbee.mall.controller.vo.SearchPageCategoryVO;
+import ltd.newbee.mall.entity.CategoryIdAndId;
 import ltd.newbee.mall.entity.GoodsCategory;
 import ltd.newbee.mall.entity.TbCategory;
 import ltd.newbee.mall.entity.TbSale;
 import ltd.newbee.mall.util.PageQueryUtil;
 import ltd.newbee.mall.util.PageResult;
-
-import java.util.List;
 
 public interface NewBeeMallCategoryService {
     /**
@@ -73,4 +74,17 @@ public interface NewBeeMallCategoryService {
     
     List<TbSale> TbsaleGoods(Long id);
     List<TbCategory> CategoryGoods(Long id);
-}
+    /* 
+     * niuxiaofeng
+     * sale 2021/05/30
+     * CategoryIdAndName
+     */
+    List<CategoryIdAndId>CategoryIdAndName(Long categoryId);
+    /* 
+     * niuxiaofeng
+     * sale 2021/05/30
+     * deleteId
+     */
+    Boolean deleteCaId(Long categoryId); 
+}  
+
