@@ -29,6 +29,7 @@ import ltd.newbee.mall.controller.vo.SearchPageCategoryVO;
 import ltd.newbee.mall.controller.vo.SecondLevelCategoryVO;
 import ltd.newbee.mall.controller.vo.ThirdLevelCategoryVO;
 import ltd.newbee.mall.dao.GoodsCategoryMapper;
+import ltd.newbee.mall.entity.CampaignSet;
 import ltd.newbee.mall.entity.CategoryIdAndId;
 import ltd.newbee.mall.entity.GoodsCategory;
 import ltd.newbee.mall.entity.TbCategory;
@@ -228,5 +229,9 @@ public class NewBeeMallCategoryServiceImpl implements NewBeeMallCategoryService 
     public Boolean deleteCaId(Long categoryId) {
      return goodsCategoryMapper.deletePaK(categoryId) > 0;
     };
-
+    //2021/06/01 campaignSet
+    @Override
+    public List<CampaignSet> campaignSet(Long categoryId) {
+     return goodsCategoryMapper.getcampaignSet(categoryId);
+    };
 }

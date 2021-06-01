@@ -101,7 +101,7 @@ public interface NewBeeMallGoodsMapper {
     List<GoodsCoupon> getGoodsCoupon(Long couponId);
     //sale insert 2021/05/11
     int insertTbSale(TbSale id);
-    int insertTbCategory(TbCategory id);
+    //int insertTbCategory(TbCategory id);
     int insertGoodsSale(GoodsSale id);
     int insertGoodsCoupon(GoodsCoupon couponId);
     String saveInsertKeyword(InsertKeyword insertKeyword);
@@ -111,6 +111,10 @@ public interface NewBeeMallGoodsMapper {
     List<GoodsSale> goodsSalePagAndSort(PageQueryUtil pageUtil);
     int getGoodsSaleTotal(PageQueryUtil pageUtil);
     Long insertSale(Long id);
-    int getGoodsCouponTotal(PageQueryUtil pageUtil);  
-    
+    int getGoodsCouponTotal(PageQueryUtil pageUtil);
+    //2021/06/01
+    //List<GoodsSale> getGoodsSaleId(Long id);  
+    boolean insertTbCategory(TbCategory id);
+
+    List<GoodsSale> getGoodsSaleId(Long id);
 }

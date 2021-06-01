@@ -4,7 +4,7 @@ var MouseOnSearchResultUl  //全局变量
 	var keyword = $( "#button2" ).val();
 		    $.ajax({
             type: 'POST',//方法类型
-            url: '/admin/goodsCategory',
+            url: '/searchHistory/getSearchHistory',
             contentType: 'application/json',
             //data: JSON.stringify(keyword),
             success: function (result) {
@@ -73,41 +73,32 @@ $("#searchResultUl").mousemove(function(){
 $("#searchResultUl").mouseleave(function(){
 	MouseOnSearchResultUl = false;
 })
-
-	      
-/*$(document).ready(function () {
-	 $("#checkbox1").prop('checked', flase); 
-     //$(".fontSize").text(" 家电 数码 手机");
-  
-});*/
 //2021/05/30
- $("#checkId").change(function() {
- var ischecked = $(this).is(':checked');
+  $(".checkId").change(function() {
+   var ischecked = $(this).is(':checked');
+   
+   var id =$('.custom-select1').val();
+   var startDate = $('#startDate').val();
+   var endDate = $('#endDate').val();
+   var categoryId = $(this).val();
  if (!ischecked) {
-  var categoryId = $('#checkId').val();
+	var categoryId = $(this).val();
  }
-
- var url = '/admin/delete/categoryId';
- var swlMessage = '刪除成功';
+  var data = {
+	"id":id,
+	"startDate":startDate,
+	"endDate":endDate,
+	"categoryId":categoryId
+    };	  
 debugger;
  $.ajax({
   type: 'POST',//方法类型
-  url: url,
+  url: '/admin/delete/categoryId',
   contentType: 'application/json',
   data: JSON.stringify(categoryId),
   success: function(result) {
    if (result.resultCode == 200) {
-    swal({
-     title: swlMessage,
-     type: 'success',
-     showCancelButton: false,
-     confirmButtonColor: '#1baeae',
-     confirmButtonText: '確定',
-     confirmButtonClass: 'btn btn-success',
-     buttonsStyling: false
-    }).then(function() {
-     window.location.href = "/admin/goods/sale";
-    })
+	
    } else {
     swal(result.message, {
      icon: "error",
@@ -121,43 +112,79 @@ debugger;
    });
   }
  });
-});
-//2021/05/30
-/*$("#checkId").change(function() {
-
-    var ids = getCategoryId();
-    if (ids == null) {
-        return;
-    }
-    swal({
-        title: "确认弹框",
-        text: "确认要删除数据吗?",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-    }).then((flag) => {
-            if (flag) {
-                $.ajax({
-                    type: "POST",
-                    url: "/admin/delete/categoryId",
-                    contentType: "application/json",
-                    data: JSON.stringify(ids),
-                    success: function (r) {
-                        if (r.resultCode == 200) {
-                            swal("删除成功", {
-                                icon: "success",
-                            });
-                            $("#jqGrid").trigger("reloadGrid");
-                        } else {
-                            swal(r.message, {
-                                icon: "error",
-                            });
-                        }
-                    }
+ 
+     $.ajax({
+        type: 'POST',//方法类型
+        url: '/admin/goods/inserTbcategory',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function (result) {
+//サーバーが成功した場合
+            if (result.resultCode == 200) {
+			debugger;					
+					swal("ご登録ありがとうございました！" ,{
+						icon:"success",
+					});
+            } else {
+                	swal(result.message, {
+                    icon: "error",
                 });
             }
-        }
-    )
-    ;
-})
-*/
+            
+        },
+        error: function () {
+            swal("操作失败", {
+                icon: "error",
+            });
+         }
+     })
+
+});
+//2021/06/01 modal 
+$(function(){
+	$("#campaignSet").click(function(){
+		$(".modal").fadeIn();
+	});
+	$("#datequxiao").click(function(){
+		$(".modal").fadeOut();
+	});
+});
+//2021/06/01 insertSale 绑定modal上的保存按钮
+$("#saveSaleButton").click(function(){	
+	var primaryGoodsId = $("#primaryGoodsId").val();
+	var subGoodsId = $("#subGoodsId").val();
+    var data = {
+	"primaryGoodsId":primaryGoodsId,
+	"subGoodsId":subGoodsId,
+    };	  
+    $.ajax({
+        type: 'POST',//方法类型
+        url: '/admin/goods/primaryGoods',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function (result) {
+//サーバーが成功した場合
+            if (result.resultCode == 200) {
+			debugger;					
+					swal("ご登録ありがとうございました！" ,{
+						icon:"success",
+					});
+            } else {
+                	swal(result.message, {
+                    icon: "error",
+                });
+            }
+            
+        },
+        error: function () {
+            swal("操作失败", {
+                icon: "error",
+            });
+         }
+     })
+     $(".modal").fadeOut();
+  });
+//2021/06/01 insertTbcategory
+
+/*$(".checkId").click(function(){	*/
+	

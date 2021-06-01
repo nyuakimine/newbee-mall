@@ -12,6 +12,7 @@ import ltd.newbee.mall.common.Constants;
 import ltd.newbee.mall.common.NewBeeMallCategoryLevelEnum;
 import ltd.newbee.mall.common.ServiceResultEnum;
 import ltd.newbee.mall.controller.vo.NewBeeMallUserVO;
+import ltd.newbee.mall.entity.CampaignSet;
 import ltd.newbee.mall.entity.CategoryIdAndId;
 import ltd.newbee.mall.entity.GoodsCategory;
 import ltd.newbee.mall.entity.GoodsReviewHelpNum;
@@ -33,6 +34,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 /**
  * @author 13
@@ -49,7 +51,7 @@ public class GoodsCategoryController {
     private NewBeeMallCategoryService newBeeMallCategoryService;
   
    @GetMapping({ "/goodsCategory","/goodsCategory.html" })
-   public String category(HttpServletRequest request,Long categoryId) {
+   public String category(HttpServletRequest request,Long categoryId,GoodsSale id) {
          //該当カテゴリがキャンペーンの適応有無をチェックする。
          List<CategoryIdAndId> tCategory = newBeeMallCategoryService.CategoryIdAndName(categoryId); 
          //キャンペーンの抽出
@@ -68,5 +70,26 @@ public class GoodsCategoryController {
        }
        //删除失败
        return ResultGenerator.genFailResult(ServiceResultEnum.OPERATE_ERROR.getResult());
+   }
+   @GetMapping({ "/goods/primaryGoods","/goodsCategory.html" })
+   public String campaignSet(HttpServletRequest request,Long categoryId) {
+         List<CampaignSet> cs = newBeeMallCategoryService.campaignSet(categoryId); 
+         request.setAttribute("campaignSet", cs);
+         return "admin/goodsCategory";
+        }
+   //added by niu 2021/06/01 insertTbcategory
+   @RequestMapping(value = "/goods/inserTbcategory", method = RequestMethod.POST)
+   @ResponseBody
+   public Result insertCategory(@RequestBody TbCategory id) {
+       Boolean count = null;  
+       id.getStartDate();
+       id.getEndDate();
+       if(id != null) {
+           count = newBeeMallGoodsService.insertTbCategory(id);
+       }
+       if(!(count))  {
+       return ResultGenerator.genFailResult("投稿失敗！");
+       }      
+       return ResultGenerator.genSuccessResult(count);    
    }
 }

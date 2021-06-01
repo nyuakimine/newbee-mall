@@ -239,4 +239,7 @@
       <delete id="deletePaK" parameterType="java.lang.Long">
           delete from tb_category where category_id = #{categoryId,jdbcType=BIGINT}
      </delete>
+      <select id="getcampaignSet" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.CampaignSet">
+		select id,campagin_id,primary_goods_id,category_id,sub_goods_id,start_date,end_date where id = #{id,jdbcType=BIGINT}
+      </select>
 </mapper>

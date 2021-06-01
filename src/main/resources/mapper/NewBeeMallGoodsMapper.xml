@@ -769,4 +769,12 @@
 	    <select id="getGoodsCouponTotal" parameterType="Map" resultType="int">
         select count(*) from goods_coupon
    </select>
+ <!--   2021/06/01 -->
+     <select id="TbCategoryMaxId" parameterType="java.lang.Long" resultType= "java.lang.Long">			   
+			select max(id) from tb_category		  
+	 </select> 
+	    <select id="getGoodsSaleId" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.GoodsSale">
+	       select id,name,start_date,end_date,campaign,content1,content2,content3,content4,content5,flag from goods_sale where id = #{id,jdbcType=BIGINT}	
+	   </select>
+	 
  </mapper>

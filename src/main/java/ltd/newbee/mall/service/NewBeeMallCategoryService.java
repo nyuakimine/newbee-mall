@@ -12,6 +12,7 @@ import java.util.List;
 
 import ltd.newbee.mall.controller.vo.NewBeeMallIndexCategoryVO;
 import ltd.newbee.mall.controller.vo.SearchPageCategoryVO;
+import ltd.newbee.mall.entity.CampaignSet;
 import ltd.newbee.mall.entity.CategoryIdAndId;
 import ltd.newbee.mall.entity.GoodsCategory;
 import ltd.newbee.mall.entity.TbCategory;
@@ -86,5 +87,11 @@ public interface NewBeeMallCategoryService {
      * deleteId
      */
     Boolean deleteCaId(Long categoryId); 
+    /* 
+     * niuxiaofeng
+     * sale 2021/06/01
+     * CampaignSet
+     */
+    List<CampaignSet>campaignSet(Long categoryId);
 }  
 

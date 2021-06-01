@@ -18,10 +18,8 @@ import org.springframework.util.CollectionUtils;
 
 import ltd.newbee.mall.common.ServiceResultEnum;
 import ltd.newbee.mall.controller.vo.GoodsReviewVo;
-import ltd.newbee.mall.controller.vo.GoodsSaleVO;
 import ltd.newbee.mall.controller.vo.NewBeeMallSearchGoodsVO;
 import ltd.newbee.mall.dao.NewBeeMallGoodsMapper;
-import ltd.newbee.mall.entity.GoodsCategory;
 import ltd.newbee.mall.entity.GoodsCoupon;
 import ltd.newbee.mall.entity.GoodsDesc;
 import ltd.newbee.mall.entity.GoodsImage;
@@ -266,11 +264,7 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 	    return count;
 	}
 
-	@Override
-	public int insertTbCategory(TbCategory id) {
-	    int count = goodsMapper.insertTbCategory(id);
-	    return count;
-	}
+
 	@Override
 	public int insertGoodsSale(GoodsSale id) {
 	    int count = goodsMapper.insertGoodsSale(id);
@@ -306,4 +300,14 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 		      return 1L;
 		    }
 	    }
+	    //add by niu 2021/06/01 getTbCategory
+            @Override
+	    public Boolean insertTbCategory(TbCategory id) {
+		  List<GoodsSale> goodsSale = goodsMapper.getGoodsSaleId(id.getId());
+		  if(id.getStartDate().compareTo(goodsSale.get(0).getStartDate()) >=0
+			  && id.getEndDate().compareTo(goodsSale.get(0).getEndDate()) <=0) {
+		      return true;
+		  }
+		  return false;
+		}
 }

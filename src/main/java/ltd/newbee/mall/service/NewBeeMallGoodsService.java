@@ -8,6 +8,7 @@
  */
 package ltd.newbee.mall.service;
 
+import java.util.Date;
 import java.util.List;
 
 import ltd.newbee.mall.controller.vo.GoodsReviewVo;
@@ -154,7 +155,7 @@ public interface NewBeeMallGoodsService {
      * sale insert 20210511
      */
     int insertTbSale(TbSale id);
-    int insertTbCategory(TbCategory id);
+    Boolean insertTbCategory(TbCategory id);
     int insertGoodsSale(GoodsSale id);
     int insertGoodsCoupon(GoodsCoupon couponId);
     /* 
@@ -173,5 +174,17 @@ public interface NewBeeMallGoodsService {
      * insertSaleMaxId
      */
     Long insertSale(Long id);
+    /* 
+     * niuxiaofeng
+     * add by niu 2021/06/01
+     * GoodsSale
+     */
+   // List<GoodsSale>GoodsSaleId(GoodsSale id); 
+    /* 
+     * niuxiaofeng
+     * add by niu 2021/06/01
+     * getCategoryMaxId
+     */
+   // Boolean CategoryMaxId(Long id);
    
 }

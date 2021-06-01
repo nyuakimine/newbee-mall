@@ -8,6 +8,7 @@
  */
 package ltd.newbee.mall.dao;
 
+import ltd.newbee.mall.entity.CampaignSet;
 import ltd.newbee.mall.entity.CategoryIdAndId;
 import ltd.newbee.mall.entity.GoodsCategory;
 import ltd.newbee.mall.entity.ReviewUserInfo;
@@ -52,4 +53,6 @@ public interface GoodsCategoryMapper {
     List<CategoryIdAndId>getCategoryIdAndName(Long categoryId);  
     //2021/05/30
     int deletePaK(Long categoryId);
+    //2021/06/01
+    List<CampaignSet>getcampaignSet(Long categoryId);
 }
