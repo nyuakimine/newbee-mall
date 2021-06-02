@@ -32,6 +32,7 @@
 												<td class="hight1">
 													<select class="custom-select1" id="inputGroupSelect04">
 														<option th:each="s : ${goodsSaleList}"
+													        	th:value="${s.id}"
 														        th:text="${s.name}"
 														        th:selected="${s.id == gs.id} ? true:false" > 
 														</option>
@@ -41,10 +42,10 @@
 												
 													<input type="checkbox" class="checkId" th:value="${gs.categoryId}" th:checked="${gs.id} !=null? true:false" th:text="${gs.categoryName}"/>
 													<span>開始日
-														  <input type="date" id="startDate" th:value="${#dates.format(gs.startDate,'yyyy-MM-dd')}">
+														  <input type="date" class="startDate" th:value="${#dates.format(gs.startDate,'yyyy-MM-dd')}">
 														</span>
 														<span>終了日
-														  <input type="date" id="endDate" th:value="${#dates.format(gs.endDate,'yyyy-MM-dd')}">
+														  <input type="date" class="endDate" th:value="${#dates.format(gs.endDate,'yyyy-MM-dd')}">
 														</span>
 													<button class="button1" id="button2" th:if="${gs.id}">➕</button>
 												</td>
@@ -76,6 +77,11 @@
 	</li>
 </ul>
 <!--2021/06/01 modal niu -->
+	<div class="grid-btn">
+		<button class="btn btn-info" id="modal-open"> 
+				<i class="fa fa-plus" id="shinnki"> </i>&nbsp;买二送一
+		</button>
+	</div>
  <div id="modal-main">
 <div class="button open"> </div>
 <div class="modal" id="campaignSet" tabindex="-1" role="dialog" aria-labelledby="campaignSaleModalLabel">
@@ -90,9 +96,9 @@
 		<div class="form-group">
 			<label for="Name" class="control-label">主商品</label>
 			<input type="text" class="form-control" id="primaryGoodsId" name="primaryGoods"
-				placeholder="Nameを入力してください" required="true">
+				placeholder="idを入力してください" required="true">
 		</div>
-		<div class="form-group">
+		<!--<div class="form-group">
 			<label for="startDate" class="control-label">赠送商品</label>
 			<select class="custom-select" id="subGoodsId">
 			<option value="selected">Choose...</option>
@@ -100,7 +106,7 @@
 			<option value="2">usb线</option>
 		</select>
 		
-		</div>
+		</div>-->
 		<div class="modal-footer">
 			<button type="button" class="btn btn-default" id="datequxiao">キャンセル</button>
 			<button type="button" class="btn btn-primary" id="saveSaleButton">確認</button>

@@ -71,12 +71,25 @@ public class GoodsCategoryController {
        //删除失败
        return ResultGenerator.genFailResult(ServiceResultEnum.OPERATE_ERROR.getResult());
    }
-   @GetMapping({ "/goods/primaryGoods","/goodsCategory.html" })
-   public String campaignSet(HttpServletRequest request,Long categoryId) {
-         List<CampaignSet> cs = newBeeMallCategoryService.campaignSet(categoryId); 
-         request.setAttribute("campaignSet", cs);
-         return "admin/goodsCategory";
-        }
+ 
+   //added by niu 2021/06/02 insertprimaryGoods
+   @RequestMapping(value = "/goods/primaryGoods", method = RequestMethod.POST)
+   @ResponseBody
+   public Result insertprimaryGoods(@RequestBody CampaignSet categoryId) {
+       CampaignSet list = new CampaignSet();
+       Integer count = null;
+       Long saleId = newBeeMallCategoryService.campaignMaxId(categoryId.getId()); 
+       list.setId(saleId);
+       list.setPrimaryGoodsId(categoryId.getPrimaryGoodsId());
+//       list.setSubGoodsId(categoryId.getSubGoodsId());
+       if(list != null) {
+           count = newBeeMallCategoryService.campaignSet(list);
+       }
+       if(!(count > 0))  {
+       return ResultGenerator.genFailResult("投稿失敗！");
+       }      
+       return ResultGenerator.genSuccessResult(count);    
+   }
    //added by niu 2021/06/01 insertTbcategory
    @RequestMapping(value = "/goods/inserTbcategory", method = RequestMethod.POST)
    @ResponseBody

@@ -54,5 +54,7 @@ public interface GoodsCategoryMapper {
     //2021/05/30
     int deletePaK(Long categoryId);
     //2021/06/01
-    List<CampaignSet>getcampaignSet(Long categoryId);
+    int getCampaignSet(CampaignSet categoryId);
+    //2021/06/02 getcampaignMaxId
+    Long getCampaignMaxId(Long id);
 }

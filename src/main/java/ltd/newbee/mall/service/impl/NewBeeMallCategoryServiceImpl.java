@@ -231,7 +231,18 @@ public class NewBeeMallCategoryServiceImpl implements NewBeeMallCategoryService 
     };
     //2021/06/01 campaignSet
     @Override
-    public List<CampaignSet> campaignSet(Long categoryId) {
-     return goodsCategoryMapper.getcampaignSet(categoryId);
+    public int campaignSet(CampaignSet categoryId) {
+     return goodsCategoryMapper.getCampaignSet(categoryId);
     };
+    
+    //add by niu 2021/05/24 insertSaleMaxId
+    @Override
+    public Long campaignMaxId(Long id) {
+	 Long maxId = goodsCategoryMapper.getCampaignMaxId(id);
+	    if(maxId !=null) {
+	    return maxId + 1;
+	    }else {
+	      return 1L;
+	    }
+    }
 }

@@ -92,6 +92,12 @@ public interface NewBeeMallCategoryService {
      * sale 2021/06/01
      * CampaignSet
      */
-    List<CampaignSet>campaignSet(Long categoryId);
+    int campaignSet(CampaignSet categoryId);
+    /* 
+     * niuxiaofeng
+     * sale 2021/06/02
+     * getcampaignMaxId
+     */
+    Long campaignMaxId(Long id);
 }  
 

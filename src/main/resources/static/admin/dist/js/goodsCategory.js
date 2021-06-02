@@ -73,14 +73,15 @@ $("#searchResultUl").mousemove(function(){
 $("#searchResultUl").mouseleave(function(){
 	MouseOnSearchResultUl = false;
 })
-//2021/05/30
+//2021/06/01
   $(".checkId").change(function() {
    var ischecked = $(this).is(':checked');
    
    var id =$('.custom-select1').val();
-   var startDate = $('#startDate').val();
-   var endDate = $('#endDate').val();
+   var startDate = $('.startDate').val();
+   var endDate = $('.endDate').val();
    var categoryId = $(this).val();
+   
  if (!ischecked) {
 	var categoryId = $(this).val();
  }
@@ -142,7 +143,7 @@ debugger;
 });
 //2021/06/01 modal 
 $(function(){
-	$("#campaignSet").click(function(){
+	$("#modal-open").click(function(){
 		$(".modal").fadeIn();
 	});
 	$("#datequxiao").click(function(){
@@ -151,11 +152,11 @@ $(function(){
 });
 //2021/06/01 insertSale 绑定modal上的保存按钮
 $("#saveSaleButton").click(function(){	
-	var primaryGoodsId = $("#primaryGoodsId").val();
-	var subGoodsId = $("#subGoodsId").val();
+	var primaryGoodsId = $("#primaryGoodsId").text();
+/*	var subGoodsId = $("#subGoodsId").val();*/
     var data = {
 	"primaryGoodsId":primaryGoodsId,
-	"subGoodsId":subGoodsId,
+/*	"subGoodsId":subGoodsId,*/
     };	  
     $.ajax({
         type: 'POST',//方法类型
