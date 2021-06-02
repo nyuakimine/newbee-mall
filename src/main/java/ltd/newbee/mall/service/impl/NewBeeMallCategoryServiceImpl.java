@@ -232,7 +232,7 @@ public class NewBeeMallCategoryServiceImpl implements NewBeeMallCategoryService 
     //2021/06/01 campaignSet
     @Override
     public int campaignSet(CampaignSet categoryId) {
-     return goodsCategoryMapper.getCampaignSet(categoryId);
+     return goodsCategoryMapper.insertCampaignSet(categoryId);
     };
     
     //add by niu 2021/05/24 insertSaleMaxId

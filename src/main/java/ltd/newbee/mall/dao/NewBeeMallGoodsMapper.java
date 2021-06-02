@@ -114,7 +114,8 @@ public interface NewBeeMallGoodsMapper {
     int getGoodsCouponTotal(PageQueryUtil pageUtil);
     //2021/06/01
     //List<GoodsSale> getGoodsSaleId(Long id);  
-    boolean insertTbCategory(TbCategory id);
-
+    //boolean insertTbCategory(TbCategory id);
+    int insertTbCategory(TbCategory id);
+    //判断是否在日期范围内
     List<GoodsSale> getGoodsSaleId(Long id);
 }

@@ -155,9 +155,15 @@ public interface NewBeeMallGoodsService {
      * sale insert 20210511
      */
     int insertTbSale(TbSale id);
-    Boolean insertTbCategory(TbCategory id);
     int insertGoodsSale(GoodsSale id);
     int insertGoodsCoupon(GoodsCoupon couponId);
+    /* 
+     * niuxiaofeng
+     * 20210602
+     * insertTbCategory
+     */
+    Boolean insertTbCategory(TbCategory id);
+    int insertTbCategoryId(TbCategory id);
     /* 
      * niuxiaofeng
      * Download add by niu 2021/05/14 

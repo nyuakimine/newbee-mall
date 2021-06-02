@@ -76,22 +76,11 @@ $("#searchResultUl").mouseleave(function(){
 //2021/06/01
   $(".checkId").change(function() {
    var ischecked = $(this).is(':checked');
-   
-   var id =$('.custom-select1').val();
-   var startDate = $('.startDate').val();
-   var endDate = $('.endDate').val();
-   var categoryId = $(this).val();
-   
  if (!ischecked) {
 	var categoryId = $(this).val();
- }
-  var data = {
-	"id":id,
-	"startDate":startDate,
-	"endDate":endDate,
-	"categoryId":categoryId
-    };	  
+
 debugger;
+
  $.ajax({
   type: 'POST',//方法类型
   url: '/admin/delete/categoryId',
@@ -99,7 +88,9 @@ debugger;
   data: JSON.stringify(categoryId),
   success: function(result) {
    if (result.resultCode == 200) {
-	
+	swal("削除されました！" ,{
+						icon:"success",
+					});
    } else {
     swal(result.message, {
      icon: "error",
@@ -113,7 +104,17 @@ debugger;
    });
   }
  });
- 
+  }  else{
+   var id =$(this).parent().parent().find(".custom-select1").val();
+   var startDate = $(this).parent().find(".startDate").val();
+   var endDate =$(this).parent().find(".endDate").val();
+   var categoryId = $(this).val();
+   var data = {
+	"id":id,
+	"startDate":startDate,
+	"endDate":endDate,
+	"categoryId":categoryId
+    };	  
      $.ajax({
         type: 'POST',//方法类型
         url: '/admin/goods/inserTbcategory',
@@ -134,12 +135,12 @@ debugger;
             
         },
         error: function () {
-            swal("操作失败", {
+            swal("有効期限外！", {
                 icon: "error",
             });
          }
      })
-
+}
 });
 //2021/06/01 modal 
 $(function(){
@@ -152,11 +153,11 @@ $(function(){
 });
 //2021/06/01 insertSale 绑定modal上的保存按钮
 $("#saveSaleButton").click(function(){	
-	var primaryGoodsId = $("#primaryGoodsId").text();
-/*	var subGoodsId = $("#subGoodsId").val();*/
+	var primaryGoodsId = $("#primaryGoodsId").val();
+	var subGoodsId = $("#subGoodsId").val();
     var data = {
 	"primaryGoodsId":primaryGoodsId,
-/*	"subGoodsId":subGoodsId,*/
+	"subGoodsId":subGoodsId,
     };	  
     $.ajax({
         type: 'POST',//方法类型
@@ -185,7 +186,3 @@ $("#saveSaleButton").click(function(){
      })
      $(".modal").fadeOut();
   });
-//2021/06/01 insertTbcategory
-
-/*$(".checkId").click(function(){	*/
-	

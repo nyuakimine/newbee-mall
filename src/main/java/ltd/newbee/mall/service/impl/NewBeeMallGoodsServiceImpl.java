@@ -310,4 +310,11 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 		  }
 		  return false;
 		}
+
+	    @Override
+	    public int insertTbCategoryId(TbCategory id) {
+		  int count = goodsMapper.insertTbCategory(id);
+		    return count;
+	    }
+            
 }

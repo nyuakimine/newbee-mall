@@ -60,6 +60,24 @@ public class GoodsCategoryController {
          request.setAttribute("tCategory", tCategory);
          return "admin/goodsCategory";
         }
+   //added by niu 2021/06/02 insertprimaryGoods
+   @RequestMapping(value = "/goods/primaryGoods", method = RequestMethod.POST)
+   @ResponseBody
+   public Result insertprimaryGoods(@RequestBody CampaignSet categoryId) {
+       CampaignSet list = new CampaignSet();
+       Integer count = null;
+       Long saleId = newBeeMallCategoryService.campaignMaxId(categoryId.getId()); 
+       list.setId(saleId);
+       list.setPrimaryGoodsId(categoryId.getPrimaryGoodsId());
+       list.setSubGoodsId(categoryId.getSubGoodsId());
+       if(list != null) {
+           count = newBeeMallCategoryService.campaignSet(list);
+       }
+       if(!(count > 0))  {
+       return ResultGenerator.genFailResult("投稿失敗！");
+       }      
+       return ResultGenerator.genSuccessResult(count);    
+   }
    @PostMapping(value = "/delete/categoryId")
    @ResponseBody
    public Result deleteId(@RequestBody Long categoryId) {
@@ -71,38 +89,21 @@ public class GoodsCategoryController {
        //删除失败
        return ResultGenerator.genFailResult(ServiceResultEnum.OPERATE_ERROR.getResult());
    }
- 
-   //added by niu 2021/06/02 insertprimaryGoods
-   @RequestMapping(value = "/goods/primaryGoods", method = RequestMethod.POST)
-   @ResponseBody
-   public Result insertprimaryGoods(@RequestBody CampaignSet categoryId) {
-       CampaignSet list = new CampaignSet();
-       Integer count = null;
-       Long saleId = newBeeMallCategoryService.campaignMaxId(categoryId.getId()); 
-       list.setId(saleId);
-       list.setPrimaryGoodsId(categoryId.getPrimaryGoodsId());
-//       list.setSubGoodsId(categoryId.getSubGoodsId());
-       if(list != null) {
-           count = newBeeMallCategoryService.campaignSet(list);
-       }
-       if(!(count > 0))  {
-       return ResultGenerator.genFailResult("投稿失敗！");
-       }      
-       return ResultGenerator.genSuccessResult(count);    
-   }
    //added by niu 2021/06/01 insertTbcategory
    @RequestMapping(value = "/goods/inserTbcategory", method = RequestMethod.POST)
    @ResponseBody
    public Result insertCategory(@RequestBody TbCategory id) {
-       Boolean count = null;  
-       id.getStartDate();
-       id.getEndDate();
-       if(id != null) {
-           count = newBeeMallGoodsService.insertTbCategory(id);
+       Integer count =  null;  
+       Boolean insert = newBeeMallGoodsService.insertTbCategory(id);
+       if(insert) {
+           if(id != null) {
+               count = newBeeMallGoodsService.insertTbCategoryId(id);
+           }
+           if(!(count > 0))  {
+           return ResultGenerator.genFailResult("投稿失敗！");
+           }      
+           return ResultGenerator.genSuccessResult(count);    
        }
-       if(!(count))  {
-       return ResultGenerator.genFailResult("投稿失敗！");
-       }      
-       return ResultGenerator.genSuccessResult(count);    
+       return ResultGenerator.genFailResult("有効期限外！");
    }
 }

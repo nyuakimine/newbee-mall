@@ -242,6 +242,49 @@
       <select id="getCampaignSet" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.CampaignSet">
 		select id,campagin_id,primary_goods_id,category_id,sub_goods_id,start_date,end_date from campaign_set where id = #{id,jdbcType=BIGINT}
       </select>
+         <insert id="insertCampaignSet" parameterType="java.lang.Long">
+        insert into campaign_set
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="campaginId != null">
+                campagin_id,
+            </if>                 
+            <if test="primaryGoodsId != null">
+                primary_goods_id,
+            </if>
+             <if test="subGoodsId != null">
+                sub_goods_id,
+            </if>
+             <if test="startDate != null">
+                start_date,
+            </if>
+             <if test="endDate != null">
+                endDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="campaginId != null">
+                #{campaginId,jdbcType=BIGINT},
+            </if>   
+            <if test="primaryGoodsId != null">
+                #{primaryGoodsId,jdbcType=BIGINT},
+            </if>     
+             <if test="subGoodsId != null">
+                #{subGoodsId,jdbcType=BIGINT},
+            </if>     
+             <if test="startDate != null">
+                #{startDate,jdbcType=TIMESTAMP},
+            </if>       
+            <if test="endDate != null">
+                #{endDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert> 
         <select id="getCampaignMaxId" parameterType="java.lang.Long" resultType= "java.lang.Long">			   
 			select max(id) from campaign_set		  
 	 </select> 
