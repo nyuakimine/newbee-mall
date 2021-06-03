@@ -99,24 +99,19 @@
 				placeholder="idを入力してください" required="true">
 		</div>
 		<div class="form-group">
-			<label for="Name" class="control-label">赠送商品</label>
-			<input type="text" class="form-control" id="subGoodsId" name="primaryGoods"
-				placeholder="idを入力してください" required="true">
-		</div>
-		<!--<div class="form-group">
 			<label for="startDate" class="control-label">赠送商品</label>
-			<select class="custom-select" id="subGoodsId">
-			<option value="selected">Choose...</option>
-			<option value="1">充电器</option>
-			<option value="2">usb线</option>
-		</select>
-		
-		</div>-->
+			<select class="custom-select">
+				<th:block th:each="c : ${subGoodsId}">
+					<option value="selected" th:value="${c.categoryId}" th:text="${c.categoryName}">
+					</option>
+				</th:block>
+			</select>
+		</div>
 		<div class="modal-footer">
 			<button type="button" class="btn btn-default" id="datequxiao">キャンセル</button>
 			<button type="button" class="btn btn-primary" id="saveSaleButton">確認</button>
 		</div>
-	</div>
+		</div>
 </div>
 </div>
 <!-- /.content-wrapper -->

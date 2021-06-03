@@ -1,3 +1,4 @@
+
 //メニュー
 var MouseOnSearchResultUl  //全局变量
  $("#button2").click(function(){	
@@ -153,6 +154,7 @@ $(function(){
 });
 //2021/06/01 insertSale 绑定modal上的保存按钮
 $("#saveSaleButton").click(function(){	
+
 	var primaryGoodsId = $("#primaryGoodsId").val();
 	var subGoodsId = $("#subGoodsId").val();
     var data = {
@@ -186,3 +188,30 @@ $("#saveSaleButton").click(function(){
      })
      $(".modal").fadeOut();
   });
+//获取赠送商品的goodsId
+$("#saveGoodsButton").click(function(){	
+
+  $(function () {
+  var goodsId =$("#primaryGoodsId").val(); 
+  
+       $.ajax({
+        type: 'POST',//方法类型
+        url: '/admin/goods/subGoods',
+        contentType: 'application/json',
+        data: JSON.stringify(goodsId),
+        success: function (result) {
+//サーバーが成功した場合
+            if (result.resultCode == 200) {
+			debugger;					
+            } else {
+                	swal(result.message, {
+                    icon: "error",
+                });
+            }
+            
+        },
+        error: function () {
+         }
+     })
+     });
+});

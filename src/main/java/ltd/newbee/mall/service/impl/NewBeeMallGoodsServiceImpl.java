@@ -316,5 +316,11 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 		  int count = goodsMapper.insertTbCategory(id);
 		    return count;
 	    }
-            
+	    //获取goodsId
+	    @Override
+		public List<NewBeeMallGoods> getSubGoods(Long goodsId) {
+		    List<NewBeeMallGoods> goods = goodsMapper.findNewBeeMallGoodsListByGoodsId(goodsId); 
+		    List<NewBeeMallGoods> goodsList = goodsMapper.findNewBeeMallGoodsListByCategoryId(goods.get(0).getGoodsCategoryId()); 
+		    return goodsList;
+		}
 }

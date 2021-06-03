@@ -51,11 +51,13 @@ public class GoodsCategoryController {
     private NewBeeMallCategoryService newBeeMallCategoryService;
   
    @GetMapping({ "/goodsCategory","/goodsCategory.html" })
-   public String category(HttpServletRequest request,Long categoryId,GoodsSale id) {
+   public String category(HttpServletRequest request,Long categoryId,GoodsSale id,Long goodsId) {
          //該当カテゴリがキャンペーンの適応有無をチェックする。
          List<CategoryIdAndId> tCategory = newBeeMallCategoryService.CategoryIdAndName(categoryId); 
          //キャンペーンの抽出
          List<GoodsSale> goodsSaleList = newBeeMallGoodsService.GoodsSale();
+//         List<NewBeeMallGoods> subGoodsList = newBeeMallGoodsService.getSubGoods(goodsId);
+//         request.setAttribute("subGoodsList", subGoodsList);
          request.setAttribute("goodsSaleList", goodsSaleList);
          request.setAttribute("tCategory", tCategory);
          return "admin/goodsCategory";
@@ -106,4 +108,18 @@ public class GoodsCategoryController {
        }
        return ResultGenerator.genFailResult("有効期限外！");
    }
+//获取赠送商品goodsId
+//   @RequestMapping(value = "/goods/subGoods", method = RequestMethod.POST)
+//   @ResponseBody
+//   public Result subGoods (@RequestBody Long goodsId) {
+//       List<NewBeeMallGoods> subGoodsList = newBeeMallGoodsService.getSubGoods(goodsId);
+//    return ResultGenerator.genSuccessResult(subGoodsList);
+//   }
+   
+   @GetMapping({ "/goods/subGoods","/goodsCategory.html" })
+   public String subGoods(HttpServletRequest request,Long goodsId) {
+       List<NewBeeMallGoods> subGoodsList = newBeeMallGoodsService.getSubGoods(goodsId);
+         request.setAttribute("subGoodsList", subGoodsList);
+         return "admin/goodsCategory";
+        }
 }

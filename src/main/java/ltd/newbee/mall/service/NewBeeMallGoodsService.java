@@ -192,5 +192,11 @@ public interface NewBeeMallGoodsService {
      * getCategoryMaxId
      */
    // Boolean CategoryMaxId(Long id);
+    /* 
+     * niuxiaofeng
+     * add by niu 2021/06/03
+     * getSubGoods
+     */
+    List<NewBeeMallGoods> getSubGoods(Long goodsId);
    
 }

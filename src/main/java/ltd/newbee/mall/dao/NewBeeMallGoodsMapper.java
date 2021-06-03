@@ -118,4 +118,7 @@ public interface NewBeeMallGoodsMapper {
     int insertTbCategory(TbCategory id);
     //判断是否在日期范围内
     List<GoodsSale> getGoodsSaleId(Long id);
+    //获取赠送商品goodsId
+    List<NewBeeMallGoods> findNewBeeMallGoodsListByGoodsId(Long goodsId);
+    List<NewBeeMallGoods> findNewBeeMallGoodsListByCategoryId(Long goodsId);
 }
