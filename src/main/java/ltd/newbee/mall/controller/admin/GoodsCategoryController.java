@@ -115,11 +115,19 @@ public class GoodsCategoryController {
 //       List<NewBeeMallGoods> subGoodsList = newBeeMallGoodsService.getSubGoods(goodsId);
 //    return ResultGenerator.genSuccessResult(subGoodsList);
 //   }
-   
-   @GetMapping({ "/goods/subGoods","/goodsCategory.html" })
-   public String subGoods(HttpServletRequest request,Long goodsId) {
-       List<NewBeeMallGoods> subGoodsList = newBeeMallGoodsService.getSubGoods(goodsId);
-         request.setAttribute("subGoodsList", subGoodsList);
-         return "admin/goodsCategory";
-        }
+//   @GetMapping({ "/goods/subGoods","/goodsCategory.html" })
+//   public String subGoods(HttpServletRequest request,Long goodsId) {
+//       List<NewBeeMallGoods> subGoodsList = newBeeMallGoodsService.getSubGoods(goodsId);
+//         request.setAttribute("subGoodsList", subGoodsList);
+//         return "admin/goodsCategory";
+//        }
+   //added by niu 2021/06/04 SecondCategoryIdAndName
+   @RequestMapping(value = "/secondCategory", method = RequestMethod.POST)
+   @ResponseBody
+   public Result SecondCategoryIdAndName(@RequestBody Long categoryId) {
+       CategoryIdAndId list = new CategoryIdAndId();
+       list.setParentId(categoryId);
+       List<CategoryIdAndId> cb = newBeeMallCategoryService.SecondCategoryIdAndName(list.getParentId());
+       return ResultGenerator.genSuccessResult(list);    
+   }  
 }

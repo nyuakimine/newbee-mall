@@ -99,5 +99,11 @@ public interface NewBeeMallCategoryService {
      * getcampaignMaxId
      */
     Long campaignMaxId(Long id);
+    /* 
+     * niuxiaofeng
+     * 2021/06/04
+     * getSecondCategoryIdAndName
+     */
+    List<CategoryIdAndId>SecondCategoryIdAndName(Long categoryId);  
 }  
 

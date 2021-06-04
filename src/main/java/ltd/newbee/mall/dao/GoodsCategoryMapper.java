@@ -57,4 +57,7 @@ public interface GoodsCategoryMapper {
     int insertCampaignSet(CampaignSet categoryId);
     //2021/06/02 getcampaignMaxId
     Long getCampaignMaxId(Long id);
+    //2021/06/04 getSecondCategoryIdAndName
+    List<CategoryIdAndId>getSecondCategoryIdAndName(Long categoryId);  
+
 }

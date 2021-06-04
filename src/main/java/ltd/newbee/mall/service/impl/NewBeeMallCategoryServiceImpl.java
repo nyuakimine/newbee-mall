@@ -245,4 +245,9 @@ public class NewBeeMallCategoryServiceImpl implements NewBeeMallCategoryService 
 	      return 1L;
 	    }
     }
+    @Override
+    public List<CategoryIdAndId> SecondCategoryIdAndName(Long categoryId) {
+	List<CategoryIdAndId> tcList = goodsCategoryMapper.getSecondCategoryIdAndName(categoryId);
+	return tcList;
+    }
 }

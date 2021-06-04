@@ -1,13 +1,13 @@
-
 //メニュー
 var MouseOnSearchResultUl  //全局变量
- $("#button2").click(function(){	
-	var keyword = $( "#button2" ).val();
+ $(".button3").click(function(){	
+	var categoryId = $(this).parent().find("#secondCategory").val();
+	
 		    $.ajax({
             type: 'POST',//方法类型
-            url: '/searchHistory/getSearchHistory',
+            url: '/admin/secondCategory',
             contentType: 'application/json',
-            //data: JSON.stringify(keyword),
+            data: JSON.stringify(categoryId),
             success: function (result) {
 				//サーバーが成功した場合
                 if (result.resultCode == 200) {
@@ -19,7 +19,6 @@ var MouseOnSearchResultUl  //全局变量
                         icon: "error",
                     });
                 }
-                
             },
             error: function () {
                 swal("操作失败", {
@@ -28,15 +27,15 @@ var MouseOnSearchResultUl  //全局变量
              }
          })
 });
-$("#button2").focusout(function(){
+$(".button3").focusout(function(){
 	if(MouseOnSearchResultUl)
 	return;
     clearResultList()
 	//hide #searchResultUl
-	$("#searchResultUl").hide();
+	$(".secondCategoryId").hide();
 })
 function clearResultList(){
-	$("#searchResultUl").children().toArray().forEach(function(value,index,array){
+	$(".secondCategoryId").children().toArray().forEach(function(value,index,array){
 		var incFlag = $(value).attr('class').includes("dumyLi");
 		if(!incFlag){
 			$(value).remove();
@@ -44,22 +43,31 @@ function clearResultList(){
 	})
 }
 function showResult(result){
+	 var data = {
+		 'foo': 'bar',
+		 'foo2': 'baz'
+	 }
+	 var s = $('<select />');
+	 for (var val in data) {
+		 $('<option />', { value: val, text: data[val] }).appendTo(s);
+	 }
+	 s.appendTo('.secondOption'); // or wherever it should be
 	var list = result.data;
 	//href="/goods/detail/10700"
-	var _href = "/goods/detail/";
+	//var _href = "/goods/detail/";
 	for(var i = 0; i< list.length; i++){
 		var el = $(".dumyLi").clone().removeClass("dumyLi");
 		var link = el.find("a");
-		link.text(list[i].goodsName);
-		link.attr("href", _href + list[i].goodsId);
+		//link.text(list[i].goodsName);
+		//link.attr("href", _href + list[i].goodsId);
 		$(".dumyLi").before(el);
 	}
-	$("#searchResultUl").show();
-	appendToSearchBar($("#searchResultUl"));
+	$(".secondCategoryId").show();
+	appendToSearchBar($(".secondCategoryId"));
 }
 function appendToSearchBar(el){
 	debugger;
-	var searchBar = $("#button2");//jquery object
+	var searchBar = $(".button3");//jquery object
 	//var searchBar = document.getElementById("button2");//dom
 	var rect = searchBar[0].getBoundingClientRect();//转换成dom加[0]  convert jquery object to dom by searchBar[0]
 	console.log(rect.top,rect.right,rect.bottom,rect.left);
@@ -68,10 +76,10 @@ function appendToSearchBar(el){
 	//el.left(rect.left);
 	el.css({top: rect.top,left: rect.right,position:'fixed'});//相对定位relative  绝对定位absolute
 	}
-$("#searchResultUl").mousemove(function(){
+$(".secondCategoryId").mousemove(function(){
 	MouseOnSearchResultUl = true;
 });
-$("#searchResultUl").mouseleave(function(){
+$(".secondCategoryId").mouseleave(function(){
 	MouseOnSearchResultUl = false;
 })
 //2021/06/01
@@ -189,7 +197,7 @@ $("#saveSaleButton").click(function(){
      $(".modal").fadeOut();
   });
 //获取赠送商品的goodsId
-$("#saveGoodsButton").click(function(){	
+/*$("#saveGoodsButton").click(function(){	
 
   $(function () {
   var goodsId =$("#primaryGoodsId").val(); 
@@ -214,4 +222,4 @@ $("#saveGoodsButton").click(function(){
          }
      })
      });
-});
+});*/
