@@ -56,8 +56,6 @@ public class GoodsCategoryController {
          List<CategoryIdAndId> tCategory = newBeeMallCategoryService.CategoryIdAndName(categoryId); 
          //キャンペーンの抽出
          List<GoodsSale> goodsSaleList = newBeeMallGoodsService.GoodsSale();
-//         List<NewBeeMallGoods> subGoodsList = newBeeMallGoodsService.getSubGoods(goodsId);
-//         request.setAttribute("subGoodsList", subGoodsList);
          request.setAttribute("goodsSaleList", goodsSaleList);
          request.setAttribute("tCategory", tCategory);
          return "admin/goodsCategory";
@@ -65,7 +63,7 @@ public class GoodsCategoryController {
    //added by niu 2021/06/02 insertprimaryGoods
    @RequestMapping(value = "/goods/primaryGoods", method = RequestMethod.POST)
    @ResponseBody
-   public Result insertprimaryGoods(@RequestBody CampaignSet categoryId) {
+   public Result insertPrimaryGoods(@RequestBody CampaignSet categoryId) {
        CampaignSet list = new CampaignSet();
        Integer count = null;
        Long saleId = newBeeMallCategoryService.campaignMaxId(categoryId.getId()); 
@@ -82,7 +80,7 @@ public class GoodsCategoryController {
    }
    @PostMapping(value = "/delete/categoryId")
    @ResponseBody
-   public Result deleteId(@RequestBody Long categoryId) {
+   public Result deleteCaId(@RequestBody Long categoryId) {
        boolean deleteResult = newBeeMallCategoryService.deleteCaId(categoryId);
        //删除成功
        if (deleteResult) {
@@ -125,9 +123,18 @@ public class GoodsCategoryController {
    @RequestMapping(value = "/secondCategory", method = RequestMethod.POST)
    @ResponseBody
    public Result SecondCategoryIdAndName(@RequestBody Long categoryId) {
-       CategoryIdAndId list = new CategoryIdAndId();
-       list.setParentId(categoryId);
-       List<CategoryIdAndId> cb = newBeeMallCategoryService.SecondCategoryIdAndName(list.getParentId());
-       return ResultGenerator.genSuccessResult(list);    
-   }  
+       Long parentId = categoryId;
+       List<GoodsSale> gsM = new ArrayList<GoodsSale>();
+       List<CategoryIdAndId> cm = newBeeMallCategoryService.SecondCategoryIdAndName(parentId);
+       for (int i = 0; i < cm.size(); i++) {
+	   if (cm.get(i).getId() != null) {
+	       List<GoodsSale> gs = newBeeMallGoodsService.goodsSaleId(cm.get(i).getId());
+	       gsM.addAll(gs);
+	   }
+       }
+       Map<Object, List> result = new HashMap<>();
+       result.put("gsM", gsM);
+       result.put("cm", cm);
+       return ResultGenerator.genSuccessResult(result);
+   }
 }

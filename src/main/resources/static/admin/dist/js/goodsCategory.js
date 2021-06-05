@@ -1,4 +1,3 @@
-//メニュー
 var MouseOnSearchResultUl  //全局变量
  $(".button3").click(function(){	
 	var categoryId = $(this).parent().find("#secondCategory").val();
@@ -43,23 +42,25 @@ function clearResultList(){
 	})
 }
 function showResult(result){
-	 var data = {
-		 'foo': 'bar',
-		 'foo2': 'baz'
-	 }
-	 var s = $('<select />');
-	 for (var val in data) {
-		 $('<option />', { value: val, text: data[val] }).appendTo(s);
-	 }
-	 s.appendTo('.secondOption'); // or wherever it should be
-	var list = result.data;
-	//href="/goods/detail/10700"
-	//var _href = "/goods/detail/";
-	for(var i = 0; i< list.length; i++){
+	//campaignName
+	var gsM = result.data.gsM;
+	var option = "";
+	for(var i = 0; i< gsM.length; i++){
+		option += '<option value=\"'+gsM[i].id+'\">' + gsM[i].name + '</option>'
+		$('.secondOption').html(option);
+		}
+    //categoryName
+	var cm = result.data.cm;
+	for(var i = 0; i< cm.length; i++){
 		var el = $(".dumyLi").clone().removeClass("dumyLi");
-		var link = el.find("a");
-		//link.text(list[i].goodsName);
-		//link.attr("href", _href + list[i].goodsId);
+		var cn = el.find("a");
+		cn.text(cm[i].categoryName);
+		
+/*		var startDate = (cm[i].startDate).split("T");
+		$(".startDateSecond").val(startDate[0]);
+		var endDate = (cm[i].endDate).split("T");
+		$(".endDateSecond").val(endDate[0]);*/
+		
 		$(".dumyLi").before(el);
 	}
 	$(".secondCategoryId").show();
@@ -87,9 +88,7 @@ $(".secondCategoryId").mouseleave(function(){
    var ischecked = $(this).is(':checked');
  if (!ischecked) {
 	var categoryId = $(this).val();
-
 debugger;
-
  $.ajax({
   type: 'POST',//方法类型
   url: '/admin/delete/categoryId',

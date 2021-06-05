@@ -323,4 +323,10 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 		    List<NewBeeMallGoods> goodsList = goodsMapper.findNewBeeMallGoodsListByCategoryId(goods.get(0).getGoodsCategoryId()); 
 		    return goodsList;
 		}
+
+	    @Override
+	    public List<GoodsSale> goodsSaleId(Long id) {
+		 List<GoodsSale> goodsList = goodsMapper.getGoodsSaleId(id); 
+		 return goodsList;
+	    }
 }

@@ -291,5 +291,5 @@
 	 <select id="getSecondCategoryIdAndName" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.CategoryIdAndId">
 			select n.category_id,n.category_name,n.parent_id,m.id,m.category_id,m.start_date,m.end_date
             from tb_newbee_mall_goods_category as n left join tb_category as m on n.category_id = m.category_id where parent_id = #{parentId,jdbcType=BIGINT}
-      </select>
+     </select>
 </mapper>

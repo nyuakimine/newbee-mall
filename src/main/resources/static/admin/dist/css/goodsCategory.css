@@ -32,10 +32,10 @@
 	 background-color: #4CAF50;
 	 color: white;
  }
-/* .dumyLi{
+ .dumyLi{
     display:none;
 }
-*/
+
 #searchResultUl{
     display:none;
     z-index:1000;
@@ -54,7 +54,7 @@
 }
 
 #inputGroupSelect05{
-	width: 25%;
+	width: 23%;
 }
 .hight1{
 	height: 60px;	
@@ -97,4 +97,7 @@
 	text-align: center;
 	max-height: 90vh;
 	overflow: auto;
+}
+.card card-primary card-outline{
+	   overflow:auto;
 }

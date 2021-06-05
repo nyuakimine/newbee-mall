@@ -121,4 +121,6 @@ public interface NewBeeMallGoodsMapper {
     //获取赠送商品goodsId
     List<NewBeeMallGoods> findNewBeeMallGoodsListByGoodsId(Long goodsId);
     List<NewBeeMallGoods> findNewBeeMallGoodsListByCategoryId(Long goodsId);
+
+    List<GoodsSale> getGoodsSaleId(GoodsSale id);
 }

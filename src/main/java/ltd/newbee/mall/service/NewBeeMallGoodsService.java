@@ -182,10 +182,10 @@ public interface NewBeeMallGoodsService {
     Long insertSale(Long id);
     /* 
      * niuxiaofeng
-     * add by niu 2021/06/01
+     * add by niu 2021/06/05
      * GoodsSale
      */
-   // List<GoodsSale>GoodsSaleId(GoodsSale id); 
+   List<GoodsSale>goodsSaleId(Long id); 
     /* 
      * niuxiaofeng
      * add by niu 2021/06/01
