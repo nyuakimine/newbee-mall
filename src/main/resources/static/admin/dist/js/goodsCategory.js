@@ -1,6 +1,7 @@
 var MouseOnSearchResultUl  //全局变量
  $(".button3").click(function(){	
 	var categoryId = $(this).parent().find("#secondCategory").val();
+	//var categoryId = $(this).parent().find("#threeCategory").val();
 	
 		    $.ajax({
             type: 'POST',//方法类型
@@ -43,24 +44,29 @@ function clearResultList(){
 }
 function showResult(result){
 	//campaignName
+	var cm = result.data.cm;
 	var gsM = result.data.gsM;
 	var option = "";
-	for(var i = 0; i< gsM.length; i++){
-		option += '<option value=\"'+gsM[i].id+'\">' + gsM[i].name + '</option>'
-		$('.secondOption').html(option);
-		}
-    //categoryName
-	var cm = result.data.cm;
-	for(var i = 0; i< cm.length; i++){
+	for (var i = 0; i < gsM.length; i++) {
+		var se = $('<select/>')
+		option += '<option value=\"' + gsM[i].id + '\">' + gsM[i].name + '</option>'//<option value="gsM[i].id">gsM[i].name</option>
+		se.html(option);
 		var el = $(".dumyLi").clone().removeClass("dumyLi");
+		for (var j = 0; j < cm.length; j++) {
+			if (gsM[i].id == cm[j].id && gsM[i].id != null) {
+				debugger;
+			    se.val(gsM[i].id);
+			}
+		}
+		el.find("input:first-child").before(se);
+		$(".secondCheckbox").prop('checked',true);
+		var sd = el.find("input:nth-child(4)");
+		var ed = el.find("input:nth-child(5)");
+		
+		sd.val(cm[i].startDate);
+		ed.val(cm[i].endDate);
 		var cn = el.find("a");
 		cn.text(cm[i].categoryName);
-		
-/*		var startDate = (cm[i].startDate).split("T");
-		$(".startDateSecond").val(startDate[0]);
-		var endDate = (cm[i].endDate).split("T");
-		$(".endDateSecond").val(endDate[0]);*/
-		
 		$(".dumyLi").before(el);
 	}
 	$(".secondCategoryId").show();

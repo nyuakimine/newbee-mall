@@ -37,6 +37,7 @@
 }
 
 #searchResultUl{
+	 overflow: scroll;
     display:none;
     z-index:1000;
     border: 1px solid #c5c5c5;
@@ -98,6 +99,17 @@
 	max-height: 90vh;
 	overflow: auto;
 }
-.card card-primary card-outline{
-	   overflow:auto;
+.card{
+	   overflow-x: scroll;
+}
+#threeSearchResultUl{
+	 overflow: scroll;
+    display:none;
+    z-index:1000;
+    border: 1px solid #c5c5c5;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 360px;
+    background-color: #fff;
+    width: 745px;
 }

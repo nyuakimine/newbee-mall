@@ -14,8 +14,12 @@ import java.util.Date;
 public class TbCategory {
     private Long id;
     private Long categoryId;
+    
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+9")
     private Date startDate;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+9")
     private Date endDate;
+    
     public Long getId() {
         return id;
     }

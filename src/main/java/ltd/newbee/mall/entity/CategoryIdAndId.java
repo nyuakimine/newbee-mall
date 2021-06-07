@@ -14,7 +14,9 @@ import java.util.Date;
 public class CategoryIdAndId {
     private Long id;
     private Long categoryId;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+9")
     private Date startDate;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+9")
     private Date endDate;
     private String categoryName;
     private Long parentId;
