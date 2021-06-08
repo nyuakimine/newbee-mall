@@ -63,7 +63,6 @@
 #col-119{
 	 color: rgb(128, 128, 64);
 }
-
 /*2021/06/01*/
 #datequxiao {
 	background-color: rgb(192, 192, 192);
@@ -104,6 +103,20 @@
 }
 #threeSearchResultUl{
 	 overflow: scroll;
+    display:none;
+    z-index:1000;
+    border: 1px solid #c5c5c5;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 360px;
+    background-color: #fff;
+    width: 745px;
+}
+.dumyLi01{
+    display:none;
+}
+#threeSearchResultUl{
+	overflow: scroll;
     display:none;
     z-index:1000;
     border: 1px solid #c5c5c5;
