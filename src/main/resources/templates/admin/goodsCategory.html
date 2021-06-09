@@ -47,7 +47,8 @@
 														<span>終了日
 														  <input type="date" class="endDate" th:value="${#dates.format(gs.endDate,'yyyy-MM-dd')}">
 														</span>
-													<button class="button3" id="secondCategory" onclick="secondButton()" th:value="${gs.categoryId}" th:if="${gs.id}">➕</button>
+													<button class="button3" id="secondCategory" th:value="${gs.categoryId}" th:onclick="'javascript:secondButton(' +this +',' + ${gs.categoryId} + ');'" th:if="${gs.id}">➕</button>
+												<!--<button class="button3" id="secondCategory" th:value="${gs.categoryId}" th:onclick="'javascript:secondButton(' +this +',' + ${gs.categoryId} + ');'" th:attr="onclick=|secondButton(' +this +',' + ${gs.categoryId} + ')|" th:if="${gs.id}">➕</button>-->
 												</td>
 											</tr>
 											</th:block>
@@ -61,7 +62,7 @@
 <!--secondLevelCategories-->
 <ul class="secondCategoryId" id="searchResultUl">
 	<li class="dumyLi">
-		&nbsp;<input type="checkbox" class="secondCheckbox"/ >
+		&nbsp;<input type="checkbox" class="secondCheckbox"/>
 		<a>
 			link
 		</a>
@@ -69,24 +70,25 @@
 		<input type="date" class="startDateSecond">
 		&nbsp;&nbsp;終了日
 		<input type="date" class="endDateSecond">
-		<button class="button4" id="threeCategory" onclick="secondButton()" >➕</button>
+		<button class="button4" id="threeCategory" th:attr="onclick=|secondButton(' +this +',' + categoryId+ ')|">➕</button>
 	</li>
 </ul>
-<ul class="threeCategoryId" id="threeSearchResultUl">
-	<li class="dumyLi01">
-		<!--<select class="threeOption" id="threeInputGroupSelect05">
-		</select>-->
-		<input type="checkbox" / class="threeCheckbox" >
-		<b>
-			link01
-		</b>
-		&nbsp;&nbsp;開始日
-		<input type="date" class="startDateThree">
-		&nbsp;&nbsp;終了日
-		<input type="date" class="endDateThree">
-		<button class="button5">➕</button>
-	</li>
-</ul>
+
+	<!--<ul class="threeCategoryId" id="threeSearchResultUl">
+		<li class="dumyLi01">
+			<!--<select class="threeOption" id="threeInputGroupSelect05">
+			</select>-->
+		<!--	<input type="checkbox" class="threeCheckbox"/>
+			<b>
+				link01
+			</b>
+			&nbsp;&nbsp;開始日
+			<input type="date" class="startDateThree">
+			&nbsp;&nbsp;終了日
+			<input type="date" class="endDateThree">
+			<button class="button5">➕</button>
+		</li>
+	</ul> -->
 <!--2021/06/01 modal niu -->
 	<div class="grid-btn">
 		<button class="btn btn-info" id="modal-open"> 

@@ -1,20 +1,18 @@
 var MouseOnSearchResultUl  //全局变量
-var sc = $('.button3');	
-//$(".button3").click(function(){	
-	function secondButton(){
-	var categoryId = sc.parent().find("#secondCategory").val();
-	// $('.button3').attr('onClick','FunctionName('+categoryId+');');
+	function secondButton(thi,categoryId){
+		debugger;
+	//var categoryId = $(".fontSize").parent().parent().find("#secondCategory").val();
 		    $.ajax({
             type: 'POST',//方法类型
             url: '/admin/secondCategory',
             contentType: 'application/json',
             data: JSON.stringify(categoryId),
             success: function (result) {
+	          debugger;
 				//サーバーが成功した場合
                 if (result.resultCode == 200) {
-				debugger;
 				    clearResultList();					
-					showResult(result);
+					showResult(thi,result);
                 } else {
                     	swal(result.message, {
                         icon: "error",
@@ -44,54 +42,46 @@ function clearResultList(){
 		}
 	})
 }
-function showResult(result){
+function showResult(thi,result){
 	//campaignName
 	var cm = result.data.cm;
 	var gsM = result.data.gsM;
 	var option = "";
+	var cloneUl = $(".secondCategoryId").clone();
+	var el = $(".dumyLi").clone().removeClass("dumyLi");
 	for (var i = 0; i < gsM.length; i++) {
 		var se = $('<select/>').css({"width": "20%",});
 		option += '<option value=\"' + gsM[i].id + '\">' + gsM[i].name + '</option>'//<option value="gsM[i].id">gsM[i].name</option>
 		se.html(option);
-		var el = $(".dumyLi").clone().removeClass("dumyLi");
+		
 		for (var j = 0; j < cm.length; j++) {
 			if (gsM[i].id == cm[j].id && gsM[i].id != null) {
-				debugger;
 			    se.val(gsM[i].id);
 			}
 		}
 		el.find("input:first-child").before(se);
-		$(".secondCheckbox").prop('checked',true);
+		cloneUl.find(".secondCheckbox").prop('checked',true);
 		var sd = el.find("input:nth-child(4)");//找到时间的位置，同一行第四个开始
 		var ed = el.find("input:nth-child(5)");
 		sd.val(cm[i].startDate);
 		ed.val(cm[i].endDate);
 		var cn = el.find("a");
 		cn.text(cm[i].categoryName);
-		$(".dumyLi").before(el);
+	    cloneUl.find('.button4').attr('onClick','secondButton(' +this +','+cm[i].categoryId+');');
+		cloneUl.find(".dumyLi").before(el);
 	}
 	$(".secondCategoryId").show();
-	appendToSearchBar($(".secondCategoryId"));
-	appendToSearchBar02($(".threeCategoryId"));
+	appendToSearchBar(thi,$(".secondCategoryId"));
 	debugger;
-	$('.button4').attr('onClick','secondButton('+cm.categoryId+');');
 }
-function appendToSearchBar(el){
+function clickMe(_this){
+	console.log(_this);
+}
+function appendToSearchBar(thi,el){
 	debugger;
-	var searchBar = $(".button3");//jquery object
-	//var searchBar = document.getElementById("button2");//dom
-	var rect = searchBar[0].getBoundingClientRect();//转换成dom加[0]  convert jquery object to dom by searchBar[0]
-	console.log(rect.top,rect.right,rect.bottom,rect.left);
-	//var sbHeight = searchBar.height();
-	//el.height(rect.top + sbHeight)
-	//el.left(rect.left);
-	el.css({top: rect.top,left: rect.right,position:'fixed'});//相对定位relative  绝对定位absolute
-	}
-	function appendToSearchBar02(el){
-	debugger;
-	var searchBar = $(".button4");//jquery object
-	//var searchBar = document.getElementById("button2");//dom
-	var rect = searchBar[0].getBoundingClientRect();//转换成dom加[0]  convert jquery object to dom by searchBar[0]
+	//var searchBar = $(this);//el.find("button:nth-child(6)");//jquery object
+	//var searchBar = document.getElementById("button3");//dom
+	var rect = thi.getBoundingClientRect();//转换成dom加[0]  convert jquery object to dom by searchBar[0]
 	console.log(rect.top,rect.right,rect.bottom,rect.left);
 	//var sbHeight = searchBar.height();
 	//el.height(rect.top + sbHeight)
@@ -109,7 +99,6 @@ $(".secondCategoryId").mouseleave(function(){
    var ischecked = $(this).is(':checked');
  if (!ischecked) {
 	var categoryId = $(this).val();
-debugger;
  $.ajax({
   type: 'POST',//方法类型
   url: '/admin/delete/categoryId',
@@ -152,7 +141,6 @@ debugger;
         success: function (result) {
 //サーバーが成功した場合
             if (result.resultCode == 200) {
-			debugger;					
 					swal("ご登録ありがとうございました！" ,{
 						icon:"success",
 					});
@@ -197,7 +185,6 @@ $("#saveSaleButton").click(function(){
         success: function (result) {
 //サーバーが成功した場合
             if (result.resultCode == 200) {
-			debugger;					
 					swal("ご登録ありがとうございました！" ,{
 						icon:"success",
 					});
