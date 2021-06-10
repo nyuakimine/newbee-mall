@@ -1,6 +1,5 @@
 var MouseOnSearchResultUl  //全局变量
-	function secondButton(thi,categoryId){
-		debugger;
+function secondButton(thi,categoryId){
 	//var categoryId = $(".fontSize").parent().parent().find("#secondCategory").val();
 		    $.ajax({
             type: 'POST',//方法类型
@@ -25,7 +24,6 @@ var MouseOnSearchResultUl  //全局变量
                 });
              }
          })
-//});
 };
 $(".button3").focusout(function(){
 	if(MouseOnSearchResultUl)
@@ -43,44 +41,51 @@ function clearResultList(){
 	})
 }
 function showResult(thi,result){
-	//campaignName
+	//获取category级别的list
 	var cm = result.data.cm;
+	//获取goodsSale的list
 	var gsM = result.data.gsM;
 	var option = "";
+	//cloneUL模板
 	var cloneUl = $(".secondCategoryId").clone();
-	var el = $(".dumyLi").clone().removeClass("dumyLi");
 	for (var i = 0; i < gsM.length; i++) {
 		var se = $('<select/>').css({"width": "20%",});
 		option += '<option value=\"' + gsM[i].id + '\">' + gsM[i].name + '</option>'//<option value="gsM[i].id">gsM[i].name</option>
 		se.html(option);
-		
+		var el = $(".dumyLi").clone().removeClass("dumyLi");
 		for (var j = 0; j < cm.length; j++) {
 			if (gsM[i].id == cm[j].id && gsM[i].id != null) {
 			    se.val(gsM[i].id);
 			}
 		}
 		el.find("input:first-child").before(se);
-		cloneUl.find(".secondCheckbox").prop('checked',true);
-		var sd = el.find("input:nth-child(4)");//找到时间的位置，同一行第四个开始
-		var ed = el.find("input:nth-child(5)");
-		sd.val(cm[i].startDate);
-		ed.val(cm[i].endDate);
+		//找到categoryName
 		var cn = el.find("a");
 		cn.text(cm[i].categoryName);
-	    cloneUl.find('.button4').attr('onClick','secondButton(' +this +','+cm[i].categoryId+');');
+		//找到checkbox位置
+		cloneUl.find(".secondCheckbox").prop('checked',true);
+		//找到时间的位置，同一行第四个开始
+		var sd = el.find("input:nth-child(5)");
+		var ed = el.find("input:nth-child(7)");
+		sd.val(cm[i].startDate);
+		ed.val(cm[i].endDate);
+		//clone第二个ul模板
+	    cloneUl.find('.button4').attr('onClick','secondButton(' +thi +','+cm[i].categoryId+');');
 		cloneUl.find(".dumyLi").before(el);
 	}
-	$(".secondCategoryId").show();
-	appendToSearchBar(thi,$(".secondCategoryId"));
 	debugger;
-}
-function clickMe(_this){
-	console.log(_this);
+	cloneUl.show();
+	//appendToSearchBar(thi,cloneUl);
+	var rect = thi.getBoundingClientRect();//转换成dom加[0]  convert jquery object to dom by searchBar[0]
+	console.log(rect.top,rect.right,rect.bottom,rect.left);
+	//var sbHeight = searchBar.height();
+	//el.height(rect.top + sbHeight)
+	//el.left(rect.left);
+	cloneUl.css({top: rect.top,left: rect.right,position:'absolute'});//相对定位relative  绝对定位absolute
+	$("#main").append(cloneUl);
 }
 function appendToSearchBar(thi,el){
 	debugger;
-	//var searchBar = $(this);//el.find("button:nth-child(6)");//jquery object
-	//var searchBar = document.getElementById("button3");//dom
 	var rect = thi.getBoundingClientRect();//转换成dom加[0]  convert jquery object to dom by searchBar[0]
 	console.log(rect.top,rect.right,rect.bottom,rect.left);
 	//var sbHeight = searchBar.height();
@@ -203,6 +208,10 @@ $("#saveSaleButton").click(function(){
      })
      $(".modal").fadeOut();
   });
+  
+function clickMe(_this){
+	console.log(_this);
+}
 //获取赠送商品的goodsId
 /*$("#saveGoodsButton").click(function(){	
 
@@ -230,92 +239,3 @@ $("#saveSaleButton").click(function(){
      })
      });
 });*/
-
-
-/* $(".button4").click(function(){	
-	var categoryId = $(this).parent().find("#threeCategory").val();
-		    $.ajax({
-            type: 'POST',//方法类型
-            url: '/admin/threeCategory',
-            contentType: 'application/json',
-            data: JSON.stringify(categoryId),
-            success: function (result) {
-				//サーバーが成功した場合
-                if (result.resultCode == 200) {
-				debugger;
-				    clearResultList();					
-					showResult(result);
-                } else {
-                    	swal(result.message, {
-                        icon: "error",
-                    });
-                }
-            },
-            error: function () {
-                swal("操作失败", {
-                    icon: "error",
-                });
-             }
-         })
-});
-$(".button4").focusout(function(){
-	if(MouseOnSearchResultUl)
-	return;
-    clearResultList()
-	//hide #searchResultUl
-	$(".threeCategoryId").hide();
-})
-function clearResultList(){
-	$(".threeCategoryId").children().toArray().forEach(function(value,index,array){
-		var incFlag = $(value).attr('class').includes("dumyLi01");
-		if(!incFlag){
-			$(value).remove();
-		}
-	})
-}
-function showResult(result){
-	//campaignName
-	var cm = result.data.cm;
-	var gsM = result.data.gsM;
-	var option = "";
-	for (var i = 0; i < gsM.length; i++) {
-		var se = $('<select/>').css({"width": "20%",});
-		option += '<option value=\"' + gsM[i].id + '\">' + gsM[i].name + '</option>'//<option value="gsM[i].id">gsM[i].name</option>
-		se.html(option);
-		var el = $(".dumyLi01").clone().removeClass("dumyLi01");
-		for (var j = 0; j < cm.length; j++) {
-			if (gsM[i].id == cm[j].id && gsM[i].id != null) {
-				debugger;
-			    se.val(gsM[i].id);
-			}
-		}
-		el.find("input:first-child").before(se);
-		$(".threeCheckbox").prop('checked',true);
-		var sd = el.find("input:nth-child(4)");//找到时间的位置，同一行第四个开始
-		var ed = el.find("input:nth-child(5)");
-		sd.val(cm[i].startDate);
-		ed.val(cm[i].endDate);
-		cn.text(cm[i].categoryName);
-		var cn = el.find("b");
-		$(".dumyLi01").before(el);
-	}
-	$(".threeCategoryId").show();
-	appendToSearchBar($(".threeCategoryId"));
-}
-function appendToSearchBar(el){
-	debugger;
-	var searchBar = $(".button4");//jquery object
-	//var searchBar = document.getElementById("button2");//dom
-	var rect = searchBar[0].getBoundingClientRect();//转换成dom加[0]  convert jquery object to dom by searchBar[0]
-	console.log(rect.top,rect.right,rect.bottom,rect.left);
-	//var sbHeight = searchBar.height();
-	//el.height(rect.top + sbHeight)
-	//el.left(rect.left);
-	el.css({top: rect.top,left: rect.right,position:'fixed'});//相对定位relative  绝对定位absolute
-	}
-$(".threeCategoryId").mousemove(function(){
-	MouseOnSearchResultUl = true;
-});
-$(".threeCategoryId").mouseleave(function(){
-	MouseOnSearchResultUl = false;
-})*/

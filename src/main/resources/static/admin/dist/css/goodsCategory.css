@@ -32,13 +32,12 @@
 	 background-color: #4CAF50;
 	 color: white;
  }
- .dumyLi{
+.dumyLi{
     display:none;
 }
 
-#searchResultUl{
-	 overflow: scroll;
-    display:none;
+.secondCategoryId{
+	overflow: scroll;
     z-index:1000;
     border: 1px solid #c5c5c5;
     overflow-x: hidden;
@@ -100,29 +99,4 @@
 }
 .card{
 	   overflow-x: scroll;
-}
-#threeSearchResultUl{
-	 overflow: scroll;
-    display:none;
-    z-index:1000;
-    border: 1px solid #c5c5c5;
-    overflow-x: hidden;
-    overflow-y: auto;
-    max-height: 360px;
-    background-color: #fff;
-    width: 745px;
-}
-.dumyLi01{
-    display:none;
-}
-#threeSearchResultUl{
-	overflow: scroll;
-    display:none;
-    z-index:1000;
-    border: 1px solid #c5c5c5;
-    overflow-x: hidden;
-    overflow-y: auto;
-    max-height: 360px;
-    background-color: #fff;
-    width: 745px;
 }

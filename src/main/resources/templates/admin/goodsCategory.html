@@ -17,16 +17,16 @@
 				</div><!-- /.container-fluid -->
 			</div>
 			<!-- Main content -->
-			<div class="content">
+			<div class="content" id="main">
 				<div class="container-fluid">
 					<div class="card card-primary card-outline">
 						<div class="card-header">
 							<h3 class="card-title">GoodsCategory</h3>
-								</div>
-									<div>
-									<table class="order-table">
-										<tbody>
-										<th:block th:unless="${#lists.isEmpty(tCategory)}">
+						</div>
+						<div>
+							<table class="order-table">
+								<tbody>
+									<th:block th:unless="${#lists.isEmpty(tCategory)}">
 													 <th:block th:each="gs : ${tCategory}">
 											<tr>
 												<td class="hight1">
@@ -47,8 +47,7 @@
 														<span>終了日
 														  <input type="date" class="endDate" th:value="${#dates.format(gs.endDate,'yyyy-MM-dd')}">
 														</span>
-													<button class="button3" id="secondCategory" th:value="${gs.categoryId}" th:onclick="'javascript:secondButton(' +this +',' + ${gs.categoryId} + ');'" th:if="${gs.id}">➕</button>
-												<!--<button class="button3" id="secondCategory" th:value="${gs.categoryId}" th:onclick="'javascript:secondButton(' +this +',' + ${gs.categoryId} + ');'" th:attr="onclick=|secondButton(' +this +',' + ${gs.categoryId} + ')|" th:if="${gs.id}">➕</button>-->
+													<button class="button3" id="secondCategory" th:onclick="'javascript:secondButton(' +this +',' + ${gs.categoryId} + ')'" th:if="${gs.id}">➕</button>
 												</td>
 											</tr>
 											</th:block>
@@ -59,36 +58,7 @@
 							</div><!-- /.container-fluid -->
 						</div>
 					</div>
-<!--secondLevelCategories-->
-<ul class="secondCategoryId" id="searchResultUl">
-	<li class="dumyLi">
-		&nbsp;<input type="checkbox" class="secondCheckbox"/>
-		<a>
-			link
-		</a>
-		&nbsp;&nbsp;開始日
-		<input type="date" class="startDateSecond">
-		&nbsp;&nbsp;終了日
-		<input type="date" class="endDateSecond">
-		<button class="button4" id="threeCategory" th:attr="onclick=|secondButton(' +this +',' + categoryId+ ')|">➕</button>
-	</li>
-</ul>
-
-	<!--<ul class="threeCategoryId" id="threeSearchResultUl">
-		<li class="dumyLi01">
-			<!--<select class="threeOption" id="threeInputGroupSelect05">
-			</select>-->
-		<!--	<input type="checkbox" class="threeCheckbox"/>
-			<b>
-				link01
-			</b>
-			&nbsp;&nbsp;開始日
-			<input type="date" class="startDateThree">
-			&nbsp;&nbsp;終了日
-			<input type="date" class="endDateThree">
-			<button class="button5">➕</button>
-		</li>
-	</ul> -->
+	</div>
 <!--2021/06/01 modal niu -->
 	<div class="grid-btn">
 		<button class="btn btn-info" id="modal-open"> 
@@ -125,8 +95,23 @@
 			<button type="button" class="btn btn-primary" id="saveSaleButton">確認</button>
 		</div>
 		</div>
-</div>
-</div>
+		</div>
+		</div>
+		</div>
+
+<!--secondLevelCategories-->
+<ul class="secondCategoryId"><li class="dumyLi">
+		<input type="checkbox" class="secondCheckbox" />
+		<a>
+			link
+		</a>
+		<span>開始日</span>
+		<input type="date" class="startDateSecond">
+		<span>終了日</span>
+		<input type="date" class="endDateSecond">
+		<button class="button4"
+			th:attr="onclick=|secondButton(' +this +',' + categoryId+ ')|">➕</button>
+	</li></ul>
 <!-- /.content-wrapper -->
 <!-- 引入页脚footer-fragment -->
 <div th:replace="admin/footer::footer-fragment"></div>
@@ -145,7 +130,6 @@
 <script type="text/javascript" src="//unpkg.com/wangeditor/dist/wangEditor.min.js"></script>
 <script th:src="@{/admin/dist/js/public.js}"></script>
 <script th:src="@{/admin/dist/js/goodsCategory.js}"></script>
-<!--<script th:src="@{/admin/dist/js/goodsCategory2.js}"></script>-->
 <link rel="stylesheet" th:href="@{/admin/dist/css/goodsCategory.css}">
 <script>
 </script>
