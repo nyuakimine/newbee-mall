@@ -35,16 +35,16 @@
 .dumyLi{
     display:none;
 }
-
 .secondCategoryId{
-	overflow: scroll;
+	list-style-type: none;
+	overflow: auto;
     z-index:1000;
     border: 1px solid #c5c5c5;
     overflow-x: hidden;
     overflow-y: auto;
     max-height: 360px;
     background-color: #fff;
-    width: 745px;
+    width: 900px;
 }
 .order-table{
 	width: 57%;
@@ -52,7 +52,6 @@
 .fontSize{
 	font-size: 20px;
 }
-
 #inputGroupSelect05{
 	width: 23%;
 }
@@ -98,5 +97,5 @@
 	overflow: auto;
 }
 .card{
-	   overflow-x: scroll;
+	   overflow: auto;
 }

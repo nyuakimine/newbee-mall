@@ -10,7 +10,6 @@ function secondButton(thi,categoryId){
 	          debugger;
 				//サーバーが成功した場合
                 if (result.resultCode == 200) {
-				    clearResultList();					
 					showResult(thi,result);
                 } else {
                     	swal(result.message, {
@@ -25,21 +24,6 @@ function secondButton(thi,categoryId){
              }
          })
 };
-$(".button3").focusout(function(){
-	if(MouseOnSearchResultUl)
-	return;
-    clearResultList()
-	//hide #searchResultUl
-	$(".secondCategoryId").hide();
-})
-function clearResultList(){
-	$(".secondCategoryId").children().toArray().forEach(function(value,index,array){
-		var incFlag = $(value).attr('class').includes("dumyLi");
-		if(!incFlag){
-			$(value).remove();
-		}
-	})
-}
 function showResult(thi,result){
 	//获取category级别的list
 	var cm = result.data.cm;
@@ -47,7 +31,7 @@ function showResult(thi,result){
 	var gsM = result.data.gsM;
 	var option = "";
 	//cloneUL模板
-	var cloneUl = $(".secondCategoryId").clone();
+	var cloneUl = $(".secondCategoryId").clone().removeClass("secondCategoryId");
 	for (var i = 0; i < gsM.length; i++) {
 		var se = $('<select/>').css({"width": "20%",});
 		option += '<option value=\"' + gsM[i].id + '\">' + gsM[i].name + '</option>'//<option value="gsM[i].id">gsM[i].name</option>
@@ -55,23 +39,28 @@ function showResult(thi,result){
 		var el = $(".dumyLi").clone().removeClass("dumyLi");
 		for (var j = 0; j < cm.length; j++) {
 			if (gsM[i].id == cm[j].id && gsM[i].id != null) {
-			    se.val(gsM[i].id);
+				se.val(gsM[i].id);
+				//找到checkbox位置
+				el.find(".secondCheckbox").prop('checked', true);
 			}
 		}
 		el.find("input:first-child").before(se);
 		//找到categoryName
 		var cn = el.find("a");
 		cn.text(cm[i].categoryName);
-		//找到checkbox位置
-		cloneUl.find(".secondCheckbox").prop('checked',true);
 		//找到时间的位置，同一行第四个开始
 		var sd = el.find("input:nth-child(5)");
 		var ed = el.find("input:nth-child(7)");
 		sd.val(cm[i].startDate);
 		ed.val(cm[i].endDate);
 		//clone第二个ul模板
-	    cloneUl.find('.button4').attr('onClick','secondButton(' +thi +','+cm[i].categoryId+');');
+	    cloneUl.find(thi).attr('onClick','secondButton(' +thi +','+cm[i].categoryId+');');
 		cloneUl.find(".dumyLi").before(el);
+		
+		cloneUl.find("#closeButton").click(function() {
+			debugger;
+			$(".secondCategoryId").fadeOut();
+		}); 
 	}
 	debugger;
 	cloneUl.show();
@@ -81,24 +70,9 @@ function showResult(thi,result){
 	//var sbHeight = searchBar.height();
 	//el.height(rect.top + sbHeight)
 	//el.left(rect.left);
-	cloneUl.css({top: rect.top,left: rect.right,position:'absolute'});//相对定位relative  绝对定位absolute
+	cloneUl.css({top: rect.top,left: rect.right,position:'absolute'});//相对定位relative  绝对定位absolute  fixed
 	$("#main").append(cloneUl);
 }
-function appendToSearchBar(thi,el){
-	debugger;
-	var rect = thi.getBoundingClientRect();//转换成dom加[0]  convert jquery object to dom by searchBar[0]
-	console.log(rect.top,rect.right,rect.bottom,rect.left);
-	//var sbHeight = searchBar.height();
-	//el.height(rect.top + sbHeight)
-	//el.left(rect.left);
-	el.css({top: rect.top,left: rect.right,position:'fixed'});//相对定位relative  绝对定位absolute
-	}
-$(".secondCategoryId").mousemove(function(){
-	MouseOnSearchResultUl = true;
-});
-$(".secondCategoryId").mouseleave(function(){
-	MouseOnSearchResultUl = false;
-})
 //2021/06/01
   $(".checkId").change(function() {
    var ischecked = $(this).is(':checked');
@@ -239,3 +213,19 @@ function clickMe(_this){
      })
      });
 });*/
+/*$(".button3").focusout(function(){
+	if(MouseOnSearchResultUl)
+	return;
+    clearResultList()
+	//hide #searchResultUl
+  cloneUl.find(".secondCategoryId").hide();
+})
+function clearResultList(){
+		debugger;
+	$(".secondCategoryId").children().toArray().forEach(function(value,index,array){
+		var incFlag = $(value).attr('class').includes("dumyLi");
+		if(!incFlag){
+			$(value).remove();
+		}
+	})
+}*/

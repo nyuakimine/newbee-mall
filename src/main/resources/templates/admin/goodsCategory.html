@@ -58,8 +58,7 @@
 							</div><!-- /.container-fluid -->
 						</div>
 					</div>
-	</div>
-<!--2021/06/01 modal niu -->
+					<!--2021/06/01 modal niu -->
 	<div class="grid-btn">
 		<button class="btn btn-info" id="modal-open"> 
 				<i class="fa fa-plus" id="shinnki"> </i>&nbsp;买二送一
@@ -97,11 +96,14 @@
 		</div>
 		</div>
 		</div>
+	</div>
+
 		</div>
 
 <!--secondLevelCategories-->
+	
 <ul class="secondCategoryId"><li class="dumyLi">
-		<input type="checkbox" class="secondCheckbox" />
+	<input type="checkbox" class="secondCheckbox" />
 		<a>
 			link
 		</a>
@@ -111,7 +113,7 @@
 		<input type="date" class="endDateSecond">
 		<button class="button4"
 			th:attr="onclick=|secondButton(' +this +',' + categoryId+ ')|">➕</button>
-	</li></ul>
+	</li><button id="closeButton">Ⓧ</button></ul>
 <!-- /.content-wrapper -->
 <!-- 引入页脚footer-fragment -->
 <div th:replace="admin/footer::footer-fragment"></div>
