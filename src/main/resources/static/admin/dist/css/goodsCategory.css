@@ -9,7 +9,7 @@
 .col-5 {width: 41.66%;}
 .col-6 {
 	width: 50%;
-    float:left; 
+    float: left; 
     height:70px;	
 }
 .col-7 {width: 58.33%;}
@@ -18,7 +18,7 @@
 .col-10 {width: 83.33%;}
 .col-11 {width: 91.66%;}
 .col-12 {width: 100%;}
- .button3 {
+.button3 {
 	 -webkit-transition-duration: 1.5s;
 	 transition-duration: 1s;
 	 padding: 1px 1px;
@@ -36,15 +36,7 @@
     display:none;
 }
 .secondCategoryId{
-	list-style-type: none;
-	overflow: auto;
-    z-index:1000;
-    border: 1px solid #c5c5c5;
-    overflow-x: hidden;
-    overflow-y: auto;
-    max-height: 360px;
-    background-color: #fff;
-    width: 900px;
+	display:none;
 }
 .order-table{
 	width: 57%;
@@ -99,3 +91,30 @@
 .card{
 	   overflow: auto;
 }
+#closeBut{
+    margin:0px;
+	overflow: auto;
+    z-index:1000;
+    border: 1px solid #c5c5c5;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 360px;
+    background-color: #fff;
+    width: 660px;	
+}
+#closeButton {
+	 font-size: 15px;
+	 width: 100%;	
+	 -webkit-transition-duration: 1.5s;
+	 transition-duration: 1s;
+	 padding: 1px 1px;
+	 text-align: center;
+	 background-color: rgb(255, 255, 255);
+	 color: black;
+	 border: 2px solid rgb(0, 0, 0);
+	 border-radius:5px;
+ }
+ #closeButton:hover {
+	 background-color: rgb(255, 0, 0);
+	 color: white;
+ }

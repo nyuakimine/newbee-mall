@@ -54,15 +54,14 @@ function showResult(thi,result){
 		sd.val(cm[i].startDate);
 		ed.val(cm[i].endDate);
 		//clone第二个ul模板
-	    cloneUl.find(thi).attr('onClick','secondButton(' +thi +','+cm[i].categoryId+');');
+	    cloneUl.find("#button4").attr('onClick','secondButton(' + thi +','+cm[i].categoryId+');');
 		cloneUl.find(".dumyLi").before(el);
-		
+		//popup关闭button
 		cloneUl.find("#closeButton").click(function() {
 			debugger;
-			$(".secondCategoryId").fadeOut();
+				cloneUl.find("#closeBut").remove();
 		}); 
 	}
-	debugger;
 	cloneUl.show();
 	//appendToSearchBar(thi,cloneUl);
 	var rect = thi.getBoundingClientRect();//转换成dom加[0]  convert jquery object to dom by searchBar[0]
@@ -71,7 +70,7 @@ function showResult(thi,result){
 	//el.height(rect.top + sbHeight)
 	//el.left(rect.left);
 	cloneUl.css({top: rect.top,left: rect.right,position:'absolute'});//相对定位relative  绝对定位absolute  fixed
-	$("#main").append(cloneUl);
+	$(".wrapper").append(cloneUl);
 }
 //2021/06/01
   $(".checkId").change(function() {
