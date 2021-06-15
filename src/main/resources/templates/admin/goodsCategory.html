@@ -98,6 +98,7 @@
 		</div>
 			</div>
 <!--Categories-->
+
 <ul class="secondCategoryId"><div id="closeBut"><li class="dumyLi">
 	<input type="checkbox" class="secondCheckbox" />
 	<a>
@@ -107,13 +108,8 @@
 	<input type="date" class="startDateSecond">
 	<span>終了日</span>
 	<input type="date" class="endDateSecond">
-	<button class="button4" type="button" th:onclick="'javascript:secondButton(' +this +',' + (tCategory=${c.categoryId}) + ')'">➕</button>
+	<button class="button4">➕</button>
 	</li><button id="closeButton">CLOSE</button></div></ul>
-	<!--th:onclick="'javascript:secondButton(' +this +',' + (categoryId=${c.categoryId}) + ')'"-->
-	<!--th:attr="onclick=|secondButton(' + categoryId+ ')|"-->
-	<!--th:onclick="|secondButton('+this +',' +${type}_${tCategory.categoryId}+')|"-->
-	<!--th:attr="onclick=|clickButton('${c.categoryId}')|"-->
-<!--	th:onclick="${'javascript:secondButton(' + tCategory.categoryId + ')'}"-->
 <!-- /.content-wrapper -->
 <!-- 引入页脚footer-fragment -->
 <div th:replace="admin/footer::footer-fragment"></div>
