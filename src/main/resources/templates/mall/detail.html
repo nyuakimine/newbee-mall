@@ -192,7 +192,7 @@
 													<span class="zv-cqa-q-reviewer"
 														th:text="${goodsQaDetail.get(0).id}">投稿者&nbsp; </span>
 													<span class="zv-cqa-step"
-														th:text="${qa.submitDate}">投稿日&nbsp;2021年04月02日</span>
+														th:text="'投稿日:'+${#dates.format(qa.submitDate, 'yyyy-MM-dd')}">投稿日&nbsp;2021年04月02日</span>
 												</div>
 												<div class="zv-cqa-answers">
 
@@ -213,7 +213,7 @@
 																	th:text="${goodsQaDetail.get(0).id}">回答者&nbsp;
 																	Nitori-QA-001</span>
 																<span class="zv-cqa-step"
-																	th:text="'回答日:'+${qa.answerDate}">回答日&nbsp;2021年04月05日</span>
+																	th:text="'回答日:'+${#dates.format(qa.answerDate, 'yyyy-MM-dd')}">回答日&nbsp;2021年04月05日</span>
 															</div>
 															<div class="zv-helpful-form" data-answer-id="58746">
 																<span class="zv-space"></span>
@@ -297,14 +297,14 @@
 													<div class="zv-cqa-question">
 														<span class="zv-space">Q. </span>
 														<span class="zv-cqa-step"
-															th:text="${qa.question}">この商品は脚を外してロースタイルにすることは可能でしょうか？</span>
+															>この商品は脚を外してロースタイルにすることは可能でしょうか？</span>
 
 													</div>
 													<div class="zv-cqa-q-info">
 														<span class="zv-cqa-q-reviewer"
-															th:text="${goodsQaDetail.get(0).id}">投稿者&nbsp; </span>
+															>投稿者&nbsp; </span>
 														<span class="zv-cqa-step"
-															th:text="${qa.submitDate}">投稿日&nbsp;2021年04月02日</span>
+														>投稿日&nbsp;2021年04月02日</span>
 													</div>
 													<div class="zv-cqa-answers">
 
@@ -322,10 +322,10 @@
 																<div class="zv-cqa-a-info">
 																	<span class="zv-space"></span>
 																	<span class="zv-cqa-a-reviewer"
-																		th:text="${goodsQaDetail.get(0).id}">回答者&nbsp;
+																		>回答者&nbsp;
 																		Nitori-QA-001</span>
 																	<span class="zv-cqa-step"
-																		th:text="'回答日:'+${qa.answerDate}">回答日&nbsp;2021年04月05日</span>
+																		>回答日&nbsp;2021年04月05日</span>
 																</div>
 																<div class="zv-helpful-form" data-answer-id="58746">
 																	<span class="zv-space"></span>

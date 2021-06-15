@@ -1,6 +1,10 @@
 var MouseOnSearchResultUl  //全局变量
+//var arr = [];
+var isClick = true;
 function secondButton(thi,categoryId){
 	//var categoryId = $(".fontSize").parent().parent().find("#secondCategory").val();
+	if (isClick) {
+		isClick = false;
 		    $.ajax({
             type: 'POST',//方法类型
             url: '/admin/secondCategory',
@@ -11,6 +15,7 @@ function secondButton(thi,categoryId){
 				//サーバーが成功した場合
                 if (result.resultCode == 200) {
 					showResult(thi,result);
+	
                 } else {
                     	swal(result.message, {
                         icon: "error",
@@ -22,7 +27,11 @@ function secondButton(thi,categoryId){
                     icon: "error",
                 });
              }
-         })
+    
+	/*if (arr)
+		return;*/
+		}, 1000);//一秒内不能重复点击
+		}
 };
 function showResult(thi,result){
 	//获取category级别的list
@@ -59,8 +68,12 @@ function showResult(thi,result){
 		//popup关闭button
 		cloneUl.find("#closeButton").click(function() {
 			debugger;
-				cloneUl.find("#closeBut").remove();
+				var clearResult= cloneUl.find("#closeBut").remove();
+				if(clearResult){
+					isClick = true;
+				}
 		}); 
+		//arr.push({"categoryId":cm[i].categoryId,"cloneUl":cloneUl})
 	}
 	cloneUl.show();
 	//appendToSearchBar(thi,cloneUl);
@@ -69,8 +82,9 @@ function showResult(thi,result){
 	//var sbHeight = searchBar.height();
 	//el.height(rect.top + sbHeight)
 	//el.left(rect.left);
-	cloneUl.css({top: rect.top,left: rect.right,position:'absolute'});//相对定位relative  绝对定位absolute  fixed
+	cloneUl.css({top: rect.top,left: rect.right,position:'fixed'});//相对定位relative  绝对定位absolute  fixed
 	$(".wrapper").append(cloneUl);
+	
 }
 //2021/06/01
   $(".checkId").change(function() {
@@ -218,13 +232,13 @@ function clickMe(_this){
     clearResultList()
 	//hide #searchResultUl
   cloneUl.find(".secondCategoryId").hide();
-})
+})*/
 function clearResultList(){
 		debugger;
-	$(".secondCategoryId").children().toArray().forEach(function(value,index,array){
+	$(thi).children().toArray().forEach(function(value,index,array){
 		var incFlag = $(value).attr('class').includes("dumyLi");
 		if(!incFlag){
 			$(value).remove();
 		}
 	})
-}*/
+}
