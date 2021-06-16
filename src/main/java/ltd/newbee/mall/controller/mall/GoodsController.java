@@ -372,23 +372,23 @@ public class GoodsController {
     @ResponseBody
     public Result insertKeyword(@RequestBody InsertKeyword keywordId, HttpSession httpSession) {
 	NewBeeMallUserVO user = (NewBeeMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
-	if(user != null) {
-	      keywordId.setUserId(user.getUserId());
-        }
+	if (user != null) {
+	    keywordId.setUserId(user.getUserId());
+	}
 	SimpleDateFormat i = new SimpleDateFormat();
-		i.applyPattern("yyyy-MM-dd HH:mm:ss a");
-		Date date = new Date();
-	Integer count = null;  
-        Long keyWordId = newBeeMallGoodsService.getMaxKeywordId(keywordId.getUserId());
-        keywordId.setId(keyWordId);
-        keywordId.setDate(date);
-        
-        if(keywordId != null) {
-            count = newBeeMallGoodsService.insertKeyword(keywordId);
-        }
-        if(!(count > 0))  {
-        return ResultGenerator.genFailResult("投稿失敗！");
-        }      
-        return ResultGenerator.genSuccessResult(count);    
+	i.applyPattern("yyyy-MM-dd HH:mm:ss a");
+	Date date = new Date();
+	Integer count = null;
+	Long keyWordId = newBeeMallGoodsService.getMaxKeywordId(keywordId.getUserId());
+	keywordId.setId(keyWordId);
+	keywordId.setDate(date);
+
+	if (keywordId != null) {
+	    count = newBeeMallGoodsService.insertKeyword(keywordId);
+	}
+	if (!(count > 0)) {
+	    return ResultGenerator.genFailResult("投稿失敗！");
+	}
+	return ResultGenerator.genSuccessResult(count);
     }
 }

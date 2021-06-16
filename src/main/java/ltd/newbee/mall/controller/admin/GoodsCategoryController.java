@@ -78,47 +78,6 @@ public class GoodsCategoryController {
        }      
        return ResultGenerator.genSuccessResult(count);    
    }
-   @PostMapping(value = "/delete/categoryId")
-   @ResponseBody
-   public Result deleteCaId(@RequestBody Long categoryId) {
-       boolean deleteResult = newBeeMallCategoryService.deleteCaId(categoryId);
-       //删除成功
-       if (deleteResult) {
-           return ResultGenerator.genSuccessResult();
-       }
-       //删除失败
-       return ResultGenerator.genFailResult(ServiceResultEnum.OPERATE_ERROR.getResult());
-   }
-   //added by niu 2021/06/01 insertTbcategory
-   @RequestMapping(value = "/goods/inserTbcategory", method = RequestMethod.POST)
-   @ResponseBody
-   public Result insertCategory(@RequestBody TbCategory id) {
-       Integer count =  null;  
-       Boolean insert = newBeeMallGoodsService.insertTbCategory(id);
-       if(insert) {
-           if(id != null) {
-               count = newBeeMallGoodsService.insertTbCategoryId(id);
-           }
-           if(!(count > 0))  {
-           return ResultGenerator.genFailResult("投稿失敗！");
-           }      
-           return ResultGenerator.genSuccessResult(count);    
-       }
-       return ResultGenerator.genFailResult("有効期限外！");
-   }
-//获取赠送商品goodsId
-//   @RequestMapping(value = "/goods/subGoods", method = RequestMethod.POST)
-//   @ResponseBody
-//   public Result subGoods (@RequestBody Long goodsId) {
-//       List<NewBeeMallGoods> subGoodsList = newBeeMallGoodsService.getSubGoods(goodsId);
-//    return ResultGenerator.genSuccessResult(subGoodsList);
-//   }
-//   @GetMapping({ "/goods/subGoods","/goodsCategory.html" })
-//   public String subGoods(HttpServletRequest request,Long goodsId) {
-//       List<NewBeeMallGoods> subGoodsList = newBeeMallGoodsService.getSubGoods(goodsId);
-//         request.setAttribute("subGoodsList", subGoodsList);
-//         return "admin/goodsCategory";
-//        }
    //added by niu 2021/06/04 SecondCategoryIdAndName
    @RequestMapping(value = "/secondCategory", method = RequestMethod.POST)
    @ResponseBody
@@ -136,5 +95,28 @@ public class GoodsCategoryController {
        result.put("gsM", gsM);
        result.put("cm", cm);
        return ResultGenerator.genSuccessResult(result);
+   }
+   //added by niu 2021/06/01 insertTbcategory
+   @RequestMapping(value = "/goods/inserTbcategory", method = RequestMethod.POST)
+   @ResponseBody
+   public Result insertCategory(@RequestBody TbCategory id) {
+       Integer count =  null; 
+       boolean deleteResult = newBeeMallCategoryService.deleteCaId(id.getCategoryId());
+       if (!id.getFlag()) {
+	   return ResultGenerator.genSuccessResult();
+       }
+       else {
+       Boolean insert = newBeeMallGoodsService.insertTbCategory(id);
+       if(insert) {
+           if(id != null) {
+               count = newBeeMallGoodsService.insertTbCategoryId(id);
+           }
+           if(!(count > 0))  {
+           return ResultGenerator.genFailResult("投稿失敗！");
+           }      
+           return ResultGenerator.genSuccessResult(count);    
+       }
+       return ResultGenerator.genFailResult("有効期限外！");
+       }
    }
 }

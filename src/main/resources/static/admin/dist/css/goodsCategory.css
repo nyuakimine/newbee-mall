@@ -44,14 +44,8 @@
 .fontSize{
 	font-size: 20px;
 }
-#inputGroupSelect05{
-	width: 23%;
-}
 .hight1{
 	height: 60px;	
-}
-#col-119{
-	 color: rgb(128, 128, 64);
 }
 /*2021/06/01*/
 #datequxiao {
@@ -102,7 +96,7 @@
 }
 #closeButton {
 	 font-size: 15px;
-	 width: 100%;	
+	 width: 20%;	
 	 -webkit-transition-duration: 1.5s;
 	 transition-duration: 1s;
 	 padding: 1px 1px;

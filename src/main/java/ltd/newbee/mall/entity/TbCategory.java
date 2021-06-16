@@ -10,16 +10,22 @@ package ltd.newbee.mall.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
-
 public class TbCategory {
+    private Boolean flag;
     private Long id;
     private Long categoryId;
-    
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+9")
     private Date startDate;
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+9")
     private Date endDate;
     
+   
+    public Boolean getFlag() {
+        return flag;
+    }
+    public void setFlag(Boolean flag) {
+        this.flag = flag;
+    }
     public Long getId() {
         return id;
     }
@@ -46,8 +52,7 @@ public class TbCategory {
     }
     @Override
     public String toString() {
-	return "TbCategory [id=" + id + ", categoryId=" + categoryId + ", startDate=" + startDate + ", endDate="
-		+ endDate + "]";
+	return "TbCategory [flag=" + flag + ", id=" + id + ", categoryId=" + categoryId + ", startDate=" + startDate
+		+ ", endDate=" + endDate + "]";
     }
-  
 }

@@ -46,7 +46,7 @@
 															<span>終了日
 															  <input type="date" class="endDate" th:value="${#dates.format(gs.endDate,'yyyy-MM-dd')}">
 															</span>
-														<button class="button3" id="secondCategory" th:onclick="'javascript:secondButton(' +this +',' + ${gs.categoryId} + ')'" th:if="${gs.id}">➕</button>
+														<button class="button3" id="secondCategory" th:onclick="'javascript:secondButton(' +this +',' + ${gs.categoryId} + ')'">➕</button>
 													</td>
 												</tr>
 												</th:block>
@@ -100,14 +100,14 @@
 <!--Categories-->
 
 <ul class="secondCategoryId"><div id="closeBut"><li class="dumyLi">
-	<input type="checkbox" class="secondCheckbox" />
+	<input type="checkbox" class="checkId" />
 	<a>
 		link
 	</a>
 	<span>開始日</span>
-	<input type="date" class="startDateSecond">
+	<input type="date" class="startDate">
 	<span>終了日</span>
-	<input type="date" class="endDateSecond">
+	<input type="date" class="endDate">
 	<button class="button4">➕</button>
 	</li><button id="closeButton">CLOSE</button></div></ul>
 <!-- /.content-wrapper -->
