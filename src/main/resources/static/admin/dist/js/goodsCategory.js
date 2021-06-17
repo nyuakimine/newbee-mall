@@ -1,5 +1,4 @@
-var MouseOnSearchResultUl  //全局变量
-var arr = [];
+var arr = [];//全局变量
 function secondButton(thi,categoryId){
 	     debugger;
 		if (arr.includes(categoryId)){
@@ -39,16 +38,20 @@ function showResult(thi,result){
 	var cloneUl = $(".secondCategoryId").clone().removeClass("secondCategoryId");
 	for (var i = 0; i < cm.length; i++) {
 		var option = "";
+		var temp = "";
 		var se = $('<select/>',{class: "custom-select1"}).css({ "width": "20%", });
 		var el = cloneUl.find(".dumyLi").clone().removeClass("dumyLi");
 		for (var j = 0; j < gsM.length; j++) {
 			option += '<option value=\"' + gsM[j].id + '\">' + gsM[j].name + '</option>'//<option value="gsM[i].id">gsM[i].name</option>
 			se.html(option);
 			if (gsM[j].id == cm[i].id && gsM[j].id != null) {
-				se.val(gsM[j].id);
+				temp = gsM[j].id;
 				//找到checkbox位置
 				el.find(".checkId").prop('checked', true);
 			}
+			if(temp != ""){
+				se.val(temp);
+				}
 		}
 		el.find("input:first-child").before(se);
 		//找到categoryName
@@ -85,59 +88,92 @@ function showResult(thi,result){
 	$(".wrapper").append(cloneUl);
 }
 //2021/06/01
-function checkPopup(thi){
-	 debugger;
-   var flag = $(thi).is(':checked');
-   var id =$(thi).parent().parent().find(".custom-select1").val();
-   var startDate = $(thi).parent().find(".startDate").val();
-   var endDate =$(thi).parent().find(".endDate").val();
-   var categoryId = $(thi).parent().find(".hiddenCategoryId").val();
-   var data = {
-	"flag":flag,
-	"id":id,
-	"startDate":startDate,
-	"endDate":endDate,
-	"categoryId":categoryId
-    };
-     $.ajax({
-        type: 'POST',//方法类型
-        url: '/admin/goods/inserTbcategory',
-        contentType: 'application/json',
-        data: JSON.stringify(data),
-        success: function (result) {
-//サーバーが成功した場合
-			 if (result.resultCode == 200) {
-				 if (data.flag) {
-					 swal("ご挿入出来ました！", {
-						 icon: "success",
-					 });
-				 } else {
-					 swal("ご削除出来ました！", {
-						 icon: "success",
-					 });
-				 }
-			 } else {
-				 swal(result.message, {
-					 icon: "error",
-				 });
-			 }
+function checkPopup(thi) {
+	debugger;
+	var id = $(thi).parent().parent().find(".custom-select1").val();
+	if (id == 1) {
+		debugger;
+		var categoryName = $(thi).parent().find(".modalCategoryName").text();
+		var categoryId = $(thi).parent().find(".hiddenCategoryId").val();
+		$("#campaignSet").find("#primaryGoodsId").val(categoryName);
+		$.ajax({
+			type: 'POST',//方法类型
+			url: '/admin/subGoodsName',
+			contentType: 'application/json',
+			data: JSON.stringify(categoryId),
+			success: function(result) {
+				if (result.resultCode == 200) {
+					debugger;
+					var goodsList = result.data;
+					for (var i = 0; i < goodsList.length; i++) {
+					$("#modalSubGoodsName").append('<option value=\"' + goodsList[i].goodsId + '\">' + goodsList[i].goodsName + '</option>');
+					}
+				} else {
+					swal(result.message, {
+						icon: "error",
+					});
+				}
+			},
+			error: function() {
+				swal("操作失败", {
+					icon: "error",
+				});
+			}
+		})
+		$('#campaignSet').modal('show');
+		$("#datequxiao").click(function() {
+	    $(".modal").fadeOut();
+		});
+		return;
+	} else {
+		var flag = $(thi).is(':checked');
+		var id = $(thi).parent().parent().find(".custom-select1").val();
+		var startDate = $(thi).parent().find(".startDate").val();
+		var endDate = $(thi).parent().find(".endDate").val();
+		var categoryId = $(thi).parent().find(".hiddenCategoryId").val();
+		var data = {
+			"flag": flag,
+			"id": id,
+			"startDate": startDate,
+			"endDate": endDate,
+			"categoryId": categoryId
+		};
+	}
 
-		 },
-        error: function () {
-            swal("有効期限外", {
-                icon: "error",
-            });
-         }
-     })
+	$.ajax({
+		type: 'POST',//方法类型
+		url: '/admin/insertAndDeleteCategory',
+		contentType: 'application/json',
+		data: JSON.stringify(data),
+		success: function(result) {
+			//サーバーが成功した場合
+			if (result.resultCode == 200) {
+				if (data.flag) {
+					swal("ご挿入出来ました！", {
+						icon: "success",
+					});
+				} else {
+					swal("ご削除出来ました！", {
+						icon: "success",
+					});
+				}
+			} else {
+				swal(result.message, {
+					icon: "error",
+				});
+			}
+
+		},
+		error: function() {
+			swal("有効期限外", {
+				icon: "error",
+			});
+		}
+	})
 }	
 
 //2021/06/01 modal 
-	$("#modal-open").click(function(){
-		$(".modal").fadeIn();
-	});
-	$("#datequxiao").click(function(){
-		$(".modal").fadeOut();
-	});
+	
 
 //2021/06/01 insertSale 绑定modal上的保存按钮
 $("#saveSaleButton").click(function(){	

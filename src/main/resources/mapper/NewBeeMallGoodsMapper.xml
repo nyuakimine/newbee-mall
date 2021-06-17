@@ -148,7 +148,6 @@
             </if>
         </where>
     </select>
-
     <select id="selectByPrimaryKeys" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -777,16 +776,20 @@
 	       select id,name,start_date,end_date,campaign,content1,content2,content3,content4,content5,flag from goods_sale where id = #{id,jdbcType=BIGINT}	
 	   </select>
 	 <!--   2021/06/03 -->
-	  <select id="findNewBeeMallGoodsListByGoodsId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+	<!--   <select id="findNewBeeMallGoodsListByGoodsId" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from tb_newbee_mall_goods_info
         where goods_id = #{goodsId,jdbcType=BIGINT}
-     </select>
-     <select id="findNewBeeMallGoodsListByCategoryId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+     </select> -->
+   <!--   <select id="findNewBeeMallGoodsListByCategoryId" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from tb_newbee_mall_goods_info
         where goods_category_id = #{goodsCategoryId,jdbcType=BIGINT}
+    </select> -->
+    
+    <select id="findNewBeeMallGoodsListByCategoryId" resultType= "ltd.newbee.mall.entity.NewBeeMallGoods">
+      select goods_id,goods_name,goods_category_id from tb_newbee_mall_goods_info where goods_category_id = #{goodsCategoryId,jdbcType=BIGINT}
     </select>
  </mapper>

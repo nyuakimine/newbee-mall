@@ -78,45 +78,49 @@ public class GoodsCategoryController {
        }      
        return ResultGenerator.genSuccessResult(count);    
    }
+   
    //added by niu 2021/06/04 SecondCategoryIdAndName
    @RequestMapping(value = "/secondCategory", method = RequestMethod.POST)
    @ResponseBody
-   public Result SecondCategoryIdAndName(@RequestBody Long categoryId) {
+   public Result popup(@RequestBody Long categoryId) {
        Long parentId = categoryId;
-       List<GoodsSale> gsM = new ArrayList<GoodsSale>();
+       List<GoodsSale> gsM = newBeeMallGoodsService.GoodsSale();
        List<CategoryIdAndId> cm = newBeeMallCategoryService.SecondCategoryIdAndName(parentId);
-       for (int i = 0; i < cm.size(); i++) {
-	   if (cm.get(i).getId() != null) {
-	       List<GoodsSale> gs = newBeeMallGoodsService.goodsSaleId(cm.get(i).getId());
-	       gsM.addAll(gs);
-	   }
-       }
        Map<Object, List> result = new HashMap<>();
        result.put("gsM", gsM);
        result.put("cm", cm);
        return ResultGenerator.genSuccessResult(result);
    }
    //added by niu 2021/06/01 insertTbcategory
-   @RequestMapping(value = "/goods/inserTbcategory", method = RequestMethod.POST)
+   @RequestMapping(value = "/insertAndDeleteCategory", method = RequestMethod.POST)
    @ResponseBody
-   public Result insertCategory(@RequestBody TbCategory id) {
-       Integer count =  null; 
-       boolean deleteResult = newBeeMallCategoryService.deleteCaId(id.getCategoryId());
+   public Result insertAndDeleteCategory(@RequestBody TbCategory id) {
+       Integer count = null;
        if (!id.getFlag()) {
-	   return ResultGenerator.genSuccessResult();
+	   Boolean deleteResult = newBeeMallCategoryService.deleteCaId(id.getCategoryId());
+	   if (deleteResult) {
+	       return ResultGenerator.genSuccessResult();
+	   }
+	   return ResultGenerator.genFailResult(ServiceResultEnum.OPERATE_ERROR.getResult());
+       } else {
+	   Boolean insert = newBeeMallGoodsService.insertTbCategory(id);
+	   if (insert) {
+	       if (id != null) {
+		   count = newBeeMallGoodsService.insertTbCategoryId(id);
+	       }
+	       if (!(count > 0)) {
+		   return ResultGenerator.genFailResult("投稿失敗！");
+	       }
+	       return ResultGenerator.genSuccessResult(count);
+	   }
+	   return ResultGenerator.genFailResult("有効期限外！");
        }
-       else {
-       Boolean insert = newBeeMallGoodsService.insertTbCategory(id);
-       if(insert) {
-           if(id != null) {
-               count = newBeeMallGoodsService.insertTbCategoryId(id);
-           }
-           if(!(count > 0))  {
-           return ResultGenerator.genFailResult("投稿失敗！");
-           }      
-           return ResultGenerator.genSuccessResult(count);    
-       }
-       return ResultGenerator.genFailResult("有効期限外！");
-       }
+   }
+   // @PostMapping("/subGoodsName")
+   @RequestMapping(value = "/subGoodsName", method = RequestMethod.POST)
+   @ResponseBody
+   public Result getGiftGoods(@RequestBody Long goodsCategoryId) {
+    List<NewBeeMallGoods> goodsList = newBeeMallGoodsService.getSubGoods(goodsCategoryId);
+       return ResultGenerator.genSuccessResult(goodsList);
    }
 }

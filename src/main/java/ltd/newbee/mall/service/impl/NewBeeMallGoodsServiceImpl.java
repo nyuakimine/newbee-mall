@@ -318,12 +318,10 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 	    }
 	    //获取goodsId
 	    @Override
-		public List<NewBeeMallGoods> getSubGoods(Long goodsId) {
-		    List<NewBeeMallGoods> goods = goodsMapper.findNewBeeMallGoodsListByGoodsId(goodsId); 
-		    List<NewBeeMallGoods> goodsList = goodsMapper.findNewBeeMallGoodsListByCategoryId(goods.get(0).getGoodsCategoryId()); 
+		public List<NewBeeMallGoods> getSubGoods(Long goodsCategoryId) {
+		    List<NewBeeMallGoods> goodsList = goodsMapper.findNewBeeMallGoodsListByCategoryId(goodsCategoryId); 
 		    return goodsList;
 		}
-
 	    @Override
 	    public List<GoodsSale> goodsSaleId(Long id) {
 		 List<GoodsSale> goodsList = goodsMapper.getGoodsSaleId(id); 

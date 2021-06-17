@@ -81,11 +81,7 @@
 			</div>
 			<div class="form-group">
 				<label for="startDate" class="control-label">赠送商品</label>
-				<select class="custom-select">
-					<th:block th:each="c : ${subGoodsId}">
-						<option value="selected" th:value="${c.categoryId}" th:text="${c.categoryName}">
-						</option>
-					</th:block>
+				<select class="custom-select" id="modalSubGoodsName">
 				</select>
 			</div>
 			<div class="modal-footer">
@@ -100,9 +96,11 @@
 <!--Categories-->
 
 <ul class="secondCategoryId"><div id="closeBut"><li class="dumyLi">
+<tr>
+<td class="fontSize">
 	<input type="checkbox" class="checkId"/>
 	<input type="hidden" class="hiddenCategoryId">
-	<a>
+	<a class="modalCategoryName">
 		link
 	</a>
 	<span>開始日</span>
@@ -110,6 +108,8 @@
 	<span>終了日</span>
 	<input type="date" class="endDate">
 	<button class="button4">➕</button>
+</td>
+</tr>
 	</li><button id="closeButton">CLOSE</button></div></ul>
 <!-- /.content-wrapper -->
 <!-- 引入页脚footer-fragment -->
