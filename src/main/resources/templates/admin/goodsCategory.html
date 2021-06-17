@@ -38,8 +38,7 @@
 														</select>
 												    </td>
 													<td class="fontSize">&nbsp;
-													
-														<input type="checkbox" class="checkId" th:value="${gs.categoryId}" th:checked="${gs.id} !=null? true:false" th:text="${gs.categoryName}"/>
+														<input type="checkbox" th:onchange="javascript:checkPopup(this)" class="checkId" th:checked="${gs.id} !=null? true:false" th:text="${gs.categoryName}"/>
 														<span>開始日
 															  <input type="date" class="startDate" th:value="${#dates.format(gs.startDate,'yyyy-MM-dd')}">
 															</span>
@@ -47,6 +46,7 @@
 															  <input type="date" class="endDate" th:value="${#dates.format(gs.endDate,'yyyy-MM-dd')}">
 															</span>
 														<button class="button3" id="secondCategory" th:onclick="'javascript:secondButton(' +this +',' + ${gs.categoryId} + ')'">➕</button>
+												     	<input type="hidden" class="hiddenCategoryId" th:value="${gs.categoryId}" >
 													</td>
 												</tr>
 												</th:block>
@@ -100,7 +100,8 @@
 <!--Categories-->
 
 <ul class="secondCategoryId"><div id="closeBut"><li class="dumyLi">
-	<input type="checkbox" class="checkId" />
+	<input type="checkbox" class="checkId"/>
+	<input type="hidden" class="hiddenCategoryId">
 	<a>
 		link
 	</a>

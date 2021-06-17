@@ -39,7 +39,7 @@ function showResult(thi,result){
 	var cloneUl = $(".secondCategoryId").clone().removeClass("secondCategoryId");
 	for (var i = 0; i < cm.length; i++) {
 		var option = "";
-		var se = $('<select/>').css({ "width": "20%", });
+		var se = $('<select/>',{class: "custom-select1"}).css({ "width": "20%", });
 		var el = cloneUl.find(".dumyLi").clone().removeClass("dumyLi");
 		for (var j = 0; j < gsM.length; j++) {
 			option += '<option value=\"' + gsM[j].id + '\">' + gsM[j].name + '</option>'//<option value="gsM[i].id">gsM[i].name</option>
@@ -55,13 +55,16 @@ function showResult(thi,result){
 		var cn = el.find("a");
 		cn.text(cm[i].categoryName);
 		//找到时间的位置，同一行第四个开始
-		var sd = el.find("input:nth-child(5)");
-		var ed = el.find("input:nth-child(7)");
+		var sd = el.find("input:nth-child(6)");
+		var ed = el.find("input:nth-child(8)");
 		sd.val(cm[i].startDate);
 		ed.val(cm[i].endDate);
+		var ci = el.find("input:nth-child(3)");
+		ci.val(cm[i].categoryId);
 		//clone第二个ul模板
 		//cloneUl.find(".button4").attr('onclick','secondButton()');
 		el.find(".button4").attr('onclick', 'secondButton(this,' + cm[i].categoryId + ')');
+		el.find(".checkId").attr('onchange', 'checkPopup(this)');
 		debugger;
 		cloneUl.find(".dumyLi").before(el);
 		//popup关闭button
@@ -82,19 +85,20 @@ function showResult(thi,result){
 	$(".wrapper").append(cloneUl);
 }
 //2021/06/01
-$(".checkId").change(function() {
-   var flag = $(this).is(':checked');
-   var id =$(this).parent().parent().find(".custom-select1").val();
-   var startDate = $(this).parent().find(".startDate").val();
-   var endDate =$(this).parent().find(".endDate").val();
-   var categoryId = $(this).val();
+function checkPopup(thi){
+	 debugger;
+   var flag = $(thi).is(':checked');
+   var id =$(thi).parent().parent().find(".custom-select1").val();
+   var startDate = $(thi).parent().find(".startDate").val();
+   var endDate =$(thi).parent().find(".endDate").val();
+   var categoryId = $(thi).parent().find(".hiddenCategoryId").val();
    var data = {
 	"flag":flag,
 	"id":id,
 	"startDate":startDate,
 	"endDate":endDate,
 	"categoryId":categoryId
-    };	  
+    };
      $.ajax({
         type: 'POST',//方法类型
         url: '/admin/goods/inserTbcategory',
@@ -103,7 +107,7 @@ $(".checkId").change(function() {
         success: function (result) {
 //サーバーが成功した場合
 			 if (result.resultCode == 200) {
-				 if (flag) {
+				 if (data.flag) {
 					 swal("ご挿入出来ました！", {
 						 icon: "success",
 					 });
@@ -125,8 +129,8 @@ $(".checkId").change(function() {
             });
          }
      })
+}	
 
-});
 //2021/06/01 modal 
 	$("#modal-open").click(function(){
 		$(".modal").fadeIn();

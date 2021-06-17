@@ -235,33 +235,3 @@ $(function() {
              .show();
      })
  })
-//ajax あいまい検索
-/*$("#searchSale").keyup(function(){
-	debugger;
-	var keyword = $("#searchSale").val();
-	    $.ajax({
-            type: 'get',//方法类型  //method = "POST"
-            url: "/admin/goods/sale?name="+keyword,  //Post送信先のurl
-            //contentType: 'application/json',
-            //data: JSON.stringify(keyword),
-            dataType:"json",
-            success: function (json_data) {
-	   	   
-	   	    var list = json_data.data.list[0];
-		    var str = list.name;
-		    var arr = str.split(" ");
-		    // arr.filter(keyword => keyword.includes(keyword));  
-		    for (var i=0;i<arr.length;i++){
-			  if(arr[i].includes(keyword)){
-				keyword = arr[i];
-			  }
-		    }  
-            keywordInsert(keyword);
-		},
-		error: function() {
-			debugger;
-			alert("Service Error. Pleasy try again later.");
-		}
-	});
-		
-});*/
