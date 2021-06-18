@@ -30,13 +30,14 @@ function secondButton(thi,categoryId){
 	});
 };
 function showResult(thi,result){
+	//var list = result.data.list;
 	//获取category级别的list
-	var cm = result.data.cm;
+	var list = result.data.list;
 	//获取goodsSale的list
 	var gsM = result.data.gsM;
 	//cloneUL模板
 	var cloneUl = $(".secondCategoryId").clone().removeClass("secondCategoryId");
-	for (var i = 0; i < cm.length; i++) {
+	for (var i = 0; i < list.length; i++) {
 		var option = "";
 		var temp = "";
 		var se = $('<select/>',{class: "custom-select1"}).css({ "width": "20%", });
@@ -44,7 +45,7 @@ function showResult(thi,result){
 		for (var j = 0; j < gsM.length; j++) {
 			option += '<option value=\"' + gsM[j].id + '\">' + gsM[j].name + '</option>'//<option value="gsM[i].id">gsM[i].name</option>
 			se.html(option);
-			if (gsM[j].id == cm[i].id && gsM[j].id != null) {
+			if (gsM[j].id == list[i].id && gsM[j].id != null) {
 				temp = gsM[j].id;
 				//找到checkbox位置
 				el.find(".checkId").prop('checked', true);
@@ -56,17 +57,21 @@ function showResult(thi,result){
 		el.find("input:first-child").before(se);
 		//找到categoryName
 		var cn = el.find("a");
-		cn.text(cm[i].categoryName);
+	    cn.text(list[i].categoryName);
+		cn.text(list[i].goodsName);
 		//找到时间的位置，同一行第四个开始
-		var sd = el.find("input:nth-child(6)");
-		var ed = el.find("input:nth-child(8)");
-		sd.val(cm[i].startDate);
-		ed.val(cm[i].endDate);
+		var sd = el.find("input:nth-child(7)");
+		var ed = el.find("input:nth-child(9)");
+		sd.val(list[i].startDate);
+		ed.val(list[i].endDate);
 		var ci = el.find("input:nth-child(3)");
-		ci.val(cm[i].categoryId);
+		var goodsCategoryId = el.find("input:nth-child(4)");
+		//ci.val(list[i].categoryId);
+		ci.val(list[i].goodsId);
+		goodsCategoryId.val(list[i].goodsCategoryId)
 		//clone第二个ul模板
 		//cloneUl.find(".button4").attr('onclick','secondButton()');
-		el.find(".button4").attr('onclick', 'secondButton(this,' + cm[i].categoryId + ')');
+		el.find(".button4").attr('onclick', 'secondButton(this,' + list[i].categoryId + ')');
 		el.find(".checkId").attr('onchange', 'checkPopup(this)');
 		debugger;
 		cloneUl.find(".dumyLi").before(el);
@@ -93,14 +98,20 @@ function checkPopup(thi) {
 	var id = $(thi).parent().parent().find(".custom-select1").val();
 	if (id == 1) {
 		debugger;
-		var categoryName = $(thi).parent().find(".modalCategoryName").text();
-		var categoryId = $(thi).parent().find(".hiddenCategoryId").val();
-		$("#campaignSet").find("#primaryGoodsId").val(categoryName);
+		var goodsName = $(thi).parent().find(".modalGoodsName").text();
+		//var goodsId = $(thi).parent().find(".hiddenCategoryId").val();
+		var goodsCategoryId = $(thi).parent().find(".hiddenGoodsCategoryId").val();
+		$("#campaignSet").find("#primaryGoodsId").val(goodsName);
+	/*		var data = {
+			"goodsId": goodsId,
+			"goodsCategoryId": goodsCategoryId,
+		};*/
+		data
 		$.ajax({
 			type: 'POST',//方法类型
 			url: '/admin/subGoodsName',
 			contentType: 'application/json',
-			data: JSON.stringify(categoryId),
+			data: JSON.stringify(goodsCategoryId),
 			success: function(result) {
 				if (result.resultCode == 200) {
 					debugger;
@@ -121,9 +132,6 @@ function checkPopup(thi) {
 			}
 		})
 		$('#campaignSet').modal('show');
-		$("#datequxiao").click(function() {
-	    $(".modal").fadeOut();
-		});
 		return;
 	} else {
 		var flag = $(thi).is(':checked');
@@ -170,11 +178,8 @@ function checkPopup(thi) {
 			});
 		}
 	})
+	 $(".modal").fadeOut();
 }	
-
-//2021/06/01 modal 
-	
-
 //2021/06/01 insertSale 绑定modal上的保存按钮
 $("#saveSaleButton").click(function(){	
 	var primaryGoodsId = $("#primaryGoodsId").val();
@@ -207,9 +212,12 @@ $("#saveSaleButton").click(function(){
             });
          }
      })
-     $(".modal").fadeOut();
   });
-  
+$(function() {
+	$("#datequxiao").click(function() {
+		$(".modal").remove();
+	});
+});
 /*function clickMe(_this){
 	console.log(_this);
 }*/

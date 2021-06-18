@@ -292,4 +292,9 @@
 			select n.category_id,n.category_name,n.parent_id,m.id,m.category_id,m.start_date,m.end_date
             from tb_newbee_mall_goods_category as n left join tb_category as m on n.category_id = m.category_id where parent_id = #{parentId,jdbcType=BIGINT}
      </select>
+      <select id="getPrice" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.Price">
+           select n.category_id,n.parent_id,n.category_level,u.goods_id,u.goods_category_id
+           from tb_newbee_mall_goods_category as n join tb_newbee_mall_goods_info as u on n.category_id=u.goods_category_id 
+           where n.category_id =#{categoryId,jdbcType=BIGINT}
+     </select>
 </mapper>

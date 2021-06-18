@@ -15,6 +15,7 @@ import ltd.newbee.mall.controller.vo.SearchPageCategoryVO;
 import ltd.newbee.mall.entity.CampaignSet;
 import ltd.newbee.mall.entity.CategoryIdAndId;
 import ltd.newbee.mall.entity.GoodsCategory;
+import ltd.newbee.mall.entity.Price;
 import ltd.newbee.mall.entity.TbCategory;
 import ltd.newbee.mall.entity.TbSale;
 import ltd.newbee.mall.util.PageQueryUtil;
@@ -104,6 +105,8 @@ public interface NewBeeMallCategoryService {
      * 2021/06/04
      * getSecondCategoryIdAndName
      */
-    List<CategoryIdAndId>SecondCategoryIdAndName(Long categoryId);  
+    List<CategoryIdAndId>SecondCategoryIdAndName(Long categoryId);
+
+    List<Price> calculationPrice(Long categoryId);  
 }  
 

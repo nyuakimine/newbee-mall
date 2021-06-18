@@ -11,6 +11,7 @@ package ltd.newbee.mall.dao;
 import ltd.newbee.mall.entity.CampaignSet;
 import ltd.newbee.mall.entity.CategoryIdAndId;
 import ltd.newbee.mall.entity.GoodsCategory;
+import ltd.newbee.mall.entity.Price;
 import ltd.newbee.mall.entity.ReviewUserInfo;
 import ltd.newbee.mall.entity.TbCategory;
 import ltd.newbee.mall.entity.TbSale;
@@ -59,5 +60,5 @@ public interface GoodsCategoryMapper {
     Long getCampaignMaxId(Long id);
     //2021/06/04 getSecondCategoryIdAndName
     List<CategoryIdAndId>getSecondCategoryIdAndName(Long categoryId);  
-
+    List<Price>getPrice(Long categoryId);  
 }

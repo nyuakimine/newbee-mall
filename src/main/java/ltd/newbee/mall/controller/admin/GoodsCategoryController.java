@@ -64,14 +64,19 @@ public class GoodsCategoryController {
    @RequestMapping(value = "/goods/primaryGoods", method = RequestMethod.POST)
    @ResponseBody
    public Result insertPrimaryGoods(@RequestBody CampaignSet categoryId) {
-       CampaignSet list = new CampaignSet();
+       TbSale list = new TbSale();
        Integer count = null;
-       Long saleId = newBeeMallCategoryService.campaignMaxId(categoryId.getId()); 
-       list.setId(saleId);
-       list.setPrimaryGoodsId(categoryId.getPrimaryGoodsId());
-       list.setSubGoodsId(categoryId.getSubGoodsId());
+       Integer countTs = null;
+       //Long saleId = newBeeMallCategoryService.campaignMaxId(categoryId.getId()); 
+       list.setId(categoryId.getCampaginId());
+       list.setGoodsId(categoryId.getPrimaryGoodsId());
+       list.setStartDate(categoryId.getStartDate());
+       list.setEndDate(categoryId.getEndDate());
+       if(categoryId !=null) {
+	   countTs = newBeeMallGoodsService.insertTbSale(list);
+       }
        if(list != null) {
-           count = newBeeMallCategoryService.campaignSet(list);
+           count = newBeeMallCategoryService.campaignSet(categoryId);
        }
        if(!(count > 0))  {
        return ResultGenerator.genFailResult("投稿失敗！");
@@ -83,12 +88,19 @@ public class GoodsCategoryController {
    @RequestMapping(value = "/secondCategory", method = RequestMethod.POST)
    @ResponseBody
    public Result popup(@RequestBody Long categoryId) {
+       Map<Object, List> result = new HashMap<>();
        Long parentId = categoryId;
+       Long goodsCategoryId = categoryId;
        List<GoodsSale> gsM = newBeeMallGoodsService.GoodsSale();
        List<CategoryIdAndId> cm = newBeeMallCategoryService.SecondCategoryIdAndName(parentId);
-       Map<Object, List> result = new HashMap<>();
-       result.put("gsM", gsM);
-       result.put("cm", cm);
+       List<NewBeeMallGoods> goodsList = newBeeMallGoodsService.getSubGoods(goodsCategoryId);
+       if (!goodsList.isEmpty()) {
+	   result.put("gsM", gsM);
+	   result.put("list", goodsList);
+       } else {
+	   result.put("gsM", gsM);
+	   result.put("list", cm);
+       }
        return ResultGenerator.genSuccessResult(result);
    }
    //added by niu 2021/06/01 insertTbcategory
@@ -119,8 +131,9 @@ public class GoodsCategoryController {
    // @PostMapping("/subGoodsName")
    @RequestMapping(value = "/subGoodsName", method = RequestMethod.POST)
    @ResponseBody
-   public Result getGiftGoods(@RequestBody Long goodsCategoryId) {
-    List<NewBeeMallGoods> goodsList = newBeeMallGoodsService.getSubGoods(goodsCategoryId);
+   public Result getGiftGoods(@RequestBody Long goodsId) {
+       Long categoryId = goodsId;
+       List<NewBeeMallGoods> goodsList = newBeeMallGoodsService.NewBeeMallGoodsListBySub(goodsId);
        return ResultGenerator.genSuccessResult(goodsList);
    }
 }

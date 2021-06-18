@@ -32,6 +32,7 @@ import ltd.newbee.mall.dao.GoodsCategoryMapper;
 import ltd.newbee.mall.entity.CampaignSet;
 import ltd.newbee.mall.entity.CategoryIdAndId;
 import ltd.newbee.mall.entity.GoodsCategory;
+import ltd.newbee.mall.entity.Price;
 import ltd.newbee.mall.entity.TbCategory;
 import ltd.newbee.mall.entity.TbSale;
 import ltd.newbee.mall.service.NewBeeMallCategoryService;
@@ -218,36 +219,46 @@ public class NewBeeMallCategoryServiceImpl implements NewBeeMallCategoryService 
 	List<TbCategory> tbList = goodsCategoryMapper.getCategoryGoods(id);
 	return tbList;
     }
-    //2021/05/30
+
+    // 2021/05/30
     @Override
     public List<CategoryIdAndId> CategoryIdAndName(Long categoryId) {
 	List<CategoryIdAndId> tcList = goodsCategoryMapper.getCategoryIdAndName(categoryId);
 	return tcList;
     }
-    //2021/05/30 delete
+
+    // 2021/05/30 delete
     @Override
     public Boolean deleteCaId(Long categoryId) {
-     return goodsCategoryMapper.deletePaK(categoryId) > 0;
+	return goodsCategoryMapper.deletePaK(categoryId) > 0;
     };
-    //2021/06/01 campaignSet
+
+    // 2021/06/01 campaignSet
     @Override
     public int campaignSet(CampaignSet categoryId) {
-     return goodsCategoryMapper.insertCampaignSet(categoryId);
+	return goodsCategoryMapper.insertCampaignSet(categoryId);
     };
-    
-    //add by niu 2021/05/24 insertSaleMaxId
+
+    // add by niu 2021/05/24 insertSaleMaxId
     @Override
     public Long campaignMaxId(Long id) {
-	 Long maxId = goodsCategoryMapper.getCampaignMaxId(id);
-	    if(maxId !=null) {
+	Long maxId = goodsCategoryMapper.getCampaignMaxId(id);
+	if (maxId != null) {
 	    return maxId + 1;
-	    }else {
-	      return 1L;
-	    }
+	} else {
+	    return 1L;
+	}
     }
+
     @Override
     public List<CategoryIdAndId> SecondCategoryIdAndName(Long categoryId) {
 	List<CategoryIdAndId> tcList = goodsCategoryMapper.getSecondCategoryIdAndName(categoryId);
+	return tcList;
+    }
+
+    @Override
+    public List<Price> calculationPrice(Long categoryId) {
+	List<Price> tcList = goodsCategoryMapper.getPrice(categoryId);
 	return tcList;
     }
 }

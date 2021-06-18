@@ -198,5 +198,11 @@ public interface NewBeeMallGoodsService {
      * getSubGoods
      */
     List<NewBeeMallGoods> getSubGoods(Long goodsCategoryId);
+    /* 
+     * niuxiaofeng
+     * add by niu 2021/06/18
+     * getSubGoods
+     */
+    List<NewBeeMallGoods> NewBeeMallGoodsListBySub(Long goodsId);
    
 }

@@ -26,73 +26,72 @@
 							<table class="order-table">
 								<tbody>
 									<th:block th:unless="${#lists.isEmpty(tCategory)}">
-														 <th:block th:each="gs : ${tCategory}">
-												<tr>
-													<td class="hight1">
-														<select class="custom-select1" id="inputGroupSelect04">
-															<option th:each="s : ${goodsSaleList}"
-														        	th:value="${s.id}"
-															        th:text="${s.name}"
-															        th:selected="${s.id == gs.id} ? true:false" > 
-															</option>
-														</select>
-												    </td>
-													<td class="fontSize">&nbsp;
-														<input type="checkbox" th:onchange="javascript:checkPopup(this)" class="checkId" th:checked="${gs.id} !=null? true:false" th:text="${gs.categoryName}"/>
-														<span>開始日
-															  <input type="date" class="startDate" th:value="${#dates.format(gs.startDate,'yyyy-MM-dd')}">
-															</span>
-															<span>終了日
-															  <input type="date" class="endDate" th:value="${#dates.format(gs.endDate,'yyyy-MM-dd')}">
-															</span>
-														<button class="button3" id="secondCategory" th:onclick="'javascript:secondButton(' +this +',' + ${gs.categoryId} + ')'">➕</button>
-												     	<input type="hidden" class="hiddenCategoryId" th:value="${gs.categoryId}" >
-													</td>
-												</tr>
-												</th:block>
-												</th:block>
-											</tbody>
-										</table>
-									</div><!-- /.card-body -->
-								</div><!-- /.container-fluid -->
-							</div>
+																 <th:block th:each="gs : ${tCategory}">
+														<tr>
+															<td class="hight1">
+																<select class="custom-select1" id="inputGroupSelect04">
+																	<option th:each="s : ${goodsSaleList}"
+																        	th:value="${s.id}"
+																	        th:text="${s.name}"
+																	        th:selected="${s.id == gs.id} ? true:false" > 
+																	</option>
+																</select>
+														    </td>
+															<td class="fontSize">&nbsp;
+																<input type="checkbox" th:onchange="javascript:checkPopup(this)" class="checkId" th:checked="${gs.id} !=null? true:false" th:text="${gs.categoryName}"/>
+																<span>開始日
+																	  <input type="date" class="startDate" th:value="${#dates.format(gs.startDate,'yyyy-MM-dd')}">
+																	</span>
+																	<span>終了日
+																	  <input type="date" class="endDate" th:value="${#dates.format(gs.endDate,'yyyy-MM-dd')}">
+																	</span>
+																<button class="button3" id="secondCategory" th:onclick="'javascript:secondButton(' +this +',' + ${gs.categoryId} + ')'">➕</button>
+														     	<input type="hidden" class="hiddenCategoryId" th:value="${gs.categoryId}" >
+															</td>
+														</tr>
+														</th:block>
+														</th:block>
+													</tbody>
+												</table>
+											</div><!-- /.card-body -->
+										</div><!-- /.container-fluid -->
+									</div>
+								</div>
+								<!--2021/06/01 modal niu -->
+				<div class="grid-btn">
+					<button class="btn btn-info" id="modal-open"> 
+							<i class="fa fa-plus" id="shinnki"> </i>&nbsp;买二送一
+					</button>
+				</div>
+			<div id="modal-main">
+				<div class="button open"> </div>
+				<div class="modal" id="campaignSet" tabindex="-1" role="dialog" aria-labelledby="campaignSaleModalLabel">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+								aria-hidden="true">&times;</span></button>
+						<h6 class="modal-title" id="categoryModalLabel">Modal</h6>
+					</div>
+					<div class="modal_bg"> </div>
+					<div class="modal_window" id="campaignSaleModal">
+						　　　　<h3>campaign_set</h3>
+						<div class="form-group">
+							<label for="Name" class="control-label">主商品</label>
+							<input type="text" class="form-control" id="primaryGoodsId" name="primaryGoods" required="true">
 						</div>
-						<!--2021/06/01 modal niu -->
-		<div class="grid-btn">
-			<button class="btn btn-info" id="modal-open"> 
-					<i class="fa fa-plus" id="shinnki"> </i>&nbsp;买二送一
-			</button>
-		</div>
-	 <div id="modal-main">
-	<div class="button open"> </div>
-	<div class="modal" id="campaignSet" tabindex="-1" role="dialog" aria-labelledby="campaignSaleModalLabel">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-					aria-hidden="true">&times;</span></button>
-			<h6 class="modal-title" id="categoryModalLabel">Modal</h6>
-		</div>
-		<div class="modal_bg"> </div>
-		<div class="modal_window" id="campaignSaleModal">
-	　　　　<h3>campaign_set</h3>
-			<div class="form-group">
-				<label for="Name" class="control-label">主商品</label>
-				<input type="text" class="form-control" id="primaryGoodsId" name="primaryGoods"
-					placeholder="idを入力してください" required="true">
+						<div class="form-group">
+							<label for="startDate" class="control-label">赠送商品</label>
+							<select class="custom-select" id="modalSubGoodsName">
+							</select>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" id="datequxiao">キャンセル</button>
+							<button type="button" class="btn btn-primary" id="saveSaleButton">確認</button>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div class="form-group">
-				<label for="startDate" class="control-label">赠送商品</label>
-				<select class="custom-select" id="modalSubGoodsName">
-				</select>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" id="datequxiao">キャンセル</button>
-				<button type="button" class="btn btn-primary" id="saveSaleButton">確認</button>
-			</div>
-			</div>
-			</div>
-			</div>
-		</div>
-			</div>
+				</div>
+					</div>
 <!--Categories-->
 
 <ul class="secondCategoryId"><div id="closeBut"><li class="dumyLi">
@@ -100,9 +99,8 @@
 <td class="fontSize">
 	<input type="checkbox" class="checkId"/>
 	<input type="hidden" class="hiddenCategoryId">
-	<a class="modalCategoryName">
-		link
-	</a>
+	<input type="hidden" class="hiddenGoodsCategoryId">
+	<a class="modalGoodsName"></a>
 	<span>開始日</span>
 	<input type="date" class="startDate">
 	<span>終了日</span>

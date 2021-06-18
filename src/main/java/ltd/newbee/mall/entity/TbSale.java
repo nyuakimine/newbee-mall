@@ -15,7 +15,7 @@ public class TbSale {
     private Long id;
     private Long goodsId;
     private Date startDate;
-    private Date end_date;
+    private Date endDate;
     public Long getId() {
         return id;
     }
@@ -34,15 +34,15 @@ public class TbSale {
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
-    public Date getEnd_date() {
-        return end_date;
+    public Date getEndDate() {
+        return endDate;
     }
-    public void setEnd_date(Date end_date) {
-        this.end_date = end_date;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
     @Override
     public String toString() {
-	return "TbSale [id=" + id + ", goodsId=" + goodsId + ", startDate=" + startDate + ", end_date=" + end_date
-		+ "]";
+	return "TbSale [id=" + id + ", goodsId=" + goodsId + ", startDate=" + startDate + ", endDate=" + endDate + "]";
     }
+    
 }
