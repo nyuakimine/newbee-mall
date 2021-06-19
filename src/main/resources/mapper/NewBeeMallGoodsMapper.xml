@@ -775,12 +775,10 @@
 	    <select id="getGoodsSaleId" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.GoodsSale">
 	       select id,name,start_date,end_date,campaign,content1,content2,content3,content4,content5,flag from goods_sale where id = #{id,jdbcType=BIGINT}	
 	   </select>
-   <select id="findNewBeeMallGoodsListByCategoryId" parameterType="java.lang.Long" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from tb_newbee_mall_goods_info
-        where goods_category_id = #{goodsCategoryId,jdbcType=BIGINT}
-    </select> 
+      <select id="findNewBeeMallGoodsListByCategoryId" parameterType="java.lang.Long" resultType="ltd.newbee.mall.entity.SaleIdAndInfo">
+			select n.goods_id,n.goods_name,n.goods_category_id,m.id,m.goods_id,m.start_date,m.end_date
+            from tb_newbee_mall_goods_info as n left join tb_sale as m on n.goods_id = m.goods_id where goods_category_id = #{goodsCategoryId,jdbcType=BIGINT}
+     </select>
     <select id="findNewBeeMallGoodsListBySub" resultType= "ltd.newbee.mall.entity.NewBeeMallGoods">
       select goods_id,goods_name,goods_category_id from tb_newbee_mall_goods_info where goods_category_id = #{goodsCategoryId,jdbcType=BIGINT}
     </select>

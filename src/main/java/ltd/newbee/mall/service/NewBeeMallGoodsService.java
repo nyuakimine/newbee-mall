@@ -8,11 +8,9 @@
  */
 package ltd.newbee.mall.service;
 
-import java.util.Date;
 import java.util.List;
 
 import ltd.newbee.mall.controller.vo.GoodsReviewVo;
-import ltd.newbee.mall.entity.GoodsCategory;
 import ltd.newbee.mall.entity.GoodsCoupon;
 import ltd.newbee.mall.entity.GoodsDesc;
 import ltd.newbee.mall.entity.GoodsImage;
@@ -24,6 +22,7 @@ import ltd.newbee.mall.entity.IndexConfig;
 import ltd.newbee.mall.entity.InsertKeyword;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
 import ltd.newbee.mall.entity.ReviewUserInfo;
+import ltd.newbee.mall.entity.SaleIdAndInfo;
 import ltd.newbee.mall.entity.TbCategory;
 import ltd.newbee.mall.entity.TbSale;
 import ltd.newbee.mall.util.PageQueryUtil;
@@ -197,7 +196,7 @@ public interface NewBeeMallGoodsService {
      * add by niu 2021/06/03
      * getSubGoods
      */
-    List<NewBeeMallGoods> getSubGoods(Long goodsCategoryId);
+    List<SaleIdAndInfo> getSubGoods(Long goodsCategoryId);
     /* 
      * niuxiaofeng
      * add by niu 2021/06/18

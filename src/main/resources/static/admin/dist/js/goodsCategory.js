@@ -60,14 +60,15 @@ function showResult(thi,result){
 	    cn.text(list[i].categoryName);
 		cn.text(list[i].goodsName);
 		//找到时间的位置，同一行第四个开始
-		var sd = el.find("input:nth-child(7)");
-		var ed = el.find("input:nth-child(9)");
-		sd.val(list[i].startDate);
-		ed.val(list[i].endDate);
-		var ci = el.find("input:nth-child(3)");
-		var goodsCategoryId = el.find("input:nth-child(4)");
-		//ci.val(list[i].categoryId);
-		ci.val(list[i].goodsId);
+		var CategoryId = el.find("#hiddenCategoryId");
+		var goodsCategoryId = el.find("#hiddenGoodsCategoryId");
+		var goodsId = el.find("#hiddenGoodsId");
+		var startDate = el.find("#startDateUl");
+		var endDate = el.find("#endDateUl");
+		startDate.val(list[i].startDate);
+		endDate.val(list[i].endDate);
+		CategoryId.val(list[i].categoryId);
+		goodsId.val(list[i].goodsId);
 		goodsCategoryId.val(list[i].goodsCategoryId)
 		//clone第二个ul模板
 		//cloneUl.find(".button4").attr('onclick','secondButton()');
@@ -79,6 +80,7 @@ function showResult(thi,result){
 		cloneUl.find("#closeButton").click(function() {
 			debugger;
 			cloneUl.find("#closeBut").remove();
+			arr.pop();
 		})
 		//arr.push({"categoryId":cm[i].categoryId,"cloneUl":cloneUl})
 	}
@@ -98,26 +100,39 @@ function checkPopup(thi) {
 	var id = $(thi).parent().parent().find(".custom-select1").val();
 	if (id == 1) {
 		debugger;
+		var flag = $(thi).is(':checked');
 		var goodsName = $(thi).parent().find(".modalGoodsName").text();
-		//var goodsId = $(thi).parent().find(".hiddenCategoryId").val();
-		var goodsCategoryId = $(thi).parent().find(".hiddenGoodsCategoryId").val();
+		var goodsCategoryId = $(thi).parent().find("#hiddenGoodsCategoryId").val();
+		var goodsId = $(thi).parent().find("#hiddenGoodsId").val();
+		var startDate = $(thi).parent().find("#startDateUl").val();
+		var endDate = $(thi).parent().find("#endDateUl").val();
+		$("#campaignSet").find("#hiddenPrimaryGoodsId").val(goodsId);
 		$("#campaignSet").find("#primaryGoodsId").val(goodsName);
-	/*		var data = {
+		$("#campaignSet").find("#hiddenModalStartDate").val(startDate);
+		$("#campaignSet").find("#hiddenModalEndDate").val(endDate);
+		$("#campaignSet").find("#hiddenModalCategoryId").val(goodsCategoryId);
+		var data = {
 			"goodsId": goodsId,
+			"flag": flag,
 			"goodsCategoryId": goodsCategoryId,
-		};*/
-		data
+		};
 		$.ajax({
 			type: 'POST',//方法类型
 			url: '/admin/subGoodsName',
 			contentType: 'application/json',
-			data: JSON.stringify(goodsCategoryId),
+			data: JSON.stringify(data),
 			success: function(result) {
 				if (result.resultCode == 200) {
 					debugger;
-					var goodsList = result.data;
-					for (var i = 0; i < goodsList.length; i++) {
-					$("#modalSubGoodsName").append('<option value=\"' + goodsList[i].goodsId + '\">' + goodsList[i].goodsName + '</option>');
+					if (!flag) {
+						swal("ご削除出来ました！", {
+							icon: "success",
+						});
+					} else {
+						var goodsList = result.data;
+						for (var i = 0; i < goodsList.length; i++) {
+							$("#modalSubGoodsName").append('<option value=\"' + goodsList[i].goodsId + '\">' + goodsList[i].goodsName + '</option>');
+						}
 					}
 				} else {
 					swal(result.message, {
@@ -131,14 +146,18 @@ function checkPopup(thi) {
 				});
 			}
 		})
-		$('#campaignSet').modal('show');
+		if (goodsId) {
+			$("#campaignSet").modal('show');
+		} else {
+		};
+		//$('#campaignSet').modal('show');
 		return;
 	} else {
 		var flag = $(thi).is(':checked');
 		var id = $(thi).parent().parent().find(".custom-select1").val();
-		var startDate = $(thi).parent().find(".startDate").val();
-		var endDate = $(thi).parent().find(".endDate").val();
-		var categoryId = $(thi).parent().find(".hiddenCategoryId").val();
+		var startDate = $(thi).parent().find("#startDateUl").val();
+		var endDate = $(thi).parent().find("#endDateUl").val();
+		var categoryId = $(thi).parent().parent().find("#hiddenCategoryId").val();
 		var data = {
 			"flag": flag,
 			"id": id,
@@ -146,7 +165,7 @@ function checkPopup(thi) {
 			"endDate": endDate,
 			"categoryId": categoryId
 		};
-	}
+
 
 	$.ajax({
 		type: 'POST',//方法类型
@@ -178,15 +197,25 @@ function checkPopup(thi) {
 			});
 		}
 	})
-	 $(".modal").fadeOut();
+	// $(".modal").fadeOut();
+	 	}
 }	
 //2021/06/01 insertSale 绑定modal上的保存按钮
 $("#saveSaleButton").click(function(){	
-	var primaryGoodsId = $("#primaryGoodsId").val();
-	var subGoodsId = $("#subGoodsId").val();
+	debugger;
+	var primaryGoodsId = $("#hiddenPrimaryGoodsId").val();
+	var subGoodsId = $("#modalSubGoodsName").val();
+	var startDate = $("#hiddenModalStartDate").val();
+	var endDate = $("#hiddenModalEndDate").val();
+	var categoryId = $("#hiddenModalCategoryId").val();
+	var campaginId = 1;
     var data = {
+	"campaginId":campaginId,
 	"primaryGoodsId":primaryGoodsId,
 	"subGoodsId":subGoodsId,
+	"startDate":startDate,
+	"endDate":endDate,
+	"categoryId":categoryId,
     };	  
     $.ajax({
         type: 'POST',//方法类型
@@ -212,39 +241,5 @@ $("#saveSaleButton").click(function(){
             });
          }
      })
+	$(".modal").fadeOut();
   });
-$(function() {
-	$("#datequxiao").click(function() {
-		$(".modal").remove();
-	});
-});
-/*function clickMe(_this){
-	console.log(_this);
-}*/
-//获取赠送商品的goodsId
-/*$("#saveGoodsButton").click(function(){	
-
-  $(function () {
-  var goodsId =$("#primaryGoodsId").val(); 
-  
-       $.ajax({
-        type: 'POST',//方法类型
-        url: '/admin/goods/subGoods',
-        contentType: 'application/json',
-        data: JSON.stringify(goodsId),
-        success: function (result) {
-//サーバーが成功した場合
-            if (result.resultCode == 200) {
-			debugger;					
-            } else {
-                	swal(result.message, {
-                    icon: "error",
-                });
-            }
-            
-        },
-        error: function () {
-         }
-     })
-     });
-});*/

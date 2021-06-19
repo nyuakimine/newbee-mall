@@ -31,6 +31,7 @@ import ltd.newbee.mall.entity.IndexConfig;
 import ltd.newbee.mall.entity.InsertKeyword;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
 import ltd.newbee.mall.entity.ReviewUserInfo;
+import ltd.newbee.mall.entity.SaleIdAndInfo;
 import ltd.newbee.mall.entity.TbCategory;
 import ltd.newbee.mall.entity.TbSale;
 import ltd.newbee.mall.service.NewBeeMallGoodsService;
@@ -318,8 +319,8 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 	    }
 	    //获取goodsId
 	    @Override
-		public List<NewBeeMallGoods> getSubGoods(Long goodsCategoryId) {
-		    List<NewBeeMallGoods> goodsList = goodsMapper.findNewBeeMallGoodsListByCategoryId(goodsCategoryId); 
+		public List<SaleIdAndInfo> getSubGoods(Long goodsCategoryId) {
+		    List<SaleIdAndInfo> goodsList = goodsMapper.findNewBeeMallGoodsListByCategoryId(goodsCategoryId); 
 		    return goodsList;
 		}
 	    @Override

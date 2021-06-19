@@ -232,6 +232,11 @@ public class NewBeeMallCategoryServiceImpl implements NewBeeMallCategoryService 
     public Boolean deleteCaId(Long categoryId) {
 	return goodsCategoryMapper.deletePaK(categoryId) > 0;
     };
+    // 2021/06/19 deleteTbsale
+    @Override
+    public Boolean deleteTbsaleAndCampSet(Long goodsId) {
+	return goodsCategoryMapper.deleteTbsale(goodsId) > 0;
+    };
 
     // 2021/06/01 campaignSet
     @Override
@@ -241,8 +246,8 @@ public class NewBeeMallCategoryServiceImpl implements NewBeeMallCategoryService 
 
     // add by niu 2021/05/24 insertSaleMaxId
     @Override
-    public Long campaignMaxId(Long id) {
-	Long maxId = goodsCategoryMapper.getCampaignMaxId(id);
+    public Long campaignMaxId() {
+	Long maxId = goodsCategoryMapper.getCampaignMaxId();
 	if (maxId != null) {
 	    return maxId + 1;
 	} else {

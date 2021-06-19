@@ -8,34 +8,33 @@
  */
 package ltd.newbee.mall.controller.admin;
 
-import ltd.newbee.mall.common.Constants;
-import ltd.newbee.mall.common.NewBeeMallCategoryLevelEnum;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import ltd.newbee.mall.common.ServiceResultEnum;
-import ltd.newbee.mall.controller.vo.NewBeeMallUserVO;
 import ltd.newbee.mall.entity.CampaignSet;
 import ltd.newbee.mall.entity.CategoryIdAndId;
-import ltd.newbee.mall.entity.GoodsCategory;
-import ltd.newbee.mall.entity.GoodsReviewHelpNum;
 import ltd.newbee.mall.entity.GoodsSale;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
+import ltd.newbee.mall.entity.SaleIdAndInfo;
 import ltd.newbee.mall.entity.TbCategory;
 import ltd.newbee.mall.entity.TbSale;
 import ltd.newbee.mall.service.NewBeeMallCategoryService;
 import ltd.newbee.mall.service.NewBeeMallGoodsService;
-import ltd.newbee.mall.util.PageQueryUtil;
 import ltd.newbee.mall.util.Result;
 import ltd.newbee.mall.util.ResultGenerator;
-import org.springframework.stereotype.Controller;
-import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import java.text.SimpleDateFormat;
-import java.util.*;
 /**
  * @author 13
  * @qq交流群 796794009
@@ -63,27 +62,27 @@ public class GoodsCategoryController {
    //added by niu 2021/06/02 insertprimaryGoods
    @RequestMapping(value = "/goods/primaryGoods", method = RequestMethod.POST)
    @ResponseBody
-   public Result insertPrimaryGoods(@RequestBody CampaignSet categoryId) {
+   public Result insertPrimaryGoods(@RequestBody CampaignSet campaignSet) {
        TbSale list = new TbSale();
        Integer count = null;
        Integer countTs = null;
-       //Long saleId = newBeeMallCategoryService.campaignMaxId(categoryId.getId()); 
-       list.setId(categoryId.getCampaginId());
-       list.setGoodsId(categoryId.getPrimaryGoodsId());
-       list.setStartDate(categoryId.getStartDate());
-       list.setEndDate(categoryId.getEndDate());
-       if(categoryId !=null) {
+       Long saleId = newBeeMallCategoryService.campaignMaxId();
+       campaignSet.setId(saleId);
+       list.setId(campaignSet.getCampaginId());
+       list.setGoodsId(campaignSet.getPrimaryGoodsId());
+       list.setStartDate(campaignSet.getStartDate());
+       list.setEndDate(campaignSet.getEndDate());
+       if(campaignSet !=null) {
 	   countTs = newBeeMallGoodsService.insertTbSale(list);
        }
        if(list != null) {
-           count = newBeeMallCategoryService.campaignSet(categoryId);
+           count = newBeeMallCategoryService.campaignSet(campaignSet);
        }
        if(!(count > 0))  {
        return ResultGenerator.genFailResult("投稿失敗！");
        }      
        return ResultGenerator.genSuccessResult(count);    
    }
-   
    //added by niu 2021/06/04 SecondCategoryIdAndName
    @RequestMapping(value = "/secondCategory", method = RequestMethod.POST)
    @ResponseBody
@@ -93,7 +92,7 @@ public class GoodsCategoryController {
        Long goodsCategoryId = categoryId;
        List<GoodsSale> gsM = newBeeMallGoodsService.GoodsSale();
        List<CategoryIdAndId> cm = newBeeMallCategoryService.SecondCategoryIdAndName(parentId);
-       List<NewBeeMallGoods> goodsList = newBeeMallGoodsService.getSubGoods(goodsCategoryId);
+       List<SaleIdAndInfo> goodsList = newBeeMallGoodsService.getSubGoods(goodsCategoryId);
        if (!goodsList.isEmpty()) {
 	   result.put("gsM", gsM);
 	   result.put("list", goodsList);
@@ -106,19 +105,19 @@ public class GoodsCategoryController {
    //added by niu 2021/06/01 insertTbcategory
    @RequestMapping(value = "/insertAndDeleteCategory", method = RequestMethod.POST)
    @ResponseBody
-   public Result insertAndDeleteCategory(@RequestBody TbCategory id) {
+   public Result insertAndDeleteCategory(@RequestBody TbCategory tbCategory) {
        Integer count = null;
-       if (!id.getFlag()) {
-	   Boolean deleteResult = newBeeMallCategoryService.deleteCaId(id.getCategoryId());
+       if (!tbCategory.getFlag()) {
+	   Boolean deleteResult = newBeeMallCategoryService.deleteCaId(tbCategory.getCategoryId());
 	   if (deleteResult) {
 	       return ResultGenerator.genSuccessResult();
 	   }
 	   return ResultGenerator.genFailResult(ServiceResultEnum.OPERATE_ERROR.getResult());
        } else {
-	   Boolean insert = newBeeMallGoodsService.insertTbCategory(id);
+	   Boolean insert = newBeeMallGoodsService.insertTbCategory(tbCategory);
 	   if (insert) {
-	       if (id != null) {
-		   count = newBeeMallGoodsService.insertTbCategoryId(id);
+	       if (tbCategory != null) {
+		   count = newBeeMallGoodsService.insertTbCategoryId(tbCategory);
 	       }
 	       if (!(count > 0)) {
 		   return ResultGenerator.genFailResult("投稿失敗！");
@@ -131,9 +130,16 @@ public class GoodsCategoryController {
    // @PostMapping("/subGoodsName")
    @RequestMapping(value = "/subGoodsName", method = RequestMethod.POST)
    @ResponseBody
-   public Result getGiftGoods(@RequestBody Long goodsId) {
-       Long categoryId = goodsId;
-       List<NewBeeMallGoods> goodsList = newBeeMallGoodsService.NewBeeMallGoodsListBySub(goodsId);
-       return ResultGenerator.genSuccessResult(goodsList);
+   public Result getGiftGoods(@RequestBody SaleIdAndInfo saleIdAndInfo) {
+       if(!saleIdAndInfo.getFlag()){//删除成功
+	   boolean deleteResult = newBeeMallCategoryService.deleteTbsaleAndCampSet(saleIdAndInfo.getGoodsId());
+       if(deleteResult) {
+           return ResultGenerator.genSuccessResult();
+      }
+       return ResultGenerator.genFailResult(ServiceResultEnum.OPERATE_ERROR.getResult());
+       } else {
+	   List<SaleIdAndInfo> goodsList = newBeeMallGoodsService.getSubGoods(saleIdAndInfo.getGoodsCategoryId());
+   return ResultGenerator.genSuccessResult(goodsList);
+       }
    }
 }

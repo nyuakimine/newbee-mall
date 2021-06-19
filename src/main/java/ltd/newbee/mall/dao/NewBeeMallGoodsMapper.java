@@ -12,7 +12,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import ltd.newbee.mall.entity.GoodsCategory;
 import ltd.newbee.mall.entity.GoodsCoupon;
 import ltd.newbee.mall.entity.GoodsDesc;
 import ltd.newbee.mall.entity.GoodsImage;
@@ -23,6 +22,7 @@ import ltd.newbee.mall.entity.GoodsSale;
 import ltd.newbee.mall.entity.InsertKeyword;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
 import ltd.newbee.mall.entity.ReviewUserInfo;
+import ltd.newbee.mall.entity.SaleIdAndInfo;
 import ltd.newbee.mall.entity.StockNumDTO;
 import ltd.newbee.mall.entity.TbCategory;
 import ltd.newbee.mall.entity.TbSale;
@@ -120,7 +120,7 @@ public interface NewBeeMallGoodsMapper {
     List<GoodsSale> getGoodsSaleId(Long id);
     //获取赠送商品goodsId
     List<NewBeeMallGoods> findNewBeeMallGoodsListBySub(Long goodsId);
-    List<NewBeeMallGoods> findNewBeeMallGoodsListByCategoryId(Long goodsId);
+    List<SaleIdAndInfo> findNewBeeMallGoodsListByCategoryId(Long goodsId);
 
     List<GoodsSale> getGoodsSaleId(GoodsSale id);
 }

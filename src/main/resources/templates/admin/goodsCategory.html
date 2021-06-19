@@ -58,11 +58,6 @@
 									</div>
 								</div>
 								<!--2021/06/01 modal niu -->
-				<div class="grid-btn">
-					<button class="btn btn-info" id="modal-open"> 
-							<i class="fa fa-plus" id="shinnki"> </i>&nbsp;买二送一
-					</button>
-				</div>
 			<div id="modal-main">
 				<div class="button open"> </div>
 				<div class="modal" id="campaignSet" tabindex="-1" role="dialog" aria-labelledby="campaignSaleModalLabel">
@@ -75,17 +70,22 @@
 					<div class="modal_window" id="campaignSaleModal">
 						　　　　<h3>campaign_set</h3>
 						<div class="form-group">
-							<label for="Name" class="control-label">主商品</label>
-							<input type="text" class="form-control" id="primaryGoodsId" name="primaryGoods" required="true">
+							<label for="primaryGoodsId" class="control-label">主商品</label>
+							<input class="form-control" id="primaryGoodsId">
+							<input type="hidden" id="hiddenPrimaryGoodsId">
+							<input type="hidden" id="hiddenModalId">
+							<input type="hidden" id="hiddenModalCategoryId">
+							<input type="hidden" id="hiddenModalStartDate">
+							<input type="hidden" id="hiddenModalEndDate">
 						</div>
 						<div class="form-group">
-							<label for="startDate" class="control-label">赠送商品</label>
+							<label for="modalSubGoodsName" class="control-label">赠送商品</label>
 							<select class="custom-select" id="modalSubGoodsName">
 							</select>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-default" id="datequxiao">キャンセル</button>
-							<button type="button" class="btn btn-primary" id="saveSaleButton">確認</button>
+							<button class="btn btn-default" data-dismiss="modal" id="modal-close">キャンセル</button>
+							<button class="btn btn-primary" data-dismiss="modal" id="saveSaleButton">確認</button>
 						</div>
 					</div>
 				</div>
@@ -98,13 +98,14 @@
 <tr>
 <td class="fontSize">
 	<input type="checkbox" class="checkId"/>
-	<input type="hidden" class="hiddenCategoryId">
-	<input type="hidden" class="hiddenGoodsCategoryId">
+	<input type="hidden" id="hiddenCategoryId">
+	<input type="hidden" id="hiddenGoodsCategoryId">
+	<input type="hidden" id="hiddenGoodsId">
 	<a class="modalGoodsName"></a>
 	<span>開始日</span>
-	<input type="date" class="startDate">
+	<input type="date" id="startDateUl">
 	<span>終了日</span>
-	<input type="date" class="endDate">
+	<input type="date" id="endDateUl">
 	<button class="button4">➕</button>
 </td>
 </tr>

@@ -99,7 +99,7 @@ public interface NewBeeMallCategoryService {
      * sale 2021/06/02
      * getcampaignMaxId
      */
-    Long campaignMaxId(Long id);
+    Long campaignMaxId();
     /* 
      * niuxiaofeng
      * 2021/06/04
@@ -107,6 +107,8 @@ public interface NewBeeMallCategoryService {
      */
     List<CategoryIdAndId>SecondCategoryIdAndName(Long categoryId);
 
-    List<Price> calculationPrice(Long categoryId);  
+    List<Price> calculationPrice(Long categoryId);
+
+    Boolean deleteTbsaleAndCampSet(Long id);  
 }  
 
