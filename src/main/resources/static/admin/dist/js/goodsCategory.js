@@ -55,19 +55,18 @@ function showResult(thi,result){
 				}
 		}
 		el.find("input:first-child").before(se);
-		//找到categoryName
+		//找到categoryName,goodsName
 		var cn = el.find("a");
 	    cn.text(list[i].categoryName);
 		cn.text(list[i].goodsName);
-		//找到时间的位置，同一行第四个开始
-		var CategoryId = el.find("#hiddenCategoryId");
+		var categoryId = el.find("#hiddenCategoryId");
 		var goodsCategoryId = el.find("#hiddenGoodsCategoryId");
 		var goodsId = el.find("#hiddenGoodsId");
 		var startDate = el.find("#startDateUl");
 		var endDate = el.find("#endDateUl");
 		startDate.val(list[i].startDate);
 		endDate.val(list[i].endDate);
-		CategoryId.val(list[i].categoryId);
+		categoryId.val(list[i].categoryId);
 		goodsId.val(list[i].goodsId);
 		goodsCategoryId.val(list[i].goodsCategoryId)
 		//clone第二个ul模板
@@ -80,9 +79,8 @@ function showResult(thi,result){
 		cloneUl.find("#closeButton").click(function() {
 			debugger;
 			cloneUl.find("#closeBut").remove();
-			arr.pop();
+			arr.pop(categoryId);
 		})
-		//arr.push({"categoryId":cm[i].categoryId,"cloneUl":cloneUl})
 	}
 	cloneUl.show();
 	//appendToSearchBar(thi,cloneUl);
@@ -97,20 +95,20 @@ function showResult(thi,result){
 //2021/06/01
 function checkPopup(thi) {
 	debugger;
-	var id = $(thi).parent().parent().find(".custom-select1").val();
-	if (id == 1) {
-		debugger;
-		var flag = $(thi).is(':checked');
-		var goodsName = $(thi).parent().find(".modalGoodsName").text();
-		var goodsCategoryId = $(thi).parent().find("#hiddenGoodsCategoryId").val();
-		var goodsId = $(thi).parent().find("#hiddenGoodsId").val();
-		var startDate = $(thi).parent().find("#startDateUl").val();
-		var endDate = $(thi).parent().find("#endDateUl").val();
-		$("#campaignSet").find("#hiddenPrimaryGoodsId").val(goodsId);
-		$("#campaignSet").find("#primaryGoodsId").val(goodsName);
-		$("#campaignSet").find("#hiddenModalStartDate").val(startDate);
-		$("#campaignSet").find("#hiddenModalEndDate").val(endDate);
-		$("#campaignSet").find("#hiddenModalCategoryId").val(goodsCategoryId);
+	var flag = $(thi).is(':checked');
+	var id = $(thi).parent().find(".custom-select1").val();
+	var goodsId = $(thi).parent().find("#hiddenGoodsId").val();
+	var startDate = $(thi).parent().find("#startDateUl").val();
+	var endDate = $(thi).parent().find("#endDateUl").val();
+	$("#campaignSet").find("#hiddenPrimaryGoodsId").val(goodsId);
+	$("#campaignSet").find("#hiddenModalStartDate").val(startDate);
+	$("#campaignSet").find("#hiddenModalEndDate").val(endDate);
+		if (id == 1) {
+			debugger;
+			var goodsName = $(thi).parent().find(".modalGoodsName").text();
+			var goodsCategoryId = $(thi).parent().find("#hiddenGoodsCategoryId").val();
+			$("#campaignSet").find("#primaryGoodsId").val(goodsName);
+			$("#campaignSet").find("#hiddenModalCategoryId").val(goodsCategoryId);
 		var data = {
 			"goodsId": goodsId,
 			"flag": flag,
@@ -146,18 +144,14 @@ function checkPopup(thi) {
 				});
 			}
 		})
-		if (goodsId) {
+		if (goodsId&&flag&&id==1) {
 			$("#campaignSet").modal('show');
-		} else {
-		};
-		//$('#campaignSet').modal('show');
+		} 
 		return;
-	} else {
-		var flag = $(thi).is(':checked');
-		var id = $(thi).parent().parent().find(".custom-select1").val();
-		var startDate = $(thi).parent().find("#startDateUl").val();
-		var endDate = $(thi).parent().find("#endDateUl").val();
-		var categoryId = $(thi).parent().parent().find("#hiddenCategoryId").val();
+
+	}
+else {
+		var categoryId = $(thi).parent().find("#hiddenCategoryId").val();
 		var data = {
 			"flag": flag,
 			"id": id,
@@ -165,40 +159,37 @@ function checkPopup(thi) {
 			"endDate": endDate,
 			"categoryId": categoryId
 		};
-
-
-	$.ajax({
-		type: 'POST',//方法类型
-		url: '/admin/insertAndDeleteCategory',
-		contentType: 'application/json',
-		data: JSON.stringify(data),
-		success: function(result) {
-			//サーバーが成功した場合
-			if (result.resultCode == 200) {
-				if (data.flag) {
-					swal("ご挿入出来ました！", {
-						icon: "success",
-					});
+		$.ajax({
+			type: 'POST',//方法类型
+			url: '/admin/insertAndDeleteCategory',
+			contentType: 'application/json',
+			data: JSON.stringify(data),
+			success: function(result) {
+				//サーバーが成功した場合
+				if (result.resultCode == 200) {
+					if (data.flag) {
+						swal("ご挿入出来ました！", {
+							icon: "success",
+						});
+					} else {
+						swal("ご削除出来ました！", {
+							icon: "success",
+						});
+					}
 				} else {
-					swal("ご削除出来ました！", {
-						icon: "success",
+					swal(result.message, {
+						icon: "error",
 					});
 				}
-			} else {
-				swal(result.message, {
+
+			},
+			error: function() {
+				swal("有効期限外", {
 					icon: "error",
 				});
 			}
-
-		},
-		error: function() {
-			swal("有効期限外", {
-				icon: "error",
-			});
-		}
-	})
-	// $(".modal").fadeOut();
-	 	}
+		})
+	}
 }	
 //2021/06/01 insertSale 绑定modal上的保存按钮
 $("#saveSaleButton").click(function(){	
