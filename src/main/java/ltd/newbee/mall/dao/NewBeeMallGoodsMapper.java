@@ -12,6 +12,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import ltd.newbee.mall.entity.DetailTitle;
+import ltd.newbee.mall.entity.GenreAndStation;
 import ltd.newbee.mall.entity.GoodsCoupon;
 import ltd.newbee.mall.entity.GoodsDesc;
 import ltd.newbee.mall.entity.GoodsImage;
@@ -21,11 +23,16 @@ import ltd.newbee.mall.entity.GoodsReviewHelpNum;
 import ltd.newbee.mall.entity.GoodsSale;
 import ltd.newbee.mall.entity.InsertKeyword;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
+import ltd.newbee.mall.entity.RestaurantDesc;
 import ltd.newbee.mall.entity.ReviewUserInfo;
 import ltd.newbee.mall.entity.SaleIdAndInfo;
 import ltd.newbee.mall.entity.StockNumDTO;
+import ltd.newbee.mall.entity.TabelogCategory;
 import ltd.newbee.mall.entity.TbCategory;
+import ltd.newbee.mall.entity.TbGenre;
 import ltd.newbee.mall.entity.TbSale;
+import ltd.newbee.mall.entity.TopImg;
+import ltd.newbee.mall.entity.TopNoticeComment;
 import ltd.newbee.mall.util.PageQueryUtil;
 
 public interface NewBeeMallGoodsMapper {
@@ -123,4 +130,26 @@ public interface NewBeeMallGoodsMapper {
     List<SaleIdAndInfo> findNewBeeMallGoodsListByCategoryId(Long goodsId);
 
     List<GoodsSale> getGoodsSaleId(GoodsSale id);
+
+    List<DetailTitle> getDetailTitle(Long id);
+
+    List<RestaurantDesc> getRestaurantDesc(Long id);
+
+    List<TabelogCategory> getTabelogCategory(Long parentId);
+
+    List<TbGenre> getTbGenre(Long genreId);
+
+	List<ReviewUserInfo> getOpenReview(PageQueryUtil pageUtil);
+
+	int getTotalOpenReview(PageQueryUtil pageUtil);
+
+	int getTbCommentTotal();
+
+	double getTbCommentAvg();
+
+	List<GenreAndStation> getGenreAndStationList(Long id);
+
+	List<TopNoticeComment> getTopNoticeComment(Long id);
+
+	List<TopImg> getTopImg(Long id);
 }

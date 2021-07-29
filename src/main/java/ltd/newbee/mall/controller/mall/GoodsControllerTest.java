@@ -1,45 +1,22 @@
 package ltd.newbee.mall.controller.mall;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import ltd.newbee.mall.common.ServiceResultEnum;
-import ltd.newbee.mall.entity.Carousel;
-import ltd.newbee.mall.entity.CategoryIdAndId;
-import ltd.newbee.mall.entity.GoodsDesc;
-import ltd.newbee.mall.entity.GoodsImage;
-import ltd.newbee.mall.entity.GoodsQa;
-import ltd.newbee.mall.entity.GoodsReview;
-import ltd.newbee.mall.entity.GoodsSale;
-import ltd.newbee.mall.entity.ReviewUserInfo;
-import ltd.newbee.mall.entity.TbCategory;
+import ltd.newbee.mall.dao.NewBeeMallGoodsMapper;
+import ltd.newbee.mall.entity.DetailTitle;
+import ltd.newbee.mall.entity.RestaurantDesc;
+import ltd.newbee.mall.entity.TabelogCategory;
+import ltd.newbee.mall.entity.TbGenre;
 import ltd.newbee.mall.service.NewBeeMallCategoryService;
 import ltd.newbee.mall.service.NewBeeMallGoodsService;
-import ltd.newbee.mall.util.PageQueryUtil;
-import ltd.newbee.mall.util.PageResult;
-import ltd.newbee.mall.util.Result;
-import ltd.newbee.mall.util.ResultGenerator;
 
 @SpringBootTest
 class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
@@ -51,6 +28,70 @@ class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
     private NewBeeMallGoodsService newBeeMallCarouselService;
     @Resource
     private NewBeeMallCategoryService newBeeMallCategoryService;
+    @Autowired
+    private NewBeeMallGoodsMapper goodsMapper;
+
+    @Test
+    public void testGetDetailTitle() {
+	long id = 1L;
+	List<DetailTitle> list = goodsMapper.getDetailTitle(id);
+	DetailTitle dt = list.get(0);
+	String name = dt.getName();
+	assertEquals("nn", name);
+	String star = dt.getStar();
+	assertEquals("nn", star);
+	String score = dt.getScore();
+	assertEquals("nn", score);
+	String commentNum = dt.getCommentNum();
+	assertEquals("nn", commentNum);
+	String saveNum = dt.getSaveNum();
+	assertEquals("nn", saveNum);
+    }
+
+    @Test
+    public void testGoodsImageService() {
+	long id = 1L;
+	List<RestaurantDesc> list = goodsMapper.getRestaurantDesc(id);
+	RestaurantDesc rd = list.get(0);
+	String nearbyStation = rd.getNearbyStation();
+	assertEquals("nn", nearbyStation);
+	long genreId = rd.getGenreId();
+	assertEquals(11L, genreId);
+	String nightBudget = rd.getNightBudget();
+	assertEquals("nn", nightBudget);
+	String dayBudget = rd.getDayBudget();
+	assertEquals("nn", dayBudget);
+	String restDay = rd.getRestDay();
+	assertEquals("nn", restDay);
+	String genreName = rd.getGenreName();
+	assertEquals("nn", genreName);
+
+    }
+
+    @Test
+    public void testTabelogCategory() {
+	long parentId = 1L;
+	List<TabelogCategory> list = goodsMapper.getTabelogCategory(parentId);
+	TabelogCategory tc = list.get(0);
+	long categoryId = tc.getCategoryId();
+	assertEquals(1, categoryId);
+	String categoryName = tc.getCategoryName();
+	assertEquals("1", categoryName);
+    }
+
+    @Test
+    public void testTbGenre() {
+	long genreId = 1L;
+	List<TbGenre> list = goodsMapper.getTbGenre(genreId);
+	TbGenre tg = list.get(0);
+	String name1 = tg.getName1();
+	assertEquals("11", name1);
+	String name2 = tg.getName2();
+	assertEquals("111", name2);
+	String name3 = tg.getName3();
+	assertEquals("1111", name3);
+    }
+
 //    @Test
 //    public void testGoodsImageService() {
 //	long o = 10700L;
@@ -503,74 +544,74 @@ class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
 //	assertEquals("有效", List.get(0).getFlag());
 //    }
 
-    // 2021/06/03  カテゴリの抽出&該当カテゴリがキャンペーンの適応有無をチェックする。
-    @Test
-    public void testTCategory() {
-	Long categoryId = 16L;
-	List<CategoryIdAndId> tCategory = newBeeMallCategoryService.CategoryIdAndName(categoryId);
-	CategoryIdAndId z = tCategory.get(1);
-	Long id = z.getId();
-	assertEquals(7, id);
-	String categoryName = tCategory.get(1).getCategoryName();
-    	assertEquals("女装 男装 穿搭", categoryName);
-    	Long parentId = tCategory.get(1).getParentId();
-    	assertEquals(0, parentId);
-	SimpleDateFormat dmyFormat = new SimpleDateFormat("yyyy-MM-dd");
-	String startDate1 = dmyFormat.format(tCategory.get(1).getStartDate());
-	String endDate3 = dmyFormat.format(tCategory.get(1).getEndDate());
-	assertEquals("2021-06-02", startDate1);
-	assertEquals("2021-06-04", endDate3);
-    }
-    //2021/06/03 キャンペーンの抽出
-    @Test
-       public void testGoodsSale() {
-    	List<GoodsSale> list = newBeeMallGoodsService.GoodsSale();
-    
-    	Long id = list.get(0).getId();
-    	assertEquals(1, id);
-    
-    	String name = list.get(0).getName();
-    	assertEquals("大甩卖", name);
-
-        SimpleDateFormat dmyFormat = new SimpleDateFormat("yyyy-MM-dd");
- 	String startDate1 = dmyFormat.format(list.get(0).getStartDate());
- 	String endDate3 = dmyFormat.format(list.get(0).getEndDate());
- 	assertEquals("2021-05-13", startDate1);
- 	assertEquals("2022-04-04", endDate3);
-
-    	String campaign = list.get(0).getCampaign();
-    	assertEquals("满三百减一百", campaign);
-    	
-    	String content1 = list.get(0).getContent1();
-    	assertEquals(null, content1);
-    	
-    	String content2 = list.get(0).getContent2();
-    	assertEquals(null, content2);
-    	
-    	String content3 = list.get(0).getContent3();
-    	assertEquals(null, content3);
-        
-    	String content4 = list.get(0).getContent4();
-    	assertEquals(null, content4);
-    	
-    	String content5 = list.get(0).getContent5();
-    	assertEquals(null, content5);
-    
-    	String flag = list.get(0).getFlag();
-    	assertEquals("有效", flag);
-        }
-    
-  @Test
-  public void testInsertCategory() {
-	CategoryIdAndId Category = new CategoryIdAndId();
-	Category.setCategoryId(59L);
-	//Category.setCategoryName("运动 户外 乐器");
-	Category.setId(2L);
-	//Category.setStartDate("变绿变绿变绿变绿!!!");
-	//Category.setEndDate("好运来变绿！！！");
-	//String v = newBeeMallCategoryService.TbCategory(Long id);
-	//assertEquals(ServiceResultEnum.SUCCESS.getResult(), v);
-  }
+    // 2021/06/03 カテゴリの抽出&該当カテゴリがキャンペーンの適応有無をチェックする。
+//    @Test
+//    public void testTCategory() {
+//	Long categoryId = 16L;
+//	List<CategoryIdAndId> tCategory = newBeeMallCategoryService.CategoryIdAndName(categoryId);
+//	CategoryIdAndId z = tCategory.get(1);
+//	Long id = z.getId();
+//	assertEquals(7, id);
+//	String categoryName = tCategory.get(1).getCategoryName();
+//    	assertEquals("女装 男装 穿搭", categoryName);
+//    	Long parentId = tCategory.get(1).getParentId();
+//    	assertEquals(0, parentId);
+//	SimpleDateFormat dmyFormat = new SimpleDateFormat("yyyy-MM-dd");
+//	String startDate1 = dmyFormat.format(tCategory.get(1).getStartDate());
+//	String endDate3 = dmyFormat.format(tCategory.get(1).getEndDate());
+//	assertEquals("2021-06-02", startDate1);
+//	assertEquals("2021-06-04", endDate3);
+//    }
+//    //2021/06/03 キャンペーンの抽出
+//    @Test
+//       public void testGoodsSale() {
+//    	List<GoodsSale> list = newBeeMallGoodsService.GoodsSale();
+//    
+//    	Long id = list.get(0).getId();
+//    	assertEquals(1, id);
+//    
+//    	String name = list.get(0).getName();
+//    	assertEquals("大甩卖", name);
+//
+//        SimpleDateFormat dmyFormat = new SimpleDateFormat("yyyy-MM-dd");
+// 	String startDate1 = dmyFormat.format(list.get(0).getStartDate());
+// 	String endDate3 = dmyFormat.format(list.get(0).getEndDate());
+// 	assertEquals("2021-05-13", startDate1);
+// 	assertEquals("2022-04-04", endDate3);
+//
+//    	String campaign = list.get(0).getCampaign();
+//    	assertEquals("满三百减一百", campaign);
+//    	
+//    	String content1 = list.get(0).getContent1();
+//    	assertEquals(null, content1);
+//    	
+//    	String content2 = list.get(0).getContent2();
+//    	assertEquals(null, content2);
+//    	
+//    	String content3 = list.get(0).getContent3();
+//    	assertEquals(null, content3);
+//        
+//    	String content4 = list.get(0).getContent4();
+//    	assertEquals(null, content4);
+//    	
+//    	String content5 = list.get(0).getContent5();
+//    	assertEquals(null, content5);
+//    
+//    	String flag = list.get(0).getFlag();
+//    	assertEquals("有效", flag);
+//        }
+//    
+//  @Test
+//  public void testInsertCategory() {
+//	CategoryIdAndId Category = new CategoryIdAndId();
+//	Category.setCategoryId(59L);
+//	//Category.setCategoryName("运动 户外 乐器");
+//	Category.setId(2L);
+//	//Category.setStartDate("变绿变绿变绿变绿!!!");
+//	//Category.setEndDate("好运来变绿！！！");
+//	//String v = newBeeMallCategoryService.TbCategory(Long id);
+//	//assertEquals(ServiceResultEnum.SUCCESS.getResult(), v);
+//  }
 //    //2021/06/03
 //    @Test
 //    public void testDeleteCaId() {

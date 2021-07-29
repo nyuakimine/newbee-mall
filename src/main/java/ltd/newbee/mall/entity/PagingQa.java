@@ -21,73 +21,72 @@ public class PagingQa {
 
     private Byte cofigType;
 
-    private String page;
+    private Long page;
 
     private Date submitDate;
     
     private String helpedNum;
 
-    public String getOrderBy() {
-        return orderBy;
-    }
+	public String getOrderBy() {
+		return orderBy;
+	}
 
-    public void setOrderBy(String orderBy) {
-        this.orderBy = orderBy;
-    }
+	public void setOrderBy(String orderBy) {
+		this.orderBy = orderBy;
+	}
 
-    public String getConfigName() {
-        return configName;
-    }
+	public String getConfigName() {
+		return configName;
+	}
 
-    public void setConfigName(String configName) {
-        this.configName = configName;
-    }
+	public void setConfigName(String configName) {
+		this.configName = configName;
+	}
 
-    public Integer getConfigRank() {
-        return configRank;
-    }
+	public Integer getConfigRank() {
+		return configRank;
+	}
 
-    public void setConfigRank(Integer configRank) {
-        this.configRank = configRank;
-    }
+	public void setConfigRank(Integer configRank) {
+		this.configRank = configRank;
+	}
 
-    public Byte getCofigType() {
-        return cofigType;
-    }
+	public Byte getCofigType() {
+		return cofigType;
+	}
 
-    public void setCofigType(Byte cofigType) {
-        this.cofigType = cofigType;
-    }
+	public void setCofigType(Byte cofigType) {
+		this.cofigType = cofigType;
+	}
 
-    public String getPage() {
-        return page;
-    }
+	public Long getPage() {
+		return page;
+	}
 
-    public void setPage(String page) {
-        this.page = page;
-    }
+	public void setPage(Long page) {
+		this.page = page;
+	}
 
-    public Date getSubmitDate() {
-        return submitDate;
-    }
+	public Date getSubmitDate() {
+		return submitDate;
+	}
 
-    public void setSubmitDate(Date submitDate) {
-        this.submitDate = submitDate;
-    }
+	public void setSubmitDate(Date submitDate) {
+		this.submitDate = submitDate;
+	}
 
-    public String getHelpedNum() {
-        return helpedNum;
-    }
+	public String getHelpedNum() {
+		return helpedNum;
+	}
 
-    public void setHelpedNum(String helpedNum) {
-        this.helpedNum = helpedNum;
-    }
+	public void setHelpedNum(String helpedNum) {
+		this.helpedNum = helpedNum;
+	}
 
-    @Override
-    public String toString() {
-	return "PagingQa [orderBy=" + orderBy + ", configName=" + configName + ", configRank=" + configRank
-		+ ", cofigType=" + cofigType + ", page=" + page + ", submitDate=" + submitDate + ", helpedNum="
-		+ helpedNum + "]";
-    }
-    
+	@Override
+	public String toString() {
+		return "PagingQa [orderBy=" + orderBy + ", configName=" + configName + ", configRank=" + configRank
+				+ ", cofigType=" + cofigType + ", page=" + page + ", submitDate=" + submitDate + ", helpedNum="
+				+ helpedNum + "]";
+	}
 }

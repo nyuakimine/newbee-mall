@@ -782,4 +782,88 @@
     <select id="findNewBeeMallGoodsListBySub" resultType= "ltd.newbee.mall.entity.NewBeeMallGoods">
       select goods_id,goods_name,goods_category_id from tb_newbee_mall_goods_info where goods_category_id = #{goodsCategoryId,jdbcType=BIGINT}
     </select>
+    <!-- Tabelog -->
+
+
+<select id="getDetailTitle" parameterType="java.lang.Long"
+	resultType="ltd.newbee.mall.entity.DetailTitle">select id,name,star,score,comment_num,save_num from
+	detail_titlewhere id = #{id,jdbcType=BIGINT}
+</select>
+
+	<select id="getRestaurantDesc" parameterType="java.lang.Long"
+		resultType="ltd.newbee.mall.entity.RestaurantDesc">select
+		id,nearby_station,genre_id,night_budget,day_budget,rest_day,genre_name
+		from restaurant_descwhere id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<select id="getTabelogCategory" parameterType="java.lang.Long"
+		resultType="ltd.newbee.mall.entity.TabelogCategory">select parent_id,category_id,category_name from
+		tabelog_categorywhere parent_id = #{parentId,jdbcType=BIGINT}
+	</select>
+
+	<select id="getTbGenre" parameterType="java.lang.Long"
+		resultType="ltd.newbee.mall.entity.TbGenre">select genre_id,name_1,name_2,name_3 from tb_genrewhere
+		genre_id = #{genreId,jdbcType=BIGINT}
+	</select>
+
+	<select id="getOpenReview" parameterType="Map"
+		resultType="ltd.newbee.mall.entity.ReviewUserInfo">
+		select
+		n.id,n.goods_id,n.star,n.comment_date,n.title,n.content,n.picture,n.review_num,u.nick_name,f.goods_name
+		from goods_review as n join tb_newbee_mall_user as u on n.custermer_id
+		= u.user_id
+		join tb_newbee_mall_goods_info as f on
+		n.goods_id=f.goods_id
+		where n.goods_id = #{goodsId,jdbcType=BIGINT}
+		limit #{start},#{limit}
+	</select>
+	<select id="getTotalOpenReview" parameterType="Map"
+		resultType="int">
+		select count(*) from goods_review
+	</select>
+	
+	<select id="getTbCommentTotal" parameterType="Map"
+		resultType="int">
+		select count(*) from tb_comment
+	</select>
+		<select id="getTbCommentAvg" parameterType="Map"
+		resultType="double">
+		SELECT AVG(score) FROM tb_comment
+	</select>
+	
+		<select id="getGenreAndStationList"
+		parameterType="java.lang.Long"
+		resultType="ltd.newbee.mall.entity.GenreAndStation">
+		select
+		tabelog_category.id, tabelog_category.near_station_id,
+		tabelog_category.genre_collection_id,
+
+		tbelog_station.near_station_id, tbelog_station.station_id,tbelog_station.station_name,
+
+		tb_genre.genre_name, tb_genre.genre_id, tb_genre.genre_collection_id
+
+		from tbelog_station as tbelog_station join tabelog_category as
+		tabelog_category on tabelog_category.near_station_id
+		= tbelog_station.near_station_id
+		join tb_genre as tb_genre on
+		tb_genre.genre_collection_id=tabelog_category.genre_collection_id
+		where tabelog_category.id = #{id,jdbcType=BIGINT}
+
+	</select>
+
+	<select id="getTopNoticeComment" parameterType="java.lang.Long"
+		resultType="ltd.newbee.mall.entity.TopNoticeComment">
+		select id, top_notice_title, top_noticecol1, top_noticecol2, top_noticecol3,
+		top_noticecol5, top_noticecol4, top_noticecol6, top_comment1,
+		top_comment2, top_comment3, top_comment4, top_comment5
+		from top_notice_comment
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	
+	<select id="getTopImg" parameterType="java.lang.Long"
+		resultType="ltd.newbee.mall.entity.TopImg">
+		select id, img_path
+		from top_img
+		where id = #{id,jdbcType=BIGINT}
+	</select>
  </mapper>

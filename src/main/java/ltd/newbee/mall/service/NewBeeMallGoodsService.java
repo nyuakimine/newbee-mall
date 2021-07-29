@@ -11,6 +11,8 @@ package ltd.newbee.mall.service;
 import java.util.List;
 
 import ltd.newbee.mall.controller.vo.GoodsReviewVo;
+import ltd.newbee.mall.entity.DetailTitle;
+import ltd.newbee.mall.entity.GenreAndStation;
 import ltd.newbee.mall.entity.GoodsCoupon;
 import ltd.newbee.mall.entity.GoodsDesc;
 import ltd.newbee.mall.entity.GoodsImage;
@@ -21,10 +23,15 @@ import ltd.newbee.mall.entity.GoodsSale;
 import ltd.newbee.mall.entity.IndexConfig;
 import ltd.newbee.mall.entity.InsertKeyword;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
+import ltd.newbee.mall.entity.RestaurantDesc;
 import ltd.newbee.mall.entity.ReviewUserInfo;
 import ltd.newbee.mall.entity.SaleIdAndInfo;
+import ltd.newbee.mall.entity.TabelogCategory;
 import ltd.newbee.mall.entity.TbCategory;
+import ltd.newbee.mall.entity.TbGenre;
 import ltd.newbee.mall.entity.TbSale;
+import ltd.newbee.mall.entity.TopImg;
+import ltd.newbee.mall.entity.TopNoticeComment;
 import ltd.newbee.mall.util.PageQueryUtil;
 import ltd.newbee.mall.util.PageResult;
 
@@ -203,5 +210,26 @@ public interface NewBeeMallGoodsService {
      * getSubGoods
      */
     List<NewBeeMallGoods> NewBeeMallGoodsListBySub(Long goodsId);
-   
+
+    List<DetailTitle> detailTitle(Long id);
+
+    List<RestaurantDesc> restaurantDesc(Long id);
+
+    List<TabelogCategory> tabelogCategory(Long parentId);
+
+    List<TbGenre> tbGenre(Long genreId);
+
+	PageResult getOpenReview(PageQueryUtil pageUtil);
+
+	int tbCommentTotal();
+
+	double tbCommentAvg();
+
+	List<GenreAndStation> genreAndStationList(Long id);
+
+	List<TopNoticeComment> topNoticeComment(Long id);
+
+	List<TopImg> topImg(Long id);
+	
+
 }

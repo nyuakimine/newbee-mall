@@ -20,6 +20,8 @@ import ltd.newbee.mall.common.ServiceResultEnum;
 import ltd.newbee.mall.controller.vo.GoodsReviewVo;
 import ltd.newbee.mall.controller.vo.NewBeeMallSearchGoodsVO;
 import ltd.newbee.mall.dao.NewBeeMallGoodsMapper;
+import ltd.newbee.mall.entity.DetailTitle;
+import ltd.newbee.mall.entity.GenreAndStation;
 import ltd.newbee.mall.entity.GoodsCoupon;
 import ltd.newbee.mall.entity.GoodsDesc;
 import ltd.newbee.mall.entity.GoodsImage;
@@ -30,10 +32,15 @@ import ltd.newbee.mall.entity.GoodsSale;
 import ltd.newbee.mall.entity.IndexConfig;
 import ltd.newbee.mall.entity.InsertKeyword;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
+import ltd.newbee.mall.entity.RestaurantDesc;
 import ltd.newbee.mall.entity.ReviewUserInfo;
 import ltd.newbee.mall.entity.SaleIdAndInfo;
+import ltd.newbee.mall.entity.TabelogCategory;
 import ltd.newbee.mall.entity.TbCategory;
+import ltd.newbee.mall.entity.TbGenre;
 import ltd.newbee.mall.entity.TbSale;
+import ltd.newbee.mall.entity.TopImg;
+import ltd.newbee.mall.entity.TopNoticeComment;
 import ltd.newbee.mall.service.NewBeeMallGoodsService;
 import ltd.newbee.mall.util.BeanUtil;
 import ltd.newbee.mall.util.PageQueryUtil;
@@ -334,4 +341,67 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 		 return goodsList;
 	    }
 	    
+		/* Tabelog */
+		@Override
+		public List<DetailTitle> detailTitle(Long id) {
+			List<DetailTitle> list = goodsMapper.getDetailTitle(id);
+			return list;
+		}
+
+		@Override
+		public List<RestaurantDesc> restaurantDesc(Long id) {
+			List<RestaurantDesc> list = goodsMapper.getRestaurantDesc(id);
+			return list;
+		}
+
+		@Override
+		public List<TabelogCategory> tabelogCategory(Long parentId) {
+			List<TabelogCategory> list = goodsMapper.getTabelogCategory(parentId);
+			return list;
+		}
+
+		@Override
+		public List<TbGenre> tbGenre(Long genreId) {
+			List<TbGenre> list = goodsMapper.getTbGenre(genreId);
+			return list;
+		}
+//		++++++++++++++++++++++++++++++++
+		@Override
+		public PageResult getOpenReview(PageQueryUtil pageUtil) {
+			List<ReviewUserInfo> goodsList = goodsMapper.getOpenReview(pageUtil);
+			int total = goodsMapper.getTotalOpenReview(pageUtil);
+			PageResult pageResult = new PageResult(goodsList, total, pageUtil.getLimit(), pageUtil.getPage());
+			return pageResult;
+		}
+		
+		@Override
+		public int tbCommentTotal() {
+			int Total = goodsMapper.getTbCommentTotal();
+			return Total;
+		}
+		@Override
+		public double tbCommentAvg() {
+			double avg = goodsMapper.getTbCommentAvg();
+			return avg;
+		}
+		@Override
+		public List<GenreAndStation> genreAndStationList(Long id) {
+			List<GenreAndStation> list = goodsMapper.getGenreAndStationList(id);
+			return list;
+			
+		}
+		
+		@Override
+		public List<TopNoticeComment> topNoticeComment(Long id) {
+			List<TopNoticeComment> list = goodsMapper.getTopNoticeComment(id);
+			return list;
+		}
+		
+		@Override
+		public List<TopImg> topImg(Long id) {
+			List<TopImg> list = goodsMapper.getTopImg(id);
+			return list;
+		}
+		
 }
+
