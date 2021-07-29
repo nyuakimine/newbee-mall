@@ -11,6 +11,7 @@ public class DetailTitle {
 	private Double score;
 	private int commentNum;
 	private String saveNum;
+	private String title;
 	public Long getId() {
 		return id;
 	}
@@ -47,10 +48,17 @@ public class DetailTitle {
 	public void setSaveNum(String saveNum) {
 		this.saveNum = saveNum;
 	}
+	
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	@Override
 	public String toString() {
 		return "DetailTitle [id=" + id + ", name=" + name + ", star=" + star + ", score=" + score + ", commentNum="
-				+ commentNum + ", saveNum=" + saveNum + "]";
+				+ commentNum + ", saveNum=" + saveNum + ", title=" + title + "]";
 	}
 	
 }

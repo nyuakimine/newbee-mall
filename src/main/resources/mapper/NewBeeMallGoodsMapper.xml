@@ -785,15 +785,19 @@
     <!-- Tabelog -->
 
 
-<select id="getDetailTitle" parameterType="java.lang.Long"
-	resultType="ltd.newbee.mall.entity.DetailTitle">select id,name,star,score,comment_num,save_num from
-	detail_titlewhere id = #{id,jdbcType=BIGINT}
-</select>
+<select id="getDetailTitle" parameterType="Map"
+		resultType="ltd.newbee.mall.entity.DetailTitle">
+		select id,name,star,score,save_num,comment_num,title from
+		detail_title
+		where id = #{id,jdbcType=BIGINT}
+	</select>
 
 	<select id="getRestaurantDesc" parameterType="java.lang.Long"
-		resultType="ltd.newbee.mall.entity.RestaurantDesc">select
+		resultType="ltd.newbee.mall.entity.RestaurantDesc">
+		select
 		id,nearby_station,genre_id,night_budget,day_budget,rest_day,genre_name
-		from restaurant_descwhere id = #{id,jdbcType=BIGINT}
+		from restaurant_desc
+		where id = #{id,jdbcType=BIGINT}
 	</select>
 
 	<select id="getTabelogCategory" parameterType="java.lang.Long"

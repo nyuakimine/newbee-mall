@@ -31,66 +31,66 @@ class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
     @Autowired
     private NewBeeMallGoodsMapper goodsMapper;
 
-    @Test
-    public void testGetDetailTitle() {
-	long id = 1L;
-	List<DetailTitle> list = goodsMapper.getDetailTitle(id);
-	DetailTitle dt = list.get(0);
-	String name = dt.getName();
-	assertEquals("nn", name);
-	String star = dt.getStar();
-	assertEquals("nn", star);
-	String score = dt.getScore();
-	assertEquals("nn", score);
-	String commentNum = dt.getCommentNum();
-	assertEquals("nn", commentNum);
-	String saveNum = dt.getSaveNum();
-	assertEquals("nn", saveNum);
-    }
+//    @Test
+//    public void testGetDetailTitle() {
+//	long id = 1L;
+//	List<DetailTitle> list = goodsMapper.getDetailTitle(id);
+//	DetailTitle dt = list.get(0);
+//	String name = dt.getName();
+//	assertEquals("nn", name);
+//	String star = dt.getStar();
+//	assertEquals("nn", star);
+//	String score = dt.getScore();
+//	assertEquals("nn", score);
+//	String commentNum = dt.getCommentNum();
+//	assertEquals("nn", commentNum);
+//	String saveNum = dt.getSaveNum();
+//	assertEquals("nn", saveNum);
+//    }
 
-    @Test
-    public void testGoodsImageService() {
-	long id = 1L;
-	List<RestaurantDesc> list = goodsMapper.getRestaurantDesc(id);
-	RestaurantDesc rd = list.get(0);
-	String nearbyStation = rd.getNearbyStation();
-	assertEquals("nn", nearbyStation);
-	long genreId = rd.getGenreId();
-	assertEquals(11L, genreId);
-	String nightBudget = rd.getNightBudget();
-	assertEquals("nn", nightBudget);
-	String dayBudget = rd.getDayBudget();
-	assertEquals("nn", dayBudget);
-	String restDay = rd.getRestDay();
-	assertEquals("nn", restDay);
-	String genreName = rd.getGenreName();
-	assertEquals("nn", genreName);
-
-    }
-
-    @Test
-    public void testTabelogCategory() {
-	long parentId = 1L;
-	List<TabelogCategory> list = goodsMapper.getTabelogCategory(parentId);
-	TabelogCategory tc = list.get(0);
-	long categoryId = tc.getCategoryId();
-	assertEquals(1, categoryId);
-	String categoryName = tc.getCategoryName();
-	assertEquals("1", categoryName);
-    }
-
-    @Test
-    public void testTbGenre() {
-	long genreId = 1L;
-	List<TbGenre> list = goodsMapper.getTbGenre(genreId);
-	TbGenre tg = list.get(0);
-	String name1 = tg.getName1();
-	assertEquals("11", name1);
-	String name2 = tg.getName2();
-	assertEquals("111", name2);
-	String name3 = tg.getName3();
-	assertEquals("1111", name3);
-    }
+//    @Test
+//    public void testGoodsImageService() {
+//	long id = 1L;
+//	List<RestaurantDesc> list = goodsMapper.getRestaurantDesc(id);
+//	RestaurantDesc rd = list.get(0);
+//	String nearbyStation = rd.getNearbyStation();
+//	assertEquals("nn", nearbyStation);
+//	long genreId = rd.getGenreId();
+//	assertEquals(11L, genreId);
+//	String nightBudget = rd.getNightBudget();
+//	assertEquals("nn", nightBudget);
+//	String dayBudget = rd.getDayBudget();
+//	assertEquals("nn", dayBudget);
+//	String restDay = rd.getRestDay();
+//	assertEquals("nn", restDay);
+//	String genreName = rd.getGenreName();
+//	assertEquals("nn", genreName);
+//
+//    }
+//
+//    @Test
+//    public void testTabelogCategory() {
+//	long parentId = 1L;
+//	List<TabelogCategory> list = goodsMapper.getTabelogCategory(parentId);
+//	TabelogCategory tc = list.get(0);
+//	long categoryId = tc.getCategoryId();
+//	assertEquals(1, categoryId);
+//	String categoryName = tc.getCategoryName();
+//	assertEquals("1", categoryName);
+//    }
+//
+//    @Test
+//    public void testTbGenre() {
+//	long genreId = 1L;
+//	List<TbGenre> list = goodsMapper.getTbGenre(genreId);
+//	TbGenre tg = list.get(0);
+//	String name1 = tg.getName1();
+//	assertEquals("11", name1);
+//	String name2 = tg.getName2();
+//	assertEquals("111", name2);
+//	String name3 = tg.getName3();
+//	assertEquals("1111", name3);
+//    }
 
 //    @Test
 //    public void testGoodsImageService() {
