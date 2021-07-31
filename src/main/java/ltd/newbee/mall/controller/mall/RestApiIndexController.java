@@ -54,8 +54,13 @@ import ltd.newbee.mall.entity.RestaurantDesc;
 import ltd.newbee.mall.entity.ReviewUserInfo;
 import ltd.newbee.mall.entity.TabelogCategory;
 import ltd.newbee.mall.entity.TbGenre;
+import ltd.newbee.mall.entity.TopCoupon;
+import ltd.newbee.mall.entity.TopCourse;
+import ltd.newbee.mall.entity.TopHygiene;
 import ltd.newbee.mall.entity.TopImg;
+import ltd.newbee.mall.entity.TopKodawari;
 import ltd.newbee.mall.entity.TopNoticeComment;
+import ltd.newbee.mall.entity.TopPostphoto;
 import ltd.newbee.mall.service.NewBeeMallCarouselService;
 import ltd.newbee.mall.service.NewBeeMallCategoryService;
 import ltd.newbee.mall.service.NewBeeMallGoodsService;
@@ -365,5 +370,68 @@ public class RestApiIndexController {
 		}
 	}
 	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(value = "/topKodawari", method = RequestMethod.POST)
+	@ResponseBody
+	public Result topKodawari(@RequestBody TopKodawari topKodawari) {
+		List<TopKodawari> kodawariList = newBeeMallGoodsService.topKodawari(topKodawari.getId());
+		if (CollectionUtils.isEmpty(kodawariList)) {
+			return ResultGenerator.genErrorResult(Constants.CATEGORY_FETCH_ERROR,
+					Constants.CATEGORY_FETCH_ERROR_MESSAGE);
+		} else {
+			return ResultGenerator.genSuccessResult(kodawariList);
+		}
+	}
 	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(value = "/topHygiene", method = RequestMethod.POST)
+	@ResponseBody
+	public Result topHygiene(@RequestBody TopHygiene topHygiene) {
+		List<TopHygiene> topHygieneList = newBeeMallGoodsService.topHygiene(topHygiene.getId());
+		if (CollectionUtils.isEmpty(topHygieneList)) {
+			return ResultGenerator.genErrorResult(Constants.CATEGORY_FETCH_ERROR,
+					Constants.CATEGORY_FETCH_ERROR_MESSAGE);
+		} else {
+			return ResultGenerator.genSuccessResult(topHygieneList);
+		}
+	}
+	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(value = "/topCourse", method = RequestMethod.POST)
+	@ResponseBody
+	public Result topCourse(@RequestBody TopCourse topCourse) {
+		List<TopCourse> topCourseList = newBeeMallGoodsService.topCourse(topCourse.getId());
+		if (CollectionUtils.isEmpty(topCourseList)) {
+			return ResultGenerator.genErrorResult(Constants.CATEGORY_FETCH_ERROR,
+					Constants.CATEGORY_FETCH_ERROR_MESSAGE);
+		} else {
+			return ResultGenerator.genSuccessResult(topCourseList);
+		}
+	}
+	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(value = "/topCoupon", method = RequestMethod.POST)
+	@ResponseBody
+	public Result topCoupon(@RequestBody TopCoupon topCoupon) {
+		List<TopCoupon> topCouponList = newBeeMallGoodsService.topCoupon(topCoupon.getId());
+		if (CollectionUtils.isEmpty(topCouponList)) {
+			return ResultGenerator.genErrorResult(Constants.CATEGORY_FETCH_ERROR,
+					Constants.CATEGORY_FETCH_ERROR_MESSAGE);
+		} else {
+			return ResultGenerator.genSuccessResult(topCouponList);
+		}
+	}
+	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(value = "/topPostphoto", method = RequestMethod.POST)
+	@ResponseBody
+	public Result topPostphoto(@RequestBody TopPostphoto topPostphoto) {
+		List<TopPostphoto> topPostphotoList = newBeeMallGoodsService.topPostphoto(topPostphoto.getId());
+		if (CollectionUtils.isEmpty(topPostphotoList)) {
+			return ResultGenerator.genErrorResult(Constants.CATEGORY_FETCH_ERROR,
+					Constants.CATEGORY_FETCH_ERROR_MESSAGE);
+		} else {
+			return ResultGenerator.genSuccessResult(topPostphotoList);
+		}
+	}
 }

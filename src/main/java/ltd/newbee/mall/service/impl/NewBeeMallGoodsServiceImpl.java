@@ -39,8 +39,13 @@ import ltd.newbee.mall.entity.TabelogCategory;
 import ltd.newbee.mall.entity.TbCategory;
 import ltd.newbee.mall.entity.TbGenre;
 import ltd.newbee.mall.entity.TbSale;
+import ltd.newbee.mall.entity.TopCoupon;
+import ltd.newbee.mall.entity.TopCourse;
+import ltd.newbee.mall.entity.TopHygiene;
 import ltd.newbee.mall.entity.TopImg;
+import ltd.newbee.mall.entity.TopKodawari;
 import ltd.newbee.mall.entity.TopNoticeComment;
+import ltd.newbee.mall.entity.TopPostphoto;
 import ltd.newbee.mall.service.NewBeeMallGoodsService;
 import ltd.newbee.mall.util.BeanUtil;
 import ltd.newbee.mall.util.PageQueryUtil;
@@ -403,5 +408,34 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 			return list;
 		}
 		
+		@Override
+		public List<TopKodawari> topKodawari(Long id) {
+			List<TopKodawari> list = goodsMapper.getTopKodawari(id);
+			return list;
+		}
+		
+		@Override
+		public List<TopHygiene> topHygiene(Long id) {
+			List<TopHygiene> list = goodsMapper.getTopHygiene(id);
+			return list;
+		}
+		
+		@Override
+		public List<TopCourse> topCourse(Long id) {
+			List<TopCourse> list = goodsMapper.getTopCourse(id);
+			return list;
+		}
+		
+		@Override
+		public List<TopCoupon> topCoupon(Long id) {
+			List<TopCoupon> list = goodsMapper.getTopCoupon(id);
+			return list;
+		}
+		
+		@Override
+		public List<TopPostphoto> topPostphoto(Long id) {
+			List<TopPostphoto> list = goodsMapper.getTopPostphoto(id);
+			return list;
+		}
 }
 

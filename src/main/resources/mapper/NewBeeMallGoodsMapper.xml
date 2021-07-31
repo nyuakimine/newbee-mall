@@ -870,4 +870,46 @@
 		from top_img
 		where id = #{id,jdbcType=BIGINT}
 	</select>
+	<select id="getTopKodawari" parameterType="java.lang.Long"
+		resultType="ltd.newbee.mall.entity.TopKodawari">
+		select id,kodawari_heading_title,kodawari_photo,kodawari_title,kodawaricol_label,kodawari_modal_comment
+		from top_kodawari
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	
+	<select id="getTopHygiene" parameterType="java.lang.Long"
+		resultType="ltd.newbee.mall.entity.TopHygiene">
+		select heading_title,hygiene_data1,hygiene_data2,hygiene_data3,hygiene_item_name1,hygiene_item_name2,id,path1,path2,text_notice1,text_notice2,text_notice3,text_notice4,text_notice5
+		from top_hygiene
+		where id=#{id,jdbcType=BIGINT}
+	</select>
+	
+	<select id="getTopCourse" parameterType="java.lang.Long"
+		resultType="ltd.newbee.mall.entity.TopCourse">
+		select course_btn,course_list_desc,course_list_label,
+		course_list_label2,course_member,course_price_num,course_path,
+		course_title_text,id,img_path,price_num_tax,yoyaku_btn,heading_title,course_more_link
+		from top_course
+		where id=#{id,jdbcType=BIGINT}
+	</select>
+
+
+	<select id="getTopCoupon" parameterType="java.lang.Long"
+		resultType="ltd.newbee.mall.entity.TopCoupon">
+		select
+		coupon_btn,coupon_description,coupon_more_text1,
+		coupon_more_text3,coupon_more_text2,coupon_notice,
+		coupon_subject,coupon_target,heading_title,id
+		from top_coupon
+		where id=#{id,jdbcType=BIGINT}
+	</select>
+	  	<select id="getTopPostphoto" parameterType="java.lang.Long"
+		resultType="ltd.newbee.mall.entity.TopPostphoto">
+		select
+		any1,any2,any3,heading_title,id,like_num,post_date,
+		rst_link,side_comment,side_rvw_title,top_big_postphotocol_path,
+		top_postphoto_more_link,top_postphotocol_path,user_icon_link,user_name
+		from top_postphoto
+		where id=#{id,jdbcType=BIGINT}
+	</select>
  </mapper>

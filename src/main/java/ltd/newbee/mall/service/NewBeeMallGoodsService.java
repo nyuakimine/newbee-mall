@@ -30,8 +30,13 @@ import ltd.newbee.mall.entity.TabelogCategory;
 import ltd.newbee.mall.entity.TbCategory;
 import ltd.newbee.mall.entity.TbGenre;
 import ltd.newbee.mall.entity.TbSale;
+import ltd.newbee.mall.entity.TopCoupon;
+import ltd.newbee.mall.entity.TopCourse;
+import ltd.newbee.mall.entity.TopHygiene;
 import ltd.newbee.mall.entity.TopImg;
+import ltd.newbee.mall.entity.TopKodawari;
 import ltd.newbee.mall.entity.TopNoticeComment;
+import ltd.newbee.mall.entity.TopPostphoto;
 import ltd.newbee.mall.util.PageQueryUtil;
 import ltd.newbee.mall.util.PageResult;
 
@@ -230,6 +235,16 @@ public interface NewBeeMallGoodsService {
 	List<TopNoticeComment> topNoticeComment(Long id);
 
 	List<TopImg> topImg(Long id);
+
+	List<TopKodawari> topKodawari(Long id);
+
+	List<TopHygiene> topHygiene(Long id);
+
+	List<TopCourse> topCourse(Long id);
+
+	List<TopCoupon> topCoupon(Long id);
+
+	List<TopPostphoto> topPostphoto(Long id);
 	
 
 }
