@@ -48,6 +48,7 @@ import ltd.newbee.mall.entity.GoodsImage;
 import ltd.newbee.mall.entity.GoodsQa;
 import ltd.newbee.mall.entity.GoodsReview;
 import ltd.newbee.mall.entity.GoodsReviewHelpNum;
+import ltd.newbee.mall.entity.ModalLikeNum;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
 import ltd.newbee.mall.entity.PagingQa;
 import ltd.newbee.mall.entity.RestaurantDesc;
@@ -432,6 +433,30 @@ public class RestApiIndexController {
 					Constants.CATEGORY_FETCH_ERROR_MESSAGE);
 		} else {
 			return ResultGenerator.genSuccessResult(topPostphotoList);
+		}
+	}
+	
+	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(value = "/modalLikeNum", method = RequestMethod.POST)
+	@ResponseBody
+	public Result modalLikeNum(@RequestBody ModalLikeNum modalLikeNum) {
+//		, HttpSession httpSession
+//		TopPostphoto user = (TopPostphoto) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
+//		if (user != null) {
+//			modalLikeNum.setUserId(user.getUserId());
+//		}
+		boolean addFlag = newBeeMallGoodsService.addLikeNum(modalLikeNum);
+		if (addFlag) {
+			boolean updateFlag = newBeeMallGoodsService.updateLikeNum(modalLikeNum);
+			if (updateFlag) {
+				long likeNum = newBeeMallGoodsService.topPostphotoLikeNum(modalLikeNum.getLikeId());
+				return ResultGenerator.genSuccessResult(likeNum);
+			} else {
+				return ResultGenerator.genFailResult("改修失敗！！！");
+			}
+		} else {
+			return ResultGenerator.genFailResult("挿入失敗！！！");
 		}
 	}
 }

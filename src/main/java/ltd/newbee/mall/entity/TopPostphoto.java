@@ -16,7 +16,7 @@ public class TopPostphoto {
 
 	private Long id;
 	private String headingTitle;
-	private String likeNum;
+	private Long likeNum;
 	private String postDate;
 	private String rstLink;
 	private String sideComment;
@@ -26,8 +26,8 @@ public class TopPostphoto {
 	private String topPostphotocolPath;
 	private String userIconLink;
 	private String userName;
-	private String any1;
-	private String any2;
+	private Long userId;
+	private Long imgId;
 	private String any3;
 
 	public Long getId() {
@@ -46,11 +46,11 @@ public class TopPostphoto {
 		this.headingTitle = headingTitle;
 	}
 
-	public String getLikeNum() {
+	public Long getLikeNum() {
 		return likeNum;
 	}
 
-	public void setLikeNum(String likeNum) {
+	public void setLikeNum(Long likeNum) {
 		this.likeNum = likeNum;
 	}
 
@@ -126,20 +126,21 @@ public class TopPostphoto {
 		this.userName = userName;
 	}
 
-	public String getAny1() {
-		return any1;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setAny1(String any1) {
-		this.any1 = any1;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
-	public String getAny2() {
-		return any2;
+
+	public Long getImgId() {
+		return imgId;
 	}
 
-	public void setAny2(String any2) {
-		this.any2 = any2;
+	public void setImgId(Long imgId) {
+		this.imgId = imgId;
 	}
 
 	public String getAny3() {
@@ -156,8 +157,9 @@ public class TopPostphoto {
 				+ postDate + ", rstLink=" + rstLink + ", sideComment=" + sideComment + ", sideRvwTitle=" + sideRvwTitle
 				+ ", topBigPostphotocolPath=" + topBigPostphotocolPath + ", topPostphotoMoreLink="
 				+ topPostphotoMoreLink + ", topPostphotocolPath=" + topPostphotocolPath + ", userIconLink="
-				+ userIconLink + ", userName=" + userName + ", any1=" + any1 + ", any2=" + any2 + ", any3=" + any3
+				+ userIconLink + ", userName=" + userName + ", userId=" + userId + ", imgId=" + imgId + ", any3=" + any3
 				+ "]";
 	}
+
 
 }

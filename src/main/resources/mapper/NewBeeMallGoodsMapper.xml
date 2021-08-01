@@ -906,10 +906,26 @@
 	  	<select id="getTopPostphoto" parameterType="java.lang.Long"
 		resultType="ltd.newbee.mall.entity.TopPostphoto">
 		select
-		any1,any2,any3,heading_title,id,like_num,post_date,
+		user_id,img_id,any3,heading_title,id,like_num,post_date,
 		rst_link,side_comment,side_rvw_title,top_big_postphotocol_path,
 		top_postphoto_more_link,top_postphotocol_path,user_icon_link,user_name
 		from top_postphoto
 		where id=#{id,jdbcType=BIGINT}
+	</select>
+	
+	<!-- modal -->
+	<insert id="insertModalLikeNum"
+		parameterType="ltd.newbee.mall.entity.ModalLikeNum">
+		INSERT INTO modal_like_num(like_id,user_id)
+		VALUES(#{likeId,jdbcType=INTEGER},#{userId,jdbcType=BIGINT})
+	</insert>
+	<update id="updateTopPostphoto">
+		update top_postphoto set like_num = like_num + 1
+		where img_id = #{likeId}
+	</update>
+	<select id="getTopPostphotoLikeNum" parameterType="int"
+		resultType="java.lang.Long">
+		select like_num
+		from top_postphoto where img_id = #{likeId,jdbcType=BIGINT}
 	</select>
  </mapper>

@@ -31,6 +31,7 @@ import ltd.newbee.mall.entity.GoodsReviewHelpNum;
 import ltd.newbee.mall.entity.GoodsSale;
 import ltd.newbee.mall.entity.IndexConfig;
 import ltd.newbee.mall.entity.InsertKeyword;
+import ltd.newbee.mall.entity.ModalLikeNum;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
 import ltd.newbee.mall.entity.RestaurantDesc;
 import ltd.newbee.mall.entity.ReviewUserInfo;
@@ -437,5 +438,18 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 			List<TopPostphoto> list = goodsMapper.getTopPostphoto(id);
 			return list;
 		}
+		//modal like num 2021/08/01
+		@Override
+		public boolean addLikeNum(ModalLikeNum modalLikeNum) {
+		   
+		    return goodsMapper.insertModalLikeNum(modalLikeNum);
+		} 
+		@Override
+		public boolean updateLikeNum(ModalLikeNum modalLikeNum) {	   
+		    return goodsMapper.updateTopPostphoto(modalLikeNum);
+		} 
+		@Override
+		public long topPostphotoLikeNum(int likeId) {	   
+		    return goodsMapper.getTopPostphotoLikeNum(likeId);
+		}
 }
-

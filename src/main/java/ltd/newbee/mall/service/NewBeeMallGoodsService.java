@@ -22,6 +22,7 @@ import ltd.newbee.mall.entity.GoodsReviewHelpNum;
 import ltd.newbee.mall.entity.GoodsSale;
 import ltd.newbee.mall.entity.IndexConfig;
 import ltd.newbee.mall.entity.InsertKeyword;
+import ltd.newbee.mall.entity.ModalLikeNum;
 import ltd.newbee.mall.entity.NewBeeMallGoods;
 import ltd.newbee.mall.entity.RestaurantDesc;
 import ltd.newbee.mall.entity.ReviewUserInfo;
@@ -245,6 +246,12 @@ public interface NewBeeMallGoodsService {
 	List<TopCoupon> topCoupon(Long id);
 
 	List<TopPostphoto> topPostphoto(Long id);
+
+	boolean addLikeNum(ModalLikeNum modalLikeNum);
+
+	boolean updateLikeNum(ModalLikeNum modalLikeNum);
+
+	long topPostphotoLikeNum(int likeId);
 	
 
 }
