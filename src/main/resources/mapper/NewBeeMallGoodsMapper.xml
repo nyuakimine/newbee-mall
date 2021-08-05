@@ -928,4 +928,33 @@
 		select like_num
 		from top_postphoto where img_id = #{likeId,jdbcType=BIGINT}
 	</select>
+	
+	<delete id="deleteDelModalLikeNum" parameterType="java.lang.Long">
+		delete from
+		modal_like_num
+		where like_id = #{likeId,jdbcType=BIGINT}
+	</delete>
+	<update id="updateDelTopPostphoto">
+		update top_postphoto set like_num = like_num - 1
+		where img_id = #{likeId}
+	</update>
+
+	<select id="getTopReview" parameterType="java.lang.Long"
+		resultType="ltd.newbee.mall.entity.TopReview">
+		select id,top_photo_path,top_img_path1,rstdtl_rvw_title,
+		clearfix_comment,rvw_more_path,rvw_dtl_date,dinner_star,
+		visit_count,any1,lunch_star,like_count,any3,any2
+		from top_review
+		where
+		id=#{id,jdbcType=BIGINT}
+	</select>
+
+	<select id="getTopMatome" parameterType="java.lang.Long"
+		resultType="ltd.newbee.mall.entity.TopMatome">
+		select
+		id,matome_heading,path1,path2,path3,matome_text_title,matome_text_desc,path4,any1
+		from top_matome
+		where
+		id=#{id,jdbcType=BIGINT}
+	</select>
  </mapper>

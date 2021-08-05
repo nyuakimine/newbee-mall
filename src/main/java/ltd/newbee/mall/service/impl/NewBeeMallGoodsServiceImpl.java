@@ -45,8 +45,10 @@ import ltd.newbee.mall.entity.TopCourse;
 import ltd.newbee.mall.entity.TopHygiene;
 import ltd.newbee.mall.entity.TopImg;
 import ltd.newbee.mall.entity.TopKodawari;
+import ltd.newbee.mall.entity.TopMatome;
 import ltd.newbee.mall.entity.TopNoticeComment;
 import ltd.newbee.mall.entity.TopPostphoto;
+import ltd.newbee.mall.entity.TopReview;
 import ltd.newbee.mall.service.NewBeeMallGoodsService;
 import ltd.newbee.mall.util.BeanUtil;
 import ltd.newbee.mall.util.PageQueryUtil;
@@ -452,4 +454,29 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 		public long topPostphotoLikeNum(int likeId) {	   
 		    return goodsMapper.getTopPostphotoLikeNum(likeId);
 		}
+		//del modal like num 2021/08/02
+		@Override
+		public boolean deleteDelLikeNum(ModalLikeNum modalLikeNum) {
+		   
+		    return goodsMapper.deleteDelModalLikeNum(modalLikeNum);
+		} 
+		@Override
+		public boolean updateDelLikeNum(ModalLikeNum modalLikeNum) {	   
+		    return goodsMapper.updateDelTopPostphoto(modalLikeNum);
+		} 
+		
+		
+		@Override
+		public List<TopReview> topReview(Long id) {
+			List<TopReview> list = goodsMapper.getTopReview(id);
+			return list;
+		}
+		
+		@Override
+		public List<TopMatome> topMatome(Long id) {
+			List<TopMatome> list = goodsMapper.getTopMatome(id);
+			return list;
+		}
+		
+		
 }

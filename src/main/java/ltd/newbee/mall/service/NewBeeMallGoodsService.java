@@ -36,8 +36,10 @@ import ltd.newbee.mall.entity.TopCourse;
 import ltd.newbee.mall.entity.TopHygiene;
 import ltd.newbee.mall.entity.TopImg;
 import ltd.newbee.mall.entity.TopKodawari;
+import ltd.newbee.mall.entity.TopMatome;
 import ltd.newbee.mall.entity.TopNoticeComment;
 import ltd.newbee.mall.entity.TopPostphoto;
+import ltd.newbee.mall.entity.TopReview;
 import ltd.newbee.mall.util.PageQueryUtil;
 import ltd.newbee.mall.util.PageResult;
 
@@ -252,6 +254,14 @@ public interface NewBeeMallGoodsService {
 	boolean updateLikeNum(ModalLikeNum modalLikeNum);
 
 	long topPostphotoLikeNum(int likeId);
+
+	boolean deleteDelLikeNum(ModalLikeNum modalLikeNum);
+
+	boolean updateDelLikeNum(ModalLikeNum modalLikeNum);
+
+	List<TopReview> topReview(Long id);
+
+	List<TopMatome> topMatome(Long id);
 	
 
 }

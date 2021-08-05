@@ -60,8 +60,10 @@ import ltd.newbee.mall.entity.TopCourse;
 import ltd.newbee.mall.entity.TopHygiene;
 import ltd.newbee.mall.entity.TopImg;
 import ltd.newbee.mall.entity.TopKodawari;
+import ltd.newbee.mall.entity.TopMatome;
 import ltd.newbee.mall.entity.TopNoticeComment;
 import ltd.newbee.mall.entity.TopPostphoto;
+import ltd.newbee.mall.entity.TopReview;
 import ltd.newbee.mall.service.NewBeeMallCarouselService;
 import ltd.newbee.mall.service.NewBeeMallCategoryService;
 import ltd.newbee.mall.service.NewBeeMallGoodsService;
@@ -459,4 +461,52 @@ public class RestApiIndexController {
 			return ResultGenerator.genFailResult("挿入失敗！！！");
 		}
 	}
+	
+//	delModalLikeNum
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(value = "/deleteModalLikeNum", method = RequestMethod.POST)
+	@ResponseBody
+	public Result deleteDelLikeNum(@RequestBody ModalLikeNum modalLikeNum) {
+		boolean addFlag = newBeeMallGoodsService.deleteDelLikeNum(modalLikeNum);
+		if (addFlag) {
+			boolean updateFlag = newBeeMallGoodsService.updateDelLikeNum(modalLikeNum);
+			if (updateFlag) {
+				long likeNum = newBeeMallGoodsService.topPostphotoLikeNum(modalLikeNum.getLikeId());
+				return ResultGenerator.genSuccessResult(likeNum);
+			} else {
+				return ResultGenerator.genFailResult("改修失敗！！！");
+			}
+		} else {
+			return ResultGenerator.genFailResult("挿入失敗！！！");
+		}
+	}
+	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(value = "/topReview", method = RequestMethod.POST)
+	@ResponseBody
+	public Result topReview(@RequestBody TopReview topReview) {
+		List<TopReview> topReviewList = newBeeMallGoodsService.topReview(topReview.getId());
+		if (CollectionUtils.isEmpty(topReviewList)) {
+			return ResultGenerator.genErrorResult(Constants.CATEGORY_FETCH_ERROR,
+					Constants.CATEGORY_FETCH_ERROR_MESSAGE);
+		} else {
+			return ResultGenerator.genSuccessResult(topReviewList);
+		}
+	}
+	
+	
+	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(value = "/topMatome", method = RequestMethod.POST)
+	@ResponseBody
+	public Result topMatome(@RequestBody TopMatome topMatome) {
+		List<TopMatome> topMatomeList = newBeeMallGoodsService.topMatome(topMatome.getId());
+		if (CollectionUtils.isEmpty(topMatomeList)) {
+			return ResultGenerator.genErrorResult(Constants.CATEGORY_FETCH_ERROR,
+					Constants.CATEGORY_FETCH_ERROR_MESSAGE);
+		} else {
+			return ResultGenerator.genSuccessResult(topMatomeList);
+		}
+	}
+			
 }
