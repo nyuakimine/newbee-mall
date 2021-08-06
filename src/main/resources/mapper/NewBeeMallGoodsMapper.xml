@@ -893,6 +893,8 @@
 		where id=#{id,jdbcType=BIGINT}
 	</select>
 
+	
+
 
 	<select id="getTopCoupon" parameterType="java.lang.Long"
 		resultType="ltd.newbee.mall.entity.TopCoupon">
@@ -956,5 +958,22 @@
 		from top_matome
 		where
 		id=#{id,jdbcType=BIGINT}
+	</select>
+	
+	<select id="getTopBasicInformation" parameterType="java.lang.Long"
+		resultType="ltd.newbee.mall.entity.TopBasicInformation">
+		select pay_way,official_budget,work_time,access,reserve_status,
+		genre,phone_number,res_name,id,
+		box2_mobile_phone,box2_space_equipment,box2_parking_lot,
+		box2_smoking,box2_reserved,
+		box2_private_room,box2_seats_number,
+		box3_cuisine,box3_menu_course,box3_drink,
+		box4_first_contributor,box4_related_store_info,
+		box4_pr,box4_remarks,box4_homepage,box4_official_account,
+		box4_with_children,box4_scene1_link3,box4_scene1_link2,
+		box4_scene1_link1,box4_scene3,box4_scene2,box4_scene1,
+		box4_use_scene
+		from top_basic_information
+		where id=#{id,jdbcType=BIGINT}
 	</select>
  </mapper>

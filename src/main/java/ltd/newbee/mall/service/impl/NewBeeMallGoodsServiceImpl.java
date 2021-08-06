@@ -40,6 +40,7 @@ import ltd.newbee.mall.entity.TabelogCategory;
 import ltd.newbee.mall.entity.TbCategory;
 import ltd.newbee.mall.entity.TbGenre;
 import ltd.newbee.mall.entity.TbSale;
+import ltd.newbee.mall.entity.TopBasicInformation;
 import ltd.newbee.mall.entity.TopCoupon;
 import ltd.newbee.mall.entity.TopCourse;
 import ltd.newbee.mall.entity.TopHygiene;
@@ -475,6 +476,12 @@ public class NewBeeMallGoodsServiceImpl implements NewBeeMallGoodsService {
 		@Override
 		public List<TopMatome> topMatome(Long id) {
 			List<TopMatome> list = goodsMapper.getTopMatome(id);
+			return list;
+		}
+		
+		@Override
+		public List<TopBasicInformation> topBasicInformation(Long id) {
+			List<TopBasicInformation> list = goodsMapper.getTopBasicInformation(id);
 			return list;
 		}
 		
