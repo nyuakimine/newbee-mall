@@ -619,4 +619,16 @@ class GoodsControllerTest<ReviewUserInf, GoodsImageEntity> {
 //	boolean deleteResult = newBeeMallCategoryService.deleteCaId(categoryId);
 //	  
 //    }
+//    
+//    public void updateageTest() {
+//    	 Student s3 = new Student();
+//    	 s3.setId(1);
+//    	 s3.setAge(25);
+//    	 long b = studentMapper.updateById(s3);
+//    	 assertEquals(1,b);
+//    	 
+//    	 List<Student> list1 = studentMapper.selectById(1L);
+//    	 Student s4 = list1.get(0);
+//    	 assertEquals(25,s4.getAge());
+//    }
 }
