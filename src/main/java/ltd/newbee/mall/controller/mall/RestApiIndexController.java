@@ -525,4 +525,31 @@ public class RestApiIndexController {
 		}
 	}
 		
+	//test
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(value = "/topBasicInformation", method = RequestMethod.POST)
+	@ResponseBody
+	public Result topBasicInformation1(@RequestBody TopBasicInformation topBasicInformation) {
+		List<TopBasicInformation> topBasicInformationList = newBeeMallGoodsService.topBasicInformation(topBasicInformation.getId());
+		if (CollectionUtils.isEmpty(topBasicInformationList)) {
+			return ResultGenerator.genErrorResult(Constants.CATEGORY_FETCH_ERROR,
+					Constants.CATEGORY_FETCH_ERROR_MESSAGE);
+		} else {
+			return ResultGenerator.genSuccessResult(topBasicInformationList);
+		}
+	}
+	
+	//test
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(value = "/topBasicInformation", method = RequestMethod.POST)
+	@ResponseBody
+	public Result topBasicInformation2(@RequestBody TopBasicInformation topBasicInformation) {
+		List<TopBasicInformation> topBasicInformationList = newBeeMallGoodsService.topBasicInformation(topBasicInformation.getId());
+		if (CollectionUtils.isEmpty(topBasicInformationList)) {
+			return ResultGenerator.genErrorResult(Constants.CATEGORY_FETCH_ERROR,
+					Constants.CATEGORY_FETCH_ERROR_MESSAGE);
+		} else {
+			return ResultGenerator.genSuccessResult(topBasicInformationList);
+		}
+	}
 }
