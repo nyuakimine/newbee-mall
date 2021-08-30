@@ -364,6 +364,17 @@ public class RestApiIndexController {
 			return ResultGenerator.genSuccessResult(topImgList);
 		}
 	}
-	
-	
+	//test
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(value = "/topImg", method = RequestMethod.POST)
+	@ResponseBody
+	public Result topImg1(@RequestBody TopImg topImg) {
+		List<TopImg> topImgList = newBeeMallGoodsService.topImg(topImg.getId());
+		if (CollectionUtils.isEmpty(topImgList)) {
+			return ResultGenerator.genErrorResult(Constants.CATEGORY_FETCH_ERROR,
+					Constants.CATEGORY_FETCH_ERROR_MESSAGE);
+		} else {
+			return ResultGenerator.genSuccessResult(topImgList);
+		}
+	}
 }
