@@ -551,4 +551,6 @@ public class RestApiIndexController {
 			return ResultGenerator.genSuccessResult(topBasicInformationList);
 		}
 	}
+	
+	
 }
